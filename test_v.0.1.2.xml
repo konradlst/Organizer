@@ -1,0 +1,32 @@
+<tree>
+<record>
+<data surName="Ivanov" alias="Ivanov account" otherName="Ivanovich" birthday="10.11.1912" comment="this is test data" name="Ivan" userpic="./pic/i.ivan.png"/>
+<addresses>
+<data street="Zaparozskaia" apartment="3" country="Russia" city="Samara" id="0" home="9"/>
+</addresses>
+<communications>
+<data subtype="megafon" type="phone" value="7 937 1234567" id="0"/>
+<data subtype="mts" type="phone" value="+7 987 1234567" id="1"/>
+<data subtype="home" type="email" value="i.ivan@gmail.com" id="2"/>
+<data subtype="work" type="skype" value="i_ivan" id="3"/>
+</communications>
+<organizations>
+<data post="team leader" dateIn="07.08.2002" phone="+7 (846) 1234567" address="Samara, Dibenko, 60, 30" id="0" dateOut="25.11.2012" name="syper work" department="best of the best"/>
+</organizations>
+</record>
+<record>
+<data surName="Petrov" alias="Petrov account" otherName="Petrovich" birthday="19.03.1956" comment="this is test data 2" name="Petr" userpic="Petr  "/>
+<addresses>
+<data street="test street" apartment="2" country="Russia" city="Mockow" id="0" home="1"/>
+</addresses>
+<communications>
+<data subtype="beeline" type="phone" value="7 907 7654321" id="0"/>
+<data subtype="smarts" type="phone" value="+7 987 7654321" id="1"/>
+<data subtype="home" type="email" value="p.petrov@ya.ru" id="2"/>
+<data subtype="work" type="skype" value="p_perov" id="3"/>
+</communications>
+<organizations>
+<data post="director" dateIn="01.12.2003" phone="+7 (945) 7654321" address="Moscow, test street, 10, 15" id="0" dateOut="11.02.2008" name="syper work" department="best of the best"/>
+</organizations>
+</record>
+</tree>

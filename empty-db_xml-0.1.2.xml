@@ -1,0 +1,14 @@
+<tree version="0.1.2">
+	<record>
+		<data alias="" name="" surName="" otherName="" birthday="" userpic="" comment=""/>
+		<addresses>
+			<data id="" country="" city="" street="" home="" apartment=""/>
+		</addresses>
+		<communications>
+			<data id="" type="phone\email\skype\vk" subtype="" value=""/>
+		</communications>
+		<organizations>
+			<data id="" name="" department="" post="" address="" phone="" dateIn="" dateOut=""/>
+		</organizations>
+	</record>
+</tree>
