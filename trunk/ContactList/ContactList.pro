@@ -27,7 +27,7 @@ HEADERS  += \
     ./include/contactListController.h \
     ./include/contactListModel.h \
     ./include/settingsView.h \
-    aboutView.h
+    ./include/aboutView.h
 
 FORMS    += contactListView.ui \
     settingsView.ui \

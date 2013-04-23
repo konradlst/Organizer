@@ -1,83 +1,17 @@
-<RCC>
+﻿<RCC>
     <qresource prefix="/">
-        <file>Icons/about.png</file>
-        <file>Icons/add.png</file>
-        <file>Icons/addDataBase.png</file>
-        <file>Icons/addGroup.png</file>
-        <file>Icons/addGroup-2.png</file>
-        <file>Icons/addShortcut.png</file>
-        <file>Icons/apply.png</file>
-        <file>Icons/cancel.png</file>
-        <file>Icons/checkSLPConnection.png</file>
-        <file>Icons/close.png</file>
-        <file>Icons/closedCategory.png</file>
-        <file>Icons/closedCategory-2.png</file>
-        <file>Icons/commit.png</file>
-        <file>Icons/connectingToSLP.png</file>
-        <file>Icons/connectToDataBase.png</file>
-        <file>Icons/copy.png</file>
-        <file>Icons/currentDataBase.png</file>
-        <file>Icons/dataBase.png</file>
-        <file>Icons/dataBase-2.png</file>
-        <file>Icons/dataCommunication.png</file>
-        <file>Icons/dataCommunicationError.png</file>
-        <file>Icons/dataProcessingServiceError.png</file>
-        <file>Icons/defaultDoc.png</file>
-        <file>Icons/delete.png</file>
-        <file>Icons/deleteDataBase.png</file>
-        <file>Icons/differentVersions.png</file>
-        <file>Icons/directories.png</file>
-        <file>Icons/discounts.png</file>
-        <file>Icons/docFromDoc.png</file>
-        <file>Icons/docHistory.png</file>
-        <file>Icons/docTree.png</file>
-        <file>Icons/documents.png</file>
-        <file>Icons/editConnectionParameters.png</file>
-        <file>Icons/equipment.png</file>
-        <file>Icons/expand.png</file>
-        <file>Icons/filter.png</file>
-        <file>Icons/fundamentals.png</file>
-        <file>Icons/help.png</file>
-        <file>Icons/indicator.png</file>
-        <file>Icons/loadWareInSLP.png</file>
-        <file>Icons/lock.png</file>
-        <file>Icons/logs.png</file>
-        <file>Icons/messageError.png</file>
-        <file>Icons/messageInfo.png</file>
-        <file>Icons/messageWarning.png</file>
-        <file>Icons/minimize.png</file>
-        <file>Icons/moParameters.png</file>
-        <file>Icons/next.png</file>
-        <file>Icons/openCategory.png</file>
-        <file>Icons/openedUserCateg.png</file>
-        <file>Icons/previous.png</file>
-        <file>Icons/printWareTable.png</file>
-        <file>Icons/reference.png</file>
-        <file>Icons/refresh.png</file>
-        <file>Icons/restore.png</file>
-        <file>Icons/revert.png</file>
-        <file>Icons/search.png</file>
-        <file>Icons/serviceFunctions.png</file>
-        <file>Icons/settings.png</file>
-        <file>Icons/slpOperations.png</file>
-        <file>Icons/submit.png</file>
-        <file>Icons/submit-2.png</file>
-        <file>Icons/synchronizationOff.png</file>
-        <file>Icons/synchronizationScheme.png</file>
-        <file>Icons/synchronizedSucessfully.png</file>
-        <file>Icons/synchronizing.png</file>
-        <file>Icons/systemDirectories.png</file>
-        <file>Icons/table.png</file>
-        <file>Icons/tableRadiobuttonChecked.png</file>
-        <file>Icons/tableRadiobuttonUnchecked.png</file>
-        <file>Icons/uiBuilder.png</file>
-        <file>Icons/userCategory.png</file>
-        <file>Icons/users.png</file>
-        <file>Icons/viewMode.png</file>
-        <file>Icons/wizardEditParamsDB.png</file>
-        <file>Icons/wizardEditParamsDPS.png</file>
-        <file>Icons/wizardInitDB.png</file>
-        <file alias="logo">Icons/userpic.gif</file>
-        <file alias="app_pic">Icons/contacts.png</file>
+        <file>icons/about.png</file>
+        <file>icons/add.png</file>
+        <file>icons/addDataBase.png</file>
+        <file>icons/addGroup.png</file>
+        <file>icons/addGroup-2.png</file>
+        <file>icons/close.png</file>
+        <file>icons/commit.png</file>
+        <file alias="app_pic">icons/contacts.png</file>
+        <file>icons/copy.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/editConnectionParameters.png</file>
+        <file>icons/settings.png</file>
+        <file alias="logo">icons/userpic.gif</file>
     </qresource>
 </RCC>
