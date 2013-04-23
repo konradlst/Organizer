@@ -784,6 +784,9 @@
    </property>
   </action>
   <action name="actionSettings">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/Icons/settings.png</normaloff>:/Icons/settings.png</iconset>

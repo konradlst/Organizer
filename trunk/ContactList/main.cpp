@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     a.setApplicationVersion("0.1.1");
     a.setOrganizationDomain("a.batyaev@gmail.com");
     a.setOrganizationName("Batyaev Anton");
+    a.setLibraryPaths(QStringList("./libs"));
     ContactListController c;
     
     return a.exec();
