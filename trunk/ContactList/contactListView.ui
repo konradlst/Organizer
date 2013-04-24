@@ -241,7 +241,7 @@
          </property>
          <property name="icon">
           <iconset resource="res.qrc">
-           <normaloff>:/icons/editConnectionParameters.png</normaloff>:/icons/editConnectionParameters.png</iconset>
+           <normaloff>:/editContact</normaloff>:/editContact</iconset>
          </property>
         </widget>
        </item>
@@ -663,7 +663,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/about.png</normaloff>:/icons/about.png</iconset>
+     <normaloff>:/about</normaloff>:/about</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -681,7 +681,7 @@
   <action name="actionNew">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/addDataBase.png</normaloff>:/icons/addDataBase.png</iconset>
+     <normaloff>:/newContactList</normaloff>:/newContactList</iconset>
    </property>
    <property name="text">
     <string>New...</string>
@@ -693,7 +693,7 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/addGroup-2.png</normaloff>:/icons/addGroup-2.png</iconset>
+     <normaloff>:/loadContactList</normaloff>:/loadContactList</iconset>
    </property>
    <property name="text">
     <string>Open...</string>
@@ -705,7 +705,7 @@
   <action name="actionSave_as">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/commit.png</normaloff>:/icons/commit.png</iconset>
+     <normaloff>:/save</normaloff>:/save</iconset>
    </property>
    <property name="text">
     <string>Save as...</string>
@@ -726,7 +726,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/editConnectionParameters.png</normaloff>:/icons/editConnectionParameters.png</iconset>
+     <normaloff>:/editContact</normaloff>:/editContact</iconset>
    </property>
    <property name="text">
     <string>Editable Contact</string>
@@ -741,7 +741,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+     <normaloff>:/newContact</normaloff>:/newContact</iconset>
    </property>
    <property name="text">
     <string>New Contact</string>
@@ -753,7 +753,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/addGroup.png</normaloff>:/icons/addGroup.png</iconset>
+     <normaloff>:/loadContact</normaloff>:/loadContact</iconset>
    </property>
    <property name="text">
     <string>Load Contact</string>
@@ -765,7 +765,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/commit.png</normaloff>:/icons/commit.png</iconset>
+     <normaloff>:/save</normaloff>:/save</iconset>
    </property>
    <property name="text">
     <string>Save Contact</string>
@@ -777,7 +777,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
+     <normaloff>:/deleteContact</normaloff>:/deleteContact</iconset>
    </property>
    <property name="text">
     <string>Delete Contact</string>
@@ -789,7 +789,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/settings.png</normaloff>:/icons/settings.png</iconset>
+     <normaloff>:/settings</normaloff>:/settings</iconset>
    </property>
    <property name="text">
     <string>Settings</string>
@@ -798,7 +798,7 @@
   <action name="actionExit">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/close.png</normaloff>:/icons/close.png</iconset>
+     <normaloff>:/exit</normaloff>:/exit</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -810,7 +810,7 @@
   <action name="actionSave">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/commit.png</normaloff>:/icons/commit.png</iconset>
+     <normaloff>:/save</normaloff>:/save</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -825,7 +825,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/icons/copy.png</normaloff>:/icons/copy.png</iconset>
+     <normaloff>:/copyContact</normaloff>:/copyContact</iconset>
    </property>
    <property name="text">
     <string>Copy Contact</string>
