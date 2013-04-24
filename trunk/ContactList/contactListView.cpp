@@ -1,5 +1,6 @@
 #include <QCalendarWidget>
 #include <QFileDialog>
+#include <QMessageBox>
 #include "contactListView.h"
 #include "ui_contactListView.h"
 #include "settingsView.h"
@@ -14,6 +15,14 @@ namespace {
 #define FILE_TYPES QObject::trUtf8("All Files (*.*);;Text files (*.txt);;XML files (*.xml);;SQL files (*.sqlite);;JSON files (*.json)")
 #define OPEN_FILE_DIALOG QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH, FILE_TYPES)
 #define SAVE_FILE_DIALOG QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH, FILE_TYPES)
+
+#define APP_NAME QObject::trUtf8("Contact List")
+#define APP_VERSION "v.0.1.1"
+#define ABOUT_TITLE QObject::trUtf8("About %1").arg(APP_NAME)
+#define VERSION QObject::trUtf8("Version: %1")
+#define ABOUT_TEXT QObject::trUtf8("<b>%1 %2</b><br><br>" \
+                                    "Based on Qt 4.8.1<br><br>" \
+                                    "Copyright 2013, Anton Batyaev. All rights reserved.").arg(APP_NAME,APP_VERSION)
 
 QString pathToData(const QString *path) {
     if(!path->isEmpty())
@@ -51,7 +60,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     ui->deStartWork->setDate(QDate::currentDate());
     ui->deEndWork->setDate(QDate::currentDate());
     ui->deBirthday->calendarWidget()->setFirstDayOfWeek(Qt::Monday);
-    ui->statusBar->addWidget(new QLabel("Version: v.0.1.1"));
+    ui->statusBar->addWidget(new QLabel(VERSION.arg(APP_VERSION)));
 
     m_path->setText(*m_controller->pathToData());
     ui->statusBar->addWidget(m_path);
@@ -76,7 +85,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
 
     connect(ui->actionExit,SIGNAL(triggered()),qApp,SLOT(quit()));
-    connect(ui->actionAbout,SIGNAL(triggered()),qApp,SLOT(aboutQt()));
+    connect(ui->actionAbout,SIGNAL(triggered()),SLOT(about()));
 }
 
 ContactListView::~ContactListView()
@@ -164,6 +173,11 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leSurName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+}
+
+void ContactListView::about()
+{
+    QMessageBox::about(this,ABOUT_TITLE,ABOUT_TEXT);
 }
 
 void ContactListView::loadData()

@@ -42,6 +42,7 @@ private slots:
     void currentContactChanged(int index);
     void loadUserPic();
     void textChanged(QString text);
+    void about();
 
 private:
     Ui::ContactListView *ui;

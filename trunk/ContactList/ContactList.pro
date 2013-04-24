@@ -17,8 +17,7 @@ SOURCES += main.cpp\
     driverXml.cpp \
     contactListController.cpp \
     contactListModel.cpp \
-    settingsView.cpp \
-    aboutView.cpp
+    settingsView.cpp
 
 HEADERS  += \
     ./include/contactListView.h \
@@ -26,12 +25,10 @@ HEADERS  += \
     ./include/driverXml.h \
     ./include/contactListController.h \
     ./include/contactListModel.h \
-    ./include/settingsView.h \
-    ./include/aboutView.h
+    ./include/settingsView.h
 
 FORMS    += contactListView.ui \
-    settingsView.ui \
-    aboutView.ui
+    settingsView.ui
 
 RESOURCES += \
     res.qrc
