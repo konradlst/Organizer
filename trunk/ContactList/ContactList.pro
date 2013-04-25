@@ -32,3 +32,6 @@ FORMS    += contactListView.ui \
 
 RESOURCES += \
     res.qrc
+
+TRANSLATIONS += ContactList.ru_RU.ts \
+    ContactList.en_US.ts

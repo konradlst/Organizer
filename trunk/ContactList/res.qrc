@@ -13,5 +13,7 @@
         <file alias="editContact">icons/edit.png</file>
         <file alias="settings">icons/settings.png</file>
         <file alias="logo">icons/userpic.gif</file>
+        <file alias="lang_ru_RU">ContactList.ru_RU.qm</file>
+        <file alias="qt_ru_RU">qt_ru.qm</file>
     </qresource>
 </RCC>

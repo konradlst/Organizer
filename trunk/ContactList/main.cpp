@@ -1,5 +1,6 @@
 #include "contactListController.h"
 #include <QApplication>
+#include <QTranslator>
 #include <QTextCodec>
 #include <QIcon>
 
@@ -15,6 +16,13 @@ int main(int argc, char *argv[])
     a.setApplicationVersion("0.1.1");
     a.setOrganizationDomain("a.batyaev@gmail.com");
     a.setOrganizationName("Batyaev Anton");
+
+    QTranslator tr, qt_tr;
+    tr.load(":/lang_ru_RU");
+    qt_tr.load(":/qt_ru_RU");
+    a.installTranslator(&tr);
+    a.installTranslator(&qt_tr);
+
     ContactListController c;
     
     return a.exec();
