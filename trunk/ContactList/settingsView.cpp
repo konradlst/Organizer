@@ -16,6 +16,7 @@ SettingsView::SettingsView(QWidget *parent) :
     connect(ui->pbChooseContactList,SIGNAL(clicked()),SLOT(chooseContactList()));
     connect(ui->pbChooseLogFile,SIGNAL(clicked()),SLOT(choosePathToLog()));
     connect(ui->pbDefault,SIGNAL(clicked()),SLOT(setDefaultSettings()));
+    connect(ui->cbLanguage,SIGNAL(currentIndexChanged(int)),SIGNAL(languageChanged(int)));
 }
 
 SettingsView::~SettingsView()
@@ -44,4 +45,5 @@ void SettingsView::setDefaultSettings()
     ui->lePathToLogFile->clear();
     ui->gbDefaultContactList->setChecked(false);
     ui->gbLogging->setChecked(false);
+    emit languageChanged(0);
 }
