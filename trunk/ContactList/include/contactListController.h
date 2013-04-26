@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <contactData.h>
+#include "myLog.h"
 
 class ContactListView;
 class ContactListModel;

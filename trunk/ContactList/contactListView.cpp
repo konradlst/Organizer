@@ -64,6 +64,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
 
     m_path->setText(*m_controller->pathToData());
     ui->statusBar->addWidget(m_path);
+    MYLOG << Log::StartApp;
 
     connect(ui->actionNew,SIGNAL(triggered()),SLOT(newData()));
     connect(ui->actionOpen,SIGNAL(triggered()),SLOT(loadData()));
@@ -193,16 +194,20 @@ void ContactListView::loadData()
             ui->lwContactList->setCurrentRow(0);
             setContactData(m_controller->contact(0));
             m_path->setText(pathToData(m_controller->pathToData()));
+            MYLOG << Log::LoadContactList;
         }
     }
 }
 
 void ContactListView::saveData()
 {
-    if(!m_controller->pathToData()->isEmpty())
+    if(!m_controller->pathToData()->isEmpty()) {
         m_controller->saveData(*m_controller->pathToData());
-    else
+        MYLOG << Log::SaveContactList.arg(*m_controller->pathToData());
+    }
+    else {
         saveAsData();
+	}
 }
 
 void ContactListView::saveAsData()
@@ -211,6 +216,7 @@ void ContactListView::saveAsData()
     if(!path.isEmpty()) {
         m_controller->saveData(path);
         m_path->setText(pathToData(m_controller->pathToData()));
+        MYLOG << Log::SaveContactList.arg(m_path->text());
     }
 }
 
@@ -224,6 +230,7 @@ void ContactListView::newData()
     ui->lwContactList->addItems(*m_controller->contactList());
     ui->lwContactList->setCurrentRow(0);
     ui->leName->setFocus();
+    MYLOG << Log::NewContactList;
 }
 
 void ContactListView::clear()
@@ -268,6 +275,7 @@ void ContactListView::newContact()
     ui->lwContactList->addItems(*m_controller->contactList());
     ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
     ui->leName->setFocus();
+    MYLOG << Log::NewContact;
 }
 
 void ContactListView::loadContact()
@@ -278,12 +286,17 @@ void ContactListView::loadContact()
         ui->lwContactList->clear();
         ui->lwContactList->addItems(*m_controller->contactList());
         ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
+        MYLOG << Log::LoadContact.arg(path);
     }
 }
 
 void ContactListView::saveContact()
 {
-    m_controller->saveContact(*m_controller->contact(ui->lwContactList->currentRow()),SAVE_FILE_DIALOG);
+    QString path = SAVE_FILE_DIALOG;
+    if(!path.isEmpty()) {
+        m_controller->saveContact(*m_controller->contact(ui->lwContactList->currentRow()),path);
+        MYLOG << Log::SaveContact.arg(path);
+    }
 }
 
 void ContactListView::copyContact()
@@ -294,12 +307,14 @@ void ContactListView::copyContact()
     ui->lwContactList->addItems(*m_controller->contactList());
     ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
     emit textChanged(ui->leAlias->text());
+    MYLOG << Log::CopyContact.arg(ui->leAlias->text());
 }
 
 void ContactListView::deleteContact()
 {
     int index = ui->lwContactList->currentRow();
     m_controller->deleteContact(index);
+    MYLOG << Log::DeleteContact.arg(ui->lwContactList->currentIndex().data().toString());
     ui->lwContactList->clear();
     ui->lwContactList->addItems(*m_controller->contactList());
 }

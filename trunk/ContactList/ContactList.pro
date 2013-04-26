@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     driverXml.cpp \
     contactListController.cpp \
     contactListModel.cpp \
-    settingsView.cpp
+    settingsView.cpp \
+    myLog.cpp
 
 HEADERS  += \
     ./include/contactListView.h \
@@ -25,7 +26,8 @@ HEADERS  += \
     ./include/driverXml.h \
     ./include/contactListController.h \
     ./include/contactListModel.h \
-    ./include/settingsView.h
+    ./include/settingsView.h \
+    ./include/myLog.h
 
 FORMS    += contactListView.ui \
     settingsView.ui
