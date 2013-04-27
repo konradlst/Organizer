@@ -321,7 +321,7 @@ void ContactListView::deleteContact()
 
 void ContactListView::settings()
 {
-    m_settings = new SettingsView();
+    m_settings = new SettingsView(m_controller);
     m_settings->show();
 }
 

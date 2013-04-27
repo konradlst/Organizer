@@ -1,5 +1,4 @@
 #include "myLog.h"
-//#include <QDebug>
 #include <QFile>
 #include <QDateTime>
 
@@ -12,8 +11,9 @@ QString logMessage(QString data) {
 }
 
 myLog::myLog() :
-    m_path(new QString),
-    m_logFile(new QFile("ContactList.log"))
+    m_path(new QString(Log::defaultPathToLog)),
+    m_logFile(new QFile(*m_path)),
+    m_logging(true)
 {
 }
 
@@ -33,8 +33,21 @@ myLog *myLog::instance()
 
 void myLog::operator <<(const QString &data)
 {
-    m_logFile->open(QIODevice::Append | QIODevice::Text);
-    m_logFile->write(logMessage(data).toAscii());
-    m_logFile->close();
-//    qDebug() << logMessage(data);
+    if(m_logging) {
+        m_logFile->open(QIODevice::Append | QIODevice::Text);
+        m_logFile->write(logMessage(data).toAscii());
+        m_logFile->close();
+    }
+}
+
+void myLog::logging(bool flag, const QString &path)
+{
+    m_logging = flag;
+    *m_path = path;
+    m_logFile->setFileName(*m_path);
+}
+
+QPair<bool, QString> *myLog::loggingStatus()
+{
+    return new QPair<bool,QString>(m_logging,*m_path);
 }

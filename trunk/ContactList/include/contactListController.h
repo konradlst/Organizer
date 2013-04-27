@@ -28,9 +28,13 @@ public:
     QStringList *loadData(const QString &path);
     bool saveData(const QString &path);
 
+    void logging(bool flag, const QString &path = Log::defaultPathToLog);
+    QPair<bool,QString> *loggingStatus();
+
 private:
     ContactListModel *m_model;
     ContactListView *m_view;
+    myLog *m_log;
 };
 
 #endif // CONTACTLISTCONTROLLER_H

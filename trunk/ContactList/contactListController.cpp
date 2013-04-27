@@ -5,9 +5,10 @@
 ContactListController::ContactListController(QWidget *parent) :
     QWidget(parent),
     m_model(new ContactListModel(this)),
-    m_view(new ContactListView(this))
+    m_view(new ContactListView(this)),
+    m_log(myLog::instance())
 {
-    MYLOG;
+//    MYLOG;
     m_view->show();
     connect(m_view,SIGNAL(dataChanged(QString,QString,int)),m_model,SLOT(dataChanged(QString,QString,int)));
 }
@@ -65,4 +66,14 @@ QStringList *ContactListController::loadData(const QString &path)
 bool ContactListController::saveData(const QString &path)
 {
     return m_model->saveData(path);
+}
+
+void ContactListController::logging(bool flag, const QString &path)
+{
+    m_log->logging(flag, path);
+}
+
+QPair<bool, QString> *ContactListController::loggingStatus()
+{
+    return m_log->loggingStatus();
 }
