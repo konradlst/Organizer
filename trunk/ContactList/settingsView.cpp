@@ -11,20 +11,22 @@ namespace {
 SettingsView::SettingsView(ContactListController *controller, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SettingsView),
-    m_controller(controller)
+    m_controller(controller),
+    m_settings(new SettingsData)
 {
     ui->setupUi(this);
-    QPair<bool,QString> status = *m_controller->loggingStatus();
-    ui->gbLogging->setChecked(status.first);
-    ui->lePathToLogFile->setText(status.second);
+    m_settings = m_controller->getDefaultSettings();
+    setSettings(*m_settings);
 
     connect(ui->pbCancel,SIGNAL(clicked()),SLOT(close()));
     connect(ui->pbChooseContactList,SIGNAL(clicked()),SLOT(chooseContactList()));
     connect(ui->pbChooseLogFile,SIGNAL(clicked()),SLOT(choosePathToLog()));
     connect(ui->pbDefault,SIGNAL(clicked()),SLOT(setDefaultSettings()));
-    connect(ui->cbLanguage,SIGNAL(currentIndexChanged(int)),SIGNAL(languageChanged(int)));
+    connect(ui->cbLanguage,SIGNAL(currentIndexChanged(int)),SLOT(languageChanged(int)));
     connect(ui->gbLogging,SIGNAL(clicked(bool)),SLOT(loggingChanged(bool)));
     connect(ui->lePathToLogFile,SIGNAL(textChanged(QString)),SLOT(pathToLogChanged(QString)));
+    connect(ui->gbDefaultContactList,SIGNAL(clicked(bool)),SLOT(defaultDataChanged(bool)));
+    connect(ui->lePathToContactList,SIGNAL(textChanged(QString)),SLOT(pathToDefaultData(QString)));
 }
 
 SettingsView::~SettingsView()
@@ -48,23 +50,56 @@ void SettingsView::choosePathToLog()
 
 void SettingsView::setDefaultSettings()
 {
-    ui->cbLanguage->setCurrentIndex(0);
-    ui->lePathToContactList->clear();
-    ui->lePathToLogFile->clear();
-    ui->gbDefaultContactList->setChecked(false);
-    ui->gbLogging->setChecked(false);
-    emit languageChanged(0);
+    SettingsData data;
+    data.language = 0;
+    data.defaultData = false;
+    data.pathToDefaultData = QString();
+    data.logging = false;
+    data.pathToLogFile = QString();
+    setSettings(data);
+}
+
+void SettingsView::languageChanged(int language)
+{
+    (*m_settings).language = language;
+    setSettings(*m_settings);
 }
 
 void SettingsView::loggingChanged(bool flag)
 {
-    if(flag && !ui->lePathToLogFile->text().isEmpty())
-        m_controller->logging(flag,ui->lePathToLogFile->text());
-    else
-        m_controller->logging(flag);
+    (*m_settings).logging = flag;
+    (*m_settings).pathToLogFile = ui->lePathToLogFile->text();
+    setSettings(*m_settings);
 }
 
 void SettingsView::pathToLogChanged(QString path)
 {
-    m_controller->logging(true,path);
+    (*m_settings).logging = true;
+    (*m_settings).pathToLogFile = path;
+    setSettings(*m_settings);
+}
+
+void SettingsView::defaultDataChanged(bool flag)
+{
+    (*m_settings).defaultData = flag;
+    (*m_settings).pathToDefaultData = ui->lePathToContactList->text();
+    setSettings(*m_settings);
+}
+
+void SettingsView::pathToDefaultData(QString path)
+{
+    (*m_settings).defaultData = true;
+    (*m_settings).pathToDefaultData = path;
+    setSettings(*m_settings);
+}
+
+void SettingsView::setSettings(const SettingsData &data)
+{
+    *m_settings = data;
+    m_controller->changeSettings(*m_settings);
+    ui->cbLanguage->setCurrentIndex(data.language);
+    ui->lePathToContactList->setText(data.pathToDefaultData);
+    ui->lePathToLogFile->setText(data.pathToLogFile);
+    ui->gbDefaultContactList->setChecked(data.defaultData);
+    ui->gbLogging->setChecked(data.logging);
 }

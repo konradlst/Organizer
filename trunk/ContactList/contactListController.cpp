@@ -68,12 +68,13 @@ bool ContactListController::saveData(const QString &path)
     return m_model->saveData(path);
 }
 
-void ContactListController::logging(bool flag, const QString &path)
+void ContactListController::changeSettings(const SettingsData &data)
 {
-    m_log->logging(flag, path);
+    m_model->changeSettings(data);
+    m_log->logging(data.logging,data.pathToLogFile);
 }
 
-QPair<bool, QString> *ContactListController::loggingStatus()
+SettingsData *ContactListController::getDefaultSettings()
 {
-    return m_log->loggingStatus();
+    return m_model->getDefaultSettings();
 }

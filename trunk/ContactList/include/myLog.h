@@ -30,7 +30,6 @@ public:
     static myLog* instance();
     void operator <<(const QString &data);
     void logging(bool flag, const QString &path = Log::defaultPathToLog);
-    QPair<bool,QString> *loggingStatus();
 
 private:
     myLog();

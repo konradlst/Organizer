@@ -2,7 +2,8 @@
 #define CONTACTLISTCONTROLLER_H
 
 #include <QWidget>
-#include <contactData.h>
+#include "contactData.h"
+#include "settingsData.h"
 #include "myLog.h"
 
 class ContactListView;
@@ -28,8 +29,8 @@ public:
     QStringList *loadData(const QString &path);
     bool saveData(const QString &path);
 
-    void logging(bool flag, const QString &path = Log::defaultPathToLog);
-    QPair<bool,QString> *loggingStatus();
+    void changeSettings(const SettingsData &data);
+    SettingsData *getDefaultSettings();
 
 private:
     ContactListModel *m_model;

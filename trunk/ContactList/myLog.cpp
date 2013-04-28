@@ -43,11 +43,9 @@ void myLog::operator <<(const QString &data)
 void myLog::logging(bool flag, const QString &path)
 {
     m_logging = flag;
-    *m_path = path;
+    if(!path.trimmed().isEmpty())
+        *m_path = path;
+    else
+        *m_path = Log::defaultPathToLog;
     m_logFile->setFileName(*m_path);
-}
-
-QPair<bool, QString> *myLog::loggingStatus()
-{
-    return new QPair<bool,QString>(m_logging,*m_path);
 }
