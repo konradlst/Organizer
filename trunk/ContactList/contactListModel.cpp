@@ -1,4 +1,4 @@
-#include <QFile>
+﻿#include <QFile>
 #include <QTextStream>
 #include "contactListModel.h"
 #include "driverXml.h"

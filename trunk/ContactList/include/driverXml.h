@@ -1,4 +1,4 @@
-#ifndef DRIVERXML_H
+﻿#ifndef DRIVERXML_H
 #define DRIVERXML_H
 
 #include <QWidget>

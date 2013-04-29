@@ -1,4 +1,4 @@
-#ifndef SETTINGSDATA_H
+﻿#ifndef SETTINGSDATA_H
 #define SETTINGSDATA_H
 
 #include <QString>

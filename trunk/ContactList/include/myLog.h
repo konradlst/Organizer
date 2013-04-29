@@ -1,4 +1,4 @@
-#ifndef MYLOG_H
+﻿#ifndef MYLOG_H
 #define MYLOG_H
 
 #include <QObject>

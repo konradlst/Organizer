@@ -1,4 +1,4 @@
-#ifndef CONTACTLISTMODEL_H
+﻿#ifndef CONTACTLISTMODEL_H
 #define CONTACTLISTMODEL_H
 
 #include <QWidget>

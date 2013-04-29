@@ -1,4 +1,4 @@
-#ifndef CONTACTDATA_H
+﻿#ifndef CONTACTDATA_H
 #define CONTACTDATA_H
 
 #include <QHash>

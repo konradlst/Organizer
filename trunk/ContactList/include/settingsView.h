@@ -1,4 +1,4 @@
-#ifndef SETTINGSVIEW_H
+﻿#ifndef SETTINGSVIEW_H
 #define SETTINGSVIEW_H
 
 #include <QWidget>

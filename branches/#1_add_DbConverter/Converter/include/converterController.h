@@ -1,4 +1,4 @@
-#ifndef CONVERTERCONTROLLER_H
+﻿#ifndef CONVERTERCONTROLLER_H
 #define CONVERTERCONTROLLER_H
 
 #include <QWidget>

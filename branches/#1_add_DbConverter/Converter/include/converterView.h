@@ -1,4 +1,4 @@
-#ifndef CONVERTERVIEW_H
+﻿#ifndef CONVERTERVIEW_H
 #define CONVERTERVIEW_H
 
 #include <QWidget>

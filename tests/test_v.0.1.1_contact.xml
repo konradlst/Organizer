@@ -1,4 +1,4 @@
-<record>
+﻿<record>
 	<data surName="Sidorov" alias="Dima account" otherName="Vasilevich" birthday="25.01.1927" comment="this is test data" name="Dima" userpic="./pic/i.ivan.png"/>
 	<addresses>
 		<data street="Zaparozskaia" apartment="3" country="Russia" city="Samara" id="0" home="9"/>

@@ -1,4 +1,4 @@
-#include "driverXml.h"
+﻿#include "driverXml.h"
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>

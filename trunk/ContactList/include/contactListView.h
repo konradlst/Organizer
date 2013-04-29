@@ -1,4 +1,4 @@
-#ifndef CONTACTLISTVIEW_H
+﻿#ifndef CONTACTLISTVIEW_H
 #define CONTACTLISTVIEW_H
 
 #include <QMainWindow>

@@ -1,4 +1,4 @@
-#include <QFileDialog>
+﻿#include <QFileDialog>
 #include <QPair>
 #include "settingsView.h"
 #include "ui_settingsView.h"

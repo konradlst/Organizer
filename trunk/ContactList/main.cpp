@@ -1,4 +1,4 @@
-#include "contactListController.h"
+﻿#include "contactListController.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QTextCodec>

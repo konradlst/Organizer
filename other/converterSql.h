@@ -1,4 +1,4 @@
-#ifndef CONVERTERSQL_H
+﻿#ifndef CONVERTERSQL_H
 #define CONVERTERSQL_H
 
 #include "converter.h"

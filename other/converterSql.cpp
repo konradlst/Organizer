@@ -1,4 +1,4 @@
-#include <QStandardItemModel>
+﻿#include <QStandardItemModel>
 #include <QtSql>
 #include "converterSql.h"
 

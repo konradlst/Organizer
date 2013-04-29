@@ -1,4 +1,4 @@
-<RCC>
+﻿<RCC>
     <qresource prefix="/">
         <file alias="about">icons/about.png</file>
         <file alias="newContact">icons/add.png</file>

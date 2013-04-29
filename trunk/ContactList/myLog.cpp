@@ -1,4 +1,4 @@
-#include "myLog.h"
+﻿#include "myLog.h"
 #include <QFile>
 #include <QDateTime>
 

@@ -1,4 +1,4 @@
-#ifndef CONVERTERMODEL_H
+﻿#ifndef CONVERTERMODEL_H
 #define CONVERTERMODEL_H
 
 #include <QWidget>

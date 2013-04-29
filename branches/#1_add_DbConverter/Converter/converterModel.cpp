@@ -1,4 +1,4 @@
-#include <QDomDocument>
+﻿#include <QDomDocument>
 #include "converterModel.h"
 
 ConverterModel::ConverterModel(QWidget *parent) :
