@@ -20,6 +20,7 @@ public:
 
 signals:
     void dataChanged(QString data, QString key, int contactId);
+    void logChanged(bool, const QString &);
 
 private:
     void activateContactBotton();

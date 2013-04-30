@@ -1,33 +1,15 @@
 ﻿#include <QFile>
 #include <QTextStream>
-#include <QSettings>
 #include "contactListModel.h"
 #include "driverXml.h"
-
-namespace {
-const int ENGLISH = 0;
-const QString defaultPathToLog("ContactList.log");
-
-namespace Settings {
-const QString LANGUAGE("main/Language");
-const QString DEFAULTDATA("main/DefaultData");
-const QString PATH_TO_DEFAULTDATA("main/PathToDefaultData");
-const QString LOGGING("main/Logging");
-const QString PATH_TO_LOGFILE("main/PathToLogFile");
-}
-}
 
 ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent) :
     QWidget(parent),
     m_controller(controller),
     m_driverXml(new DriverXml()),
     m_pathToCurrentData(new QString()),
-    m_data(new Data::Contacts()),
-    m_settings(new SettingsData()),
-    m_settingsIni(new QSettings(QSettings::IniFormat,QSettings::UserScope,
-                                "AnBat","ContactList"))
+    m_data(new Data::Contacts())
 {
-    loadSettings();
 }
 
 QStringList *ContactListModel::loadData(const QString &path)
@@ -120,45 +102,6 @@ bool ContactListModel::saveContact(const Data::ContactData &data, const QString 
         return true;
     }
     return false;
-}
-
-void ContactListModel::changeSettings(const SettingsData &data)
-{
-    *m_settings = data;
-    m_settingsIni->setValue(Settings::LANGUAGE,QVariant(m_settings->language));
-    m_settingsIni->setValue(Settings::DEFAULTDATA,QVariant(m_settings->defaultData));
-    m_settingsIni->setValue(Settings::PATH_TO_DEFAULTDATA,QVariant(m_settings->pathToDefaultData));
-    m_settingsIni->setValue(Settings::LOGGING,QVariant(m_settings->logging));
-    m_settingsIni->setValue(Settings::PATH_TO_LOGFILE,QVariant(m_settings->pathToLogFile));
-}
-
-SettingsData *ContactListModel::getSettings()
-{
-    return m_settings;
-}
-
-void ContactListModel::loadSettings()
-{
-    if(QFile(m_settingsIni->fileName()).exists()) {
-        m_settings->language = m_settingsIni->value(Settings::LANGUAGE).toInt();
-        m_settings->defaultData = m_settingsIni->value(Settings::DEFAULTDATA).toBool();
-        m_settings->pathToDefaultData = m_settingsIni->value(Settings::PATH_TO_DEFAULTDATA).toString();
-        m_settings->logging = m_settingsIni->value(Settings::LOGGING).toBool();
-        m_settings->pathToLogFile = m_settingsIni->value(Settings::PATH_TO_LOGFILE).toString();
-    }
-    else {
-        setDefaultSettings();
-    }
-}
-
-void ContactListModel::setDefaultSettings()
-{
-    m_settings->language = ENGLISH;
-    m_settings->defaultData = false;
-    m_settings->pathToDefaultData = QString();
-    m_settings->logging = true;
-    m_settings->pathToLogFile = defaultPathToLog;
-    changeSettings(*m_settings);
 }
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)

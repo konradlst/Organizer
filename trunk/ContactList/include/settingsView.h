@@ -3,8 +3,8 @@
 
 #include <QWidget>
 #include "contactListController.h"
-#include "settingsData.h"
 
+class QSettings;
 namespace Ui {
 class SettingsView;
 }
@@ -25,12 +25,14 @@ private slots:
     void pathToLogChanged(QString path);
     void defaultDataChanged(bool flag);
     void pathToDefaultData(QString path);
-    void setSettings(const SettingsData &data);
+
+private:
+    void loadSettings();
 
 private:
     Ui::SettingsView *ui;
     ContactListController *m_controller;
-    SettingsData *m_settings;
+    QSettings *m_settingsIni;
 };
 
 #endif // SETTINGSVIEW_H

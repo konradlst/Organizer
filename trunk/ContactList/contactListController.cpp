@@ -67,13 +67,7 @@ bool ContactListController::saveData(const QString &path)
     return m_model->saveData(path);
 }
 
-void ContactListController::changeSettings(const SettingsData &data)
+void ContactListController::logging(bool flag, const QString &path)
 {
-    m_model->changeSettings(data);
-    m_log->logging(data.logging,data.pathToLogFile);
-}
-
-SettingsData *ContactListController::getSettings()
-{
-    return m_model->getSettings();
+    m_log->logging(flag,path);
 }

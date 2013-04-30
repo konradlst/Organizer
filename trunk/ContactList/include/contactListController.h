@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "contactData.h"
-#include "settingsData.h"
 #include "myLog.h"
 
 class ContactListView;
@@ -29,8 +28,7 @@ public:
     QStringList *loadData(const QString &path);
     bool saveData(const QString &path);
 
-    void changeSettings(const SettingsData &data);
-    SettingsData *getSettings();
+    void logging(bool flag, const QString &path);
 
 private:
     ContactListModel *m_model;
