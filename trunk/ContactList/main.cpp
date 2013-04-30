@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     a.setApplicationName("Contact List");
     a.setApplicationVersion("0.1.1");
     a.setOrganizationDomain("a.batyaev@gmail.com");
-    a.setOrganizationName("Batyaev Anton");
+    a.setOrganizationName("Anton Batyaev");
 
     QTranslator tr, qt_tr;
     tr.load(":/lang_ru_RU");

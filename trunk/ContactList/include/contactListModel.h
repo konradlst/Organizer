@@ -5,6 +5,7 @@
 #include "contactData.h"
 #include "settingsData.h"
 
+class QSettings;
 class ContactListController;
 class DriverXml;
 
@@ -28,8 +29,9 @@ public:
     bool saveContact(const Data::ContactData &data, const QString &path);
 
     void changeSettings(const SettingsData &data);
-    SettingsData *getDefaultSettings();
-    void loadDefaultSettings();
+    SettingsData *getSettings();
+    void loadSettings();
+    void setDefaultSettings();
 
 public slots:
     void dataChanged(const QString data, QString key, int contactId);
@@ -40,6 +42,7 @@ private:
     QString *m_pathToCurrentData;
     Data::Contacts *m_data;
     SettingsData *m_settings;
+    QSettings *m_settingsIni;
 };
 
 #endif // CONTACTLISTMODEL_H

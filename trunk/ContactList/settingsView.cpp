@@ -15,7 +15,7 @@ SettingsView::SettingsView(ContactListController *controller, QWidget *parent) :
     m_settings(new SettingsData)
 {
     ui->setupUi(this);
-    m_settings = m_controller->getDefaultSettings();
+    m_settings = m_controller->getSettings();
     setSettings(*m_settings);
 
     connect(ui->pbCancel,SIGNAL(clicked()),SLOT(close()));

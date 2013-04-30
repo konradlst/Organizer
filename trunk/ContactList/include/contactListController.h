@@ -30,7 +30,7 @@ public:
     bool saveData(const QString &path);
 
     void changeSettings(const SettingsData &data);
-    SettingsData *getDefaultSettings();
+    SettingsData *getSettings();
 
 private:
     ContactListModel *m_model;

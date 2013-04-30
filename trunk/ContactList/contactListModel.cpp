@@ -1,25 +1,20 @@
 ﻿#include <QFile>
 #include <QTextStream>
+#include <QSettings>
 #include "contactListModel.h"
 #include "driverXml.h"
 
 namespace {
 const int ENGLISH = 0;
-const QChar SPLIT('=');
-const QString LANGUAGE = QObject::trUtf8("Language");
-const QString DEFAULTDATA = QObject::trUtf8("DefaultData");
-const QString PATH_TO_DEFAULTDATA = QObject::trUtf8("PathToDefaultData");
-const QString LOGGING = QObject::trUtf8("Logging");
-const QString PATH_TO_LOGFILE = QObject::trUtf8("PathToLogFile");
-const QString VALUE("=%1\n");
-const QString SETTINGS_FILE("settings");
-const QString SETTING_LANGUAGE(LANGUAGE + VALUE);
-const QString SETTING_DEFAULTDATA(DEFAULTDATA + VALUE);
-const QString SETTING_PATH_TO_DEFAULTDATA(PATH_TO_DEFAULTDATA+VALUE);
-const QString SETTING_LOGGING(LOGGING + VALUE);
-const QString SETTING_PATH_TO_LOGFILE(PATH_TO_LOGFILE + VALUE);
-
 const QString defaultPathToLog("ContactList.log");
+
+namespace Settings {
+const QString LANGUAGE("main/Language");
+const QString DEFAULTDATA("main/DefaultData");
+const QString PATH_TO_DEFAULTDATA("main/PathToDefaultData");
+const QString LOGGING("main/Logging");
+const QString PATH_TO_LOGFILE("main/PathToLogFile");
+}
 }
 
 ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent) :
@@ -28,17 +23,11 @@ ContactListModel::ContactListModel(ContactListController *controller, QWidget *p
     m_driverXml(new DriverXml()),
     m_pathToCurrentData(new QString()),
     m_data(new Data::Contacts()),
-    m_settings(new SettingsData())
+    m_settings(new SettingsData()),
+    m_settingsIni(new QSettings(QSettings::IniFormat,QSettings::UserScope,
+                                "AnBat","ContactList"))
 {
-    if(!QFile::exists(defaultPathToLog)) {
-        m_settings->language = ENGLISH;
-        m_settings->logging = true;
-        m_settings->pathToLogFile = defaultPathToLog;
-        changeSettings(*m_settings);
-    }
-    else {
-        loadDefaultSettings();
-    }
+    loadSettings();
 }
 
 QStringList *ContactListModel::loadData(const QString &path)
@@ -140,52 +129,40 @@ bool ContactListModel::saveContact(const Data::ContactData &data, const QString 
 void ContactListModel::changeSettings(const SettingsData &data)
 {
     *m_settings = data;
-    QFile file(SETTINGS_FILE);
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream out(&file);
-    out << SETTING_LANGUAGE.arg(m_settings->language)
-        << SETTING_DEFAULTDATA.arg(m_settings->defaultData)
-        << SETTING_PATH_TO_DEFAULTDATA.arg(m_settings->pathToDefaultData)
-        << SETTING_LOGGING.arg(m_settings->logging)
-        << SETTING_PATH_TO_LOGFILE.arg(m_settings->pathToLogFile);
-    file.close();
+    m_settingsIni->setValue(Settings::LANGUAGE,QVariant(m_settings->language));
+    m_settingsIni->setValue(Settings::DEFAULTDATA,QVariant(m_settings->defaultData));
+    m_settingsIni->setValue(Settings::PATH_TO_DEFAULTDATA,QVariant(m_settings->pathToDefaultData));
+    m_settingsIni->setValue(Settings::LOGGING,QVariant(m_settings->logging));
+    m_settingsIni->setValue(Settings::PATH_TO_LOGFILE,QVariant(m_settings->pathToLogFile));
 }
 
-SettingsData *ContactListModel::getDefaultSettings()
+SettingsData *ContactListModel::getSettings()
 {
     return m_settings;
 }
 
-void ContactListModel::loadDefaultSettings()
+void ContactListModel::loadSettings()
 {
-    QFile file(SETTINGS_FILE);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-        QStringList list;
-        while (!in.atEnd()) {
-            list = in.readLine().split(SPLIT);
-            if (list.count() == 2) {
-                if(list.at(0) == LANGUAGE)
-                    m_settings->language = list.at(1).toInt();
-                if(list.at(0) == DEFAULTDATA)
-                    m_settings->defaultData = list.at(1).toInt();
-                if(list.at(0) == PATH_TO_DEFAULTDATA)
-                    m_settings->pathToDefaultData = list.at(1);
-                if(list.at(0) == LOGGING)
-                    m_settings->logging = list.at(1).toInt();
-                if(list.at(0) == PATH_TO_LOGFILE)
-                    m_settings->pathToLogFile = list.at(1);
-            }
-        }
-        file.close();
-        return;
+    if(QFile(m_settingsIni->fileName()).exists()) {
+        m_settings->language = m_settingsIni->value(Settings::LANGUAGE).toInt();
+        m_settings->defaultData = m_settingsIni->value(Settings::DEFAULTDATA).toBool();
+        m_settings->pathToDefaultData = m_settingsIni->value(Settings::PATH_TO_DEFAULTDATA).toString();
+        m_settings->logging = m_settingsIni->value(Settings::LOGGING).toBool();
+        m_settings->pathToLogFile = m_settingsIni->value(Settings::PATH_TO_LOGFILE).toString();
     }
     else {
-        m_settings->language = ENGLISH;
-        m_settings->logging = true;
-        m_settings->pathToLogFile = defaultPathToLog;
-        return;
+        setDefaultSettings();
     }
+}
+
+void ContactListModel::setDefaultSettings()
+{
+    m_settings->language = ENGLISH;
+    m_settings->defaultData = false;
+    m_settings->pathToDefaultData = QString();
+    m_settings->logging = true;
+    m_settings->pathToLogFile = defaultPathToLog;
+    changeSettings(*m_settings);
 }
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)

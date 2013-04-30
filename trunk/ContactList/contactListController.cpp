@@ -74,7 +74,7 @@ void ContactListController::changeSettings(const SettingsData &data)
     m_log->logging(data.logging,data.pathToLogFile);
 }
 
-SettingsData *ContactListController::getDefaultSettings()
+SettingsData *ContactListController::getSettings()
 {
-    return m_model->getDefaultSettings();
+    return m_model->getSettings();
 }
