@@ -229,7 +229,8 @@ void ContactListView::newData()
     ui->lwContactList->clear();
     ui->lwContactList->addItems(*m_controller->contactList());
     ui->lwContactList->setCurrentRow(0);
-    ui->leName->setFocus();
+    ui->leAlias->setFocus();
+    ui->leAlias->selectAll();
     MYLOG << Log::NewContactList;
 }
 
@@ -242,6 +243,11 @@ void ContactListView::clear()
 
 void ContactListView::clearContact()
 {
+    disconnect(ui->leAlias,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    disconnect(ui->leName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    disconnect(ui->leSurName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    disconnect(ui->leOtherName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+
     ui->leAlias->clear();
     ui->leName->clear();
     ui->leSurName->clear();
@@ -263,6 +269,11 @@ void ContactListView::clearContact()
     ui->leAddressOrganization->clear();
     ui->deStartWork->clear();
     ui->deEndWork->clear();
+
+    connect(ui->leAlias,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leSurName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
 }
 
 void ContactListView::newContact()
@@ -274,7 +285,8 @@ void ContactListView::newContact()
     ui->lwContactList->clear();
     ui->lwContactList->addItems(*m_controller->contactList());
     ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
-    ui->leName->setFocus();
+    ui->leAlias->setFocus();
+    ui->leAlias->selectAll();
     MYLOG << Log::NewContact;
 }
 
@@ -286,6 +298,8 @@ void ContactListView::loadContact()
         ui->lwContactList->clear();
         ui->lwContactList->addItems(*m_controller->contactList());
         ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
+        ui->leAlias->setFocus();
+        ui->leAlias->selectAll();
         MYLOG << Log::LoadContact.arg(path);
     }
 }
@@ -307,6 +321,8 @@ void ContactListView::copyContact()
     ui->lwContactList->addItems(*m_controller->contactList());
     ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
     emit textChanged(ui->leAlias->text());
+    ui->leAlias->setFocus();
+    ui->leAlias->selectAll();
     MYLOG << Log::CopyContact.arg(ui->leAlias->text());
 }
 
@@ -317,6 +333,7 @@ void ContactListView::deleteContact()
     MYLOG << Log::DeleteContact.arg(ui->lwContactList->currentIndex().data().toString());
     ui->lwContactList->clear();
     ui->lwContactList->addItems(*m_controller->contactList());
+    ui->lwContactList->setCurrentRow(index);
 }
 
 void ContactListView::settings()

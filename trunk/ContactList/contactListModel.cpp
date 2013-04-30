@@ -46,9 +46,7 @@ bool ContactListModel::saveData(const QString &path)
         *m_pathToCurrentData = path;
         return true;
     }
-    else {
-        return false;
-    }
+    return false;
 }
 
 QStringList *ContactListModel::contactList() const
@@ -80,17 +78,18 @@ Data::ContactData *ContactListModel::newData() const
 
 Data::ContactData *ContactListModel::newContact() const
 {
-    Data::ContactData data;
-    data.m_alias = QString("New contact");
-    data.m_birthday = QString(DEFAULT_DATE_STR);
-    data.m_addresses.insert(0,Data::Address());
-    data.m_communications.insert(0,Data::CommunicationData());
+    Data::ContactData *data = new Data::ContactData;
+    data->m_alias = QString("New contact");
+    data->m_birthday = QString(DEFAULT_DATE_STR);
+    data->m_addresses.insert(0,Data::Address());
+    data->m_communications.insert(0,Data::CommunicationData());
 
     Data::Organization company;
     company.dateIn = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
     company.dateOut = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
-    QHash<int,Data::ContactData>::iterator i = m_data->insert(m_data->size(),data);
-    return new Data::ContactData(m_data->value(i.key()));
+    data->m_organizations.insert(0,company);
+    m_data->insert(m_data->size(),*data);
+    return data;
 }
 
 Data::ContactData *ContactListModel::copyContact(const int index) const
@@ -102,9 +101,8 @@ Data::ContactData *ContactListModel::copyContact(const int index) const
 void ContactListModel::deleteContact(const int index)
 {
     //FIXME I apologize for this stupid code.
-    for(int i=index;i<m_data->size()-1;++i) {
+    for(int i=index;i<m_data->size()-1;++i)
         m_data->insert(i,m_data->value(i+1));
-    }
     m_data->remove(m_data->size()-1);
 }
 
@@ -121,9 +119,7 @@ bool ContactListModel::saveContact(const Data::ContactData &data, const QString 
         *m_pathToCurrentData = path;
         return true;
     }
-    else {
-        return false;
-    }
+    return false;
 }
 
 void ContactListModel::changeSettings(const SettingsData &data)

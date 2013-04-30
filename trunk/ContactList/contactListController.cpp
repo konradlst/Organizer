@@ -8,7 +8,6 @@ ContactListController::ContactListController(QWidget *parent) :
     m_view(new ContactListView(this)),
     m_log(myLog::instance())
 {
-//    MYLOG;
     m_view->show();
     connect(m_view,SIGNAL(dataChanged(QString,QString,int)),m_model,SLOT(dataChanged(QString,QString,int)));
 }
