@@ -146,7 +146,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->lePhone->clear();
     ui->leEmail->clear();
     ui->leSkype->clear();
-    ui->leVk->clear();
+    ui->leSite->clear();
     int count = contact->m_communications.size()-1;
     while(count >= 0) {
         Data::CommunicationData data = contact->m_communications.value(count);
@@ -156,8 +156,8 @@ void ContactListView::setContactData(const Data::ContactData *contact)
             ui->leEmail->setText(data.second.value);
         if(data.first == Data::typeSkype)
             ui->leSkype->setText(data.second.value);
-        if(data.first == Data::typeVk)
-            ui->leVk->setText(data.second.value);
+        if(data.first == Data::typeSite)
+            ui->leSite->setText(data.second.value);
         --count;
     }
 
@@ -261,7 +261,7 @@ void ContactListView::clearContact()
     ui->lePhone->clear();
     ui->leEmail->clear();
     ui->leSkype->clear();
-    ui->leVk->clear();
+    ui->leSite->clear();
     ui->leNameOrganization->clear();
     ui->lePhoneOrganization->clear();
     ui->leDepartment->clear();

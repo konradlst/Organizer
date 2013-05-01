@@ -349,9 +349,9 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="lbVk">
+            <widget class="QLabel" name="lbSite">
              <property name="text">
-              <string>VK.com:</string>
+              <string>Site:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -359,7 +359,7 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLineEdit" name="leVk"/>
+            <widget class="QLineEdit" name="leSite"/>
            </item>
           </layout>
          </widget>
@@ -852,7 +852,7 @@
   <tabstop>lePhone</tabstop>
   <tabstop>leEmail</tabstop>
   <tabstop>leSkype</tabstop>
-  <tabstop>leVk</tabstop>
+  <tabstop>leSite</tabstop>
   <tabstop>leNameOrganization</tabstop>
   <tabstop>lePhoneOrganization</tabstop>
   <tabstop>leDepartment</tabstop>

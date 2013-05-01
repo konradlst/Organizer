@@ -39,7 +39,7 @@ struct Organization
 };
 
 enum typeCommunication
-{ typePhone, typeEmail, typeSkype, typeVk};
+{ typePhone, typeEmail, typeSkype, typeSite};
 
 typedef QPair<typeCommunication,Communication> CommunicationData;
 

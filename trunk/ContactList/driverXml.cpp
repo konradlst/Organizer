@@ -44,7 +44,7 @@ namespace Value {
 const QString Phone("phone");
 const QString Email("email");
 const QString Skype("skype");
-const QString Vk("vk");
+const QString Site("Site");
 }
 
 #define ERROR QObject::trUtf8("Error")
@@ -266,8 +266,8 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                         currentCommunicationData.first = Data::typeEmail;
                     else if(type == Value::Skype)
                         currentCommunicationData.first = Data::typeSkype;
-                    else if(type == Value::Vk)
-                        currentCommunicationData.first = Data::typeVk;
+                    else if(type == Value::Site)
+                        currentCommunicationData.first = Data::typeSite;
 
                     Data::Communication currentCommunication;
                     currentCommunication.subType = dataElement.attribute(Attribute::Subtype);
@@ -339,8 +339,8 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
             communication.setAttribute(Attribute::Type,Value::Email);
         else if(type == Data::typeSkype)
             communication.setAttribute(Attribute::Type,Value::Skype);
-        else if(type == Data::typeVk)
-            communication.setAttribute(Attribute::Type,Value::Vk);
+        else if(type == Data::typeSite)
+            communication.setAttribute(Attribute::Type,Value::Site);
 
         communication.setAttribute(Attribute::Subtype,communicationData.second.subType);
         communication.setAttribute(Attribute::Value,communicationData.second.value);
