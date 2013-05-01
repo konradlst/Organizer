@@ -53,31 +53,30 @@ Data::ContactData *ContactListModel::newData() const
 {
     m_data->clear();
     m_pathToCurrentData->clear();
-    Data::ContactData *data = newContact();
-    m_data->insert(0,*data);
-    return data;
+    m_data->insert(0,*newContact());
+    return new Data::ContactData(m_data->value(0));
 }
 
 Data::ContactData *ContactListModel::newContact() const
 {
-    Data::ContactData *data = new Data::ContactData;
-    data->m_alias = QString("New contact");
-    data->m_birthday = QString(DEFAULT_DATE_STR);
-    data->m_addresses.insert(0,Data::Address());
-    data->m_communications.insert(0,Data::CommunicationData());
+    Data::ContactData data;
+    data.m_alias = QString("New contact");
+    data.m_birthday = QString(DEFAULT_DATE_STR);
+    data.m_addresses.insert(0,Data::Address());
+    data.m_communications.insert(0,Data::CommunicationData());
 
     Data::Organization company;
     company.dateIn = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
     company.dateOut = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
-    data->m_organizations.insert(0,company);
-    m_data->insert(m_data->size(),*data);
-    return data;
+    data.m_organizations.insert(0,company);
+    m_data->insert(m_data->size(),data);
+    return new Data::ContactData(m_data->value(m_data->size() - 1));
 }
 
 Data::ContactData *ContactListModel::copyContact(const int index) const
 {
     m_data->insert(m_data->size(),m_data->value(index));
-    return new Data::ContactData(m_data->value(m_data->size()-1));
+    return new Data::ContactData(m_data->value(m_data->size() - 1));
 }
 
 void ContactListModel::deleteContact(const int index)
@@ -90,9 +89,8 @@ void ContactListModel::deleteContact(const int index)
 
 Data::ContactData *ContactListModel::loadContact(const QString &path)
 {
-    Data::ContactData data = *m_driverXml->loadContact(path);
-    m_data->insert(m_data->size(),data);
-    return new Data::ContactData(m_data->value(m_data->size()-1));
+    m_data->insert(m_data->size(),*m_driverXml->loadContact(path));
+    return new Data::ContactData(m_data->value(m_data->size() - 1));
 }
 
 bool ContactListModel::saveContact(const Data::ContactData &data, const QString &path)

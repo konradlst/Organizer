@@ -330,10 +330,14 @@ void ContactListView::deleteContact()
 {
     int index = ui->lwContactList->currentRow();
     m_controller->deleteContact(index);
-    MYLOG << Log::DeleteContact.arg(ui->lwContactList->currentIndex().data().toString());
+    MYLOG << Log::DeleteContact.arg(ui->leAlias->text());
     ui->lwContactList->clear();
     ui->lwContactList->addItems(*m_controller->contactList());
-    ui->lwContactList->setCurrentRow(index);
+    if(index == ui->lwContactList->count())
+        ui->lwContactList->setCurrentRow(index -1);
+    else
+        ui->lwContactList->setCurrentRow(index);
+    ui->leAlias->setFocus();
 }
 
 void ContactListView::settings()

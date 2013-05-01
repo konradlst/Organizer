@@ -44,7 +44,7 @@ namespace Value {
 const QString Phone("phone");
 const QString Email("email");
 const QString Skype("skype");
-const QString Site("Site");
+const QString Site("site");
 }
 
 #define ERROR QObject::trUtf8("Error")
