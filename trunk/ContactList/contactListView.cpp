@@ -184,7 +184,6 @@ void ContactListView::setDefaultSettings()
     if(data.first && QFile(data.second).exists()) {
         loadData(data.second);
     }
-//    m_settings->show();
 }
 
 void ContactListView::about()
