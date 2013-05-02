@@ -25,10 +25,12 @@ signals:
 private:
     void activateContactBotton();
     void setContactData(const Data::ContactData *contact);
+    void setDefaultSettings();
 
 private slots:
     void setEditable(bool flag);
     void loadData();
+    void loadData(const QString &path);
     void saveData();
     void saveAsData();
     void newData();

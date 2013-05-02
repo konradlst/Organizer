@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
@@ -6,7 +6,7 @@
     <message>
         <location filename="contactListView.ui" line="32"/>
         <source>Contact List</source>
-        <translation>Список контактов</translation>
+        <translation>Список Контактов</translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="88"/>
@@ -72,8 +72,8 @@
     </message>
     <message>
         <location filename="contactListView.ui" line="354"/>
-        <source>VK.com:</source>
-        <translation>В контакте:</translation>
+        <source>Site:</source>
+        <translation>Сайт:</translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="371"/>
@@ -194,7 +194,7 @@
     <message>
         <location filename="contactListView.ui" line="771"/>
         <source>Save Contact</source>
-        <translation>Сохранить контакт</translation>
+        <translation>Сохранить Контакт</translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="783"/>
@@ -219,7 +219,7 @@
     <message>
         <location filename="contactListView.ui" line="816"/>
         <source>Save</source>
-        <translation>Сохранить список контактов</translation>
+        <translation>Сохранить Список Контактов</translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="819"/>
@@ -296,76 +296,131 @@
         <translation>Невозможно открыть файл для чтения или файл имеет некорректный формат!</translation>
     </message>
     <message>
-        <location filename="settingsView.cpp" line="6"/>
+        <location filename="settingsView.cpp" line="20"/>
         <source>Choose Log File</source>
         <translation>Выбрать файл для логов</translation>
     </message>
     <message>
-        <location filename="settingsView.cpp" line="7"/>
+        <location filename="settingsView.cpp" line="21"/>
         <source>Choose Contact List</source>
         <translation>Выбрать Список Контактов</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="10"/>
+        <source>Start Application</source>
+        <translation>Запуск приложения</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="11"/>
+        <source>Stop Application</source>
+        <translation>Остановка приложения</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="13"/>
+        <source>Create new Contact</source>
+        <translation>Создание нового Контакта</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="14"/>
+        <source>Load Contact from %1</source>
+        <translation>Загрузка Контакта из %1</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="15"/>
+        <source>Save Contact to %1</source>
+        <translation>Сохранение контакта в %1</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="16"/>
+        <source>Copy Contact %1</source>
+        <translation>Копирование Контакта %1</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="17"/>
+        <source>Delete Contact %1</source>
+        <translation>Удаление Контакта %1</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="19"/>
+        <source>New Contact List</source>
+        <translation>Новый Список Контактов</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="20"/>
+        <source>Load Contact List from %1</source>
+        <translation>Загрузить Список Контактов из %1</translation>
+    </message>
+    <message>
+        <location filename="include/myLog.h" line="21"/>
+        <source>Save Contact List to %1</source>
+        <translation>Сохранить Список Контактов в %1</translation>
     </message>
 </context>
 <context>
     <name>SettingsView</name>
     <message>
-        <location filename="settingsView.ui" line="17"/>
+        <location filename="settingsView.ui" line="29"/>
         <source>Contact List Settings</source>
-        <translation>Настройки списка Контактов</translation>
+        <translation>Настройки Списка Контактов</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="44"/>
+        <location filename="settingsView.ui" line="58"/>
+        <source>Language change occurs after restarting the application.</source>
+        <translation>Язык будет изменен после перезапуска приложения.</translation>
+    </message>
+    <message>
+        <location filename="settingsView.ui" line="73"/>
         <source>Language:</source>
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="67"/>
+        <location filename="settingsView.ui" line="96"/>
         <source>English (default)</source>
         <translation>Английский (по умолчанию)</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="72"/>
+        <location filename="settingsView.ui" line="101"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="101"/>
+        <location filename="settingsView.ui" line="130"/>
         <source>Default Contact List</source>
-        <translation>Список контактов, загружаемый по умолчанию</translation>
+        <translation>Список Контактов, загружаемый по умолчанию</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="125"/>
+        <location filename="settingsView.ui" line="154"/>
         <source>Path to Contact List:  </source>
         <translation>Путь до файла:</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="141"/>
-        <location filename="settingsView.ui" line="198"/>
+        <location filename="settingsView.ui" line="170"/>
+        <location filename="settingsView.ui" line="227"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="158"/>
+        <location filename="settingsView.ui" line="187"/>
         <source>Logging</source>
         <translation>Логирование</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="182"/>
+        <location filename="settingsView.ui" line="211"/>
         <source>Path to log file:  </source>
         <translation>Путь до файла логов:</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="211"/>
+        <location filename="settingsView.ui" line="240"/>
         <source>Apply</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="218"/>
+        <location filename="settingsView.ui" line="247"/>
         <source>Cancel</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="238"/>
+        <location filename="settingsView.ui" line="267"/>
         <source>Default</source>
         <translation>Сбросить настройки</translation>
     </message>

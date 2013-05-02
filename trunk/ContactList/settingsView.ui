@@ -13,6 +13,18 @@
     <height>205</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>365</width>
+    <height>205</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>365</width>
+    <height>205</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Contact List Settings</string>
   </property>
@@ -26,10 +38,27 @@
      <x>10</x>
      <y>10</y>
      <width>351</width>
-     <height>193</height>
+     <height>212</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="mainLayout">
+    <item>
+     <widget class="QLabel" name="lbChangeLangMsg">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <italic>true</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Language change occurs after restarting the application.</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <layout class="QHBoxLayout" name="languageLayout">
       <item>

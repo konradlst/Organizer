@@ -31,9 +31,9 @@ public:
     void logging(bool flag, const QString &path);
 
 private:
+    myLog *m_log;
     ContactListModel *m_model;
     ContactListView *m_view;
-    myLog *m_log;
 };
 
 #endif // CONTACTLISTCONTROLLER_H

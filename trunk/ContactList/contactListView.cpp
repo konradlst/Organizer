@@ -49,12 +49,14 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     QMainWindow(parent),
     ui(new Ui::ContactListView),
     m_controller(controller),
-    m_path(new QLabel())
+    m_path(new QLabel()),
+    m_settings(new SettingsView(m_controller))
 {
     //FIXME resize mainLayout while move menuBar
     ui->setupUi(this);
 //    ui->menuBar->hide();
     setEditable(false);
+    setDefaultSettings();
 
     ui->lePhone->setInputMask("+9 (999) 999 99 99;_");
     ui->deStartWork->setDate(QDate::currentDate());
@@ -176,6 +178,15 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
 }
 
+void ContactListView::setDefaultSettings()
+{
+    QPair<bool, QString> data = *m_settings->defaultData();
+    if(data.first && QFile(data.second).exists()) {
+        loadData(data.second);
+    }
+//    m_settings->show();
+}
+
 void ContactListView::about()
 {
     QMessageBox::about(this,ABOUT_TITLE,ABOUT_TEXT);
@@ -184,6 +195,11 @@ void ContactListView::about()
 void ContactListView::loadData()
 {
     QString path = OPEN_FILE_DIALOG;
+    loadData(path);
+}
+
+void ContactListView::loadData(const QString &path)
+{
     if(!path.isEmpty()) {
         QStringList list = *m_controller->loadData(path);
         if(!list.isEmpty()) {
@@ -342,7 +358,6 @@ void ContactListView::deleteContact()
 
 void ContactListView::settings()
 {
-    m_settings = new SettingsView(m_controller);
     m_settings->show();
 }
 

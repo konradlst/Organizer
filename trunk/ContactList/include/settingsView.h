@@ -5,6 +5,7 @@
 #include "contactListController.h"
 
 class QSettings;
+class QTranslator;
 namespace Ui {
 class SettingsView;
 }
@@ -15,6 +16,7 @@ class SettingsView : public QWidget
 public:
     explicit SettingsView(ContactListController *controller, QWidget *parent = 0);
     ~SettingsView();
+    QPair<bool, QString> *defaultData();
 
 private slots:
     void chooseContactList();
@@ -32,7 +34,10 @@ private:
 private:
     Ui::SettingsView *ui;
     ContactListController *m_controller;
-    QSettings *m_settingsIni;
+    QSettings *m_settings;
+    QTranslator *m_RuTranslator;
+    QTranslator *m_qtRuTranslator;
+    int m_currentLanguage;
 };
 
 #endif // SETTINGSVIEW_H
