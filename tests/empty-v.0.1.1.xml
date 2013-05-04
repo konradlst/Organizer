@@ -2,13 +2,13 @@
 	<record>
 		<data alias="" name="" surName="" otherName="" birthday="" userpic="" comment=""/>
 		<addresses>
-			<data id="" country="" city="" street="" home="" apartment=""/>
+			<data country="" city="" street="" home="" apartment=""/>
 		</addresses>
 		<communications>
-			<data id="" type="phone\email\skype\site" subtype="" value=""/>
+			<data type="phone\email\skype\site" subtype="" value=""/>
 		</communications>
 		<organizations>
-			<data id="" name="" department="" post="" address="" phone="" dateIn="" dateOut=""/>
+			<data name="" department="" post="" address="" phone="" dateIn="" dateOut=""/>
 		</organizations>
 	</record>
 </tree>

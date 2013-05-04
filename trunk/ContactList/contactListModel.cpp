@@ -15,9 +15,9 @@ ContactListModel::ContactListModel(ContactListController *controller, QWidget *p
 QStringList *ContactListModel::loadData(const QString &path)
 {
     Data::Contacts *data = m_driverXml->loadData(path);
-    if(data->size() != 0) {
+    if(data != 0) {
         *m_pathToCurrentData = path;
-        m_data = data;
+        *m_data = *data;
     }
     return contactList();
 }
@@ -62,13 +62,13 @@ Data::ContactData *ContactListModel::newContact() const
     Data::ContactData data;
     data.m_alias = QString("New contact");
     data.m_birthday = QString(DEFAULT_DATE_STR);
-    data.m_addresses.insert(0,Data::Address());
-    data.m_communications.insert(0,Data::CommunicationData());
+    data.m_addresses.append(Data::Address());
+    data.m_communications.append(Data::CommunicationData());
 
     Data::Organization company;
     company.dateIn = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
     company.dateOut = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
-    data.m_organizations.insert(0,company);
+    data.m_organizations.append(company);
     m_data->insert(m_data->size(),data);
     return new Data::ContactData(m_data->value(m_data->size() - 1));
 }
@@ -89,8 +89,12 @@ void ContactListModel::deleteContact(const int index)
 
 Data::ContactData *ContactListModel::loadContact(const QString &path)
 {
-    m_data->insert(m_data->size(),*m_driverXml->loadContact(path));
-    return new Data::ContactData(m_data->value(m_data->size() - 1));
+    Data::ContactData *data = m_driverXml->loadContact(path);
+    if(data != 0) {
+        m_data->insert(m_data->size(),*data);
+        return new Data::ContactData(m_data->value(m_data->size() - 1));
+    }
+    return 0;
 }
 
 bool ContactListModel::saveContact(const Data::ContactData &data, const QString &path)

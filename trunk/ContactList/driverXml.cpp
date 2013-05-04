@@ -16,7 +16,6 @@ const QString Organizations("organizations");
 }
 
 namespace Attribute {
-const QString Id("id");
 const QString Alias("alias");
 const QString Name("name");
 const QString SurName("surName");
@@ -120,13 +119,11 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         ERROR_MESSAGE_CANNOT_OPEN;
-        close();
-        return new Data::Contacts();
+        return 0;
     }
     if (!doc->setContent(&file)) {
         ERROR_MESSAGE_INCORRECT;
-        close();
-        return new Data::Contacts();
+        return 0;
     }
     file.close();
 
@@ -153,7 +150,6 @@ bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         ERROR_MESSAGE_CANNOT_OPEN;
-        close();
         return false;
     }
 
@@ -202,13 +198,11 @@ Data::ContactData *DriverXml::loadContact(const QString &path)
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         ERROR_MESSAGE_CANNOT_OPEN;
-        close();
-        return new Data::ContactData();
+        return 0;
     }
     if (!doc->setContent(&file)) {
         ERROR_MESSAGE_INCORRECT;
-        close();
-        return new Data::ContactData();
+        return 0;
     }
     file.close();
 
@@ -239,7 +233,6 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                 // Read all address in contact
                 while(!dataNode.isNull()) {
                     QDomElement dataElement = dataNode.toElement();
-                    int addressID = dataElement.attribute(Attribute::Id).toInt();
                     Data::Address currentAddress;
                     currentAddress.country = dataElement.attribute(Attribute::Country);
                     currentAddress.city = dataElement.attribute(Attribute::City);
@@ -247,7 +240,7 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                     currentAddress.home = dataElement.attribute(Attribute::Home);
                     currentAddress.apartment = dataElement.attribute(Attribute::Apartment);
 
-                    currentContact.m_addresses.insert(addressID,currentAddress);
+                    currentContact.m_addresses.append(currentAddress);
                     dataNode = dataNode.nextSibling();
                 }
             }
@@ -256,7 +249,6 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                 // Read all communications from the contact
                 while(!dataNode.isNull()) {
                     QDomElement dataElement = dataNode.toElement();
-                    int communicationId = dataElement.attribute(Attribute::Id).toInt();
 
                     Data::CommunicationData currentCommunicationData;
                     QString type = dataElement.attribute(Attribute::Type);
@@ -274,7 +266,7 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                     currentCommunication.value = dataElement.attribute(Attribute::Value);
                     currentCommunicationData.second = currentCommunication;
 
-                    currentContact.m_communications.insert(communicationId,currentCommunicationData);
+                    currentContact.m_communications.append(currentCommunicationData);
                     dataNode = dataNode.nextSibling();
                 }
             }
@@ -283,7 +275,6 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                 // Read every organization when working this contact
                 while(!dataNode.isNull()) {
                     QDomElement dataElement = dataNode.toElement();
-                    int companyID = dataElement.attribute(Attribute::Id).toInt();
                     Data::Organization currentCompany;
                     currentCompany.name = dataElement.attribute(Attribute::Name);
                     currentCompany.department = dataElement.attribute(Attribute::Department);
@@ -293,7 +284,7 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                     currentCompany.dateIn = dataElement.attribute(Attribute::DateIn);
                     currentCompany.dateOut = dataElement.attribute(Attribute::DateOut);
 
-                    currentContact.m_organizations.insert(companyID,currentCompany);
+                    currentContact.m_organizations.append(currentCompany);
                     dataNode = dataNode.nextSibling();
                 }
             }
@@ -316,8 +307,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     int countAddresses = data.m_addresses.size();
     QDomElement address = record.firstChildElement(Tag::Addresses).firstChildElement(Tag::Data);
     for(int addressId = 0; addressId < countAddresses; ++addressId) {
-        Data::Address addressData = data.m_addresses.value(addressId);
-        address.setAttribute(Attribute::Id,addressId);
+        Data::Address addressData = data.m_addresses.at(addressId);
         address.setAttribute(Attribute::Country,addressData.country);
         address.setAttribute(Attribute::City,addressData.city);
         address.setAttribute(Attribute::Street,addressData.street);
@@ -329,8 +319,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     int countCommunications = data.m_communications.size();
     QDomElement communication = record.firstChildElement(Tag::Communications).firstChildElement(Tag::Data);
     for(int communicationsId = 0; communicationsId < countCommunications; ++communicationsId) {
-        Data::CommunicationData communicationData = data.m_communications.value(communicationsId);
-        communication.setAttribute(Attribute::Id,communicationsId);
+        Data::CommunicationData communicationData = data.m_communications.at(communicationsId);
 
         Data::typeCommunication type = communicationData.first;
         if(type == Data::typePhone)
@@ -350,8 +339,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     int countCompanies = data.m_organizations.size();
     QDomElement company = record.firstChildElement(Tag::Organizations).firstChildElement(Tag::Data);
     for(int companiesId = 0; companiesId < countCompanies; ++companiesId) {
-        Data::Organization companyData = data.m_organizations.value(companiesId);
-        company.setAttribute(Attribute::Id,companiesId);
+        Data::Organization companyData = data.m_organizations.at(companiesId);
         company.setAttribute(Attribute::Name,companyData.name);
         company.setAttribute(Attribute::Department,companyData.department);
         company.setAttribute(Attribute::Post,companyData.post);

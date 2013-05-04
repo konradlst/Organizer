@@ -2,6 +2,7 @@
 #define CONTACTDATA_H
 
 #include <QHash>
+#include <QVector>
 #include <QDate>
 
 class QString;
@@ -43,10 +44,6 @@ enum typeCommunication
 
 typedef QPair<typeCommunication,Communication> CommunicationData;
 
-typedef QHash<int,Address> Addresses;
-typedef QHash<int,CommunicationData> Communications;
-typedef QHash<int,Organization> Organizations;
-
 struct ContactData
 {
     QString m_alias;
@@ -54,9 +51,9 @@ struct ContactData
     QString m_surName;
     QString m_otherName;
     QString m_birthday;//TODO QDate
-    Addresses m_addresses;
-    Communications m_communications;
-    Organizations m_organizations;
+    QVector<Address> m_addresses;
+    QVector<CommunicationData> m_communications;
+    QVector<Organization> m_organizations;
     QString m_pathToUserPic;
     QString m_comment;
 };

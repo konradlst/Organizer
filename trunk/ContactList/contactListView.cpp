@@ -138,7 +138,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->deBirthday->setDate(stringToDate(contact->m_birthday));
     ui->lbUserPic->setPixmap(pathToPixmap(contact->m_pathToUserPic));
 
-    Data::Address address = contact->m_addresses.value(0);
+    Data::Address address = contact->m_addresses.at(0);
     ui->leCountry->setText(address.country);
     ui->leCity->setText(address.city);
     ui->leStreet->setText(address.street);
@@ -151,7 +151,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->leSite->clear();
     int count = contact->m_communications.size()-1;
     while(count >= 0) {
-        Data::CommunicationData data = contact->m_communications.value(count);
+        Data::CommunicationData data = contact->m_communications.at(count);
         if(data.first == Data::typePhone)
             ui->lePhone->setText(data.second.value);
         if(data.first == Data::typeEmail)
@@ -163,7 +163,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
         --count;
     }
 
-    Data::Organization company = contact->m_organizations.value(0);
+    Data::Organization company = contact->m_organizations.at(0);
     ui->leNameOrganization->setText(company.name);
     ui->lePhoneOrganization->setText(company.phone);
     ui->leDepartment->setText(company.department);
@@ -202,12 +202,11 @@ void ContactListView::loadData(const QString &path)
     if(!path.isEmpty()) {
         QStringList list = *m_controller->loadData(path);
         if(!list.isEmpty()) {
-            clear();
+            clearAll();
             activateContactBotton();
             setEditable(true);
-            ui->lwContactList->addItems(*m_controller->loadData(path));
-            ui->lwContactList->setCurrentRow(0);
             setContactData(m_controller->contact(0));
+            refreshContactList();
             m_path->setText(pathToData(m_controller->pathToData()));
             MYLOG << Log::LoadContactList;
         }
@@ -237,23 +236,30 @@ void ContactListView::saveAsData()
 
 void ContactListView::newData()
 {
-    clear();
+    clearAll();
     activateContactBotton();
     setEditable(true);
     setContactData(m_controller->newData());
-    ui->lwContactList->clear();
-    ui->lwContactList->addItems(*m_controller->contactList());
-    ui->lwContactList->setCurrentRow(0);
+    refreshContactList();
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
     MYLOG << Log::NewContactList;
 }
 
-void ContactListView::clear()
+void ContactListView::clearAll()
 {
-    ui->lwContactList->clear();
+    refreshContactList();
     clearContact();
     m_path->clear();
+}
+
+void ContactListView::refreshContactList(int currentIndex)
+{
+    disconnect(ui->lwContactList,SIGNAL(currentRowChanged(int)),this,SLOT(currentContactChanged(int)));
+    ui->lwContactList->clear();
+    ui->lwContactList->addItems(*m_controller->contactList());
+    connect(ui->lwContactList,SIGNAL(currentRowChanged(int)),SLOT(currentContactChanged(int)));
+    ui->lwContactList->setCurrentRow(currentIndex);
 }
 
 void ContactListView::clearContact()
@@ -297,9 +303,7 @@ void ContactListView::newContact()
     setEditable(true);
 
     setContactData(m_controller->newContact());
-    ui->lwContactList->clear();
-    ui->lwContactList->addItems(*m_controller->contactList());
-    ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
+    refreshContactList(ui->lwContactList->count());
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
     MYLOG << Log::NewContact;
@@ -309,13 +313,14 @@ void ContactListView::loadContact()
 {
     QString path = OPEN_FILE_DIALOG;
     if(!path.isEmpty()) {
-        setContactData(m_controller->loadContact(path));
-        ui->lwContactList->clear();
-        ui->lwContactList->addItems(*m_controller->contactList());
-        ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
-        ui->leAlias->setFocus();
-        ui->leAlias->selectAll();
-        MYLOG << Log::LoadContact.arg(path);
+        Data::ContactData *data = m_controller->loadContact(path);
+        if(data != 0) {
+            setContactData(data);
+            refreshContactList(ui->lwContactList->count());
+            ui->leAlias->setFocus();
+            ui->leAlias->selectAll();
+            MYLOG << Log::LoadContact.arg(path);
+        }
     }
 }
 
@@ -332,9 +337,7 @@ void ContactListView::copyContact()
 {
     int index = ui->lwContactList->currentRow();
     setContactData(m_controller->copyContact(index));
-    ui->lwContactList->clear();
-    ui->lwContactList->addItems(*m_controller->contactList());
-    ui->lwContactList->setCurrentRow(ui->lwContactList->count()-1);
+    refreshContactList(ui->lwContactList->count());
     emit textChanged(ui->leAlias->text());
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
@@ -346,12 +349,10 @@ void ContactListView::deleteContact()
     int index = ui->lwContactList->currentRow();
     m_controller->deleteContact(index);
     MYLOG << Log::DeleteContact.arg(ui->leAlias->text());
-    ui->lwContactList->clear();
-    ui->lwContactList->addItems(*m_controller->contactList());
-    if(index == ui->lwContactList->count())
-        ui->lwContactList->setCurrentRow(index -1);
+    if(index + 1 == ui->lwContactList->count())
+        refreshContactList(index - 1);
     else
-        ui->lwContactList->setCurrentRow(index);
+        refreshContactList(index);
     ui->leAlias->setFocus();
 }
 

@@ -26,6 +26,8 @@ private:
     void activateContactBotton();
     void setContactData(const Data::ContactData *contact);
     void setDefaultSettings();
+    void clearAll();
+    void refreshContactList(int currentIndex = 0);
 
 private slots:
     void setEditable(bool flag);
@@ -34,7 +36,6 @@ private slots:
     void saveData();
     void saveAsData();
     void newData();
-    void clear();
     void clearContact();
     void newContact();
     void loadContact();
