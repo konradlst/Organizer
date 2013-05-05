@@ -35,7 +35,7 @@ QStringList *ContactListModel::contactList() const
 {
     QStringList *data = new QStringList();
     for(int i=0; i<m_data->size(); ++i)
-        data->append(m_data->value(i).m_alias);
+        data->append(m_data->at(i)->m_alias);
     return data;
 }
 
@@ -46,53 +46,51 @@ QString *ContactListModel::pathToData() const
 
 Data::ContactData *ContactListModel::contact(int index) const
 {
-    return new Data::ContactData(m_data->value(index));
+    return m_data->at(index);
 }
 
 Data::ContactData *ContactListModel::newData() const
 {
     m_data->clear();
     m_pathToCurrentData->clear();
-    m_data->insert(0,*newContact());
-    return new Data::ContactData(m_data->value(0));
+    newContact();
+    return m_data->at(0);
 }
 
 Data::ContactData *ContactListModel::newContact() const
 {
-    Data::ContactData data;
-    data.m_alias = QString("New contact");
-    data.m_birthday = QString(DEFAULT_DATE_STR);
-    data.m_addresses.append(Data::Address());
-    data.m_communications.append(Data::CommunicationData());
+    Data::ContactData *data = new Data::ContactData;
+    data->m_alias = QString("New contact");
+    data->m_birthday = DEFAULT_DATE;
+    data->m_addresses.append(Data::Address());
+    data->m_communications.append(Data::CommunicationData());
 
     Data::Organization company;
-    company.dateIn = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
-    company.dateOut = QDate::currentDate().toString(DEFAULT_DATE_FORMAT);
-    data.m_organizations.append(company);
-    m_data->insert(m_data->size(),data);
-    return new Data::ContactData(m_data->value(m_data->size() - 1));
+    company.dateIn = QDate::currentDate();
+    company.dateOut = QDate::currentDate();
+    data->m_organizations.append(company);
+    m_data->append(data);
+    return m_data->last();
 }
 
 Data::ContactData *ContactListModel::copyContact(const int index) const
 {
-    m_data->insert(m_data->size(),m_data->value(index));
-    return new Data::ContactData(m_data->value(m_data->size() - 1));
+    m_data->append(new Data::ContactData(*m_data->at(index)));
+    return m_data->last();
 }
 
 void ContactListModel::deleteContact(const int index)
 {
-    //FIXME I apologize for this stupid code.
-    for(int i=index;i<m_data->size()-1;++i)
-        m_data->insert(i,m_data->value(i+1));
-    m_data->remove(m_data->size()-1);
+    if(m_data->size())
+        m_data->remove(index);
 }
 
 Data::ContactData *ContactListModel::loadContact(const QString &path)
 {
     Data::ContactData *data = m_driverXml->loadContact(path);
     if(data != 0) {
-        m_data->insert(m_data->size(),*data);
-        return new Data::ContactData(m_data->value(m_data->size() - 1));
+        m_data->append(data);
+        return data;
     }
     return 0;
 }
@@ -109,17 +107,17 @@ bool ContactListModel::saveContact(const Data::ContactData &data, const QString 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)
 {
     //FIXME change process saving data.
-    Data::ContactData contact = m_data->value(contactId);
+    Data::ContactData *contact = m_data->at(contactId);
     if(key == "alias")
-        contact.m_alias = data;
+        contact->m_alias = data;
     else if(key == "userpic")
-        contact.m_pathToUserPic = data;
+        contact->m_pathToUserPic = data;
     else if(key == "name")
-        contact.m_name = data;
+        contact->m_name = data;
     else if(key == "surName")
-        contact.m_surName = data;
+        contact->m_surName = data;
     else if(key == "otherName")
-        contact.m_otherName = data;
+        contact->m_otherName = data;
 
-    m_data->insert(contactId,contact);
+    m_data->replace(contactId,contact);
 }

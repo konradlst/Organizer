@@ -31,12 +31,6 @@ QString pathToData(const QString *path) {
         return QString();
 }
 
-QDate stringToDate(QString data) {
-    if(data.isEmpty())
-        return DEFAULT_DATE;
-    return QDate::fromString(data,DEFAULT_DATE_FORMAT);
-}
-
 QPixmap pathToPixmap(QString path) {
     QPixmap pix = QPixmap(path);
     if(pix.isNull())
@@ -135,7 +129,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->leName->setText(contact->m_name);
     ui->leSurName->setText(contact->m_surName);
     ui->leOtherName->setText(contact->m_otherName);
-    ui->deBirthday->setDate(stringToDate(contact->m_birthday));
+    ui->deBirthday->setDate(contact->m_birthday);
     ui->lbUserPic->setPixmap(pathToPixmap(contact->m_pathToUserPic));
 
     Data::Address address = contact->m_addresses.at(0);
@@ -169,8 +163,8 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->leDepartment->setText(company.department);
     ui->lePost->setText(company.post);
     ui->leAddressOrganization->setText(company.address);
-    ui->deStartWork->setDate(stringToDate(company.dateIn));
-    ui->deEndWork->setDate(stringToDate(company.dateIn));
+    ui->deStartWork->setDate(company.dateIn);
+    ui->deEndWork->setDate(company.dateIn);
 
     connect(ui->leAlias,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
@@ -211,6 +205,8 @@ void ContactListView::loadData(const QString &path)
             MYLOG << Log::LoadContactList;
         }
     }
+    if(ui->lwContactList->count() == 1)
+        emptyContactList(false);
 }
 
 void ContactListView::saveData()
@@ -244,6 +240,8 @@ void ContactListView::newData()
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
     MYLOG << Log::NewContactList;
+    if(ui->lwContactList->count() == 1)
+        emptyContactList(false);
 }
 
 void ContactListView::clearAll()
@@ -260,6 +258,19 @@ void ContactListView::refreshContactList(int currentIndex)
     ui->lwContactList->addItems(*m_controller->contactList());
     connect(ui->lwContactList,SIGNAL(currentRowChanged(int)),SLOT(currentContactChanged(int)));
     ui->lwContactList->setCurrentRow(currentIndex);
+}
+
+void ContactListView::emptyContactList(bool flag)
+{
+    flag = !flag;
+    ui->actionSave->setEnabled(flag);
+    ui->actionSave_Contact->setEnabled(flag);
+    ui->actionCopy_Contact->setEnabled(flag);
+    ui->actionDelete_Contact->setEnabled(flag);
+    ui->actionEditable->setEnabled(flag);
+    setEditable(flag);
+    if(!flag)
+        clearContact();
 }
 
 void ContactListView::clearContact()
@@ -306,6 +317,8 @@ void ContactListView::newContact()
     refreshContactList(ui->lwContactList->count());
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
+    if(ui->lwContactList->count() == 1)
+        emptyContactList(false);
     MYLOG << Log::NewContact;
 }
 
@@ -322,6 +335,8 @@ void ContactListView::loadContact()
             MYLOG << Log::LoadContact.arg(path);
         }
     }
+    if(ui->lwContactList->count() == 1)
+        emptyContactList(false);
 }
 
 void ContactListView::saveContact()
@@ -354,6 +369,9 @@ void ContactListView::deleteContact()
     else
         refreshContactList(index);
     ui->leAlias->setFocus();
+    if(!ui->lwContactList->count()) {
+        emptyContactList();
+    }
 }
 
 void ContactListView::settings()

@@ -6,10 +6,9 @@
 #include <QDate>
 
 class QString;
-//FIXME change qhash QHash<int,ContactData> to QHash<int,ContactData *>
+
 namespace Data {
 #define DEFAULT_DATE QDate(1900,1,1)
-#define DEFAULT_DATE_STR "01.01.1900"
 #define DEFAULT_DATE_FORMAT "dd.MM.yyyy"
 #define DEFAULT_USER_PIC ":/logo"
 
@@ -35,8 +34,8 @@ struct Organization
     QString post;
     QString address;
     QString phone;
-    QString dateIn;
-    QString dateOut;
+    QDate dateIn;
+    QDate dateOut;
 };
 
 enum typeCommunication
@@ -50,7 +49,7 @@ struct ContactData
     QString m_name;
     QString m_surName;
     QString m_otherName;
-    QString m_birthday;//TODO QDate
+    QDate m_birthday;
     QVector<Address> m_addresses;
     QVector<CommunicationData> m_communications;
     QVector<Organization> m_organizations;
@@ -58,7 +57,7 @@ struct ContactData
     QString m_comment;
 };
 
-typedef QHash<int,ContactData> Contacts;
+typedef QVector<ContactData *> Contacts;
 
 };
 

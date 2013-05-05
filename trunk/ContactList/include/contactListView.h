@@ -28,6 +28,7 @@ private:
     void setDefaultSettings();
     void clearAll();
     void refreshContactList(int currentIndex = 0);
+    void emptyContactList(bool flag = true);
 
 private slots:
     void setEditable(bool flag);
