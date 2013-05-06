@@ -15,37 +15,6 @@ const QString Communications("communications");
 const QString Organizations("organizations");
 }
 
-namespace Attribute {
-const QString Alias("alias");
-const QString Name("name");
-const QString SurName("surName");
-const QString OtherName("otherName");
-const QString Birthday("birthday");
-const QString Userpic("userpic");
-const QString Comment("comment");
-const QString Country("country");
-const QString City("city");
-const QString Street("street");
-const QString Home("home");
-const QString Apartment("apartment");
-const QString Type("type");
-const QString Subtype("subtype");
-const QString Value("value");
-const QString Department("department");
-const QString Post("post");
-const QString Address("address");
-const QString Phone("phone");
-const QString DateIn("dateIn");
-const QString DateOut("dateOut");
-}
-
-namespace Value {
-const QString Phone("phone");
-const QString Email("email");
-const QString Skype("skype");
-const QString Site("site");
-}
-
 #define ERROR QObject::trUtf8("Error")
 #define ERR_INCORRECT QObject::trUtf8("This file has not correct format!")
 #define ERR_CANNOT_OPEN QObject::trUtf8("Can not open this file for read or this file has not a text format!")

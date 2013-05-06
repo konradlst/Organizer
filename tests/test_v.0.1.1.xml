@@ -9,6 +9,7 @@
 <data subtype="mts" type="phone" value="+7 987 1234567"/>
 <data subtype="home" type="email" value="i.ivan@gmail.com"/>
 <data subtype="work" type="skype" value="i_ivan"/>
+<data subtype="work" type="site" value=""/>
 </communications>
 <organizations>
 <data post="team leader" dateIn="07.08.2002" phone="+7 (846) 1234567" address="Samara, Dibenko, 60, 30" dateOut="25.11.2012" name="syper work" department="best of the best"/>
@@ -24,6 +25,7 @@
 <data subtype="smarts" type="phone" value="+7 987 7654321"/>
 <data subtype="home" type="email" value="p.petrov@ya.ru"/>
 <data subtype="work" type="skype" value="p_perov"/>
+<data subtype="work" type="site" value=""/>
 </communications>
 <organizations>
 <data post="director" dateIn="01.12.2003" phone="+7 (945) 7654321" address="Moscow, test street, 10, 15" dateOut="11.02.2008" name="syper work" department="best of the best"/>

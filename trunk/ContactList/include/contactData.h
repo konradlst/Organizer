@@ -1,11 +1,44 @@
 ﻿#ifndef CONTACTDATA_H
 #define CONTACTDATA_H
 
-#include <QHash>
 #include <QVector>
 #include <QDate>
 
 class QString;
+
+namespace Attribute {
+const QString Alias("alias");
+const QString Name("name");
+const QString SurName("surName");
+const QString OtherName("otherName");
+const QString Birthday("birthday");
+const QString Userpic("userpic");
+const QString Comment("comment");
+const QString Country("country");
+const QString City("city");
+const QString Street("street");
+const QString Home("home");
+const QString Apartment("apartment");
+const QString Type("type");
+const QString Subtype("subtype");
+const QString Value("value");
+const QString NameOrganization("nameOrganization");
+const QString PhoneOrganization("phoneOrganization");
+const QString AddressOrganization("addressOrganization");
+const QString Department("department");
+const QString Post("post");
+const QString Address("address");
+const QString Phone("phone");
+const QString DateIn("dateIn");
+const QString DateOut("dateOut");
+}
+
+namespace Value {
+const QString Phone("phone");
+const QString Email("email");
+const QString Skype("skype");
+const QString Site("site");
+}
 
 namespace Data {
 #define DEFAULT_DATE QDate(1900,1,1)

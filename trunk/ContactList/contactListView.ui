@@ -48,15 +48,27 @@
       <x>10</x>
       <y>10</y>
       <width>731</width>
-      <height>451</height>
+      <height>452</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="hLayoutMain">
      <property name="spacing">
-      <number>6</number>
+      <number>5</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>5</number>
+     </property>
+     <property name="bottomMargin">
+      <number>3</number>
      </property>
      <item>
       <widget class="QListWidget" name="lwContactList">
@@ -69,7 +81,19 @@
       </widget>
      </item>
      <item>
-      <layout class="QGridLayout" name="gridLayout">
+      <layout class="QGridLayout" name="gLayContact">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
        <property name="horizontalSpacing">
         <number>5</number>
        </property>
@@ -96,12 +120,24 @@
             <x>10</x>
             <y>20</y>
             <width>451</width>
-            <height>62</height>
+            <height>66</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <property name="horizontalSpacing">
+          <layout class="QGridLayout" name="gLayAddress">
+           <property name="leftMargin">
+            <number>5</number>
+           </property>
+           <property name="topMargin">
             <number>3</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>5</number>
            </property>
            <property name="verticalSpacing">
             <number>0</number>
@@ -299,12 +335,24 @@
             <x>10</x>
             <y>20</y>
             <width>451</width>
-            <height>82</height>
+            <height>86</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <property name="horizontalSpacing">
+          <layout class="QGridLayout" name="gLayCommunication">
+           <property name="leftMargin">
+            <number>5</number>
+           </property>
+           <property name="topMargin">
             <number>3</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>5</number>
            </property>
            <property name="verticalSpacing">
             <number>0</number>
@@ -442,12 +490,24 @@
             <x>10</x>
             <y>20</y>
             <width>451</width>
-            <height>82</height>
+            <height>88</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <property name="horizontalSpacing">
+          <layout class="QGridLayout" name="gLayOrganization">
+           <property name="leftMargin">
+            <number>5</number>
+           </property>
+           <property name="topMargin">
             <number>3</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>5</number>
            </property>
            <property name="verticalSpacing">
             <number>0</number>

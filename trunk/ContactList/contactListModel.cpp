@@ -106,18 +106,62 @@ bool ContactListModel::saveContact(const Data::ContactData &data, const QString 
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)
 {
-    //FIXME change process saving data.
     Data::ContactData *contact = m_data->at(contactId);
-    if(key == "alias")
-        contact->m_alias = data;
-    else if(key == "userpic")
-        contact->m_pathToUserPic = data;
-    else if(key == "name")
-        contact->m_name = data;
-    else if(key == "surName")
-        contact->m_surName = data;
-    else if(key == "otherName")
-        contact->m_otherName = data;
+    Data::Address address = contact->m_addresses.at(0);
+    QVector<Data::CommunicationData> communications = contact->m_communications;
+    Data::Organization organization = contact->m_organizations.at(0);
 
-    m_data->replace(contactId,contact);
+    if(key == Attribute::Alias)
+        contact->m_alias = data;
+    else if(key == Attribute::Userpic)
+        contact->m_pathToUserPic = data;
+    else if(key == Attribute::Name)
+        contact->m_name = data;
+    else if(key == Attribute::SurName)
+        contact->m_surName = data;
+    else if(key == Attribute::OtherName)
+        contact->m_otherName = data;
+    else if(key == Attribute::Country)
+        address.country = data;
+    else if(key == Attribute::City)
+        address.city = data;
+    else if(key == Attribute::Street)
+        address.street = data;
+    else if(key == Attribute::Home)
+        address.home = data;
+    else if(key == Attribute::Apartment)
+        address.apartment = data;
+    else if(key == Attribute::NameOrganization)
+        organization.name = data;
+    else if(key == Attribute::PhoneOrganization)
+        organization.phone = data;
+    else if(key == Attribute::Department)
+        organization.department = data;
+    else if(key == Attribute::Post)
+        organization.post = data;
+    else if(key == Attribute::AddressOrganization)
+        organization.address = data;
+
+    Data::typeCommunication tempKey;
+    if(key == Value::Email)
+        tempKey = Data::typeEmail;
+    else if(key == Value::Phone)
+        tempKey = Data::typePhone;
+    else if(key == Value::Skype)
+        tempKey = Data::typeSkype;
+    else if(key == Value::Site)
+        tempKey = Data::typeSite;
+    for(int i=0; i<communications.size();++i)
+        if(communications.at(i).first == tempKey) {
+            Data::CommunicationData com;
+            com.first = tempKey;
+            Data::Communication asd;
+            asd.subType = QString();
+            asd.value = data;
+            com.second = asd;
+            contact->m_communications.replace(i,com);
+        }
+
+    contact->m_addresses.replace(0,address);
+    contact->m_organizations.replace(0,organization);
 }
