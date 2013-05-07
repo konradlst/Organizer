@@ -29,6 +29,8 @@ private:
     void clearAll();
     void refreshContactList(int currentIndex = 0);
     void emptyContactList(bool flag = true);
+    void connectSignals();
+    void disconnectSignals();
 
 private slots:
     void setEditable(bool flag);

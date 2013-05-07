@@ -1,6 +1,6 @@
 ﻿<tree>
 <record>
-<data surName="Ivanov" alias="Ivanov account" otherName="Ivanovich" birthday="10.11.1912" comment="this is test data" name="Ivan" userpic="./pic/i.ivan.png"/>
+<data surName="Ivanov" alias="Ivanov account" otherName="Ivanovich" birthday="10.11.1912" comment="this is test data" name="Ivan" userpic=""/>
 <addresses>
 <data street="Zaparozskaia" apartment="3" country="Russia" city="Samara" home="9"/>
 </addresses>
@@ -16,7 +16,7 @@
 </organizations>
 </record>
 <record>
-<data surName="Petrov" alias="Petrov account" otherName="Petrovich" birthday="19.03.1956" comment="this is test data 2" name="Petr" userpic="Petr"/>
+<data surName="Petrov" alias="Petrov account" otherName="Petrovich" birthday="19.03.1956" comment="this is test data 2" name="Petr" userpic=""/>
 <addresses>
 <data street="test street" apartment="2" country="Russia" city="Mockow" home="1"/>
 </addresses>

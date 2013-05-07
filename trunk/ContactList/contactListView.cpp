@@ -78,30 +78,9 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     connect(ui->actionEditable,SIGNAL(triggered(bool)),SLOT(setEditable(bool)));
     connect(ui->lwContactList,SIGNAL(currentRowChanged(int)),SLOT(currentContactChanged(int)));
     connect(ui->pbEditUserPic,SIGNAL(clicked()),SLOT(loadUserPic()));
-
-    connect(ui->leAlias,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSurName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-
-    connect(ui->leCountry,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leCity,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leStreet,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leHome,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leApartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhone,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leEmail,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSkype,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSite,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leNameOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leDepartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePost,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-
-
     connect(ui->actionExit,SIGNAL(triggered()),qApp,SLOT(quit()));
     connect(ui->actionAbout,SIGNAL(triggered()),SLOT(about()));
+    connectSignals();
 }
 
 ContactListView::~ContactListView()
@@ -139,26 +118,7 @@ void ContactListView::setEditable(bool flag)
 
 void ContactListView::setContactData(const Data::ContactData *contact)
 {
-    disconnect(ui->leAlias,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leSurName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leOtherName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-
-    disconnect(ui->leCountry,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leCity,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leStreet,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leHome,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leApartment,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->lePhone,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leEmail,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leSkype,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leSite,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leNameOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leDepartment,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->lePost,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-
+    disconnectSignals();
     ui->leAlias->setText(contact->m_alias);
     ui->leName->setText(contact->m_name);
     ui->leSurName->setText(contact->m_surName);
@@ -200,33 +160,14 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->deStartWork->setDate(company.dateIn);
     ui->deEndWork->setDate(company.dateIn);
 
-    connect(ui->leAlias,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSurName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-
-    connect(ui->leCountry,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leCity,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leStreet,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leHome,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leApartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhone,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leEmail,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSkype,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSite,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leNameOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leDepartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePost,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connectSignals();
 }
 
 void ContactListView::setDefaultSettings()
 {
     QPair<bool, QString> data = *m_settings->defaultData();
-    if(data.first && QFile(data.second).exists()) {
+    if(data.first && QFile(data.second).exists())
         loadData(data.second);
-    }
 }
 
 void ContactListView::about()
@@ -322,13 +263,34 @@ void ContactListView::emptyContactList(bool flag)
         clearContact();
 }
 
-void ContactListView::clearContact()
+void ContactListView::connectSignals()
+{
+    connect(ui->leAlias,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leSurName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leCountry,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leCity,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leStreet,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leHome,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leApartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->lePhone,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leEmail,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leSkype,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leSite,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leNameOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leDepartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->lePost,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+}
+
+void ContactListView::disconnectSignals()
 {
     disconnect(ui->leAlias,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leSurName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leOtherName,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-
     disconnect(ui->leCountry,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leCity,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leStreet,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
@@ -343,7 +305,11 @@ void ContactListView::clearContact()
     disconnect(ui->leDepartment,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->lePost,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+}
 
+void ContactListView::clearContact()
+{
+    disconnectSignals();
     ui->leAlias->clear();
     ui->leName->clear();
     ui->leSurName->clear();
@@ -366,25 +332,7 @@ void ContactListView::clearContact()
     ui->deStartWork->clear();
     ui->deEndWork->clear();
 
-    connect(ui->leAlias,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSurName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leOtherName,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-
-    connect(ui->leCountry,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leCity,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leStreet,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leHome,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leApartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhone,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leEmail,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSkype,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leSite,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leNameOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leDepartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePost,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connectSignals();
 }
 
 void ContactListView::newContact()
@@ -475,59 +423,43 @@ void ContactListView::loadUserPic()
 void ContactListView::textChanged(QString text)
 {
     QLineEdit *send = qobject_cast<QLineEdit*>(sender());
-    if(send == ui->leAlias) {
+    if(send == ui->leAlias)
         ui->lwContactList->item(ui->lwContactList->currentRow())->setText(text);
+
+    if(send == ui->leAlias)
         emit dataChanged(text, Attribute::Alias, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leName) {
+    else if(send == ui->leName)
         emit dataChanged(text, Attribute::Name, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leSurName) {
+    else if(send == ui->leSurName)
         emit dataChanged(text, Attribute::SurName, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leOtherName) {
+    else if(send == ui->leOtherName)
         emit dataChanged(text, Attribute::OtherName, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leCountry) {
+    else if(send == ui->leCountry)
         emit dataChanged(text, Attribute::Country, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leCity) {
+    else if(send == ui->leCity)
         emit dataChanged(text, Attribute::City, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leStreet) {
+    else if(send == ui->leStreet)
         emit dataChanged(text, Attribute::Street, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leHome) {
+    else if(send == ui->leHome)
         emit dataChanged(text, Attribute::Home, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leApartment) {
+    else if(send == ui->leApartment)
         emit dataChanged(text, Attribute::Apartment, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->lePhone) {
+    else if(send == ui->lePhone)
         emit dataChanged(text, Value::Phone, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leEmail) {
+    else if(send == ui->leEmail)
         emit dataChanged(text, Value::Email, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leSkype) {
+    else if(send == ui->leSkype)
         emit dataChanged(text, Value::Skype, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leSite) {
+    else if(send == ui->leSite)
         emit dataChanged(text, Value::Site, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leNameOrganization) {
+    else if(send == ui->leNameOrganization)
         emit dataChanged(text, Attribute::NameOrganization, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->lePhoneOrganization) {
+    else if(send == ui->lePhoneOrganization)
         emit dataChanged(text, Attribute::PhoneOrganization, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leDepartment) {
+    else if(send == ui->leDepartment)
         emit dataChanged(text, Attribute::Department, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->lePost) {
+    else if(send == ui->lePost)
         emit dataChanged(text, Attribute::Post, ui->lwContactList->currentRow());
-    }
-    else if(send == ui->leAddressOrganization) {
+    else if(send == ui->leAddressOrganization)
         emit dataChanged(text, Attribute::AddressOrganization, ui->lwContactList->currentRow());
-    }
 }
