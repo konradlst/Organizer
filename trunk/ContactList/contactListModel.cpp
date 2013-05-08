@@ -113,7 +113,7 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
 
     if(key == Attribute::Alias)
         contact->m_alias = data;
-    else if(key == Attribute::Userpic)
+    else if(key == Attribute::PathToUserPic)
         contact->m_pathToUserPic = data;
     else if(key == Attribute::Name)
         contact->m_name = data;
@@ -163,5 +163,26 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
         }
 
     contact->m_addresses.replace(0,address);
+    contact->m_organizations.replace(0,organization);
+}
+
+void ContactListModel::dataChanged(const QPixmap data, QString key, int contactId)
+{
+    Data::ContactData *contact = m_data->at(contactId);
+    if(key == Attribute::Userpic)
+        contact->m_userPic = data;
+}
+
+void ContactListModel::dataChanged(const QDate data, QString key, int contactId)
+{
+    Data::ContactData *contact = m_data->at(contactId);
+    Data::Organization organization = contact->m_organizations.at(0);
+    if(key == Attribute::Birthday)
+        contact->m_birthday = data;
+    else if(key == Attribute::DateIn)
+        organization.dateIn = data;
+    else if(key == Attribute::DateOut)
+        organization.dateOut = data;
+
     contact->m_organizations.replace(0,organization);
 }

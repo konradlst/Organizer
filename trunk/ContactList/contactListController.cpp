@@ -9,7 +9,9 @@ ContactListController::ContactListController(QWidget *parent) :
     m_view(new ContactListView(this))
 {
     m_view->show();
-    connect(m_view,SIGNAL(dataChanged(QString,QString,int)),m_model,SLOT(dataChanged(QString,QString,int)));
+    connect(m_view, SIGNAL(dataChanged(QString,QString,int)), m_model, SLOT(dataChanged(QString,QString,int)));
+    connect(m_view, SIGNAL(dataChanged(QPixmap,QString,int)), m_model, SLOT(dataChanged(QPixmap,QString,int)));
+    connect(m_view, SIGNAL(dataChanged(QDate,QString,int)), m_model, SLOT(dataChanged(QDate,QString,int)));
 }
 
 QStringList *ContactListController::contactList() const

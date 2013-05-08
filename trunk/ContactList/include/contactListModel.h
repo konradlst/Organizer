@@ -28,6 +28,8 @@ public:
 
 public slots:
     void dataChanged(const QString data, QString key, int contactId);
+    void dataChanged(const QPixmap data, QString key, int contactId);
+    void dataChanged(const QDate data, QString key, int contactId);
 
 private:
     ContactListController *m_controller;

@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QDate>
+#include <QPixmap>
 
 class QString;
 
@@ -12,7 +13,8 @@ const QString Name("name");
 const QString SurName("surName");
 const QString OtherName("otherName");
 const QString Birthday("birthday");
-const QString Userpic("userpic");
+const QString PathToUserPic("pathToUserPic");
+const QString Userpic("userPic");
 const QString Comment("comment");
 const QString Country("country");
 const QString City("city");
@@ -87,6 +89,7 @@ struct ContactData
     QVector<CommunicationData> m_communications;
     QVector<Organization> m_organizations;
     QString m_pathToUserPic;
+    QPixmap m_userPic;
     QString m_comment;
 };
 

@@ -158,7 +158,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->lePost->setText(company.post);
     ui->leAddressOrganization->setText(company.address);
     ui->deStartWork->setDate(company.dateIn);
-    ui->deEndWork->setDate(company.dateIn);
+    ui->deEndWork->setDate(company.dateOut);
 
     connectSignals();
 }
@@ -283,6 +283,10 @@ void ContactListView::connectSignals()
     connect(ui->leDepartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->lePost,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+
+    connect(ui->deBirthday,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
+    connect(ui->deStartWork,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
+    connect(ui->deEndWork,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
 }
 
 void ContactListView::disconnectSignals()
@@ -305,6 +309,11 @@ void ContactListView::disconnectSignals()
     disconnect(ui->leDepartment,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->lePost,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+
+    disconnect(ui->deBirthday,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
+    disconnect(ui->deStartWork,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
+    disconnect(ui->deEndWork,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
+
 }
 
 void ContactListView::clearContact()
@@ -415,8 +424,10 @@ void ContactListView::loadUserPic()
 {
     QString path = QFileDialog::getOpenFileName(this, LOAD_USERPIC, DEFAULT_PATH);
     if(!path.isEmpty()) {
-        ui->lbUserPic->setPixmap(pathToPixmap(path));
-        emit dataChanged(path, Attribute::Userpic, ui->lwContactList->currentRow());
+        QPixmap pic = pathToPixmap(path);
+        ui->lbUserPic->setPixmap(pic);
+        emit dataChanged(path, Attribute::PathToUserPic, ui->lwContactList->currentRow());
+        emit dataChanged(pic, Attribute::Userpic, ui->lwContactList->currentRow());
     }
 }
 
@@ -462,4 +473,15 @@ void ContactListView::textChanged(QString text)
         emit dataChanged(text, Attribute::Post, ui->lwContactList->currentRow());
     else if(send == ui->leAddressOrganization)
         emit dataChanged(text, Attribute::AddressOrganization, ui->lwContactList->currentRow());
+}
+
+void ContactListView::dateChanged(QDate date)
+{
+    QDateEdit *send = qobject_cast<QDateEdit*>(sender());
+    if(send == ui->deBirthday)
+        emit dataChanged(date, Attribute::Birthday, ui->lwContactList->currentRow());
+    else if(send == ui->deStartWork)
+        emit dataChanged(date, Attribute::DateIn, ui->lwContactList->currentRow());
+    else if(send == ui->deEndWork)
+        emit dataChanged(date, Attribute::DateOut, ui->lwContactList->currentRow());
 }

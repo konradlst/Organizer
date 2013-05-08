@@ -204,7 +204,7 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                 currentContact.m_surName = fieldElement.attribute(Attribute::SurName);
                 currentContact.m_otherName = fieldElement.attribute(Attribute::OtherName);
                 currentContact.m_birthday = string2Data(fieldElement.attribute(Attribute::Birthday));
-                currentContact.m_pathToUserPic = fieldElement.attribute(Attribute::Userpic);
+                currentContact.m_pathToUserPic = fieldElement.attribute(Attribute::PathToUserPic);
                 currentContact.m_comment = fieldElement.attribute(Attribute::Comment);
             }
             else if(fieldElement.tagName() == Tag::Addresses) {
@@ -280,7 +280,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     field.setAttribute(Attribute::SurName,data.m_surName);
     field.setAttribute(Attribute::OtherName,data.m_otherName);
     field.setAttribute(Attribute::Birthday,data2String(data.m_birthday));
-    field.setAttribute(Attribute::Userpic,data.m_pathToUserPic);
+    field.setAttribute(Attribute::PathToUserPic,data.m_pathToUserPic);
     field.setAttribute(Attribute::Comment,data.m_comment);
 
     int countAddresses = data.m_addresses.size();

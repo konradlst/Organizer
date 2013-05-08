@@ -20,6 +20,8 @@ public:
 
 signals:
     void dataChanged(QString data, QString key, int contactId);
+    void dataChanged(QPixmap data, QString key, int contactId);
+    void dataChanged(QDate data, QString key, int contactId);
     void logChanged(bool, const QString &);
 
 private:
@@ -49,6 +51,7 @@ private slots:
     void currentContactChanged(int index);
     void loadUserPic();
     void textChanged(QString text);
+    void dateChanged(QDate date);
     void about();
 
 private:
