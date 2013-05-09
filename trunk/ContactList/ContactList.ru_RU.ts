@@ -253,7 +253,6 @@
     <message>
         <location filename="contactListView.cpp" line="15"/>
         <source>XML files (*.xml);;Text files (*.txt);;All Files (*.*)</source>
-        <oldsource>All Files (*.*);;Text files (*.txt);;XML files (*.xml);;SQL files (*.sqlite);;JSON files (*.json)</oldsource>
         <translation>XML файлы (*.xml);;Текстовые файлы (*.txt);;Все файлы  (*.*)</translation>
     </message>
     <message>
