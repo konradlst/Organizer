@@ -1,7 +1,7 @@
 ﻿#ifndef SETTINGSVIEW_H
 #define SETTINGSVIEW_H
 
-#include <QWidget>
+#include <QDialog>
 #include "contactListController.h"
 
 class QSettings;
@@ -10,11 +10,11 @@ namespace Ui {
 class SettingsView;
 }
 
-class SettingsView : public QWidget
+class SettingsView : public QDialog
 {
     Q_OBJECT
 public:
-    explicit SettingsView(ContactListController *controller, QWidget *parent = 0);
+    explicit SettingsView(ContactListController *controller, QDialog *parent = 0);
     ~SettingsView();
     QPair<bool, QString> *defaultData();
 

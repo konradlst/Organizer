@@ -9,226 +9,226 @@
         <translation>Список Контактов</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="88"/>
+        <location filename="contactListView.ui" line="112"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="112"/>
+        <location filename="contactListView.ui" line="148"/>
         <source>Apartment:</source>
         <translation>Квартира:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="122"/>
+        <location filename="contactListView.ui" line="158"/>
         <source>Home:</source>
         <translation>Дом:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="135"/>
+        <location filename="contactListView.ui" line="171"/>
         <source>Country:</source>
         <translation>Страна:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="148"/>
+        <location filename="contactListView.ui" line="184"/>
         <source>Street:</source>
         <translation>Улица:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="164"/>
+        <location filename="contactListView.ui" line="200"/>
         <source>City:</source>
         <translation>Город:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="181"/>
+        <location filename="contactListView.ui" line="217"/>
         <source>Alias:</source>
         <translation>Псевдоним:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="258"/>
-        <location filename="contactListView.ui" line="468"/>
+        <location filename="contactListView.ui" line="294"/>
+        <location filename="contactListView.ui" line="528"/>
         <source>Name:</source>
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="291"/>
+        <location filename="contactListView.ui" line="327"/>
         <source>Communications</source>
         <translation>Контакты</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="315"/>
+        <location filename="contactListView.ui" line="363"/>
         <source>Email:</source>
         <translation>Электронная почта:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="328"/>
-        <location filename="contactListView.ui" line="507"/>
+        <location filename="contactListView.ui" line="376"/>
+        <location filename="contactListView.ui" line="567"/>
         <source>Phone:</source>
         <translation>Телефон:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="344"/>
+        <location filename="contactListView.ui" line="392"/>
         <source>Skype:</source>
         <translation>Скайп:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="354"/>
+        <location filename="contactListView.ui" line="402"/>
         <source>Site:</source>
         <translation>Сайт:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="371"/>
+        <location filename="contactListView.ui" line="419"/>
         <source>OtherName:</source>
         <translation>Отчество:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="408"/>
+        <location filename="contactListView.ui" line="456"/>
         <source>SurName:</source>
         <translation>Фамилия:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="418"/>
+        <location filename="contactListView.ui" line="466"/>
         <source>Birthday:</source>
         <translation>День рождения:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="434"/>
+        <location filename="contactListView.ui" line="482"/>
         <source>Organization</source>
         <translation>Компания</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="458"/>
+        <location filename="contactListView.ui" line="518"/>
         <source>Department:</source>
         <translation>Отдел:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="481"/>
+        <location filename="contactListView.ui" line="541"/>
         <source>Post:</source>
         <translation>Должность:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="497"/>
+        <location filename="contactListView.ui" line="557"/>
         <source>Address:</source>
         <translation>Адрес работы:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="520"/>
+        <location filename="contactListView.ui" line="580"/>
         <source>Start work:</source>
         <translation>Начало работы:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="533"/>
+        <location filename="contactListView.ui" line="593"/>
         <source>End work:</source>
         <translation>Окончание работы:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="580"/>
+        <location filename="contactListView.ui" line="640"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="591"/>
+        <location filename="contactListView.ui" line="651"/>
         <source>Edit</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="605"/>
+        <location filename="contactListView.ui" line="665"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="669"/>
+        <location filename="contactListView.ui" line="729"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="672"/>
+        <location filename="contactListView.ui" line="732"/>
         <source>F1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="687"/>
+        <location filename="contactListView.ui" line="747"/>
         <source>New...</source>
         <translation>Новый список...</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="690"/>
+        <location filename="contactListView.ui" line="750"/>
         <source>Ctrl+N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="699"/>
+        <location filename="contactListView.ui" line="759"/>
         <source>Open...</source>
         <translation>Открыть список...</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="702"/>
+        <location filename="contactListView.ui" line="762"/>
         <source>Ctrl+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="711"/>
+        <location filename="contactListView.ui" line="771"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="714"/>
+        <location filename="contactListView.ui" line="774"/>
         <source>Ctrl+Shift+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="732"/>
-        <location filename="contactListView.ui" line="735"/>
+        <location filename="contactListView.ui" line="792"/>
+        <location filename="contactListView.ui" line="795"/>
         <source>Editable Contact</source>
         <translation>Редактировать Контакт</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="747"/>
+        <location filename="contactListView.ui" line="807"/>
         <source>New Contact</source>
         <translation>Создать Контакт</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="759"/>
+        <location filename="contactListView.ui" line="819"/>
         <source>Load Contact</source>
         <translation>Загрузить Контакт</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="771"/>
+        <location filename="contactListView.ui" line="831"/>
         <source>Save Contact</source>
         <translation>Сохранить Контакт</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="783"/>
+        <location filename="contactListView.ui" line="843"/>
         <source>Delete Contact</source>
         <translation>Удалить Контакт</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="795"/>
+        <location filename="contactListView.ui" line="855"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="804"/>
+        <location filename="contactListView.ui" line="864"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="807"/>
+        <location filename="contactListView.ui" line="867"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="816"/>
+        <location filename="contactListView.ui" line="876"/>
         <source>Save</source>
         <translation>Сохранить Список Контактов</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="819"/>
+        <location filename="contactListView.ui" line="879"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="831"/>
-        <location filename="contactListView.ui" line="834"/>
+        <location filename="contactListView.ui" line="891"/>
+        <location filename="contactListView.ui" line="894"/>
         <source>Copy Contact</source>
         <translation>Копировать Контакт</translation>
     </message>
@@ -252,8 +252,9 @@
     </message>
     <message>
         <location filename="contactListView.cpp" line="15"/>
-        <source>All Files (*.*);;Text files (*.txt);;XML files (*.xml);;SQL files (*.sqlite);;JSON files (*.json)</source>
-        <translation>Все файлы (*.*);;Текстовые файлы (*.txt);;XML файлы (*.xml);;SQL файлы (*.sqlite);;JSON файлы (*.json)</translation>
+        <source>XML files (*.xml);;Text files (*.txt);;All Files (*.*)</source>
+        <oldsource>All Files (*.*);;Text files (*.txt);;XML files (*.xml);;SQL files (*.sqlite);;JSON files (*.json)</oldsource>
+        <translation>XML файлы (*.xml);;Текстовые файлы (*.txt);;Все файлы  (*.*)</translation>
     </message>
     <message>
         <location filename="contactListView.cpp" line="19"/>
@@ -281,17 +282,17 @@
         <translation>Путь: %1</translation>
     </message>
     <message>
-        <location filename="driverXml.cpp" line="50"/>
+        <location filename="driverXml.cpp" line="18"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="driverXml.cpp" line="51"/>
+        <location filename="driverXml.cpp" line="19"/>
         <source>This file has not correct format!</source>
         <translation>Этот файл имеет некорректный формат!</translation>
     </message>
     <message>
-        <location filename="driverXml.cpp" line="52"/>
+        <location filename="driverXml.cpp" line="20"/>
         <source>Can not open this file for read or this file has not a text format!</source>
         <translation>Невозможно открыть файл для чтения или файл имеет некорректный формат!</translation>
     </message>

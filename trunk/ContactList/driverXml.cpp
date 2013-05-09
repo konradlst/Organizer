@@ -42,7 +42,6 @@ DriverXml::DriverXml(QWidget *parent) :
 
 bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
 {
-    //TODO save userpic as ByteArray
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         ERROR_MESSAGE_CANNOT_OPEN;
@@ -82,7 +81,6 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
             QDomElement company = doc.createElement(Tag::Data);
             companies.appendChild(company);
         }
-
         contactDataToXml(record,*data.at(i));
     }
 
@@ -161,7 +159,6 @@ bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
         QDomElement company = doc.createElement(Tag::Data);
         companies.appendChild(company);
     }
-
     contactDataToXml(record,data);
 
     QTextStream out(&file);

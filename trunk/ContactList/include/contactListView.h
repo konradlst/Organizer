@@ -19,10 +19,12 @@ public:
     ~ContactListView();
 
 signals:
-    void dataChanged(QString data, QString key, int contactId);
-    void dataChanged(QPixmap data, QString key, int contactId);
-    void dataChanged(QDate data, QString key, int contactId);
-    void logChanged(bool, const QString &);
+    void dataChanged(QString, QString, int);
+    void dataChanged(QPixmap, QString, int);
+    void dataChanged(QDate, QString, int);
+    void deleteContact(int);
+    void saveData(QString);
+    void saveContact(const Data::ContactData &, const QString &);
 
 private:
     void activateContactBotton();

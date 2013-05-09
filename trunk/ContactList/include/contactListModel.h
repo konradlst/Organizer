@@ -13,7 +13,6 @@ class ContactListModel : public QWidget
 public:
     explicit ContactListModel(ContactListController *controller, QWidget *parent = 0);
     QStringList *loadData(const QString &path);
-    bool saveData(const QString &path);
 
     QStringList *contactList() const;
     QString *pathToData() const;
@@ -21,15 +20,16 @@ public:
     Data::ContactData *newData() const;
     Data::ContactData *newContact() const;
     Data::ContactData *copyContact(const int index) const;
-    void deleteContact(const int index);
 
     Data::ContactData *loadContact(const QString &path);
-    bool saveContact(const Data::ContactData &data, const QString &path);
 
 public slots:
     void dataChanged(const QString data, QString key, int contactId);
     void dataChanged(const QPixmap data, QString key, int contactId);
     void dataChanged(const QDate data, QString key, int contactId);
+    void deleteContact(const int index);
+    void saveData(const QString &path);
+    void saveContact(const Data::ContactData &data, const QString &path);
 
 private:
     ContactListController *m_controller;

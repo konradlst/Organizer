@@ -12,7 +12,7 @@ namespace {
 #define SAVE_TITLE QObject::trUtf8("Save Contact List")
 #define LOAD_USERPIC QObject::trUtf8("Load User Pic")
 #define DEFAULT_PATH QDir::currentPath()
-#define FILE_TYPES QObject::trUtf8("All Files (*.*);;Text files (*.txt);;XML files (*.xml);;SQL files (*.sqlite);;JSON files (*.json)")
+#define FILE_TYPES QObject::trUtf8("XML files (*.xml);;Text files (*.txt);;All Files (*.*)")
 #define OPEN_FILE_DIALOG QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH, FILE_TYPES)
 #define SAVE_FILE_DIALOG QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH, FILE_TYPES)
 
@@ -44,7 +44,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     ui(new Ui::ContactListView),
     m_controller(controller),
     m_path(new QLabel()),
-    m_settings(new SettingsView(m_controller))
+    m_settings(m_controller->getSettingsPtr())
 {
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->hLayoutMain);
@@ -202,19 +202,19 @@ void ContactListView::loadData(const QString &path)
 void ContactListView::saveData()
 {
     if(!m_controller->pathToData()->isEmpty()) {
-        m_controller->saveData(*m_controller->pathToData());
+        emit saveData(*m_controller->pathToData());
         MYLOG << Log::SaveContactList.arg(*m_controller->pathToData());
     }
     else {
         saveAsData();
-	}
+    }
 }
 
 void ContactListView::saveAsData()
 {
     QString path = SAVE_FILE_DIALOG;
     if(!path.isEmpty()) {
-        m_controller->saveData(path);
+        emit saveData(path);
         m_path->setText(pathToData(m_controller->pathToData()));
         MYLOG << Log::SaveContactList.arg(m_path->text());
     }
@@ -379,7 +379,7 @@ void ContactListView::saveContact()
 {
     QString path = SAVE_FILE_DIALOG;
     if(!path.isEmpty()) {
-        m_controller->saveContact(*m_controller->contact(ui->lwContactList->currentRow()),path);
+        emit saveContact(*m_controller->contact(ui->lwContactList->currentRow()),path);
         MYLOG << Log::SaveContact.arg(path);
     }
 }
@@ -398,7 +398,7 @@ void ContactListView::copyContact()
 void ContactListView::deleteContact()
 {
     int index = ui->lwContactList->currentRow();
-    m_controller->deleteContact(index);
+    emit deleteContact(index);
     MYLOG << Log::DeleteContact.arg(ui->leAlias->text());
     if(index + 1 == ui->lwContactList->count())
         refreshContactList(index - 1);
@@ -412,7 +412,7 @@ void ContactListView::deleteContact()
 
 void ContactListView::settings()
 {
-    m_settings->show();
+    m_settings->exec();
 }
 
 void ContactListView::currentContactChanged(int index)

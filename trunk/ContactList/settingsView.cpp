@@ -21,8 +21,8 @@ const QString PATH_TO_LOGFILE("main/PathToLogFile");
 #define DIALOG_CHOOSE_CONTACT_LIST QFileDialog::getOpenFileName(this,QObject::trUtf8("Choose Contact List"))
 }
 
-SettingsView::SettingsView(ContactListController *controller, QWidget *parent) :
-    QWidget(parent),
+SettingsView::SettingsView(ContactListController *controller, QDialog *parent) :
+    QDialog(parent),
     ui(new Ui::SettingsView),
     m_controller(controller),
     m_settings(new QSettings(QSettings::IniFormat,QSettings::UserScope,

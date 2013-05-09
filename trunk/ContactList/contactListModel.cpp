@@ -22,13 +22,10 @@ QStringList *ContactListModel::loadData(const QString &path)
     return contactList();
 }
 
-bool ContactListModel::saveData(const QString &path)
+void ContactListModel::saveData(const QString &path)
 {
-    if(m_driverXml->saveData(*m_data, path)) {
+    if(m_driverXml->saveData(*m_data, path))
         *m_pathToCurrentData = path;
-        return true;
-    }
-    return false;
 }
 
 QStringList *ContactListModel::contactList() const
@@ -95,13 +92,10 @@ Data::ContactData *ContactListModel::loadContact(const QString &path)
     return 0;
 }
 
-bool ContactListModel::saveContact(const Data::ContactData &data, const QString &path)
+void ContactListModel::saveContact(const Data::ContactData &data, const QString &path)
 {
-    if(m_driverXml->saveContact(data, path)) {
+    if(m_driverXml->saveContact(data, path))
         *m_pathToCurrentData = path;
-        return true;
-    }
-    return false;
 }
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)
