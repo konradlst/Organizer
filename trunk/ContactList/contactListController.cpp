@@ -17,6 +17,7 @@ ContactListController::ContactListController(QWidget *parent) :
     connect(m_view, SIGNAL(deleteContact(int)), m_model, SLOT(deleteContact(int)));
     connect(m_view, SIGNAL(saveData(QString)), m_model, SLOT(saveData(QString)));
     connect(m_view, SIGNAL(saveContact(Data::ContactData,QString)), m_model, SLOT(saveContact(Data::ContactData,QString)));
+    connect(m_settings, SIGNAL(logging(bool,QString)), SLOT(logging(bool,QString)));
 }
 
 QStringList *ContactListController::contactList() const

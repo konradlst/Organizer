@@ -84,7 +84,7 @@ void SettingsView::setDefaultSettings()
     m_settings->setValue(Settings::LOGGING,QVariant(true));
     m_settings->setValue(Settings::PATH_TO_LOGFILE,QVariant(defaultPathToLog));
 
-    m_controller->logging(true,defaultPathToLog);
+    emit logging(true, defaultPathToLog);
 }
 
 void SettingsView::languageChanged(int language)
@@ -103,7 +103,7 @@ void SettingsView::languageChanged(int language)
 void SettingsView::loggingChanged(bool flag)
 {
     m_settings->setValue(Settings::LOGGING,QVariant(flag));
-    m_controller->logging(flag,m_settings->value(Settings::PATH_TO_LOGFILE).toString());
+    emit logging(flag, m_settings->value(Settings::PATH_TO_LOGFILE).toString());
 }
 
 void SettingsView::pathToLogChanged(QString path)
@@ -135,8 +135,8 @@ void SettingsView::loadSettings()
         ui->gbLogging->setChecked(m_settings->value(Settings::LOGGING).toBool());
         ui->lePathToLogFile->setText(m_settings->value(Settings::PATH_TO_LOGFILE).toString());
 
-        m_controller->logging(m_settings->value(Settings::LOGGING).toBool(),
-                        m_settings->value(Settings::PATH_TO_LOGFILE).toString());
+        emit logging(m_settings->value(Settings::LOGGING).toBool(),
+                     m_settings->value(Settings::PATH_TO_LOGFILE).toString());
 
         if(ui->cbLanguage->currentIndex() == RUSSIAN) {
             qApp->installTranslator(m_RuTranslator);

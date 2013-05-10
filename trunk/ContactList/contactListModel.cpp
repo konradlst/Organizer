@@ -136,7 +136,7 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
     else if(key == Attribute::AddressOrganization)
         organization.address = data;
 
-    Data::typeCommunication tempKey;
+    Data::typeCommunication tempKey = Data::typeError;
     if(key == Value::Email)
         tempKey = Data::typeEmail;
     else if(key == Value::Phone)

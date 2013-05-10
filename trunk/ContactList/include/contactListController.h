@@ -24,8 +24,10 @@ public:
     Data::ContactData *loadContact(const QString &path);
     QStringList *loadData(const QString &path);
 
-    void logging(bool flag, const QString &path);
     SettingsView *getSettingsPtr();
+
+private slots:
+    void logging(bool flag, const QString &path);
 
 private:
     myLog *m_log;

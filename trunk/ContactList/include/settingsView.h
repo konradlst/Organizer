@@ -18,6 +18,9 @@ public:
     ~SettingsView();
     QPair<bool, QString> *defaultData();
 
+signals:
+    void logging(bool, const QString &);
+
 private slots:
     void chooseContactList();
     void choosePathToLog();
