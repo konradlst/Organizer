@@ -14,6 +14,7 @@ INCLUDEPATH += "./include/"
 
 SOURCES += main.cpp\
     contactListView.cpp \
+    contactData.cpp \
     driverXml.cpp \
     contactListController.cpp \
     contactListModel.cpp \

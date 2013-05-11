@@ -32,7 +32,7 @@ QStringList *ContactListModel::contactList() const
 {
     QStringList *data = new QStringList();
     for(int i=0; i<m_data->size(); ++i)
-        data->append(m_data->at(i)->m_alias);
+        data->append(m_data->at(i)->alias());
     return data;
 }
 
@@ -56,17 +56,7 @@ Data::ContactData *ContactListModel::newData() const
 
 Data::ContactData *ContactListModel::newContact() const
 {
-    Data::ContactData *data = new Data::ContactData;
-    data->m_alias = QString("New contact");
-    data->m_birthday = DEFAULT_DATE;
-    data->m_addresses.append(Data::Address());
-    data->m_communications.append(Data::CommunicationData());
-
-    Data::Organization company;
-    company.dateIn = QDate::currentDate();
-    company.dateOut = QDate::currentDate();
-    data->m_organizations.append(company);
-    m_data->append(data);
+    m_data->append(new Data::ContactData());
     return m_data->last();
 }
 
@@ -101,82 +91,61 @@ void ContactListModel::saveContact(const Data::ContactData &data, const QString 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)
 {
     Data::ContactData *contact = m_data->at(contactId);
-    Data::Address address = contact->m_addresses.at(0);
-    QVector<Data::CommunicationData> communications = contact->m_communications;
-    Data::Organization organization = contact->m_organizations.at(0);
 
     if(key == Attribute::Alias)
-        contact->m_alias = data;
+        contact->setAlias(data);
     else if(key == Attribute::PathToUserPic)
-        contact->m_pathToUserPic = data;
+        contact->setPathToUserPic(data);
     else if(key == Attribute::Name)
-        contact->m_name = data;
+        contact->setName(data);
     else if(key == Attribute::SurName)
-        contact->m_surName = data;
+        contact->setSurName(data);
     else if(key == Attribute::OtherName)
-        contact->m_otherName = data;
+        contact->setOtherName(data);
     else if(key == Attribute::Country)
-        address.country = data;
+        contact->setCountry(0, data);
     else if(key == Attribute::City)
-        address.city = data;
+        contact->setCity(0, data);
     else if(key == Attribute::Street)
-        address.street = data;
+        contact->setStreet(0, data);
     else if(key == Attribute::Home)
-        address.home = data;
+        contact->setHome(0, data);
     else if(key == Attribute::Apartment)
-        address.apartment = data;
+        contact->setApartment(0, data);
     else if(key == Attribute::NameOrganization)
-        organization.name = data;
+        contact->setCompanyName(0, data);
     else if(key == Attribute::PhoneOrganization)
-        organization.phone = data;
+        contact->setCompanyPhone(0, data);
     else if(key == Attribute::Department)
-        organization.department = data;
+        contact->setDepartment(0, data);
     else if(key == Attribute::Post)
-        organization.post = data;
+        contact->setPost(0, data);
     else if(key == Attribute::AddressOrganization)
-        organization.address = data;
-
-    Data::typeCommunication tempKey = Data::typeError;
-    if(key == Value::Email)
-        tempKey = Data::typeEmail;
+        contact->setCompanyAddress(0, data);
     else if(key == Value::Phone)
-        tempKey = Data::typePhone;
+        contact->setPhone(contact->phoneTypes().at(0), data);
+    else if(key == Value::Email)
+        contact->setEmail(contact->phoneTypes().at(0), data);
     else if(key == Value::Skype)
-        tempKey = Data::typeSkype;
+        contact->setSkype(contact->phoneTypes().at(0), data);
     else if(key == Value::Site)
-        tempKey = Data::typeSite;
-    for(int i=0; i<communications.size();++i)
-        if(communications.at(i).first == tempKey) {
-            Data::CommunicationData com;
-            com.first = tempKey;
-            Data::Communication asd;
-            asd.subType = QString();
-            asd.value = data;
-            com.second = asd;
-            contact->m_communications.replace(i,com);
-        }
-
-    contact->m_addresses.replace(0,address);
-    contact->m_organizations.replace(0,organization);
+        contact->setSite(contact->phoneTypes().at(0), data);
 }
 
 void ContactListModel::dataChanged(const QPixmap data, QString key, int contactId)
 {
     Data::ContactData *contact = m_data->at(contactId);
     if(key == Attribute::Userpic)
-        contact->m_userPic = data;
+        contact->setUserPic(data);
 }
 
 void ContactListModel::dataChanged(const QDate data, QString key, int contactId)
 {
     Data::ContactData *contact = m_data->at(contactId);
-    Data::Organization organization = contact->m_organizations.at(0);
     if(key == Attribute::Birthday)
-        contact->m_birthday = data;
+        contact->setBirthday(data);
     else if(key == Attribute::DateIn)
-        organization.dateIn = data;
+        contact->setDateIn(0, data);
     else if(key == Attribute::DateOut)
-        organization.dateOut = data;
-
-    contact->m_organizations.replace(0,organization);
+        contact->setDateOut(0, data);
 }

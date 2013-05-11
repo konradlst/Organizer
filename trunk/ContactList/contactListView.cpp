@@ -119,46 +119,31 @@ void ContactListView::setEditable(bool flag)
 void ContactListView::setContactData(const Data::ContactData *contact)
 {
     disconnectSignals();
-    ui->leAlias->setText(contact->m_alias);
-    ui->leName->setText(contact->m_name);
-    ui->leSurName->setText(contact->m_surName);
-    ui->leOtherName->setText(contact->m_otherName);
-    ui->deBirthday->setDate(contact->m_birthday);
-    ui->lbUserPic->setPixmap(pathToPixmap(contact->m_pathToUserPic));
+    ui->leAlias->setText(contact->alias());
+    ui->leName->setText(contact->name());
+    ui->leSurName->setText(contact->surName());
+    ui->leOtherName->setText(contact->otherName());
+    ui->deBirthday->setDate(contact->birthday());
+    ui->lbUserPic->setPixmap(pathToPixmap(contact->pathToUserPic()));
 
-    Data::Address address = contact->m_addresses.at(0);
-    ui->leCountry->setText(address.country);
-    ui->leCity->setText(address.city);
-    ui->leStreet->setText(address.street);
-    ui->leHome->setText(address.home);
-    ui->leApartment->setText(address.apartment);
+    ui->leCountry->setText(contact->country(0));
+    ui->leCity->setText(contact->city(0));
+    ui->leStreet->setText(contact->street(0));
+    ui->leHome->setText(contact->home(0));
+    ui->leApartment->setText(contact->apartment(0));
 
-    ui->lePhone->clear();
-    ui->leEmail->clear();
-    ui->leSkype->clear();
-    ui->leSite->clear();
-    int count = contact->m_communications.size()-1;
-    while(count >= 0) {
-        Data::CommunicationData data = contact->m_communications.at(count);
-        if(data.first == Data::typePhone)
-            ui->lePhone->setText(data.second.value);
-        if(data.first == Data::typeEmail)
-            ui->leEmail->setText(data.second.value);
-        if(data.first == Data::typeSkype)
-            ui->leSkype->setText(data.second.value);
-        if(data.first == Data::typeSite)
-            ui->leSite->setText(data.second.value);
-        --count;
-    }
+    ui->lePhone->setText(contact->phones().at(0));
+    ui->leEmail->setText(contact->emails().at(0));
+    ui->leSkype->setText(contact->skypes().at(0));
+    ui->leSite->setText(contact->sites().at(0));
 
-    Data::Organization company = contact->m_organizations.at(0);
-    ui->leNameOrganization->setText(company.name);
-    ui->lePhoneOrganization->setText(company.phone);
-    ui->leDepartment->setText(company.department);
-    ui->lePost->setText(company.post);
-    ui->leAddressOrganization->setText(company.address);
-    ui->deStartWork->setDate(company.dateIn);
-    ui->deEndWork->setDate(company.dateOut);
+    ui->leNameOrganization->setText(contact->companyName(0));
+    ui->lePhoneOrganization->setText(contact->companyPhone(0));
+    ui->leDepartment->setText(contact->department(0));
+    ui->lePost->setText(contact->post(0));
+    ui->leAddressOrganization->setText(contact->companyAddress(0));
+    ui->deStartWork->setDate(contact->dateIn(0));
+    ui->deEndWork->setDate(contact->dateOut(0));
 
     connectSignals();
 }

@@ -4,9 +4,9 @@
 		<addresses>
 			<data country="" city="" street="" home="" apartment=""/>
 		</addresses>
-		<communications>
+		<channels>
 			<data type="phone\email\skype\site" subtype="" value=""/>
-		</communications>
+		</channels>
 		<organizations>
 			<data name="" department="" post="" address="" phone="" dateIn="" dateOut=""/>
 		</organizations>
