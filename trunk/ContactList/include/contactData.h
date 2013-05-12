@@ -4,10 +4,8 @@
 #include <QVector>
 #include <QHash>
 #include <QDate>
-#include <QPixmap>
-#include <QPair>
 
-class QString;
+class QPixmap;
 
 namespace Attribute {
 const QString Alias("alias");
@@ -61,12 +59,6 @@ struct Address
                && (street == QString()) && (home == QString())
                && (apartment == QString());
     }
-};
-
-struct Communication
-{
-    QString subType;
-    QString value;
 };
 
 struct Company
@@ -184,12 +176,12 @@ private:
     QString m_surName;
     QString m_otherName;
     QDate m_birthday;
-    QVector<Address> m_addresses;
-    QHash<QString,QString> m_phones;
-    QHash<QString,QString> m_emails;
-    QHash<QString,QString> m_skypes;
-    QHash<QString,QString> m_sites;
-    QVector<Company> m_companies;
+    QVector<Address> *m_addresses;
+    QHash<QString,QString> *m_phones;
+    QHash<QString,QString> *m_emails;
+    QHash<QString,QString> *m_skypes;
+    QHash<QString,QString> *m_sites;
+    QVector<Company> *m_companies;
     QString m_pathToUserPic;
     QPixmap m_userPic;
     QString m_comment;
