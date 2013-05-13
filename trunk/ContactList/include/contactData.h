@@ -55,9 +55,8 @@ struct Address
     QString home;
     QString apartment;
     bool isEmpty() const {
-        return (country == QString()) && (city == QString())
-               && (street == QString()) && (home == QString())
-               && (apartment == QString());
+        return country.isEmpty() && city.isEmpty() && street.isEmpty()
+               && home.isEmpty() && apartment.isEmpty();
     }
 };
 
@@ -71,9 +70,8 @@ struct Company
     QDate dateIn;
     QDate dateOut;
     bool isEmpty() const {
-        return (name == QString()) && (department == QString())
-               && (post == QString()) && (address == QString())
-               && (phone == QString());
+        return name.isEmpty() && department.isEmpty() && post.isEmpty()
+               && address.isEmpty() && phone.isEmpty();
     }
 };
 
@@ -177,10 +175,11 @@ private:
     QString m_otherName;
     QDate m_birthday;
     QVector<Address> *m_addresses;
-    QHash<QString,QString> *m_phones;
-    QHash<QString,QString> *m_emails;
-    QHash<QString,QString> *m_skypes;
-    QHash<QString,QString> *m_sites;
+    typedef QHash<QString,QString> Channels;
+    Channels *m_phones;
+    Channels *m_emails;
+    Channels *m_skypes;
+    Channels *m_sites;
     QVector<Company> *m_companies;
     QString m_pathToUserPic;
     QPixmap m_userPic;

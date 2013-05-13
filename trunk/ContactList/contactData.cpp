@@ -5,7 +5,7 @@ namespace {
 QDate string2Date(QString data) {
     if(data.isEmpty())
         return DEFAULT_DATE;
-    return QDate::fromString(data,DEFAULT_DATE_FORMAT);
+    return QDate::fromString(data, DEFAULT_DATE_FORMAT);
 }
 
 QString date2String(QDate data) {
@@ -16,10 +16,10 @@ QString date2String(QDate data) {
 namespace Data {
 ContactData::ContactData() :
     m_addresses(new QVector<Address>),
-    m_phones(new QHash<QString,QString>),
-    m_emails(new QHash<QString,QString>),
-    m_skypes(new QHash<QString,QString>),
-    m_sites(new QHash<QString,QString>),
+    m_phones(new Channels),
+    m_emails(new Channels),
+    m_skypes(new Channels),
+    m_sites(new Channels),
     m_companies(new QVector<Company>)
 {
     m_alias = QString("New contact");

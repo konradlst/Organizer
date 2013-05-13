@@ -25,9 +25,8 @@ myLog* myLog::m_instance = 0;
 
 myLog *myLog::instance()
 {
-    if(m_instance == 0) {
+    if(m_instance == 0)
         m_instance = new myLog();
-    }
     return m_instance;
 }
 
