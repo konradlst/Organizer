@@ -117,6 +117,13 @@
     <licenseFileEncoding>utf-8</licenseFileEncoding>
     <readmeFileEncoding>utf-8</readmeFileEncoding>
     <vendor>Anton Batyaev</vendor>
+	<customLanguageFileList>
+        <language>
+            <code>ru</code>
+            <encoding>utf-8</encoding>
+            <file>${build_project_directory}/custom-ru.lng</file>
+        </language>
+    </customLanguageFileList>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>
