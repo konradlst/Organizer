@@ -316,7 +316,7 @@
         </widget>
        </item>
        <item row="6" column="0" colspan="3">
-        <widget class="QGroupBox" name="gbCommunications">
+        <widget class="QGroupBox" name="gbChannels">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -324,7 +324,7 @@
           </size>
          </property>
          <property name="title">
-          <string>Communications</string>
+          <string>Channels</string>
          </property>
          <property name="checkable">
           <bool>false</bool>
@@ -338,7 +338,7 @@
             <height>86</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gLayCommunication">
+          <layout class="QGridLayout" name="gLayChannels">
            <property name="leftMargin">
             <number>5</number>
            </property>
@@ -471,7 +471,7 @@
         </widget>
        </item>
        <item row="7" column="0" colspan="3">
-        <widget class="QGroupBox" name="gbOrganization">
+        <widget class="QGroupBox" name="gbCompany">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -479,7 +479,7 @@
           </size>
          </property>
          <property name="title">
-          <string>Organization</string>
+          <string>Company</string>
          </property>
          <property name="checkable">
           <bool>false</bool>
@@ -493,7 +493,7 @@
             <height>88</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gLayOrganization">
+          <layout class="QGridLayout" name="gLayCompany">
            <property name="leftMargin">
             <number>5</number>
            </property>
@@ -523,7 +523,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="lbNameOrganization">
+            <widget class="QLabel" name="lbNameCompany">
              <property name="text">
               <string>Name:</string>
              </property>
@@ -549,10 +549,10 @@
             <widget class="QLineEdit" name="lePost"/>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="leNameOrganization"/>
+            <widget class="QLineEdit" name="leNameCompany"/>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="lbAddressOrganization">
+            <widget class="QLabel" name="lbAddressCompany">
              <property name="text">
               <string>Address:</string>
              </property>
@@ -562,7 +562,7 @@
             </widget>
            </item>
            <item row="0" column="2">
-            <widget class="QLabel" name="lbPhoneOrganization">
+            <widget class="QLabel" name="lbPhoneCompany">
              <property name="text">
               <string>Phone:</string>
              </property>
@@ -572,7 +572,7 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QLineEdit" name="lePhoneOrganization"/>
+            <widget class="QLineEdit" name="lePhoneCompany"/>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="lbStartWork">
@@ -585,7 +585,7 @@
             </widget>
            </item>
            <item row="2" column="1" colspan="3">
-            <widget class="QLineEdit" name="leAddressOrganization"/>
+            <widget class="QLineEdit" name="leAddressCompany"/>
            </item>
            <item row="3" column="2">
             <widget class="QLabel" name="lbEndWork">
@@ -913,11 +913,11 @@
   <tabstop>leEmail</tabstop>
   <tabstop>leSkype</tabstop>
   <tabstop>leSite</tabstop>
-  <tabstop>leNameOrganization</tabstop>
-  <tabstop>lePhoneOrganization</tabstop>
+  <tabstop>leNameCompany</tabstop>
+  <tabstop>lePhoneCompany</tabstop>
   <tabstop>leDepartment</tabstop>
   <tabstop>lePost</tabstop>
-  <tabstop>leAddressOrganization</tabstop>
+  <tabstop>leAddressCompany</tabstop>
   <tabstop>deStartWork</tabstop>
   <tabstop>deEndWork</tabstop>
  </tabstops>

@@ -52,7 +52,8 @@ SettingsView::~SettingsView()
 
 QPair<bool, QString> *SettingsView::defaultData()
 {
-    return new QPair<bool, QString>(m_settings->value(Settings::DEFAULTDATA).toBool(), m_settings->value(Settings::PATH_TO_DEFAULTDATA).toString());
+    return new QPair<bool, QString>(m_settings->value(Settings::DEFAULTDATA).toBool(),
+                                    m_settings->value(Settings::PATH_TO_DEFAULTDATA).toString());
 }
 
 void SettingsView::chooseContactList()

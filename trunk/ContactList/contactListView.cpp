@@ -49,8 +49,8 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->hLayoutMain);
     ui->gbAddress->setLayout(ui->gLayAddress);
-    ui->gbCommunications->setLayout(ui->gLayCommunication);
-    ui->gbOrganization->setLayout(ui->gLayOrganization);
+    ui->gbChannels->setLayout(ui->gLayChannels);
+    ui->gbCompany->setLayout(ui->gLayCompany);
 //    ui->menuBar->hide();
     setEditable(false);
     setDefaultSettings();
@@ -112,8 +112,8 @@ void ContactListView::setEditable(bool flag)
     ui->leOtherName->setEnabled(flag);
     ui->deBirthday->setEnabled(flag);
     ui->gbAddress->setEnabled(flag);
-    ui->gbCommunications->setEnabled(flag);
-    ui->gbOrganization->setEnabled(flag);
+    ui->gbChannels->setEnabled(flag);
+    ui->gbCompany->setEnabled(flag);
 }
 
 void ContactListView::setContactData(const Data::ContactData *contact)
@@ -137,11 +137,11 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     ui->leSkype->setText(contact->skypes().at(0));
     ui->leSite->setText(contact->sites().at(0));
 
-    ui->leNameOrganization->setText(contact->companyName(0));
-    ui->lePhoneOrganization->setText(contact->companyPhone(0));
+    ui->leNameCompany->setText(contact->companyName(0));
+    ui->lePhoneCompany->setText(contact->companyPhone(0));
     ui->leDepartment->setText(contact->department(0));
     ui->lePost->setText(contact->post(0));
-    ui->leAddressOrganization->setText(contact->companyAddress(0));
+    ui->leAddressCompany->setText(contact->companyAddress(0));
     ui->deStartWork->setDate(contact->dateIn(0));
     ui->deEndWork->setDate(contact->dateOut(0));
 
@@ -263,11 +263,11 @@ void ContactListView::connectSignals()
     connect(ui->leEmail,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leSkype,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leSite,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leNameOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leNameCompany,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->lePhoneCompany,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leDepartment,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->lePost,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
+    connect(ui->leAddressCompany,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
 
     connect(ui->deBirthday,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
     connect(ui->deStartWork,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
@@ -289,11 +289,11 @@ void ContactListView::disconnectSignals()
     disconnect(ui->leEmail,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leSkype,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leSite,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leNameOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->lePhoneOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    disconnect(ui->leNameCompany,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    disconnect(ui->lePhoneCompany,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->leDepartment,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
     disconnect(ui->lePost,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
-    disconnect(ui->leAddressOrganization,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
+    disconnect(ui->leAddressCompany,SIGNAL(textChanged(QString)),this,SLOT(textChanged(QString)));
 
     disconnect(ui->deBirthday,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
     disconnect(ui->deStartWork,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
@@ -318,11 +318,11 @@ void ContactListView::clearContact()
     ui->leEmail->clear();
     ui->leSkype->clear();
     ui->leSite->clear();
-    ui->leNameOrganization->clear();
-    ui->lePhoneOrganization->clear();
+    ui->leNameCompany->clear();
+    ui->lePhoneCompany->clear();
     ui->leDepartment->clear();
     ui->lePost->clear();
-    ui->leAddressOrganization->clear();
+    ui->leAddressCompany->clear();
     ui->deStartWork->clear();
     ui->deEndWork->clear();
 
@@ -448,15 +448,15 @@ void ContactListView::textChanged(QString text)
         emit dataChanged(text, Value::Skype, ui->lwContactList->currentRow());
     else if(send == ui->leSite)
         emit dataChanged(text, Value::Site, ui->lwContactList->currentRow());
-    else if(send == ui->leNameOrganization)
+    else if(send == ui->leNameCompany)
         emit dataChanged(text, Attribute::NameOrganization, ui->lwContactList->currentRow());
-    else if(send == ui->lePhoneOrganization)
+    else if(send == ui->lePhoneCompany)
         emit dataChanged(text, Attribute::PhoneOrganization, ui->lwContactList->currentRow());
     else if(send == ui->leDepartment)
         emit dataChanged(text, Attribute::Department, ui->lwContactList->currentRow());
     else if(send == ui->lePost)
         emit dataChanged(text, Attribute::Post, ui->lwContactList->currentRow());
-    else if(send == ui->leAddressOrganization)
+    else if(send == ui->leAddressCompany)
         emit dataChanged(text, Attribute::AddressOrganization, ui->lwContactList->currentRow());
 }
 
