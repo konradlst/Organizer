@@ -1,4 +1,4 @@
-<tree>
+<tree version="0.1.1">
 	<record>
 		<data pathToUserPic="" surName="Ivanov" alias="Ivanov account" otherName="Ivanovich" birthday="10.11.1912" comment="this is test data" name="Ivan"/>
 		<addresses>

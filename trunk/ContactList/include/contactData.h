@@ -8,6 +8,7 @@
 class QPixmap;
 
 namespace Attribute {
+const QString Version("version");
 const QString Alias("alias");
 const QString Name("name");
 const QString SurName("surName");

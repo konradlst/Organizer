@@ -1,4 +1,5 @@
-﻿#include "driverXml.h"
+﻿#include <QApplication>
+#include "driverXml.h"
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
@@ -16,10 +17,12 @@ const QString Organizations("organizations");
 }
 
 #define ERROR QObject::trUtf8("Error")
-#define ERR_INCORRECT QObject::trUtf8("This file has not correct format!")
+#define ERR_INCORRECT QObject::trUtf8("This file has incorrect format!")
+#define ERR_INCORRECT_VERSION QObject::trUtf8("This file has incorrect version!")
 #define ERR_CANNOT_OPEN QObject::trUtf8("Can not open this file for read or this file has not a text format!")
 
 #define ERROR_MESSAGE_INCORRECT QMessageBox::warning(this, ERROR, ERR_INCORRECT)
+#define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(this, ERROR, ERR_INCORRECT_VERSION)
 #define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(this, ERROR, ERR_CANNOT_OPEN)
 
 QDate string2Data(QString data) {
@@ -51,6 +54,7 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
 
     QDomDocument doc;
     QDomElement root = doc.createElement(Tag::Tree);
+    root.setAttribute(Attribute::Version,qApp->applicationVersion());
     doc.appendChild(root);
     for(int i=0; i<data.size(); ++i) {
         QDomElement record = doc.createElement(Tag::Record);
@@ -110,6 +114,10 @@ Data::Contacts *DriverXml::loadData(const QString &path)
         ERROR_MESSAGE_INCORRECT;
         return 0;
     }
+    if(rootElement.attribute(Attribute::Version) != qApp->applicationVersion()) {
+        ERROR_MESSAGE_INCORRECT_VERSION;
+        return 0;
+    }
 
     m_contacts->clear();
     QDomNode recordNode = rootElement.firstChild();
@@ -137,6 +145,7 @@ bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
 
     QDomDocument doc;
     QDomElement record = doc.createElement(Tag::Record);
+    record.setAttribute(Attribute::Version,qApp->applicationVersion());
     QDomElement field = doc.createElement(Tag::Data);
     QDomElement addresses = doc.createElement(Tag::Addresses);
     QDomElement communications = doc.createElement(Tag::Channels);
@@ -189,6 +198,10 @@ Data::ContactData *DriverXml::loadContact(const QString &path)
     QDomElement recordElement = doc->documentElement();
     if (recordElement.nodeName() != Tag::Record) {
         ERROR_MESSAGE_INCORRECT;
+        return 0;
+    }
+    if(recordElement.attribute(Attribute::Version) != qApp->applicationVersion()) {
+        ERROR_MESSAGE_INCORRECT_VERSION;
         return 0;
     }
 
