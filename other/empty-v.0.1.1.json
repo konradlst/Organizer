@@ -1,39 +1,20 @@
 ﻿{
 	"version" : "0.1.1",
 	"record" : {
-		"alias" : "",
-		"name" : "",
-		"surName" : "",
-		"otherName" : "",
-		"birthday" : "",
-		"userpic" : "",
-		"comment" : "",
-		"otherName" : "",
+		"alias" : "", "name" : "", "surName" : "", "otherName" : "", "birthday" : "", "userpic" : "", "comment" : "", "otherName" : "",
 		"addresses" : [
 			{
-				"country" : "",
-				"city" : "",
-				"street" : "",
-				"home" : "",
-				"apartment" : ""
+				"country" : "", "city" : "", "street" : "", "home" : "", "apartment" : ""
 			}
 		],
 		"communications" : [
 			{
-				"type" : "",
-				"subtype" : "",
-				"value" : ""
+				"type" : "", "subtype" : "", "value" : ""
 			}
 		],
 		"organizations" : [
 			{
-				"name" : "",
-				"department" : "",
-				"post" : "",
-				"address" : "",
-				"phone" : "",
-				"dateIn" : "",
-				"dateOut" : "",
+				"name" : "", "department" : "", "post" : "", "address" : "", "phone" : "", "dateIn" : "", "dateOut" : "",
 			}
 		]
 	}

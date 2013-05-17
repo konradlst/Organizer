@@ -1,6 +1,5 @@
 ﻿#include <QStandardItemModel>
 #include <QtSql>
-#include "converterSql.h"
 
 namespace {
 #define Fields_name "name"
@@ -18,12 +17,7 @@ const QString QUERY_INSERT("INSERT INTO phoneList(name, number, type) "
 #define QUERY_SELECT "SELECT * FROM phoneList"
 }
 
-ConverterSql::ConverterSql(Converter *parent)
-	: Converter(parent)
-{
-}
-
-void ConverterSql::setData(QStandardItemModel *data, QString &path)
+void setData(QStandardItemModel *data, QString &path)
 {
 	QSqlDatabase sdb = QSqlDatabase::addDatabase(QSQLITE);
 	sdb.setDatabaseName(path);
@@ -41,7 +35,7 @@ void ConverterSql::setData(QStandardItemModel *data, QString &path)
 	}
 }
 
-QStandardItemModel *ConverterSql::getData(QString &path)
+QStandardItemModel *getData(QString &path)
 {
 	QSqlDatabase sdb = QSqlDatabase::addDatabase(QSQLITE);
 	sdb.setDatabaseName(path);

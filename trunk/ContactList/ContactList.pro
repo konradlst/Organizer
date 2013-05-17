@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml
+QT       += core gui xml sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,16 +19,19 @@ SOURCES += main.cpp\
     contactListController.cpp \
     contactListModel.cpp \
     settingsView.cpp \
-    myLog.cpp
+    myLog.cpp \
+    driverSql.cpp
 
 HEADERS  += \
-    ./include/contactListView.h \
-    ./include/contactData.h \
-    ./include/driverXml.h \
-    ./include/contactListController.h \
-    ./include/contactListModel.h \
-    ./include/settingsView.h \
-    ./include/myLog.h
+    include/contactListView.h \
+    include/contactData.h \
+    include/driverXml.h \
+    include/contactListController.h \
+    include/contactListModel.h \
+    include/settingsView.h \
+    include/myLog.h \
+    include/driver.h \
+    include/driverSql.h
 
 FORMS    += contactListView.ui \
     settingsView.ui

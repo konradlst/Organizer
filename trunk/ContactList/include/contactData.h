@@ -4,8 +4,7 @@
 #include <QVector>
 #include <QHash>
 #include <QDate>
-
-class QPixmap;
+#include <QPixmap>
 
 namespace Attribute {
 const QString Version("version");
