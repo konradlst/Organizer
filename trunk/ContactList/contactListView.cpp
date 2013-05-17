@@ -16,8 +16,8 @@ namespace {
 #define OPEN_FILE_DIALOG QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH, FILE_TYPES)
 #define SAVE_FILE_DIALOG QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH, FILE_TYPES)
 
-#define APP_NAME QObject::trUtf8("Contact List")
-#define APP_VERSION "v.0.1.1"
+#define APP_NAME qApp->applicationName()
+#define APP_VERSION QString("v."+ qApp->applicationVersion())
 #define ABOUT_TITLE QObject::trUtf8("About %1").arg(APP_NAME)
 #define VERSION QObject::trUtf8("Version: %1")
 #define ABOUT_TEXT QObject::trUtf8("<b>%1 %2</b><br><br>" \
