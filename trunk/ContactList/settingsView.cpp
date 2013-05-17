@@ -32,6 +32,7 @@ SettingsView::SettingsView(ContactListController *controller, QDialog *parent) :
 {
     ui->setupUi(this);
     ui->lbChangeLangMsg->setVisible(false);
+    setLayout(ui->mainLayout);
     loadSettings();
 
     connect(ui->pbCancel,SIGNAL(clicked()),SLOT(close()));

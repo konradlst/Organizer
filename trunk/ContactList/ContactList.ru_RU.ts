@@ -50,11 +50,6 @@
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="327"/>
-        <source>Communications</source>
-        <translation>Контакты</translation>
-    </message>
-    <message>
         <location filename="contactListView.ui" line="363"/>
         <source>Email:</source>
         <translation>Электронная почта:</translation>
@@ -91,8 +86,13 @@
         <translation>День рождения:</translation>
     </message>
     <message>
+        <location filename="contactListView.ui" line="327"/>
+        <source>Channels</source>
+        <translation>Каналы</translation>
+    </message>
+    <message>
         <location filename="contactListView.ui" line="482"/>
-        <source>Organization</source>
+        <source>Company</source>
         <translation>Компания</translation>
     </message>
     <message>
@@ -141,19 +141,9 @@
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="732"/>
-        <source>F1</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="contactListView.ui" line="747"/>
         <source>New...</source>
         <translation>Новый список...</translation>
-    </message>
-    <message>
-        <location filename="contactListView.ui" line="750"/>
-        <source>Ctrl+N</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="759"/>
@@ -161,19 +151,9 @@
         <translation>Открыть список...</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="762"/>
-        <source>Ctrl+O</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="contactListView.ui" line="771"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
-    </message>
-    <message>
-        <location filename="contactListView.ui" line="774"/>
-        <source>Ctrl+Shift+S</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="792"/>
@@ -212,19 +192,9 @@
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="contactListView.ui" line="867"/>
-        <source>Ctrl+Q</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="contactListView.ui" line="876"/>
         <source>Save</source>
         <translation>Сохранить Список Контактов</translation>
-    </message>
-    <message>
-        <location filename="contactListView.ui" line="879"/>
-        <source>Ctrl+S</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="contactListView.ui" line="891"/>
@@ -281,17 +251,22 @@
         <translation>Путь: %1</translation>
     </message>
     <message>
-        <location filename="driverXml.cpp" line="18"/>
+        <location filename="driverXml.cpp" line="19"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="driverXml.cpp" line="19"/>
-        <source>This file has not correct format!</source>
+        <location filename="driverXml.cpp" line="20"/>
+        <source>This file has incorrect format!</source>
         <translation>Этот файл имеет некорректный формат!</translation>
     </message>
     <message>
-        <location filename="driverXml.cpp" line="20"/>
+        <location filename="driverXml.cpp" line="21"/>
+        <source>This file has incorrect version!</source>
+        <translation>Этот файл имеет некорректную версию!</translation>
+    </message>
+    <message>
+        <location filename="driverXml.cpp" line="22"/>
         <source>Can not open this file for read or this file has not a text format!</source>
         <translation>Невозможно открыть файл для чтения или файл имеет некорректный формат!</translation>
     </message>
@@ -364,63 +339,57 @@
         <translation>Настройки Списка Контактов</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="58"/>
+        <location filename="settingsView.ui" line="73"/>
         <source>Language change occurs after restarting the application.</source>
         <translation>Язык будет изменен после перезапуска приложения.</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="73"/>
+        <location filename="settingsView.ui" line="88"/>
         <source>Language:</source>
         <translation>Язык:</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="96"/>
+        <location filename="settingsView.ui" line="111"/>
         <source>English (default)</source>
         <translation>Английский (по умолчанию)</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="101"/>
+        <location filename="settingsView.ui" line="116"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="130"/>
+        <location filename="settingsView.ui" line="145"/>
         <source>Default Contact List</source>
         <translation>Список Контактов, загружаемый по умолчанию</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="154"/>
+        <location filename="settingsView.ui" line="169"/>
         <source>Path to Contact List:  </source>
         <translation>Путь до файла:</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="170"/>
-        <location filename="settingsView.ui" line="227"/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <location filename="settingsView.ui" line="187"/>
+        <location filename="settingsView.ui" line="202"/>
         <source>Logging</source>
         <translation>Логирование</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="211"/>
+        <location filename="settingsView.ui" line="226"/>
         <source>Path to log file:  </source>
         <translation>Путь до файла логов:</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="240"/>
+        <location filename="settingsView.ui" line="255"/>
         <source>Apply</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="247"/>
+        <location filename="settingsView.ui" line="262"/>
         <source>Cancel</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="settingsView.ui" line="267"/>
+        <location filename="settingsView.ui" line="282"/>
         <source>Default</source>
         <translation>Сбросить настройки</translation>
     </message>

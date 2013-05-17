@@ -10,19 +10,19 @@
     <x>0</x>
     <y>0</y>
     <width>365</width>
-    <height>205</height>
+    <height>195</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>365</width>
-    <height>205</height>
+    <height>195</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>365</width>
-    <height>205</height>
+    <height>195</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -38,10 +38,25 @@
      <x>10</x>
      <y>10</y>
      <width>351</width>
-     <height>212</height>
+     <height>216</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>5</number>
+    </property>
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>3</number>
+    </property>
     <item>
      <widget class="QLabel" name="lbChangeLangMsg">
       <property name="enabled">
@@ -167,7 +182,7 @@
            </size>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
          </widget>
         </item>
@@ -224,7 +239,7 @@
            </size>
           </property>
           <property name="text">
-           <string>...</string>
+           <string notr="true">...</string>
           </property>
          </widget>
         </item>

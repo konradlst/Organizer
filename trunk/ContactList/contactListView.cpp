@@ -298,7 +298,6 @@ void ContactListView::disconnectSignals()
     disconnect(ui->deBirthday,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
     disconnect(ui->deStartWork,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
     disconnect(ui->deEndWork,SIGNAL(dateChanged(QDate)),this,SLOT(dateChanged(QDate)));
-
 }
 
 void ContactListView::clearContact()
