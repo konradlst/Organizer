@@ -21,9 +21,9 @@ const QString Organizations("organizations");
 #define ERR_INCORRECT_VERSION QObject::trUtf8("This file has incorrect version!")
 #define ERR_CANNOT_OPEN QObject::trUtf8("Can not open this file for read or this file has not a text format!")
 
-#define ERROR_MESSAGE_INCORRECT QMessageBox::warning(this, ERROR, ERR_INCORRECT)
-#define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(this, ERROR, ERR_INCORRECT_VERSION)
-#define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(this, ERROR, ERR_CANNOT_OPEN)
+#define ERROR_MESSAGE_INCORRECT QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT)
+#define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT_VERSION)
+#define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(new QWidget(), ERROR, ERR_CANNOT_OPEN)
 
 QDate string2Data(QString data) {
     if(data.isEmpty())
@@ -36,10 +36,11 @@ QString data2String(QDate data) {
 }
 }
 
-DriverXml::DriverXml(QWidget *parent) :
-    QWidget(parent),
-    m_path(new QString()),
-    m_contacts(new Data::Contacts)
+DriverXml::DriverXml()
+{
+}
+
+DriverXml::~DriverXml()
 {
 }
 
@@ -48,7 +49,6 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         ERROR_MESSAGE_CANNOT_OPEN;
-        close();
         return false;
     }
 
@@ -119,7 +119,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
         return 0;
     }
 
-    m_contacts->clear();
+    Data::Contacts *contacts = new Data::Contacts();
     QDomNode recordNode = rootElement.firstChild();
      // Read every tag in tree
     while(!recordNode.isNull()) {
@@ -128,11 +128,11 @@ Data::Contacts *DriverXml::loadData(const QString &path)
             Data::ContactData *currentContact = new Data::ContactData();
             // Read every contact data
             xmlToContactData(recordElement,*currentContact);
-            m_contacts->append(currentContact);
+            contacts->append(currentContact);
         }
         recordNode = recordNode.nextSibling();
     }
-    return m_contacts;
+    return contacts;
 }
 
 bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
@@ -211,27 +211,27 @@ Data::ContactData *DriverXml::loadContact(const QString &path)
     return currentContact;
 }
 
-void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::ContactData &currentContact)
+void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &data) const
 {
-    QDomNode fieldNode = recordElement.firstChild();
+    QDomNode fieldNode = record.firstChild();
     while(!fieldNode.isNull()) {
         QDomElement fieldElement = fieldNode.toElement();
         if(!fieldElement.isNull()) {
             if(fieldElement.tagName() == Tag::Data) {
-                currentContact.setAlias(fieldElement.attribute(Attribute::Alias));
-                currentContact.setName(fieldElement.attribute(Attribute::Name));
-                currentContact.setSurName(fieldElement.attribute(Attribute::SurName));
-                currentContact.setOtherName(fieldElement.attribute(Attribute::OtherName));
-                currentContact.setBirthday(fieldElement.attribute(Attribute::Birthday));
-                currentContact.setPathToUserPic(fieldElement.attribute(Attribute::PathToUserPic));
-                currentContact.setComment(fieldElement.attribute(Attribute::Comment));
+                data.setAlias(fieldElement.attribute(Attribute::Alias));
+                data.setName(fieldElement.attribute(Attribute::Name));
+                data.setSurName(fieldElement.attribute(Attribute::SurName));
+                data.setOtherName(fieldElement.attribute(Attribute::OtherName));
+                data.setBirthday(fieldElement.attribute(Attribute::Birthday));
+                data.setPathToUserPic(fieldElement.attribute(Attribute::PathToUserPic));
+                data.setComment(fieldElement.attribute(Attribute::Comment));
             }
             else if(fieldElement.tagName() == Tag::Addresses) {
                 QDomNode dataNode = fieldElement.firstChild();
                 // Read all address in contact
                 while(!dataNode.isNull()) {
                     QDomElement dataElement = dataNode.toElement();
-                    currentContact.appendAddress(dataElement.attribute(Attribute::Country),
+                    data.appendAddress(dataElement.attribute(Attribute::Country),
                                               dataElement.attribute(Attribute::City),
                                               dataElement.attribute(Attribute::Street),
                                               dataElement.attribute(Attribute::Home),
@@ -247,16 +247,16 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
 
                     QString type = dataElement.attribute(Attribute::Type);
                     if(type == Value::Phone)
-                        currentContact.setPhone(dataElement.attribute(Attribute::Subtype),
+                        data.setPhone(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
                     else if(type == Value::Email)
-                        currentContact.setEmail(dataElement.attribute(Attribute::Subtype),
+                        data.setEmail(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
                     else if(type == Value::Skype)
-                        currentContact.setSkype(dataElement.attribute(Attribute::Subtype),
+                        data.setSkype(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
                     else if(type == Value::Site)
-                        currentContact.setSite(dataElement.attribute(Attribute::Subtype),
+                        data.setSite(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
                     dataNode = dataNode.nextSibling();
                 }
@@ -266,7 +266,7 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
                 // Read every organization when working this contact
                 while(!dataNode.isNull()) {
                     QDomElement dataElement = dataNode.toElement();
-                    currentContact.appendCompany(dataElement.attribute(Attribute::Name),
+                    data.appendCompany(dataElement.attribute(Attribute::Name),
                                                  dataElement.attribute(Attribute::Department),
                                                  dataElement.attribute(Attribute::Post),
                                                  dataElement.attribute(Attribute::Address),
@@ -281,7 +281,7 @@ void DriverXml::xmlToContactData(const QDomElement &recordElement, Data::Contact
     }
 }
 
-void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &data)
+void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &data) const
 {
     QDomElement field = record.firstChildElement(Tag::Data);
     field.setAttribute(Attribute::Alias,data.alias());

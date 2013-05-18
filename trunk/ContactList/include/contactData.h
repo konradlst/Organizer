@@ -90,22 +90,22 @@ public:
     QPixmap userPic() const;
     QString comment() const;
 
-    QString country(int index) const;
-    QString city(int index) const;
-    QString street(int index) const;
-    QString home(int index) const;
-    QString apartment(int index) const;
+    QString country(int index = 0) const;
+    QString city(int index = 0) const;
+    QString street(int index = 0) const;
+    QString home(int index = 0) const;
+    QString apartment(int index = 0) const;
     int countAddresses() const;
 
-    QString companyName(int index) const;
-    QString department(int index) const;
-    QString post(int index) const;
-    QString companyAddress(int index) const;
-    QString companyPhone(int index) const;
-    QDate dateIn(int index) const;
-    QString dateInAsString(int index) const;
-    QDate dateOut(int index) const;
-    QString dateOutAsString(int index) const;
+    QString companyName(int index = 0) const;
+    QString department(int index = 0) const;
+    QString post(int index = 0) const;
+    QString companyAddress(int index = 0) const;
+    QString companyPhone(int index = 0) const;
+    QDate dateIn(int index = 0) const;
+    QString dateInAsString(int index = 0) const;
+    QDate dateOut(int index = 0) const;
+    QString dateOutAsString(int index = 0) const;
     int countCompanies() const;
 
     QList<QString> phones() const;

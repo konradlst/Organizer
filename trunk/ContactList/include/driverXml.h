@@ -1,17 +1,16 @@
 ﻿#ifndef DRIVERXML_H
 #define DRIVERXML_H
 
-#include <QWidget>
-#include "contactData.h"
+#include "driver.h"
 
 class QDomDocument;
 class QDomElement;
 
-class DriverXml : public QWidget
+class DriverXml : public Driver
 {
-    Q_OBJECT
 public:
-    explicit DriverXml(QWidget *parent = 0);
+    explicit DriverXml();
+    ~DriverXml();
     bool saveData(const Data::Contacts &data, const QString &path);
     Data::Contacts *loadData(const QString &path);
 
@@ -19,14 +18,8 @@ public:
     Data::ContactData *loadContact(const QString &path);
 
 private:
-    void xmlToContactData(const QDomElement &recordElement, Data::ContactData &currentContact);
-    void contactDataToXml(QDomElement &record, const Data::ContactData &data);
-
-private:
-    //! Путь до xml файла.
-    QString *m_path;
-    //! Хэш с данными.
-    Data::Contacts *m_contacts;
+    void xmlToContactData(const QDomElement &record, Data::ContactData &data) const;
+    void contactDataToXml(QDomElement &record, const Data::ContactData &data) const;
 };
 
 #endif // DRIVERXML_H
