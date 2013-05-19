@@ -12,7 +12,7 @@ namespace {
 #define SAVE_TITLE QObject::trUtf8("Save Contact List")
 #define LOAD_USERPIC QObject::trUtf8("Load User Pic")
 #define DEFAULT_PATH QDir::currentPath()
-#define FILE_TYPES QObject::trUtf8("XML files (*.xml);;Text files (*.txt);;All Files (*.*)")
+#define FILE_TYPES QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite);;XML files (*.xml)")
 #define OPEN_FILE_DIALOG QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH, FILE_TYPES)
 #define SAVE_FILE_DIALOG QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH, FILE_TYPES)
 

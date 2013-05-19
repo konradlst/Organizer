@@ -2,11 +2,18 @@
 #include <QTextStream>
 #include "contactListModel.h"
 #include "driverXml.h"
+#include "driverSql.h"
+
+namespace File {
+const QString XML(".xml");
+const QString SQLITE(".sqlite");
+}
 
 ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent) :
     QWidget(parent),
     m_controller(controller),
     m_driverXml(new DriverXml()),
+    m_driverSql(new DriverSql()),
     m_pathToCurrentData(new QString()),
     m_data(new Data::Contacts())
 {
@@ -14,18 +21,37 @@ ContactListModel::ContactListModel(ContactListController *controller, QWidget *p
 
 QStringList *ContactListModel::loadData(const QString &path)
 {
-    Data::Contacts *data = m_driverXml->loadData(path);
-    if(data != 0) {
-        *m_pathToCurrentData = path;
-        *m_data = *data;
+    if(path.endsWith(File::XML))
+    {
+        Data::Contacts *data = m_driverXml->loadData(path);
+        if(data != 0) {
+            *m_pathToCurrentData = path;
+            *m_data = *data;
+        }
+    }
+    else if(path.endsWith(File::SQLITE))
+    {
+        Data::Contacts *data = m_driverSql->loadData(path);
+        if(data != 0) {
+            *m_pathToCurrentData = path;
+            *m_data = *data;
+        }
     }
     return contactList();
 }
 
 void ContactListModel::saveData(const QString &path)
 {
-    if(m_driverXml->saveData(*m_data, path))
-        *m_pathToCurrentData = path;
+    if(path.endsWith(File::XML))
+    {
+        if(m_driverXml->saveData(*m_data, path))
+            *m_pathToCurrentData = path;
+    }
+    else if(path.endsWith(File::SQLITE))
+    {
+        if(m_driverSql->saveData(*m_data, path))
+            *m_pathToCurrentData = path;
+    }
 }
 
 QStringList *ContactListModel::contactList() const
@@ -74,18 +100,37 @@ void ContactListModel::deleteContact(const int index)
 
 Data::ContactData *ContactListModel::loadContact(const QString &path)
 {
-    Data::ContactData *data = m_driverXml->loadContact(path);
-    if(data != 0) {
-        m_data->append(data);
-        return data;
+    if(path.endsWith(File::XML))
+    {
+        Data::ContactData *data = m_driverXml->loadContact(path);
+        if(data != 0) {
+            m_data->append(data);
+            return data;
+        }
+    }
+    else if(path.endsWith(File::SQLITE))
+    {
+        Data::ContactData *data = m_driverSql->loadContact(path);
+        if(data != 0) {
+            m_data->append(data);
+            return data;
+        }
     }
     return 0;
 }
 
 void ContactListModel::saveContact(const Data::ContactData &data, const QString &path)
 {
-    if(m_driverXml->saveContact(data, path))
-        *m_pathToCurrentData = path;
+    if(path.endsWith(File::XML))
+    {
+        if(m_driverXml->saveContact(data, path))
+            *m_pathToCurrentData = path;
+    }
+    else if(path.endsWith(File::SQLITE))
+    {
+        if(m_driverSql->saveContact(data, path))
+            *m_pathToCurrentData = path;
+    }
 }
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)
