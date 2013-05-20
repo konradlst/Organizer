@@ -41,7 +41,8 @@ const QString QUERY_INSERT_TO_ADDRESSES("INSERT INTO Addresses(country, city, st
                                         "VALUES ('%1', '%2', '%3', '%4', '%5', '%6', '%7');");
 const QString QUERY_INSERT_TO_CHANNELS("INSERT INTO Channels(format, title, value, type, ownerId) "
                                         "VALUES ('%1', '%2', '%3', '%4', '%5');");
-const QString QUERY_SELECT("SELECT * FROM Contacts");
+const QString QUERY_SELECT_SHORT("SELECT * FROM %1");
+const QString QUERY_SELECT_FULL("SELECT * FROM %1 WHERE type = %2 AND id = %3");
 }
 
 DriverSql::DriverSql()
@@ -124,23 +125,33 @@ bool DriverSql::saveData(const Data::Contacts &data, const QString &path)
 
 Data::Contacts *DriverSql::loadData(const QString &path)
 {
-    //FIXME add code
     QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
     db.setDatabaseName(path);
     db.open();
 
     QSqlQuery query;
-    query.exec(QUERY_SELECT);
+    query.exec(QUERY_SELECT_SHORT.arg("Contacts"));
+    QSqlRecord record = query.record();
 
     Data::Contacts *data = new Data::Contacts();
 
-    QSqlRecord record = query.record();
     while (query.next()) {
         Data::ContactData *contact = new Data::ContactData();
         contact->setAlias(query.value(record.indexOf(Attribute::Alias)).toString());
         contact->setName(query.value(record.indexOf(Attribute::Name)).toString());
         contact->setSurName(query.value(record.indexOf(Attribute::SurName)).toString());
         contact->setBirthday(query.value(record.indexOf(Attribute::Birthday)).toString());
+
+        //FIXME change this code
+        int index = query.value(record.indexOf(Attribute::Birthday)).toInt();
+        QSqlQuery companiesQuery;
+        companiesQuery.exec(QUERY_SELECT_FULL.arg(QString("Companies"),QString("user"), QString::number(index)));
+
+        QSqlQuery addressesQuery;
+        addressesQuery.exec(QUERY_SELECT_FULL.arg(QString("Addresses"),QString("user"), QString::number(index)));
+
+        QSqlQuery channelsQuery;
+        channelsQuery.exec(QUERY_SELECT_FULL.arg(QString("Channels"),QString("user"), QString::number(index)));
         //...
         data->append(contact);
     }
