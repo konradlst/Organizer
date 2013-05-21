@@ -8,6 +8,7 @@ const QString QUERY_CREATE_TABLE_CONTACTS("CREATE TABLE Contacts ("
                                                   "alias VARCHAR(255) NOT NULL, "
                                                   "name VARCHAR(255), "
                                                   "surName VARCHAR(255), "
+                                                  "otherName VARCHAR(255), "
                                                   "birthday VARCHAR(255));");
 const QString QUERY_CREATE_TABLE_COMPANIES("CREATE TABLE Companies ("
                                                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
@@ -33,8 +34,8 @@ const QString QUERY_CREATE_TABLE_CHANNELS("CREATE TABLE Channels ("
                                                   "type VARCHAR(255), "
                                                   "ownerId INTEGER);");
 
-const QString QUERY_INSERT_TO_CONTACTS("INSERT INTO Contacts(alias, name, surName, birthday) "
-                                        "VALUES ('%1', '%2', '%3', '%4');");
+const QString QUERY_INSERT_TO_CONTACTS("INSERT INTO Contacts(alias, name, surName, otherName, birthday) "
+                                        "VALUES ('%1', '%2', '%3', '%4', '%5');");
 const QString QUERY_INSERT_TO_COMPANIES("INSERT INTO Companies(name, department, post, dateIn, dateOut) "
                                         "VALUES ('%1', '%2', '%3', '%4', '%5');");
 const QString QUERY_INSERT_TO_ADDRESSES("INSERT INTO Addresses(country, city, street, home, apartment, type, ownerId) "
@@ -43,6 +44,8 @@ const QString QUERY_INSERT_TO_CHANNELS("INSERT INTO Channels(format, title, valu
                                         "VALUES ('%1', '%2', '%3', '%4', '%5');");
 const QString QUERY_SELECT_SHORT("SELECT * FROM %1");
 const QString QUERY_SELECT_FULL("SELECT * FROM %1 WHERE type = %2 AND id = %3");
+
+const QString USER("user");
 }
 
 DriverSql::DriverSql()
@@ -71,6 +74,7 @@ bool DriverSql::saveData(const Data::Contacts &data, const QString &path)
                                 contact->alias(),
                                 contact->name(),
                                 contact->surName(),
+                                contact->otherName(),
                                 contact->birthdayAsString());
         QString strInsertToCompanies = QUERY_INSERT_TO_COMPANIES.arg(
                                 contact->companyName(),
@@ -84,32 +88,32 @@ bool DriverSql::saveData(const Data::Contacts &data, const QString &path)
                                 contact->street(),
                                 contact->home(),
                                 contact->apartment(),
-                                QString("user"),
+                                USER,
                                 QString::number(i+1));
 
         QString strInsertPhone = QUERY_INSERT_TO_CHANNELS.arg(
                     Value::Phone,
                     QString(),
                     contact->phones().at(0),
-                    QString("user"),
+                    USER,
                     QString::number(i+1));
         QString strInsertEmail = QUERY_INSERT_TO_CHANNELS.arg(
                     Value::Email,
                     QString(),
                     contact->emails().at(0),
-                    QString("user"),
+                    USER,
                     QString::number(i+1));
         QString strInsertSkype = QUERY_INSERT_TO_CHANNELS.arg(
                     Value::Skype,
                     QString(),
                     contact->skypes().at(0),
-                    QString("user"),
+                    USER,
                     QString::number(i+1));
         QString strInsertSite = QUERY_INSERT_TO_CHANNELS.arg(
                     Value::Site,
                     QString(),
                     contact->sites().at(0),
-                    QString("user"),
+                    USER,
                     QString::number(i+1));
 
         query.exec(strInsertToContacts);
@@ -140,18 +144,25 @@ Data::Contacts *DriverSql::loadData(const QString &path)
         contact->setAlias(query.value(record.indexOf(Attribute::Alias)).toString());
         contact->setName(query.value(record.indexOf(Attribute::Name)).toString());
         contact->setSurName(query.value(record.indexOf(Attribute::SurName)).toString());
+        contact->setOtherName(query.value(record.indexOf(Attribute::OtherName)).toString());
         contact->setBirthday(query.value(record.indexOf(Attribute::Birthday)).toString());
 
         //FIXME change this code
-        int index = query.value(record.indexOf(Attribute::Birthday)).toInt();
+        int index = query.value(record.indexOf("id")).toInt();
         QSqlQuery companiesQuery;
-        companiesQuery.exec(QUERY_SELECT_FULL.arg(QString("Companies"),QString("user"), QString::number(index)));
+        companiesQuery.exec(QUERY_SELECT_FULL.arg(QString("Companies"),USER, QString::number(index)));
+        QSqlRecord companiesRecord = companiesQuery.record();
+        contact->setCountry(0,companiesQuery.value(companiesRecord.indexOf(Attribute::Country)).toString());
+        contact->setCity(0,companiesQuery.value(companiesRecord.indexOf(Attribute::City)).toString());
+        contact->setStreet(0,companiesQuery.value(companiesRecord.indexOf(Attribute::Street)).toString());
+        contact->setHome(0,companiesQuery.value(companiesRecord.indexOf(Attribute::Home)).toString());
+        contact->setApartment(0,companiesQuery.value(companiesRecord.indexOf(Attribute::Apartment)).toString());
 
         QSqlQuery addressesQuery;
-        addressesQuery.exec(QUERY_SELECT_FULL.arg(QString("Addresses"),QString("user"), QString::number(index)));
+        addressesQuery.exec(QUERY_SELECT_FULL.arg(QString("Addresses"),USER, QString::number(index)));
 
         QSqlQuery channelsQuery;
-        channelsQuery.exec(QUERY_SELECT_FULL.arg(QString("Channels"),QString("user"), QString::number(index)));
+        channelsQuery.exec(QUERY_SELECT_FULL.arg(QString("Channels"),USER, QString::number(index)));
         //...
         data->append(contact);
     }
