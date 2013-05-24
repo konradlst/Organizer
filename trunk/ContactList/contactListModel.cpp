@@ -37,6 +37,10 @@ QStringList *ContactListModel::loadData(const QString &path)
             *m_data = *data;
         }
     }
+    else
+    {
+        //FIXME incorrect format
+    }
     return contactList();
 }
 
@@ -51,6 +55,10 @@ void ContactListModel::saveData(const QString &path)
     {
         if(m_driverSql->saveData(*m_data, path))
             *m_pathToCurrentData = path;
+    }
+    else
+    {
+        //FIXME incorrect format
     }
 }
 
@@ -108,13 +116,9 @@ Data::ContactData *ContactListModel::loadContact(const QString &path)
             return data;
         }
     }
-    else if(path.endsWith(File::SQLITE))
+    else
     {
-        Data::ContactData *data = m_driverSql->loadContact(path);
-        if(data != 0) {
-            m_data->append(data);
-            return data;
-        }
+        //FIXME incorrect format
     }
     return 0;
 }
@@ -126,10 +130,9 @@ void ContactListModel::saveContact(const Data::ContactData &data, const QString 
         if(m_driverXml->saveContact(data, path))
             *m_pathToCurrentData = path;
     }
-    else if(path.endsWith(File::SQLITE))
+    else
     {
-        if(m_driverSql->saveContact(data, path))
-            *m_pathToCurrentData = path;
+        //FIXME incorrect format
     }
 }
 

@@ -3,6 +3,19 @@
 
 namespace {
 const QString QSQLITE("QSQLITE");
+const QString USER("user");
+const QString MAIN("main");
+const QString FORMAT("format");
+const QString VALUE("value");
+const QString ID("id");
+
+namespace Table {
+const QString Contacts("Contacts");
+const QString Addresses("Addresses");
+const QString Companies("Companies");
+const QString Channels("Channels");
+}
+
 const QString QUERY_CREATE_TABLE_CONTACTS("CREATE TABLE Contacts ("
                                                   "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                                                   "alias VARCHAR(255) NOT NULL, "
@@ -48,9 +61,6 @@ const QString QUERY_INSERT_TO_CHANNELS("INSERT INTO Channels(format, title, valu
 const QString QUERY_SELECT_SHORT("SELECT * FROM %1");
 const QString QUERY_SELECT_FULL("SELECT * FROM %1 WHERE ownerId = '%2'");
 const QString QUERY_SELECT_FULL_2("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
-
-const QString USER("user");
-const QString MAIN("main");
 }
 
 DriverSql::DriverSql()
@@ -85,7 +95,7 @@ Data::Contacts *DriverSql::loadData(const QString &path)
     db.open();
 
     QSqlQuery query;
-    query.exec(QUERY_SELECT_SHORT.arg("Contacts"));
+    query.exec(QUERY_SELECT_SHORT.arg(Table::Contacts));
     QSqlRecord record = query.record();
 
     Data::Contacts *data = new Data::Contacts();
@@ -100,17 +110,18 @@ Data::Contacts *DriverSql::loadData(const QString &path)
 
 bool DriverSql::saveContact(const Data::ContactData &data, const QString &path)
 {
-    //FIXME add code
+    //not used
     return false;
 }
 
 Data::ContactData *DriverSql::loadContact(const QString &path)
 {
-    //FIXME add code
+    //not used
     return 0;
 }
 
-void DriverSql::contactDataToSql(QSqlQuery &query, const Data::ContactData *contact, const int i) const
+void DriverSql::contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,
+                                 const int i) const
 {
     QString strInsertToContacts = QUERY_INSERT_TO_CONTACTS.arg(
                             contact->alias(),
@@ -170,10 +181,10 @@ void DriverSql::sqlToContactData(const QSqlQuery &query, const QSqlRecord &recor
     contact->setOtherName(query.value(record.indexOf(Attribute::OtherName)).toString());
     contact->setBirthday(query.value(record.indexOf(Attribute::Birthday)).toString());
 
-    int index = query.value(record.indexOf("id")).toInt();
+    int index = query.value(record.indexOf(ID)).toInt();
 
     QSqlQuery addressesQuery;
-    addressesQuery.exec(QUERY_SELECT_FULL_2.arg(QString("Addresses"), USER, QString::number(index)));
+    addressesQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Addresses, USER, QString::number(index)));
     QSqlRecord addressesRecord = addressesQuery.record();
     while (addressesQuery.next()) {
         contact->setCountry(0, addressesQuery.value(addressesRecord.indexOf(Attribute::Country)).toString());
@@ -184,7 +195,7 @@ void DriverSql::sqlToContactData(const QSqlQuery &query, const QSqlRecord &recor
     }
 
     QSqlQuery companiesQuery;
-    companiesQuery.exec(QUERY_SELECT_FULL.arg(QString("Companies"), QString::number(index)));
+    companiesQuery.exec(QUERY_SELECT_FULL.arg(Table::Companies, QString::number(index)));
     QSqlRecord companiesRecord = companiesQuery.record();
     while (companiesQuery.next()) {
         contact->setCompanyName(0, companiesQuery.value(companiesRecord.indexOf(Attribute::Name)).toString());
@@ -197,11 +208,11 @@ void DriverSql::sqlToContactData(const QSqlQuery &query, const QSqlRecord &recor
     }
 
     QSqlQuery channelsQuery;
-    channelsQuery.exec(QUERY_SELECT_FULL_2.arg(QString("Channels"), USER, QString::number(index)));
+    channelsQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Channels, USER, QString::number(index)));
     QSqlRecord channelsRecord = channelsQuery.record();
     while (channelsQuery.next()) {
-        QString format = channelsQuery.value(channelsRecord.indexOf("format")).toString();
-        QString value = channelsQuery.value(channelsRecord.indexOf("value")).toString();
+        QString format = channelsQuery.value(channelsRecord.indexOf(FORMAT)).toString();
+        QString value = channelsQuery.value(channelsRecord.indexOf(VALUE)).toString();
         if(format == Value::Phone)
             contact->setPhone(MAIN, value);
         else if(format == Value::Email)

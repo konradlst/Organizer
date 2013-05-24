@@ -12,9 +12,9 @@ namespace {
 #define SAVE_TITLE QObject::trUtf8("Save Contact List")
 #define LOAD_USERPIC QObject::trUtf8("Load User Pic")
 #define DEFAULT_PATH QDir::currentPath()
-#define FILE_TYPES QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite);;XML files (*.xml)")
-#define OPEN_FILE_DIALOG QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH, FILE_TYPES)
-#define SAVE_FILE_DIALOG QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH, FILE_TYPES)
+#define FILE_TYPES QObject::trUtf8("All Files (*.*)%1%2")
+#define SQLITE_TYPE QObject::trUtf8(";;SQLite files (*.sqlite)")
+#define XML_TYPE QObject::trUtf8(";;XML files (*.xml)")
 
 #define APP_NAME qApp->applicationName()
 #define APP_VERSION QString("v."+ qApp->applicationVersion())
@@ -162,7 +162,8 @@ void ContactListView::about()
 
 void ContactListView::loadData()
 {
-    QString path = OPEN_FILE_DIALOG;
+    QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
+                                            FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
     loadData(path);
 }
 
@@ -197,7 +198,8 @@ void ContactListView::saveData()
 
 void ContactListView::saveAsData()
 {
-    QString path = SAVE_FILE_DIALOG;
+    QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
+                                            FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
     if(!path.isEmpty()) {
         emit saveData(path);
         m_path->setText(pathToData(m_controller->pathToData()));
@@ -344,7 +346,8 @@ void ContactListView::newContact()
 
 void ContactListView::loadContact()
 {
-    QString path = OPEN_FILE_DIALOG;
+    QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
+                                                FILE_TYPES.arg(XML_TYPE, QString()));
     if(!path.isEmpty()) {
         Data::ContactData *data = m_controller->loadContact(path);
         if(data != 0) {
@@ -361,7 +364,8 @@ void ContactListView::loadContact()
 
 void ContactListView::saveContact()
 {
-    QString path = SAVE_FILE_DIALOG;
+    QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
+                                                FILE_TYPES.arg(XML_TYPE, QString()));
     if(!path.isEmpty()) {
         emit saveContact(*m_controller->contact(ui->lwContactList->currentRow()),path);
         MYLOG << Log::SaveContact.arg(path);
