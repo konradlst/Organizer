@@ -1,4 +1,4 @@
-#include "driverSql.h"
+#include "driverSqlite.h"
 #include <QtSql>
 
 namespace {
@@ -63,15 +63,15 @@ const QString QUERY_SELECT_FULL("SELECT * FROM %1 WHERE ownerId = '%2'");
 const QString QUERY_SELECT_FULL_2("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
 }
 
-DriverSql::DriverSql()
+DriverSqlite::DriverSqlite()
 {
 }
 
-DriverSql::~DriverSql()
+DriverSqlite::~DriverSqlite()
 {
 }
 
-bool DriverSql::saveData(const Data::Contacts &data, const QString &path)
+bool DriverSqlite::saveData(const Data::Contacts &data, const QString &path)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
     db.setDatabaseName(path);
@@ -88,7 +88,7 @@ bool DriverSql::saveData(const Data::Contacts &data, const QString &path)
     return true;
 }
 
-Data::Contacts *DriverSql::loadData(const QString &path)
+Data::Contacts *DriverSqlite::loadData(const QString &path)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
     db.setDatabaseName(path);
@@ -108,19 +108,19 @@ Data::Contacts *DriverSql::loadData(const QString &path)
     return data;
 }
 
-bool DriverSql::saveContact(const Data::ContactData &data, const QString &path)
+bool DriverSqlite::saveContact(const Data::ContactData &data, const QString &path)
 {
     //not used
     return false;
 }
 
-Data::ContactData *DriverSql::loadContact(const QString &path)
+Data::ContactData *DriverSqlite::loadContact(const QString &path)
 {
     //not used
     return 0;
 }
 
-void DriverSql::contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,
+void DriverSqlite::contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,
                                  const int i) const
 {
     QString strInsertToContacts = QUERY_INSERT_TO_CONTACTS.arg(
@@ -173,7 +173,7 @@ void DriverSql::contactDataToSql(QSqlQuery &query, const Data::ContactData *cont
     query.exec(strInsertSite);
 }
 
-void DriverSql::sqlToContactData(const QSqlQuery &query, const QSqlRecord &record, Data::ContactData *contact) const
+void DriverSqlite::sqlToContactData(const QSqlQuery &query, const QSqlRecord &record, Data::ContactData *contact) const
 {
     contact->setAlias(query.value(record.indexOf(Attribute::Alias)).toString());
     contact->setName(query.value(record.indexOf(Attribute::Name)).toString());

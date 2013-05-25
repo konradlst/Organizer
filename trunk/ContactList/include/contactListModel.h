@@ -5,8 +5,7 @@
 #include "contactData.h"
 
 class ContactListController;
-class DriverXml;
-class DriverSql;
+class DriverManager;
 
 class ContactListModel : public QWidget
 {
@@ -34,8 +33,7 @@ public slots:
 
 private:
     ContactListController *m_controller;
-    DriverXml *m_driverXml;
-    DriverSql *m_driverSql;
+    DriverManager *m_driver;
     QString *m_pathToCurrentData;
     Data::Contacts *m_data;
 };
