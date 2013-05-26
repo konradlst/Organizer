@@ -183,36 +183,37 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, const QSqlRecord &re
 
     int index = query.value(record.indexOf(ID)).toInt();
 
-    QSqlQuery addressesQuery;
-    addressesQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Addresses, USER, QString::number(index)));
-    QSqlRecord addressesRecord = addressesQuery.record();
-    while (addressesQuery.next()) {
-        contact->setCountry(0, addressesQuery.value(addressesRecord.indexOf(Attribute::Country)).toString());
-        contact->setCity(0, addressesQuery.value(addressesRecord.indexOf(Attribute::City)).toString());
-        contact->setStreet(0, addressesQuery.value(addressesRecord.indexOf(Attribute::Street)).toString());
-        contact->setHome(0, addressesQuery.value(addressesRecord.indexOf(Attribute::Home)).toString());
-        contact->setApartment(0, addressesQuery.value(addressesRecord.indexOf(Attribute::Apartment)).toString());
+    QSqlQuery tempQuery;
+    QSqlRecord tempRecord;
+    tempQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Addresses, USER, QString::number(index)));
+    tempRecord = tempQuery.record();
+    while (tempQuery.next()) {
+        contact->setCountry(0, tempQuery.value(tempRecord.indexOf(Attribute::Country)).toString());
+        contact->setCity(0, tempQuery.value(tempRecord.indexOf(Attribute::City)).toString());
+        contact->setStreet(0, tempQuery.value(tempRecord.indexOf(Attribute::Street)).toString());
+        contact->setHome(0, tempQuery.value(tempRecord.indexOf(Attribute::Home)).toString());
+        contact->setApartment(0, tempQuery.value(tempRecord.indexOf(Attribute::Apartment)).toString());
     }
 
-    QSqlQuery companiesQuery;
-    companiesQuery.exec(QUERY_SELECT_FULL.arg(Table::Companies, QString::number(index)));
-    QSqlRecord companiesRecord = companiesQuery.record();
-    while (companiesQuery.next()) {
-        contact->setCompanyName(0, companiesQuery.value(companiesRecord.indexOf(Attribute::Name)).toString());
-        contact->setCompanyPhone(0, companiesQuery.value(companiesRecord.indexOf(Attribute::Phone)).toString());
-        contact->setDepartment(0, companiesQuery.value(companiesRecord.indexOf(Attribute::Department)).toString());
-        contact->setPost(0, companiesQuery.value(companiesRecord.indexOf(Attribute::Post)).toString());
-        contact->setCompanyAddress(0, companiesQuery.value(companiesRecord.indexOf(Attribute::Address)).toString());
-        contact->setDateIn(0, companiesQuery.value(companiesRecord.indexOf(Attribute::DateIn)).toString());
-        contact->setDateOut(0, companiesQuery.value(companiesRecord.indexOf(Attribute::DateOut)).toString());
+    tempQuery.clear();
+    tempQuery.exec(QUERY_SELECT_FULL.arg(Table::Companies, QString::number(index)));
+    tempRecord = tempQuery.record();
+    while (tempQuery.next()) {
+        contact->setCompanyName(0, tempQuery.value(tempRecord.indexOf(Attribute::Name)).toString());
+        contact->setCompanyPhone(0, tempQuery.value(tempRecord.indexOf(Attribute::Phone)).toString());
+        contact->setDepartment(0, tempQuery.value(tempRecord.indexOf(Attribute::Department)).toString());
+        contact->setPost(0, tempQuery.value(tempRecord.indexOf(Attribute::Post)).toString());
+        contact->setCompanyAddress(0, tempQuery.value(tempRecord.indexOf(Attribute::Address)).toString());
+        contact->setDateIn(0, tempQuery.value(tempRecord.indexOf(Attribute::DateIn)).toString());
+        contact->setDateOut(0, tempQuery.value(tempRecord.indexOf(Attribute::DateOut)).toString());
     }
 
-    QSqlQuery channelsQuery;
-    channelsQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Channels, USER, QString::number(index)));
-    QSqlRecord channelsRecord = channelsQuery.record();
-    while (channelsQuery.next()) {
-        QString format = channelsQuery.value(channelsRecord.indexOf(FORMAT)).toString();
-        QString value = channelsQuery.value(channelsRecord.indexOf(VALUE)).toString();
+    tempQuery.clear();
+    tempQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Channels, USER, QString::number(index)));
+    tempRecord = tempQuery.record();
+    while (tempQuery.next()) {
+        QString format = tempQuery.value(tempRecord.indexOf(FORMAT)).toString();
+        QString value = tempQuery.value(tempRecord.indexOf(VALUE)).toString();
         if(format == Value::Phone)
             contact->setPhone(MAIN, value);
         else if(format == Value::Email)
