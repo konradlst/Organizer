@@ -36,8 +36,7 @@ HEADERS  += \
     include/driverManager.h
 
 FORMS    += contactListView.ui \
-    settingsView.ui \
-    contactListView_2.ui
+    settingsView.ui
 
 RESOURCES += \
     res.qrc
