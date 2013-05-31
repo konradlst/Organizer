@@ -8,11 +8,16 @@ QT       += core gui
 
 TARGET = FinanceManager
 TEMPLATE = app
-
+INCLUDEPATH += "./include/"
 
 SOURCES += main.cpp\
-        financeManagerView.cpp
+        financeManagerView.cpp \
+    financeManagerController.cpp \
+    financeManagerModel.cpp
 
-HEADERS  += financeManagerView.h
+HEADERS  += \
+    include/financeManagerView.h \
+    include/financeManagerController.h \
+    include/financeManagerModel.h
 
 FORMS    += financeManagerView.ui

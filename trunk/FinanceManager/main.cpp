@@ -1,11 +1,11 @@
 #include <QtGui/QApplication>
-#include "financeManagerView.h"
+#include "financeManagerController.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    FinanceManagerView w;
-    w.show();
-    
+
+    FinanceManagerController c;
+
     return a.exec();
 }

@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>466</width>
-    <height>417</height>
+    <width>473</width>
+    <height>426</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>466</width>
-    <height>417</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>466</width>
-    <height>417</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -29,10 +29,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>10</x>
+      <y>10</y>
       <width>460</width>
-      <height>360</height>
+      <height>341</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -53,13 +53,13 @@
      <attribute name="title">
       <string>Главная</string>
      </attribute>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="gbAccounts">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
         <width>201</width>
-        <height>251</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="title">
@@ -71,10 +71,10 @@
          <x>10</x>
          <y>20</y>
          <width>181</width>
-         <height>221</height>
+         <height>247</height>
         </rect>
        </property>
-       <layout class="QFormLayout" name="formLayout">
+       <layout class="QFormLayout" name="fLayAccounts">
         <property name="fieldGrowthPolicy">
          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
         </property>
@@ -90,6 +90,9 @@
           <property name="value">
            <number>24</number>
           </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
           <property name="format">
            <string notr="true">%v р.</string>
           </property>
@@ -98,7 +101,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>карта 1</string>
+           <string>Карта 1</string>
           </property>
          </widget>
         </item>
@@ -115,7 +118,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>карта 2</string>
+           <string>Карта 2</string>
           </property>
          </widget>
         </item>
@@ -132,7 +135,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>карта 3</string>
+           <string>Карта 3</string>
           </property>
          </widget>
         </item>
@@ -149,7 +152,7 @@
         <item row="4" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>карта 4</string>
+           <string>Карта 4</string>
           </property>
          </widget>
         </item>
@@ -163,27 +166,10 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>вклад 1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QProgressBar" name="progressBar_6">
-          <property name="value">
-           <number>24</number>
-          </property>
-          <property name="format">
-           <string notr="true">%v р.</string>
-          </property>
-         </widget>
-        </item>
         <item row="6" column="0">
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>Вклад 2</string>
+           <string>Вклад 1</string>
           </property>
          </widget>
         </item>
@@ -200,7 +186,7 @@
         <item row="7" column="0">
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>Вклад3</string>
+           <string>Вклад 2</string>
           </property>
          </widget>
         </item>
@@ -214,30 +200,76 @@
           </property>
          </widget>
         </item>
+        <item row="8" column="0" colspan="2">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Итого :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Карта 5</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QProgressBar" name="progressBar_6">
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="format">
+           <string notr="true">%v р.</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QSpinBox" name="spinBox">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="suffix">
+           <string> р.</string>
+          </property>
+          <property name="minimum">
+           <number>-100000</number>
+          </property>
+          <property name="maximum">
+           <number>100000</number>
+          </property>
+          <property name="value">
+           <number>500</number>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QGroupBox" name="gbCurrentMounth">
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>10</y>
-        <width>141</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>30 мая 2013 года (четверг)</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>40</y>
+        <y>60</y>
         <width>201</width>
-        <height>101</height>
+        <height>111</height>
        </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
       <property name="title">
        <string>В текущем месяце</string>
@@ -248,42 +280,21 @@
          <x>10</x>
          <y>20</y>
          <width>181</width>
-         <height>81</height>
+         <height>91</height>
         </rect>
        </property>
-       <layout class="QFormLayout" name="formLayout_2">
+       <layout class="QFormLayout" name="fLayCurrentMounth">
         <property name="fieldGrowthPolicy">
          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
         </property>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Total</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>56 р.</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
          <widget class="QLabel" name="label_12">
           <property name="text">
            <string>Заработал</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Потратил</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
+        <item row="0" column="1">
          <widget class="QProgressBar" name="progressBar_9">
           <property name="value">
            <number>80</number>
@@ -293,7 +304,14 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Потратил</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
          <widget class="QProgressBar" name="progressBar_10">
           <property name="value">
            <number>24</number>
@@ -303,17 +321,59 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>Итого :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="spinBox_2">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="suffix">
+           <string> р.</string>
+          </property>
+          <property name="minimum">
+           <number>-100000</number>
+          </property>
+          <property name="maximum">
+           <number>100000</number>
+          </property>
+          <property name="value">
+           <number>56</number>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_3">
+     <widget class="QGroupBox" name="gbToday">
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>150</y>
+        <y>180</y>
         <width>201</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
       <property name="title">
        <string>Сегодня</string>
@@ -323,11 +383,14 @@
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>160</width>
+         <width>181</width>
          <height>31</height>
         </rect>
        </property>
-       <layout class="QFormLayout" name="formLayout_3">
+       <layout class="QFormLayout" name="fLayToday">
+        <property name="fieldGrowthPolicy">
+         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+        </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_14">
           <property name="text">
@@ -336,32 +399,131 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="label_15">
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox">
+          <property name="frame">
+           <bool>true</bool>
           </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
-          <property name="text">
-           <string>- 18 р.</string>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="accelerated">
+           <bool>false</bool>
+          </property>
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>true</bool>
+          </property>
+          <property name="suffix">
+           <string> р.</string>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>-18.000000000000000</double>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="pbNewTransaction">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>270</y>
+        <y>290</y>
         <width>111</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Новая транзакция</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>10</y>
+        <width>201</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="date">
+       <date>
+        <year>2013</year>
+        <month>5</month>
+        <day>30</day>
+       </date>
+      </property>
+      <property name="displayFormat">
+       <string>dd MMMM yyyy года</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>30</y>
+        <width>201</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="date">
+       <date>
+        <year>2013</year>
+        <month>5</month>
+        <day>30</day>
+       </date>
+      </property>
+      <property name="displayFormat">
+       <string>dddd, 16 неделя</string>
       </property>
      </widget>
     </widget>
@@ -377,12 +539,46 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>466</width>
+     <width>473</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_as"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionHistory"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftToolBarArea|Qt::TopToolBarArea</set>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -391,6 +587,36 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save...</string>
+   </property>
+  </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as...</string>
+   </property>
+  </action>
+  <action name="actionHistory">
+   <property name="text">
+    <string>History</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
