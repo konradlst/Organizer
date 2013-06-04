@@ -21,7 +21,7 @@ namespace {
 #define ABOUT_TITLE QObject::trUtf8("About %1").arg(APP_NAME)
 #define VERSION QObject::trUtf8("Version: %1")
 #define ABOUT_TEXT QObject::trUtf8("<b>%1 %2</b><br><br>" \
-                                    "Based on Qt 4.8.1<br><br>" \
+                                    "Based on Qt 5.0.1<br><br>" \
                                     "Copyright 2013, Anton Batyaev. All rights reserved.").arg(APP_NAME,APP_VERSION)
 
 QString pathToData(const QString *path) {

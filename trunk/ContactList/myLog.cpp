@@ -34,7 +34,7 @@ void myLog::operator <<(const QString &data)
 {
     if(m_logging) {
         m_logFile->open(QIODevice::Append | QIODevice::Text);
-        m_logFile->write(logMessage(data).toAscii());
+        m_logFile->write(logMessage(data).toLatin1());
         m_logFile->close();
     }
 }

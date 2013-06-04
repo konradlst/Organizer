@@ -14,8 +14,8 @@ public:
     bool saveData(const Data::Contacts &data, const QString &path);
     Data::Contacts *loadData(const QString &path);
 
-    bool saveContact(const Data::ContactData &data, const QString &path);
-    Data::ContactData *loadContact(const QString &path);
+    bool saveContact(const Data::ContactData &, const QString &);
+    Data::ContactData *loadContact(const QString &);
 
 private:
     void contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,

@@ -108,13 +108,13 @@ Data::Contacts *DriverSqlite::loadData(const QString &path)
     return data;
 }
 
-bool DriverSqlite::saveContact(const Data::ContactData &data, const QString &path)
+bool DriverSqlite::saveContact(const Data::ContactData &, const QString &)
 {
     //not used
     return false;
 }
 
-Data::ContactData *DriverSqlite::loadContact(const QString &path)
+Data::ContactData *DriverSqlite::loadContact(const QString &)
 {
     //not used
     return 0;
