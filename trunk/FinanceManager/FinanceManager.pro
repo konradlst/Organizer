@@ -20,6 +20,7 @@ SOURCES += main.cpp\
 HEADERS  += \
     include/financeManagerView.h \
     include/financeManagerController.h \
-    include/financeManagerModel.h
+    include/financeManagerModel.h \
+    include/financeManagerData.h
 
 FORMS    += financeManagerView.ui
