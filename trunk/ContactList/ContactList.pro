@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     settingsView.cpp \
     myLog.cpp \
     driverSqlite.cpp \
-    driverManager.cpp
+    driverManager.cpp \
+    contactView.cpp
 
 HEADERS  += \
     include/contactListView.h \
@@ -33,7 +34,8 @@ HEADERS  += \
     include/myLog.h \
     include/driver.h \
     include/driverSqlite.h \
-    include/driverManager.h
+    include/driverManager.h \
+    include/contactView.h
 
 FORMS    += contactListView.ui \
     settingsView.ui
