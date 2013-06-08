@@ -5,8 +5,10 @@
 #include <QHash>
 #include <QDate>
 #include <QPixmap>
+#include "channel.h"
 
-namespace Attribute {
+namespace Attribute
+{
 const QString Version("version");
 const QString Alias("alias");
 const QString Name("name");
@@ -16,11 +18,6 @@ const QString Birthday("birthday");
 const QString PathToUserPic("pathToUserPic");
 const QString Userpic("userPic");
 const QString Comment("comment");
-const QString Country("country");
-const QString City("city");
-const QString Street("street");
-const QString Home("home");
-const QString Apartment("apartment");
 const QString Type("type");
 const QString Subtype("subtype");
 const QString Value("value");
@@ -35,14 +32,17 @@ const QString DateIn("dateIn");
 const QString DateOut("dateOut");
 }
 
-namespace Value {
-const QString Phone("phone");
-const QString Email("email");
-const QString Skype("skype");
-const QString Site("site");
+namespace Address
+{
+const QString Country("country");
+const QString City("city");
+const QString Street("street");
+const QString Home("home");
+const QString Apartment("apartment");
 }
 
-namespace Data {
+namespace Data
+{
 #define DEFAULT_DATE QDate(1900,1,1)
 #define DEFAULT_DATE_FORMAT "dd.MM.yyyy"
 #define DEFAULT_USER_PIC ":/logo"

@@ -4,11 +4,11 @@
 		<data street="Zaparozskaia" apartment="3" country="Russia" city="Samara" home="9"/>
 	</addresses>
 	<channels>
-		<data subtype="megafon" type="phone" value="7 937 1111122"/>
-		<data subtype="mts" type="phone" value="+7 987 1112233"/>
-		<data subtype="work" type="email" value="d.sidorov@mail.ru"/>
-		<data subtype="work" type="skype" value="d_sidorov"/>
-		<data subtype="work" type="site" value="sidorov.com"/>
+		<data subtype="megafon" type="Phone" value="7 937 1111122"/>
+		<data subtype="mts" type="Phone" value="+7 987 1112233"/>
+		<data subtype="work" type="Email" value="d.sidorov@mail.ru"/>
+		<data subtype="work" type="Skype" value="d_sidorov"/>
+		<data subtype="work" type="Site" value="sidorov.com"/>
 	</channels>
 	<organizations>
 		<data post="engeener" dateIn="07.08.2002" phone="+7 (846) 1234567" address="Samara, Dibenko, 60, 30" dateOut="25.11.2012" name="work" department="smth. best"/>

@@ -102,15 +102,15 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
         contact->setSurName(data);
     else if(key == Attribute::OtherName)
         contact->setOtherName(data);
-    else if(key == Attribute::Country)
+    else if(key == Address::Country)
         contact->setCountry(0, data);
-    else if(key == Attribute::City)
+    else if(key == Address::City)
         contact->setCity(0, data);
-    else if(key == Attribute::Street)
+    else if(key == Address::Street)
         contact->setStreet(0, data);
-    else if(key == Attribute::Home)
+    else if(key == Address::Home)
         contact->setHome(0, data);
-    else if(key == Attribute::Apartment)
+    else if(key == Address::Apartment)
         contact->setApartment(0, data);
     else if(key == Attribute::NameOrganization)
         contact->setCompanyName(0, data);
@@ -122,13 +122,13 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
         contact->setPost(0, data);
     else if(key == Attribute::AddressOrganization)
         contact->setCompanyAddress(0, data);
-    else if(key == Value::Phone)
+    else if(key == Channel::Phone)
         contact->setPhone(contact->phoneTypes().at(0), data);
-    else if(key == Value::Email)
+    else if(key == Channel::Email)
         contact->setEmail(contact->phoneTypes().at(0), data);
-    else if(key == Value::Skype)
+    else if(key == Channel::Skype)
         contact->setSkype(contact->phoneTypes().at(0), data);
-    else if(key == Value::Site)
+    else if(key == Channel::Site)
         contact->setSite(contact->phoneTypes().at(0), data);
 }
 

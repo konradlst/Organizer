@@ -2,13 +2,32 @@
 #define CONTACTVIEW_H
 
 #include <QWidget>
+#include <QLineEdit>
+#include <QLabel>
+#include "contactData.h"
+#include "channel.h"
 
 class QVBoxLayout;
-class QTableWidget;
+class QTabWidget;
 class QPushButton;
-class QLabel;
-class QLineEdit;
 class QDateEdit;
+
+struct AddressView
+{
+    QLabel lbCountry;
+    QLabel lbCity;
+    QLabel lbStreet;
+    QLabel lbHome;
+    QLabel lbApartment;
+
+    QLineEdit country;
+    QLineEdit city;
+    QLineEdit street;
+    QLineEdit home;
+    QLineEdit apartment;
+};
+
+typedef QVector<Channel::View *> ChannelViewList;
 
 class ContactView : public QWidget
 {
@@ -23,7 +42,7 @@ private:
 
 private:
     QVBoxLayout *m_mainLay;
-    QTableWidget *m_property;
+    QTabWidget *m_property;
     QLabel *m_userPic;
     QPushButton *m_setUserPic;
     QLineEdit *m_alias;
@@ -31,7 +50,8 @@ private:
     QLineEdit *m_surName;
     QLineEdit *m_otherName;
     QDateEdit *m_birthday;
-
+    ChannelViewList *m_channelList;
+    AddressView *m_address;
 };
 
 #endif // CONTACTVIEW_H

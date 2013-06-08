@@ -231,11 +231,11 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
                 // Read all address in contact
                 while(!dataNode.isNull()) {
                     QDomElement dataElement = dataNode.toElement();
-                    data.appendAddress(dataElement.attribute(Attribute::Country),
-                                              dataElement.attribute(Attribute::City),
-                                              dataElement.attribute(Attribute::Street),
-                                              dataElement.attribute(Attribute::Home),
-                                              dataElement.attribute(Attribute::Apartment));
+                    data.appendAddress(dataElement.attribute(Address::Country),
+                                              dataElement.attribute(Address::City),
+                                              dataElement.attribute(Address::Street),
+                                              dataElement.attribute(Address::Home),
+                                              dataElement.attribute(Address::Apartment));
                     dataNode = dataNode.nextSibling();
                 }
             }
@@ -246,16 +246,16 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
                     QDomElement dataElement = dataNode.toElement();
 
                     QString type = dataElement.attribute(Attribute::Type);
-                    if(type == Value::Phone)
+                    if(type == Channel::Phone)
                         data.setPhone(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
-                    else if(type == Value::Email)
+                    else if(type == Channel::Email)
                         data.setEmail(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
-                    else if(type == Value::Skype)
+                    else if(type == Channel::Skype)
                         data.setSkype(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
-                    else if(type == Value::Site)
+                    else if(type == Channel::Site)
                         data.setSite(dataElement.attribute(Attribute::Subtype),
                                                 dataElement.attribute(Attribute::Value));
                     dataNode = dataNode.nextSibling();
@@ -295,11 +295,11 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     int countAddresses = data.countAddresses();
     QDomElement address = record.firstChildElement(Tag::Addresses).firstChildElement(Tag::Data);
     for(int addressId = 0; addressId < countAddresses; ++addressId) {
-        address.setAttribute(Attribute::Country,data.country(addressId));
-        address.setAttribute(Attribute::City,data.city(addressId));
-        address.setAttribute(Attribute::Street,data.street(addressId));
-        address.setAttribute(Attribute::Home,data.home(addressId));
-        address.setAttribute(Attribute::Apartment,data.apartment(addressId));
+        address.setAttribute(Address::Country,data.country(addressId));
+        address.setAttribute(Address::City,data.city(addressId));
+        address.setAttribute(Address::Street,data.street(addressId));
+        address.setAttribute(Address::Home,data.home(addressId));
+        address.setAttribute(Address::Apartment,data.apartment(addressId));
         address = address.nextSiblingElement(Tag::Data);
     }
 
@@ -308,7 +308,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     QList<QString> phones = data.phones();
     QList<QString> phoneTypes = data.phoneTypes();
     for(int id = 0; id < data.countPhones(); ++id) {
-        communication.setAttribute(Attribute::Type,Value::Phone);
+        communication.setAttribute(Attribute::Type,Channel::Phone);
         communication.setAttribute(Attribute::Subtype,phoneTypes.at(id));
         communication.setAttribute(Attribute::Value,phones.at(id));
         communication = communication.nextSiblingElement(Tag::Data);
@@ -316,7 +316,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     QList<QString> emails = data.emails();
     QList<QString> emailTypes = data.emailTypes();
     for(int id = 0; id < data.countEmails(); ++id) {
-        communication.setAttribute(Attribute::Type,Value::Email);
+        communication.setAttribute(Attribute::Type,Channel::Email);
         communication.setAttribute(Attribute::Subtype,emailTypes.at(id));
         communication.setAttribute(Attribute::Value,emails.at(id));
         communication = communication.nextSiblingElement(Tag::Data);
@@ -324,7 +324,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     QList<QString> skypes = data.skypes();
     QList<QString> skypeTypes = data.skypeTypes();
     for(int id = 0; id < data.countSkypes(); ++id) {
-        communication.setAttribute(Attribute::Type,Value::Skype);
+        communication.setAttribute(Attribute::Type,Channel::Skype);
         communication.setAttribute(Attribute::Subtype,skypeTypes.at(id));
         communication.setAttribute(Attribute::Value,skypes.at(id));
         communication = communication.nextSiblingElement(Tag::Data);
@@ -332,7 +332,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     QList<QString> sites = data.sites();
     QList<QString> siteTypes = data.siteTypes();
     for(int id = 0; id < data.countSites(); ++id) {
-        communication.setAttribute(Attribute::Type,Value::Site);
+        communication.setAttribute(Attribute::Type,Channel::Site);
         communication.setAttribute(Attribute::Subtype,siteTypes.at(id));
         communication.setAttribute(Attribute::Value,sites.at(id));
         communication = communication.nextSiblingElement(Tag::Data);

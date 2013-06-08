@@ -5,7 +5,7 @@
 			<data country="" city="" street="" home="" apartment=""/>
 		</addresses>
 		<channels>
-			<data type="phone\email\skype\site" subtype="" value=""/>
+			<data type="Phone\Email\Skype\Site" subtype="" value=""/>
 		</channels>
 		<organizations>
 			<data name="" department="" post="" address="" phone="" dateIn="" dateOut=""/>

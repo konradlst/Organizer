@@ -434,23 +434,23 @@ void ContactListView::textChanged(QString text)
     else if(send == ui->leOtherName)
         emit dataChanged(text, Attribute::OtherName, ui->lwContactList->currentRow());
     else if(send == ui->leCountry)
-        emit dataChanged(text, Attribute::Country, ui->lwContactList->currentRow());
+        emit dataChanged(text, Address::Country, ui->lwContactList->currentRow());
     else if(send == ui->leCity)
-        emit dataChanged(text, Attribute::City, ui->lwContactList->currentRow());
+        emit dataChanged(text, Address::City, ui->lwContactList->currentRow());
     else if(send == ui->leStreet)
-        emit dataChanged(text, Attribute::Street, ui->lwContactList->currentRow());
+        emit dataChanged(text, Address::Street, ui->lwContactList->currentRow());
     else if(send == ui->leHome)
-        emit dataChanged(text, Attribute::Home, ui->lwContactList->currentRow());
+        emit dataChanged(text, Address::Home, ui->lwContactList->currentRow());
     else if(send == ui->leApartment)
-        emit dataChanged(text, Attribute::Apartment, ui->lwContactList->currentRow());
+        emit dataChanged(text, Address::Apartment, ui->lwContactList->currentRow());
     else if(send == ui->lePhone)
-        emit dataChanged(text, Value::Phone, ui->lwContactList->currentRow());
+        emit dataChanged(text, Channel::Phone, ui->lwContactList->currentRow());
     else if(send == ui->leEmail)
-        emit dataChanged(text, Value::Email, ui->lwContactList->currentRow());
+        emit dataChanged(text, Channel::Email, ui->lwContactList->currentRow());
     else if(send == ui->leSkype)
-        emit dataChanged(text, Value::Skype, ui->lwContactList->currentRow());
+        emit dataChanged(text, Channel::Skype, ui->lwContactList->currentRow());
     else if(send == ui->leSite)
-        emit dataChanged(text, Value::Site, ui->lwContactList->currentRow());
+        emit dataChanged(text, Channel::Site, ui->lwContactList->currentRow());
     else if(send == ui->leNameCompany)
         emit dataChanged(text, Attribute::NameOrganization, ui->lwContactList->currentRow());
     else if(send == ui->lePhoneCompany)

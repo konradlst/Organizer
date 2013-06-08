@@ -30,10 +30,10 @@ ContactData::ContactData() :
     company.dateIn = QDate::currentDate();
     company.dateOut = QDate::currentDate();
     m_companies->append(company);
-    m_phones->insert(Value::Phone,QString());
-    m_emails->insert(Value::Email,QString());
-    m_skypes->insert(Value::Skype,QString());
-    m_sites->insert(Value::Site,QString());
+    m_phones->insert(Channel::Phone,QString());
+    m_emails->insert(Channel::Email,QString());
+    m_skypes->insert(Channel::Skype,QString());
+    m_sites->insert(Channel::Site,QString());
 }
 
 QString ContactData::alias() const
@@ -248,13 +248,13 @@ int ContactData::countSites() const
 
 bool ContactData::isExistChannel(const QString type, const QString &key) const
 {
-    if(type == Value::Phone)
+    if(type == Channel::Phone)
         return m_phones->contains(key);
-    else if(type == Value::Email)
+    else if(type == Channel::Email)
         return m_emails->contains(key);
-    else if(type == Value::Skype)
+    else if(type == Channel::Skype)
         return m_skypes->contains(key);
-    else if(type == Value::Site)
+    else if(type == Channel::Site)
         return m_sites->contains(key);
     else
         return false;
@@ -451,29 +451,29 @@ void ContactData::setDateOut(const int index, const QString &data)
 
 void ContactData::setPhone(const QString &type, const QString &value)
 {
-    if(m_phones->contains(Value::Phone))
-        m_phones->remove(Value::Phone);
+    if(m_phones->contains(Channel::Phone))
+        m_phones->remove(Channel::Phone);
     m_phones->insert(type,value);
 }
 
 void ContactData::setEmail(const QString &type, const QString &value)
 {
-    if(m_emails->contains(Value::Email))
-        m_emails->remove(Value::Email);
+    if(m_emails->contains(Channel::Email))
+        m_emails->remove(Channel::Email);
     m_emails->insert(type,value);
 }
 
 void ContactData::setSkype(const QString &type, const QString &value)
 {
-    if(m_skypes->contains(Value::Skype))
-        m_skypes->remove(Value::Skype);
+    if(m_skypes->contains(Channel::Skype))
+        m_skypes->remove(Channel::Skype);
     m_skypes->insert(type,value);
 }
 
 void ContactData::setSite(const QString &type, const QString &value)
 {
-    if(m_sites->contains(Value::Site))
-        m_sites->remove(Value::Site);
+    if(m_sites->contains(Channel::Site))
+        m_sites->remove(Channel::Site);
     m_sites->insert(type,value);
 }
 }

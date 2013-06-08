@@ -148,19 +148,19 @@ void DriverSqlite::contactDataToSql(QSqlQuery &query, const Data::ContactData *c
                             QString::number(i+1));
 
     QString strInsertPhone = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Value::Phone, MAIN,
+                                    Channel::Phone, MAIN,
                                     contact->phones().at(0), USER,
                                     QString::number(i+1));
     QString strInsertEmail = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Value::Email, MAIN,
+                                    Channel::Email, MAIN,
                                     contact->emails().at(0), USER,
                                     QString::number(i+1));
     QString strInsertSkype = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Value::Skype, MAIN,
+                                    Channel::Skype, MAIN,
                                     contact->skypes().at(0), USER,
                                     QString::number(i+1));
     QString strInsertSite = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Value::Site, MAIN,
+                                    Channel::Site, MAIN,
                                     contact->sites().at(0), USER,
                                     QString::number(i+1));
 
@@ -188,11 +188,11 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, const QSqlRecord &re
     tempQuery.exec(QUERY_SELECT_FULL_2.arg(Table::Addresses, USER, QString::number(index)));
     tempRecord = tempQuery.record();
     while (tempQuery.next()) {
-        contact->setCountry(0, tempQuery.value(tempRecord.indexOf(Attribute::Country)).toString());
-        contact->setCity(0, tempQuery.value(tempRecord.indexOf(Attribute::City)).toString());
-        contact->setStreet(0, tempQuery.value(tempRecord.indexOf(Attribute::Street)).toString());
-        contact->setHome(0, tempQuery.value(tempRecord.indexOf(Attribute::Home)).toString());
-        contact->setApartment(0, tempQuery.value(tempRecord.indexOf(Attribute::Apartment)).toString());
+        contact->setCountry(0, tempQuery.value(tempRecord.indexOf(Address::Country)).toString());
+        contact->setCity(0, tempQuery.value(tempRecord.indexOf(Address::City)).toString());
+        contact->setStreet(0, tempQuery.value(tempRecord.indexOf(Address::Street)).toString());
+        contact->setHome(0, tempQuery.value(tempRecord.indexOf(Address::Home)).toString());
+        contact->setApartment(0, tempQuery.value(tempRecord.indexOf(Address::Apartment)).toString());
     }
 
     tempQuery.clear();
@@ -214,13 +214,13 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, const QSqlRecord &re
     while (tempQuery.next()) {
         QString format = tempQuery.value(tempRecord.indexOf(FORMAT)).toString();
         QString value = tempQuery.value(tempRecord.indexOf(VALUE)).toString();
-        if(format == Value::Phone)
+        if(format == Channel::Phone)
             contact->setPhone(MAIN, value);
-        else if(format == Value::Email)
+        else if(format == Channel::Email)
             contact->setEmail(MAIN, value);
-        else if(format == Value::Skype)
+        else if(format == Channel::Skype)
             contact->setSkype(MAIN, value);
-        else if(format == Value::Site)
+        else if(format == Channel::Site)
             contact->setSite(MAIN, value);
     }
 }

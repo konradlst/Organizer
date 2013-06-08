@@ -1,16 +1,14 @@
 #include <QLayout>
 #include <QFormLayout>
-#include <QTableWidget>
+#include <QTabWidget>
 #include <QPushButton>
-#include <QLabel>
-#include <QLineEdit>
 #include <QDateEdit>
 #include "contactView.h"
 
 ContactView::ContactView(QWidget *parent) :
     QWidget(parent),
     m_mainLay(new QVBoxLayout),
-    m_property(new QTableWidget),
+    m_property(new QTabWidget),
     m_userPic(new QLabel),
     m_setUserPic(new QPushButton("...")),
     m_alias(new QLineEdit),
@@ -39,14 +37,20 @@ void ContactView::createGrid()
     gridLay->addWidget(m_setUserPic, 0, 0, 0, 0, Qt::AlignTop | Qt::AlignLeft);
 
     QFormLayout *formLay = new QFormLayout;
-    formLay->addRow("Alias :", m_alias);
-    formLay->addRow("Name :", m_name);
-    formLay->addRow("SurName :", m_surName);
-    formLay->addRow("OtherName :", m_otherName);
-    formLay->addRow("Birthday :", m_birthday);
+    formLay->addRow(Attribute::Alias, m_alias);
+    formLay->addRow(Attribute::Name, m_name);
+    formLay->addRow(Attribute::SurName, m_surName);
+    formLay->addRow(Attribute::OtherName, m_otherName);
+    formLay->addRow(Attribute::Birthday, m_birthday);
 
     hLay->addLayout(gridLay);
     hLay->addLayout(formLay);
+
+    QWidget *address = new QWidget;
+    QFormLayout *addressLay = new QFormLayout;
+    m_property->addTab(address, Attribute::Address);
+    address->setLayout(addressLay);
+
 
     m_mainLay->addLayout(hLay);
     m_mainLay->addWidget(m_property);
