@@ -48,9 +48,9 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
 {
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->hLayoutMain);
-    ui->gbAddress->setLayout(ui->gLayAddress);
-    ui->gbChannels->setLayout(ui->gLayChannels);
-    ui->gbCompany->setLayout(ui->gLayCompany);
+    ui->tabAddress->setLayout(ui->gLayAddress);
+    ui->tabChannels->setLayout(ui->gLayChannels);
+    ui->tabCompany->setLayout(ui->gLayCompany);
 //    ui->menuBar->hide();
     setEditable(false);
     setDefaultSettings();
@@ -111,9 +111,9 @@ void ContactListView::setEditable(bool flag)
     ui->leSurName->setEnabled(flag);
     ui->leOtherName->setEnabled(flag);
     ui->deBirthday->setEnabled(flag);
-    ui->gbAddress->setEnabled(flag);
-    ui->gbChannels->setEnabled(flag);
-    ui->gbCompany->setEnabled(flag);
+    ui->tabAddress->setEnabled(flag);
+    ui->tabChannels->setEnabled(flag);
+    ui->tabCompany->setEnabled(flag);
 }
 
 void ContactListView::setContactData(const Data::ContactData *contact)
