@@ -7,15 +7,9 @@ FinanceManagerView::FinanceManagerView(QWidget *parent) :
 {
     ui->setupUi(this);
     centralWidget()->setLayout(ui->mainLayout);
-    ui->tab_3->setLayout(ui->vlayPlanning);
-    ui->tab->setLayout(ui->vLayStatistic);
+    ui->tabLog->setLayout(ui->vLayStatistic);
     ui->gbAccounts->setLayout(ui->fLayAccounts);
-    ui->gbCurrentMounth->setLayout(ui->fLayCurrentMounth);
-    ui->gbToday->setLayout(ui->fLayToday);
-
-
     ui->deCurrentDate->setDate(QDate::currentDate());
-    ui->deCurrentDayOfWeek->setDate(QDate::currentDate());
 }
 
 FinanceManagerView::~FinanceManagerView()

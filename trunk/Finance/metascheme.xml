@@ -1,0 +1,109 @@
+<!DOCTYPE cg>
+<cg_db_scheme version="0.1">
+    <tables>
+        <table name="CG_FINANCEACCOUNTS">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="number" type="VARCHAR(20)" unq="1"/>
+            <field name="status" type="BOOLEAN" nullable="0"/>
+            <field name="type" type="TINYINT" nullable="0"/>
+            <field name="name" type="VARCHAR(100)" unq="1" nullable="0"/>
+            <field name="value" type="INTEGER"/>
+        </table>
+        <table name="CG_FINANCELOG">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="timestamp" type="DATATIME" unq="1"/>
+            <field name="operation" type="VARCHAR(100)"/>
+            <field name="value" type="INTEGER" nullable="0"/>
+            <field name="sendfrom" type="VARCHAR(20)"/>
+            <field name="sendto" type="VARCHAR(20)"/>
+            <field name="comment" type="VARCHAR(255)"/>
+        </table>
+        <table name="CG_TIME">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="created" type="DATA"/>
+            <field name="type" type="VARCHAR(30)"/>
+            <field name="duration" type="TIME"/>
+        </table>
+        <table name="CG_BOOK">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="created" type="DATA"/>
+            <field name="author" type="VARCHAR(50)"/>
+            <field name="name" type="VARCHAR(50)"/>
+            <field name="section" type="VARCHAR(50)"/>
+            <field name="format" type="VARCHAR(50)"/>
+            <field name="pages" type="VARCHAR(50)"/>
+            <field name="year" type="INTEGER"/>
+            <field name="ISBN" type="VARCHAR(50)"/>
+            <field name="publishing" type="VARCHAR(50)"/>
+            <field name="count" type="INTEGER"/>
+        </table>
+        <table name="CG_SPORT">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="created" type="DATA"/>
+            <field name="type" type="VARCHAR(30)"/>
+            <field name="value" type="INTEGER"/>
+            <field name="duration" type="TIME"/>
+        </table>
+        <table name="CG_DEAL">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="created" type="DATA"/>
+            <field name="deadline" type="DATA"/>
+            <field name="description" type="VARCHAR(127)"/>
+            <field name="price" type="INTEGER"/>
+            <field name="duration" type="TIME"/>
+        </table>
+        <!-- from contactList -->
+        <table name="CG_CONTACTS">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="alias" type="VARCHAR(255)" unq="1" nullable="0"/>
+            <field name="name" type="VARCHAR(100)"/>
+            <field name="lastName" type="VARCHAR(100)"/>
+            <field name="otherName" type="VARCHAR(100)"/>
+            <field name="birthday" type="DATA"/>
+        </table>
+        <table name="CG_COMPANIES">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="name" type="VARCHAR(100)" unq="1"/>
+            <field name="phone" type="VARCHAR(100)"/>
+            <field name="department" type="VARCHAR(100)"/>
+            <field name="post" type="VARCHAR(100)"/>
+            <field name="address" type="VARCHAR(255)"/>
+            <field name="dateIn" type="DATA"/>
+            <field name="dateOut" type="DATA"/>
+        </table>
+        <table name="CG_ADDRESSES">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="country" type="VARCHAR(100)" nullable="0"/>
+            <field name="city" type="VARCHAR(100)"/>
+            <field name="street" type="VARCHAR(100)"/>
+            <field name="home" type="VARCHAR(100)"/>
+            <field name="apartment" type="VARCHAR(100)"/>
+            <field name="type" type="VARCHAR(100)"/>
+        </table>
+        <table name="CG_CHANNELS">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="format" type="VARCHAR(100)" nullable="0"/>
+            <field name="title" type="VARCHAR(100)"/>
+            <field name="value" type="VARCHAR(100)"/>
+            <field name="type" type="VARCHAR(100)"/>
+        </table>
+        <!-- end from contactList -->
+    </tables>
+    <values>
+        <table name="CG_FINANCEACCOUNTS">
+            <field name="number" value="1234567890"/>
+            <field name="status" value="1"/>
+            <field name="type" value="3"/>
+            <field name="name" value="vtb debet"/>
+            <field name="value" value="5000"/>
+        </table>
+        <table name="CG_FINANCELOG">
+            <field name="timestamp" value="2013.07.25 15:01"/>
+            <field name="operation" value="1"/>
+            <field name="value" value="3000"/>
+            <field name="sendfrom" value="vtb debet"/>
+            <field name="sendto" value="rsb card"/>
+            <field name="comment" value="test"/>
+        </table>
+    </values>
+</cg_db_scheme>
