@@ -5,7 +5,6 @@
 
 QT_BEGIN_NAMESPACE
 class QDialogButtonBox;
-class QHBoxLayout;
 class QPushButton;
 class QSqlTableModel;
 class QTableView;
@@ -24,19 +23,18 @@ private slots:
     void removeRecord();
 
 private:
-    QWidget *centralWidget;
-    QTabWidget *tabWidget;
-    QWidget *tabLog;
-    QWidget *m_tabMain;
-    QTableView *logView;
-    QTableView *m_mainView;
-    QPushButton *addButton;
-    QPushButton *submitButton;
-    QPushButton *revertButton;
-    QPushButton *m_btnRemove;
-    QDialogButtonBox *buttonBox;
-    QSqlTableModel *logModel;
-    QSqlTableModel *m_accountModel;
+    QWidget             *centralWidget;
+    QTabWidget          *m_tabWidget;
+    QTableView          *m_logView;
+    QTableView          *m_accountView;
+    QTableView          *m_timeView;
+//    QSqlTableModel      *m_timeModel;
+    QHash<QString, QSqlTableModel *> *m_models;
+    QPushButton         *m_btnAdd;
+    QPushButton         *m_btnSubmit;
+    QPushButton         *m_btnRevert;
+    QPushButton         *m_btnRemove;
+    QDialogButtonBox    *m_btnBox;
 
     void initModel();
     void createInterface();

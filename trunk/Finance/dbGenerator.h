@@ -15,7 +15,7 @@ private:
     QString &m_pathToDb;
 
     bool loadScheme(QDomElement &scheme);
-    void parseField(const QDomElement &fieldElement, QString &data);
+    void parseField(const QDomElement &field, QString &data);
     bool createTable(QString &tableName, QString &fieldsData);
 };
 

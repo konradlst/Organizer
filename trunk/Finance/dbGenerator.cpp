@@ -21,18 +21,27 @@ const QString CREATE = QString("CREATE TABLE %1 (%2);");
 const QString MSG_INSERT = QString("Added new data in '%1'");
 
 const QString VERSION = QString("0.1");
+QString DB_NAME = QString("concierge.sqlite");
+
+QString setQuotes(QString str)
+{
+    return QString("'%1'").arg(str);
+}
 }
 
 namespace Scheme {
 const QString tagRoot = QString("cg_db_scheme");
 const QString tagTables = QString("tables");
+const QString tagValues = QString("values");
 const QString tagTable = QString("table");
 const QString attrVersion = QString("version");
 const QString attrName = QString("name");
+const QString attrValue = QString("value");
 const QString attrType = QString("type");
 const QString attrPk = QString("pk");
 const QString attrNullable = QString("nullable");
 const QString attrUnq = QString("unq");
+const QString attrDefault = QString("default");
 }
 
 dbGenerator::dbGenerator(QString &metascheme, QString &pathToDb) :
@@ -44,7 +53,7 @@ dbGenerator::dbGenerator(QString &metascheme, QString &pathToDb) :
 bool dbGenerator::generate()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("concierge.sqlite");
+    db.setDatabaseName(DB_NAME);
     if (!db.open())
     {
         ERROR_MESSAGE_CANNOT_OPEN;
@@ -55,7 +64,7 @@ bool dbGenerator::generate()
     if(!loadScheme(scheme))
         return false;
 
-    QDomNode tablesNode = scheme.firstChild();
+    QDomNode tablesNode = scheme.firstChildElement(Scheme::tagTables);
     if(!tablesNode.isNull())
     {
         QDomNode tableNode = tablesNode.firstChild();
@@ -83,16 +92,38 @@ bool dbGenerator::generate()
     }
 
     //test data
-    QSqlQuery query;
-    if(query.exec(INSERT.arg("CG_FINANCEACCOUNTS")
-               .arg("number,status,type,name,value")
-               .arg("'1234567890','1','3','vtb debet','5000'")))
-        qDebug() << MSG_INSERT.arg("CG_FINANCEACCOUNTS");
+    tablesNode = scheme.firstChildElement(Scheme::tagValues);
+    if(!tablesNode.isNull())
+    {
+        QDomNode tableNode = tablesNode.firstChild();
+        // Read every table in scheme
+        while(!tableNode.isNull())
+        {
+            QDomNode fieldNode = tableNode.firstChild();
+            QStringList fieldsName;
+            QStringList fieldsValue;
+            // Read every field in table
+            while(!fieldNode.isNull())
+            {
+                QDomElement fieldElement = fieldNode.toElement();
+                fieldsName << setQuotes(fieldElement.attribute(Scheme::attrName));
+                fieldsValue << setQuotes(fieldElement.attribute(Scheme::attrValue));
 
-    if(query.exec(INSERT.arg("CG_FINANCELOG")
-               .arg("timestamp,operation,value,sendfrom,sendto,comment")
-               .arg("'2013.07.25 15:01','1','3000','vtb debet','rsb card','test'")))
-        qDebug() << MSG_INSERT.arg("CG_FINANCELOG");
+                fieldNode = fieldNode.nextSibling();
+            }
+            QString tableName = tableNode.toElement().attribute(Scheme::attrName);
+
+            QString insertQuery = INSERT.arg(tableName)
+                    .arg(fieldsName.join(", "))
+                    .arg(fieldsValue.join(", "));
+            qDebug() << "insertQuery:" << insertQuery;
+            QSqlQuery query;
+            if(query.exec(insertQuery))
+                qDebug() << MSG_INSERT.arg(tableName);
+
+            tableNode = tableNode.nextSibling();
+        }
+    }
 
     return true;
 }
@@ -127,24 +158,33 @@ bool dbGenerator::loadScheme(QDomElement &scheme)
     return true;
 }
 
-void dbGenerator::parseField(const QDomElement &fieldElement, QString &data)
+void dbGenerator::parseField(const QDomElement &field, QString &data)
 {
-    data.append(fieldElement.attribute(Scheme::attrName));
-    data.append(" ");
-    data.append(fieldElement.attribute(Scheme::attrType));
+    QStringList d;
+    d << field.attribute(Scheme::attrName)
+      << " "
+      << field.attribute(Scheme::attrType);
 
-    if(fieldElement.hasAttribute(Scheme::attrPk) && fieldElement.attribute(Scheme::attrPk) == "1")
+    if(field.hasAttribute(Scheme::attrPk) &&
+       field.attribute(Scheme::attrPk) == "1")
     {
-        data.append(" PRIMARY KEY");
+        d << " PRIMARY KEY";
     }
-    if(fieldElement.hasAttribute(Scheme::attrNullable) && fieldElement.attribute(Scheme::attrNullable) == "0")
+    if(field.hasAttribute(Scheme::attrNullable) &&
+       field.attribute(Scheme::attrNullable) == "0")
     {
-        data.append(" NOT NULL");
+        d << " NOT NULL";
     }
-    if(fieldElement.hasAttribute(Scheme::attrUnq) && fieldElement.attribute(Scheme::attrUnq) == "1")
+    if(field.hasAttribute(Scheme::attrUnq) &&
+       field.attribute(Scheme::attrUnq) == "1")
     {
-        data.append(" UNIQUE");
+        d << " UNIQUE";
     }
+    if(field.hasAttribute(Scheme::attrDefault))
+    {
+        d << QString(" DEFAULT %1").arg(field.attribute(Scheme::attrDefault));
+    }
+    data.append(d.join(""));
 }
 
 bool dbGenerator::createTable(QString &tableName, QString &fieldsData)

@@ -4,29 +4,29 @@
         <table name="CG_FINANCEACCOUNTS">
             <field name="id" type="INTEGER" pk="1"/>
             <field name="number" type="VARCHAR(20)" unq="1"/>
-            <field name="status" type="BOOLEAN" nullable="0"/>
-            <field name="type" type="TINYINT" nullable="0"/>
-            <field name="name" type="VARCHAR(100)" unq="1" nullable="0"/>
+            <field name="status" type="BOOLEAN" nullable="0" default="'0'"/>
+            <field name="type" type="TINYINT" nullable="0" default="'0'"/>
+            <field name="name" type="VARCHAR(100)" unq="1" nullable="0" default="' '"/>
             <field name="value" type="INTEGER"/>
         </table>
         <table name="CG_FINANCELOG">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="timestamp" type="DATATIME" unq="1"/>
+            <field name="timestamp" type="TIMESTAMP" unq="1" default="(datetime('now','localtime'))"/>
             <field name="operation" type="VARCHAR(100)"/>
-            <field name="value" type="INTEGER" nullable="0"/>
+            <field name="value" type="INTEGER" nullable="0" default="'0'"/>
             <field name="sendfrom" type="VARCHAR(20)"/>
             <field name="sendto" type="VARCHAR(20)"/>
             <field name="comment" type="VARCHAR(255)"/>
         </table>
         <table name="CG_TIME">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="created" type="DATA"/>
+            <field name="created" type="DATE"/>
             <field name="type" type="VARCHAR(30)"/>
             <field name="duration" type="TIME"/>
         </table>
         <table name="CG_BOOK">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="created" type="DATA"/>
+            <field name="created" type="DATE"/>
             <field name="author" type="VARCHAR(50)"/>
             <field name="name" type="VARCHAR(50)"/>
             <field name="section" type="VARCHAR(50)"/>
@@ -39,27 +39,27 @@
         </table>
         <table name="CG_SPORT">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="created" type="DATA"/>
+            <field name="created" type="DATE"/>
             <field name="type" type="VARCHAR(30)"/>
             <field name="value" type="INTEGER"/>
             <field name="duration" type="TIME"/>
         </table>
         <table name="CG_DEAL">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="created" type="DATA"/>
-            <field name="deadline" type="DATA"/>
+            <field name="created" type="DATE"/>
+            <field name="deadline" type="DATE"/>
             <field name="description" type="VARCHAR(127)"/>
             <field name="price" type="INTEGER"/>
             <field name="duration" type="TIME"/>
         </table>
-        <!-- from contactList -->
+
         <table name="CG_CONTACTS">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="alias" type="VARCHAR(255)" unq="1" nullable="0"/>
+            <field name="alias" type="VARCHAR(255)" unq="1" nullable="0" default="'alias'"/>/>
             <field name="name" type="VARCHAR(100)"/>
             <field name="lastName" type="VARCHAR(100)"/>
             <field name="otherName" type="VARCHAR(100)"/>
-            <field name="birthday" type="DATA"/>
+            <field name="birthday" type="DATE"/>
         </table>
         <table name="CG_COMPANIES">
             <field name="id" type="INTEGER" pk="1"/>
@@ -68,8 +68,8 @@
             <field name="department" type="VARCHAR(100)"/>
             <field name="post" type="VARCHAR(100)"/>
             <field name="address" type="VARCHAR(255)"/>
-            <field name="dateIn" type="DATA"/>
-            <field name="dateOut" type="DATA"/>
+            <field name="dateIn" type="DATE"/>
+            <field name="dateOut" type="DATE"/>
         </table>
         <table name="CG_ADDRESSES">
             <field name="id" type="INTEGER" pk="1"/>
@@ -87,7 +87,6 @@
             <field name="value" type="VARCHAR(100)"/>
             <field name="type" type="VARCHAR(100)"/>
         </table>
-        <!-- end from contactList -->
     </tables>
     <values>
         <table name="CG_FINANCEACCOUNTS">
@@ -104,6 +103,11 @@
             <field name="sendfrom" value="vtb debet"/>
             <field name="sendto" value="rsb card"/>
             <field name="comment" value="test"/>
+        </table>
+        <table name="CG_TIME">
+            <field name="created" value="28.07.2013"/>
+            <field name="type" value="sleep"/>
+            <field name="duration" value="10:00"/>
         </table>
     </values>
 </cg_db_scheme>
