@@ -9,22 +9,15 @@ const QString FORMAT("format");
 const QString VALUE("value");
 const QString ID("id");
 
-namespace Table {
-const QString Contacts("Contacts");
-const QString Addresses("Addresses");
-const QString Companies("Companies");
-const QString Channels("Channels");
-}
-
 const QString QUERY_CREATE_TABLE_CONTACTS("CREATE TABLE Contacts ("
-                                                  "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                                                  "id INTEGER PRIMARY KEY, "
                                                   "alias VARCHAR(255) NOT NULL, "
                                                   "name VARCHAR(255), "
                                                   "surName VARCHAR(255), "
                                                   "otherName VARCHAR(255), "
                                                   "birthday VARCHAR(255));");
 const QString QUERY_CREATE_TABLE_COMPANIES("CREATE TABLE Companies ("
-                                                   "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                                                   "id INTEGER PRIMARY KEY, "
                                                    "name VARCHAR(255) NOT NULL, "
                                                    "phone VARCHAR(255), "
                                                    "department VARCHAR(255), "
@@ -34,7 +27,7 @@ const QString QUERY_CREATE_TABLE_COMPANIES("CREATE TABLE Companies ("
                                                    "dateOut VARCHAR(255), "
                                                    "ownerId INTEGER);");
 const QString QUERY_CREATE_TABLE_ADDRESSES("CREATE TABLE Addresses ("
-                                                  "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                                                  "id INTEGER PRIMARY KEY, "
                                                   "country VARCHAR(255) NOT NULL, "
                                                   "city VARCHAR(255), "
                                                   "street VARCHAR(255), "
@@ -43,24 +36,35 @@ const QString QUERY_CREATE_TABLE_ADDRESSES("CREATE TABLE Addresses ("
                                                   "type VARCHAR(255), "
                                                   "ownerId INTEGER);");
 const QString QUERY_CREATE_TABLE_CHANNELS("CREATE TABLE Channels ("
-                                                  "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                                                  "id INTEGER PRIMARY KEY, "
                                                   "format VARCHAR(255) NOT NULL, "
                                                   "title VARCHAR(255), "
                                                   "value VARCHAR(255), "
                                                   "type VARCHAR(255), "
                                                   "ownerId INTEGER);");
 
-const QString QUERY_INSERT_TO_CONTACTS("INSERT INTO Contacts(alias, name, surName, otherName, birthday) "
-                                        "VALUES ('%1', '%2', '%3', '%4', '%5');");
-const QString QUERY_INSERT_TO_COMPANIES("INSERT INTO Companies(name, phone, department, post, address, dateIn, dateOut, ownerId) "
-                                        "VALUES ('%1', '%2', '%3', '%4', '%5', '%6', '%7', '%8');");
-const QString QUERY_INSERT_TO_ADDRESSES("INSERT INTO Addresses(country, city, street, home, apartment, type, ownerId) "
-                                        "VALUES ('%1', '%2', '%3', '%4', '%5', '%6', '%7');");
-const QString QUERY_INSERT_TO_CHANNELS("INSERT INTO Channels(format, title, value, type, ownerId) "
-                                        "VALUES ('%1', '%2', '%3', '%4', '%5');");
+const QString INSERT_CONTACTS("INSERT INTO Contacts(alias, name, surName, otherName, birthday) VALUES (%1);");
+const QString INSERT_COMPANIES("INSERT INTO Companies(name, phone, department, post, address, dateIn, dateOut, ownerId) VALUES (%1);");
+const QString INSERT_ADDRESSES("INSERT INTO Addresses(country, city, street, home, apartment, type, ownerId) VALUES (%1);");
+const QString INSERT_CHANNELS("INSERT INTO Channels(format, title, value, type, ownerId) VALUES (%1);");
+
 const QString QUERY_SELECT_SHORT("SELECT * FROM %1");
 const QString QUERY_SELECT_FULL("SELECT * FROM %1 WHERE ownerId = '%2'");
 const QString QUERY_SELECT_FULL_2("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
+
+QString quotesValue(QStringList list)
+{
+    foreach (QString str, list)
+        str = QString("'%1'").arg(str);
+    return list.join(", ");
+}
+}
+
+namespace Table {
+const QString Contacts("Contacts");
+const QString Addresses("Addresses");
+const QString Companies("Companies");
+const QString Channels("Channels");
 }
 
 DriverSqlite::DriverSqlite()
@@ -121,56 +125,43 @@ Data::ContactData *DriverSqlite::loadContact(const QString &)
 }
 
 void DriverSqlite::contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,
-                                 const int i) const
+                                    const int i) const
 {
-    QString strInsertToContacts = QUERY_INSERT_TO_CONTACTS.arg(
-                            contact->alias(),
-                            contact->name(),
-                            contact->surName(),
-                            contact->otherName(),
-                            contact->birthdayAsString());
-    QString strInsertToCompanies = QUERY_INSERT_TO_COMPANIES.arg(
-                            contact->companyName(),
-                            contact->companyPhone(),
-                            contact->department(),
-                            contact->post(),
-                            contact->companyAddress(),
-                            contact->dateInAsString(),
-                            contact->dateOutAsString(),
-                            QString::number(i+1));
-    QString strInsertToAddresses = QUERY_INSERT_TO_ADDRESSES.arg(
-                            contact->country(),
-                            contact->city(),
-                            contact->street(),
-                            contact->home(),
-                            contact->apartment(),
-                            USER,
-                            QString::number(i+1));
+    QString index = QString::number(i+1);
 
-    QString strInsertPhone = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Channel::Phone, MAIN,
-                                    contact->phones().at(0), USER,
-                                    QString::number(i+1));
-    QString strInsertEmail = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Channel::Email, MAIN,
-                                    contact->emails().at(0), USER,
-                                    QString::number(i+1));
-    QString strInsertSkype = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Channel::Skype, MAIN,
-                                    contact->skypes().at(0), USER,
-                                    QString::number(i+1));
-    QString strInsertSite = QUERY_INSERT_TO_CHANNELS.arg(
-                                    Channel::Site, MAIN,
-                                    contact->sites().at(0), USER,
-                                    QString::number(i+1));
+    QStringList contactVal = contact->values("contact");
+    QStringList companyVal = contact->values("company");
+    companyVal << index;
+    QStringList addressVal = contact->values("address");
+    addressVal << USER << index;
 
-    query.exec(strInsertToContacts);
-    query.exec(strInsertToCompanies);
-    query.exec(strInsertToAddresses);
-    query.exec(strInsertPhone);
-    query.exec(strInsertEmail);
-    query.exec(strInsertSkype);
-    query.exec(strInsertSite);
+    QStringList phoneVal;
+    phoneVal << Channel::Phone << MAIN
+             << contact->phones().at(0)
+             << USER << index;
+
+    QStringList emailVal;
+    phoneVal << Channel::Email << MAIN
+             << contact->emails().at(0)
+             << USER << index;
+
+    QStringList skypeVal;
+    phoneVal << Channel::Skype << MAIN
+             << contact->skypes().at(0)
+             << USER << index;
+
+    QStringList siteVal;
+    phoneVal << Channel::Site << MAIN
+             << contact->sites().at(0)
+             << USER << index;
+
+    query.exec(INSERT_CONTACTS.arg(quotesValue(contactVal)));
+    query.exec(INSERT_COMPANIES.arg(quotesValue(companyVal)));
+    query.exec(INSERT_ADDRESSES.arg(quotesValue(addressVal)));
+    query.exec(INSERT_CHANNELS.arg(quotesValue(phoneVal)));
+    query.exec(INSERT_CHANNELS.arg(quotesValue(emailVal)));
+    query.exec(INSERT_CHANNELS.arg(quotesValue(skypeVal)));
+    query.exec(INSERT_CHANNELS.arg(quotesValue(siteVal)));
 }
 
 void DriverSqlite::sqlToContactData(const QSqlQuery &query, const QSqlRecord &record, Data::ContactData *contact) const

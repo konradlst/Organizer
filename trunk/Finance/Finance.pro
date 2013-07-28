@@ -12,14 +12,15 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Finance
 TEMPLATE = app
-
+INCLUDEPATH += "../Common/dbGenerator"
 
 SOURCES += main.cpp\
         cgFinance.cpp \
-    dbGenerator.cpp
+        ../Common/dbGenerator/dbGenerator.cpp
 
-HEADERS  += cgFinance.h \
-    dbGenerator.h
+HEADERS  += \
+        cgFinance.h \
+        ../Common/dbGenerator/dbGenerator.h
 
 OTHER_FILES += \
     metascheme.xml

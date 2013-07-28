@@ -28,7 +28,6 @@ private:
     QTableView          *m_logView;
     QTableView          *m_accountView;
     QTableView          *m_timeView;
-//    QSqlTableModel      *m_timeModel;
     QHash<QString, QSqlTableModel *> *m_models;
     QPushButton         *m_btnAdd;
     QPushButton         *m_btnSubmit;

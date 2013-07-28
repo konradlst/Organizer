@@ -93,11 +93,11 @@
             <field name="number" value="1234567890"/>
             <field name="status" value="1"/>
             <field name="type" value="3"/>
-            <field name="name" value="vtb debet"/>
+            <field name="name" value="bank debet"/>
             <field name="value" value="5000"/>
         </table>
         <table name="CG_FINANCELOG">
-            <field name="timestamp" value="2013.07.25 15:01"/>
+            <field name="timestamp" value="2000.01.01 00:00:00"/>
             <field name="operation" value="1"/>
             <field name="value" value="3000"/>
             <field name="sendfrom" value="vtb debet"/>
@@ -105,7 +105,7 @@
             <field name="comment" value="test"/>
         </table>
         <table name="CG_TIME">
-            <field name="created" value="28.07.2013"/>
+            <field name="created" value="2000.01.01"/>
             <field name="type" value="sleep"/>
             <field name="duration" value="10:00"/>
         </table>

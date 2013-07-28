@@ -16,12 +16,11 @@ namespace {
 #define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT_VERSION)
 #define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(new QWidget(), ERROR, ERR_CANNOT_OPEN)
 
-const QString INSERT = QString("INSERT INTO %1(%2) VALUES(%3);");
-const QString CREATE = QString("CREATE TABLE %1 (%2);");
-const QString MSG_INSERT = QString("Added new data in '%1'");
-
-const QString VERSION = QString("0.1");
-QString DB_NAME = QString("concierge.sqlite");
+const QString QSQLITE("QSQLITE");
+const QString INSERT("INSERT INTO %1(%2) VALUES(%3);");
+const QString CREATE("CREATE TABLE %1 (%2);");
+const QString MSG_INSERT("Added new data in '%1'");
+const QString VERSION("0.1");
 
 QString setQuotes(QString str)
 {
@@ -30,18 +29,18 @@ QString setQuotes(QString str)
 }
 
 namespace Scheme {
-const QString tagRoot = QString("cg_db_scheme");
-const QString tagTables = QString("tables");
-const QString tagValues = QString("values");
-const QString tagTable = QString("table");
-const QString attrVersion = QString("version");
-const QString attrName = QString("name");
-const QString attrValue = QString("value");
-const QString attrType = QString("type");
-const QString attrPk = QString("pk");
-const QString attrNullable = QString("nullable");
-const QString attrUnq = QString("unq");
-const QString attrDefault = QString("default");
+const QString tagRoot("cg_db_scheme");
+const QString tagTables("tables");
+const QString tagValues("values");
+const QString tagTable("table");
+const QString attrVersion("version");
+const QString attrName("name");
+const QString attrValue("value");
+const QString attrType("type");
+const QString attrPk("pk");
+const QString attrNullable("nullable");
+const QString attrUnq("unq");
+const QString attrDefault("default");
 }
 
 dbGenerator::dbGenerator(QString &metascheme, QString &pathToDb) :
@@ -52,8 +51,8 @@ dbGenerator::dbGenerator(QString &metascheme, QString &pathToDb) :
 
 bool dbGenerator::generate()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(DB_NAME);
+    QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
+    db.setDatabaseName(m_pathToDb);
     if (!db.open())
     {
         ERROR_MESSAGE_CANNOT_OPEN;

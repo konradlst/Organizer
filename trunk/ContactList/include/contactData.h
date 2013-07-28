@@ -75,10 +75,13 @@ struct Company
     }
 };
 
+//FIXME !!!!!
 class ContactData
 {
 public:
     explicit ContactData();
+
+    QStringList values(QString type) const;
 
     QString alias() const;
     QString name() const;

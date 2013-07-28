@@ -36,6 +36,40 @@ ContactData::ContactData() :
     m_sites->insert(Channel::Site,QString());
 }
 
+QStringList ContactData::values(QString type) const
+{
+    QStringList list;
+    if(type == "contact")
+    {
+        list << m_alias
+             << m_name
+             << m_surName
+             << m_otherName
+             << date2String(m_birthday);
+    }
+    else if(type == "company")
+    {
+        int index = 0;
+        list << m_companies->at(index).name
+             << m_companies->at(index).phone
+             << m_companies->at(index).department
+             << m_companies->at(index).post
+             << m_companies->at(index).address
+             << date2String(m_companies->at(index).dateIn)
+             << date2String(m_companies->at(index).dateOut);
+    }
+    else if(type == "address")
+    {
+        int index = 0;
+        list << m_addresses->at(index).country
+             << m_addresses->at(index).city
+             << m_addresses->at(index).street
+             << m_addresses->at(index).home
+             << m_addresses->at(index).apartment;
+    }
+    return list;
+}
+
 QString ContactData::alias() const
 {
     return m_alias;
