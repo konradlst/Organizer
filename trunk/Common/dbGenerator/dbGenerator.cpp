@@ -59,6 +59,13 @@ bool dbGenerator::generate()
         return false;
     }
 
+    QSqlQuery query;
+    if(!db.tables().isEmpty())
+    {
+        qDebug() << QString("Database %1 already exist").arg(m_pathToDb);
+        return true;
+    }
+
     QDomElement scheme;
     if(!loadScheme(scheme))
         return false;

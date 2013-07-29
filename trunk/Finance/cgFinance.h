@@ -21,6 +21,7 @@ private slots:
     void submit();
     void addRecord();
     void removeRecord();
+    bool dbGenerate();
 
 private:
     QWidget             *centralWidget;
@@ -29,15 +30,18 @@ private:
     QTableView          *m_accountView;
     QTableView          *m_timeView;
     QHash<QString, QSqlTableModel *> *m_models;
+    QPushButton         *m_btnOpenDb;
     QPushButton         *m_btnAdd;
     QPushButton         *m_btnSubmit;
     QPushButton         *m_btnRevert;
     QPushButton         *m_btnRemove;
     QDialogButtonBox    *m_btnBox;
+    QWidget             *m_accountTab;
 
     void initModel();
     void createInterface();
-    bool dbGenerate();
+    QString openDb();
+    void createAccountTab();
 };
 
 #endif // CGFINANCE_H
