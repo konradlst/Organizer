@@ -3,6 +3,11 @@
 #include "contactListModel.h"
 #include "driverManager.h"
 
+namespace {
+const int ALIAS = 0;
+const QString CONTACT("contact");
+}
+
 ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent) :
     QWidget(parent),
     m_controller(controller),
@@ -32,7 +37,7 @@ QStringList *ContactListModel::contactList() const
 {
     QStringList *data = new QStringList();
     for(int i=0; i<m_data->size(); ++i)
-        data->append(m_data->at(i)->alias());
+        data->append(m_data->at(i)->data(CONTACT).at(ALIAS));
     return data;
 }
 
@@ -92,44 +97,39 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
 {
     Data::ContactData *contact = m_data->at(contactId);
 
-    if(key == Attribute::Alias)
-        contact->setAlias(data);
-    else if(key == Attribute::PathToUserPic)
-        contact->setPathToUserPic(data);
-    else if(key == Attribute::Name)
-        contact->setName(data);
-    else if(key == Attribute::SurName)
-        contact->setSurName(data);
-    else if(key == Attribute::OtherName)
-        contact->setOtherName(data);
-    else if(key == Address::Country)
-        contact->setCountry(0, data);
-    else if(key == Address::City)
-        contact->setCity(0, data);
-    else if(key == Address::Street)
-        contact->setStreet(0, data);
-    else if(key == Address::Home)
-        contact->setHome(0, data);
-    else if(key == Address::Apartment)
-        contact->setApartment(0, data);
-    else if(key == Attribute::NameOrganization)
-        contact->setCompanyName(0, data);
-    else if(key == Attribute::PhoneOrganization)
-        contact->setCompanyPhone(0, data);
-    else if(key == Attribute::Department)
-        contact->setDepartment(0, data);
-    else if(key == Attribute::Post)
-        contact->setPost(0, data);
-    else if(key == Attribute::AddressOrganization)
-        contact->setCompanyAddress(0, data);
-    else if(key == Channel::Phone)
-        contact->setPhone(contact->phoneTypes().at(0), data);
-    else if(key == Channel::Email)
-        contact->setEmail(contact->phoneTypes().at(0), data);
-    else if(key == Channel::Skype)
-        contact->setSkype(contact->phoneTypes().at(0), data);
-    else if(key == Channel::Site)
-        contact->setSite(contact->phoneTypes().at(0), data);
+    if(key == Attribute::Alias ||
+       key == Attribute::Name ||
+       key == Attribute::SurName ||
+       key == Attribute::OtherName ||
+       key == Attribute::Birthday ||
+       key == Attribute::PathToUserPic ||
+       key == Attribute::Comment)
+    {
+        contact->setMainData(key, data);
+    }
+    else if(key == Address::Country ||
+            key == Address::City ||
+            key == Address::Street ||
+            key == Address::Home ||
+            key == Address::Apartment)
+    {
+        contact->setAddressData(key, data);
+    }
+    else if(key == Attribute::NameOrganization ||
+            key == Attribute::Department ||
+            key == Attribute::Post ||
+            key == Attribute::AddressOrganization ||
+            key == Attribute::PhoneOrganization)
+    {
+        contact->setCompanyData(key, data);
+    }
+    else if(key == Channel::Phone ||
+            key == Channel::Email ||
+            key == Channel::Skype ||
+            key == Channel::Site)
+    {
+        contact->setChannel(key, contact->channelsTypes(Channel::Phone).at(0), data);
+    }
 }
 
 void ContactListModel::dataChanged(const QPixmap data, QString key, int contactId)
@@ -144,8 +144,7 @@ void ContactListModel::dataChanged(const QDate data, QString key, int contactId)
     Data::ContactData *contact = m_data->at(contactId);
     if(key == Attribute::Birthday)
         contact->setBirthday(data);
-    else if(key == Attribute::DateIn)
-        contact->setDateIn(0, data);
-    else if(key == Attribute::DateOut)
-        contact->setDateOut(0, data);
+    else if(key == Attribute::DateIn ||
+            key == Attribute::DateOut)
+        contact->setCompanyData(key, data);
 }

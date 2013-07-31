@@ -54,9 +54,13 @@ struct Address
     QString street;
     QString home;
     QString apartment;
-    bool isEmpty() const {
-        return country.isEmpty() && city.isEmpty() && street.isEmpty()
-               && home.isEmpty() && apartment.isEmpty();
+    bool isEmpty() const
+    {
+        return country.isEmpty() &&
+               city.isEmpty() &&
+               street.isEmpty() &&
+               home.isEmpty() &&
+               apartment.isEmpty();
     }
 };
 
@@ -69,9 +73,13 @@ struct Company
     QString phone;
     QDate dateIn;
     QDate dateOut;
-    bool isEmpty() const {
-        return name.isEmpty() && department.isEmpty() && post.isEmpty()
-               && address.isEmpty() && phone.isEmpty();
+    bool isEmpty() const
+    {
+        return name.isEmpty() &&
+               department.isEmpty() &&
+               post.isEmpty() &&
+               address.isEmpty() &&
+               phone.isEmpty();
     }
 };
 
@@ -81,97 +89,36 @@ class ContactData
 public:
     explicit ContactData();
 
-    QStringList values(QString type) const;
+    QStringList data(const QString &type, const int &index = 0) const;
+    void setMainData(const QString &type, const QString &value);
+    void setBirthday(const QDate &data);
+    void setUserPic(const QPixmap &data);
+    void setMainData(const QStringList &data);
+    void setAddressData(const QString &type, const QString &data, const int &index = 0);
+    void setAddressData(const QStringList &data, const int &index = 0);
+    void setCompanyData(const QString &type, const QString &data, const int &index = 0);
+    void setCompanyData(const QString &type, const QDate &data, const int &index = 0);
+    void setCompanyData(const QStringList &data, const int &index = 0);
+    void setChannel(const QString &type, const QString &subType, const QString &value);
 
-    QString alias() const;
-    QString name() const;
-    QString surName() const;
-    QString otherName() const;
-    QDate birthday() const;
-    QString birthdayAsString() const;
-    QString pathToUserPic() const;
-    QPixmap userPic() const;
-    QString comment() const;
-
-    QString country(int index = 0) const;
-    QString city(int index = 0) const;
-    QString street(int index = 0) const;
-    QString home(int index = 0) const;
-    QString apartment(int index = 0) const;
-    int countAddresses() const;
-
-    QString companyName(int index = 0) const;
-    QString department(int index = 0) const;
-    QString post(int index = 0) const;
-    QString companyAddress(int index = 0) const;
-    QString companyPhone(int index = 0) const;
-    QDate dateIn(int index = 0) const;
-    QString dateInAsString(int index = 0) const;
+    QDate   birthday()           const;
+    QPixmap userPic()            const;
+    QDate dateIn(int index = 0)  const;
     QDate dateOut(int index = 0) const;
-    QString dateOutAsString(int index = 0) const;
-    int countCompanies() const;
 
-    QList<QString> phones() const;
-    QList<QString> emails() const;
-    QList<QString> skypes() const;
-    QList<QString> sites() const;
-    QList<QString> phoneTypes() const;
-    QList<QString> emailTypes() const;
-    QList<QString> skypeTypes() const;
-    QList<QString> siteTypes() const;
-    QString phone(const QString &type) const;
-    QString email(const QString &type) const;
-    QString skype(const QString &type) const;
-    QString site(const QString &type) const;
-    int countChannels() const;
-    int countPhones() const;
-    int countEmails() const;
-    int countSkypes() const;
-    int countSites() const;
+    int countCompanies() const;
+    int countAddresses() const;
+    int countChannels(const QString &type = QString()) const;
+
+    QList<QString> channels(const QString &type) const;
+    QList<QString> channelsTypes(const QString &type) const;
+
     bool isExistChannel(const QString type, const QString &key) const;
 
-    void setAlias(const QString &data);
-    void setName(const QString &data);
-    void setSurName(const QString &data);
-    void setOtherName(const QString &data);
-    void setBirthday(const QDate &data);
-    void setBirthday(const QString &data);
-    int appendAddress(const QString &country, const QString &city,
-                   const QString &street, const QString &home,
-                   const QString &apartment);
-    int appendCompany(const QString &name, const QString &department,
-                           const QString &post, const QString &address,
-                           const QString &phone, const QString &dateIn,
-                           const QString &dateOut);
-    void setPathToUserPic(const QString &data);
-    void setUserPic(const QPixmap &data);
-    void setComment(const QString &data);
-
-    void setCountry(const int index, const QString &data);
-    void setCity(const int index, const QString &data);
-    void setStreet(const int index, const QString &data);
-    void setHome(const int index, const QString &data);
-    void setApartment(const int index, const QString &data);
-
-    void setCompanyName(const int index, const QString &data);
-    void setDepartment(const int index, const QString &data);
-    void setPost(const int index, const QString &data);
-    void setCompanyAddress(const int index, const QString &data);
-    void setCompanyPhone(const int index, const QString &data);
-    void setDateIn(const int index, const QDate &data);
-    void setDateIn(const int index, const QString &data);
-    void setDateOut(const int index, const QDate &data);
-    void setDateOut(const int index, const QString &data);
-
-    void setPhone(const QString &type, const QString &value);
-    void setEmail(const QString &type, const QString &value);
-    void setSkype(const QString &type, const QString &value);
-    void setSite(const QString &type, const QString &value);
+    int appendAddress(const QStringList &value);
+    int appendCompany(const QStringList &value);
 
 private:
-    int appendAddress(const Address &data);
-    int appendCompany(const Company &data);
-
     QString m_alias;
     QString m_name;
     QString m_surName;
@@ -190,7 +137,6 @@ private:
 };
 
 typedef QVector<ContactData *> Contacts;
-
 };
 
 #endif // CONTACTDATA_H

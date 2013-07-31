@@ -37,6 +37,13 @@ QPixmap pathToPixmap(QString path) {
         pix = QPixmap(":/logo");
     return pix.scaled(pix.size());
 }
+
+const QString CONTACT("contact");
+const QString COMPANY("company");
+const QString ADDRESS("address");
+enum { ALIAS = 0, NAME, SURNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
+enum { COMP_NAME = 0, PHONE, DEPARTMENT, POST, COMP_ADDRESS, DATEIN, DATEOUT };
+enum { COUNTRY = 0, CITY, STREET, HOME, APARTMENT };
 }
 
 ContactListView::ContactListView(ContactListController *controller, QWidget *parent) :
@@ -119,31 +126,31 @@ void ContactListView::setEditable(bool flag)
 void ContactListView::setContactData(const Data::ContactData *contact)
 {
     disconnectSignals();
-    ui->leAlias->setText(contact->alias());
-    ui->leName->setText(contact->name());
-    ui->leSurName->setText(contact->surName());
-    ui->leOtherName->setText(contact->otherName());
+    ui->leAlias->setText(contact->data(CONTACT).at(ALIAS));
+    ui->leName->setText(contact->data(CONTACT).at(NAME));
+    ui->leSurName->setText(contact->data(CONTACT).at(SURNAME));
+    ui->leOtherName->setText(contact->data(CONTACT).at(OTHERNAME));
     ui->deBirthday->setDate(contact->birthday());
-    ui->lbUserPic->setPixmap(pathToPixmap(contact->pathToUserPic()));
+    ui->lbUserPic->setPixmap(contact->userPic());
 
-    ui->leCountry->setText(contact->country(0));
-    ui->leCity->setText(contact->city(0));
-    ui->leStreet->setText(contact->street(0));
-    ui->leHome->setText(contact->home(0));
-    ui->leApartment->setText(contact->apartment(0));
+    ui->leCountry->setText(contact->data(ADDRESS).at(COUNTRY));
+    ui->leCity->setText(contact->data(ADDRESS).at(CITY));
+    ui->leStreet->setText(contact->data(ADDRESS).at(STREET));
+    ui->leHome->setText(contact->data(ADDRESS).at(HOME));
+    ui->leApartment->setText(contact->data(ADDRESS).at(APARTMENT));
 
-    ui->lePhone->setText(contact->phones().at(0));
-    ui->leEmail->setText(contact->emails().at(0));
-    ui->leSkype->setText(contact->skypes().at(0));
-    ui->leSite->setText(contact->sites().at(0));
+    ui->lePhone->setText(contact->channels(Channel::Phone).at(0));
+    ui->leEmail->setText(contact->channels(Channel::Email).at(0));
+    ui->leSkype->setText(contact->channels(Channel::Skype).at(0));
+    ui->leSite->setText(contact->channels(Channel::Site).at(0));
 
-    ui->leNameCompany->setText(contact->companyName(0));
-    ui->lePhoneCompany->setText(contact->companyPhone(0));
-    ui->leDepartment->setText(contact->department(0));
-    ui->lePost->setText(contact->post(0));
-    ui->leAddressCompany->setText(contact->companyAddress(0));
-    ui->deStartWork->setDate(contact->dateIn(0));
-    ui->deEndWork->setDate(contact->dateOut(0));
+    ui->leNameCompany->setText(contact->data(COMPANY).at(COMP_NAME));
+    ui->lePhoneCompany->setText(contact->data(COMPANY).at(PHONE));
+    ui->leDepartment->setText(contact->data(COMPANY).at(DEPARTMENT));
+    ui->lePost->setText(contact->data(COMPANY).at(POST));
+    ui->leAddressCompany->setText(contact->data(COMPANY).at(COMP_ADDRESS));
+    ui->deStartWork->setDate(contact->dateIn());
+    ui->deEndWork->setDate(contact->dateOut());
 
     connectSignals();
 }
