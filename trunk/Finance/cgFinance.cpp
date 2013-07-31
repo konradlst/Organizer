@@ -6,6 +6,7 @@
 #include <QDir>
 #include "cgFinance.h"
 #include "dbGenerator.h"
+#include "cgFinanceView.h"
 
 namespace {
 const QString INSERT_DEFAULT = QString("INSERT INTO %1 DEFAULT VALUES");
@@ -205,78 +206,41 @@ QString cgFinance::openDb()
 void cgFinance::createAccountTab()
 {
     //FIXME simple
-    QGroupBox *account = new QGroupBox("Accounts");
+    cgFinanceView view;
 
-    m_accountTab->setLayout(new QHBoxLayout);
-
-    QFormLayout *lay = new QFormLayout;
-    QProgressBar *cashBar = new QProgressBar();
+    QFrame *lineAccount = view.getLine();
+    QFrame *lineToday = view.getLine();
+    QDateEdit *date = view.getDateWidget();
+    QProgressBar *cashBar = view.getProgressBar();
+    QProgressBar *depositBar = view.getProgressBar();
+    QDoubleSpinBox *resumeBox = view.getDoubleSpinBox();
+    QDoubleSpinBox *dsbTravel = view.getDoubleSpinBox();
+    QDoubleSpinBox *dsbZp = view.getDoubleSpinBox();
     cashBar->setMaximum(100);
     cashBar->setValue(24);
-    cashBar->setTextVisible(true);
-    cashBar->setFormat("%v p.");
-
-    QProgressBar *depositBar = new QProgressBar();
     depositBar->setMaximum(100);
     depositBar->setValue(70);
-    depositBar->setTextVisible(true);
-    depositBar->setFormat("%v p.");
-
-    QFrame *lineAccount = new QFrame(m_accountTab);
-    lineAccount->setFrameShape(QFrame::HLine);
-    lineAccount->setFrameShadow(QFrame::Sunken);
-
-    QSpinBox *resumeBox = new QSpinBox();
-    resumeBox->setReadOnly(true);
-    resumeBox->setButtonSymbols(QSpinBox::NoButtons);
-    resumeBox->setSuffix(" p.");
-    resumeBox->setMinimum(-100000);
-    resumeBox->setMaximum(100000);
     resumeBox->setValue(500);
+    dsbTravel->setValue(-20);
+    dsbZp->setValue(15000);
 
+    QFormLayout *lay = new QFormLayout;
     lay->addRow("Cash", cashBar);
     lay->addRow("Deposit", depositBar);
     lay->addWidget(lineAccount);
     lay->addRow("Total", resumeBox);
 
+    QGroupBox *account = new QGroupBox("Accounts");
     account->setLayout(lay);
-
-    QVBoxLayout *vlay = new QVBoxLayout(m_accountTab);
-    QDateEdit *date = new QDateEdit(QDate::currentDate());
-    date->setFrame(false);
-    date->setReadOnly(true);
-    date->setButtonSymbols(QDateEdit::NoButtons);
-    date->setAlignment(Qt::AlignCenter);
-    date->setDisplayFormat("ddd, dd MMMM yyyy года");
-
-    QFrame *lineToday = new QFrame(m_accountTab);
-    lineToday->setFrameShape(QFrame::HLine);
-    lineToday->setFrameShadow(QFrame::Sunken);
-
-    QGroupBox *gbToday = new QGroupBox("Today");
-
-    QDoubleSpinBox *dsbTravel = new QDoubleSpinBox();
-    dsbTravel->setReadOnly(true);
-    dsbTravel->setButtonSymbols(QDoubleSpinBox::NoButtons);
-    dsbTravel->setSuffix(" p.");
-    dsbTravel->setMinimum(-100000);
-    dsbTravel->setMaximum(100000);
-    dsbTravel->setValue(-20);
-
-    QDoubleSpinBox *dsbZp = new QDoubleSpinBox();
-    dsbZp->setReadOnly(true);
-    dsbZp->setButtonSymbols(QDoubleSpinBox::NoButtons);
-    dsbZp->setSuffix(" p.");
-    dsbZp->setMinimum(-100000);
-    dsbZp->setMaximum(100000);
-    dsbZp->setValue(15000);
 
     QFormLayout *layToday = new QFormLayout;
     layToday->addRow("travel", dsbTravel);
     layToday->addRow("ZP", dsbZp);
 
+    QGroupBox *gbToday = new QGroupBox("Today");
     gbToday->setLayout(layToday);
 
+    QVBoxLayout *vlay = new QVBoxLayout(m_accountTab);
     vlay->addWidget(date);
     vlay->addWidget(new QPushButton("Add Transaction"));
     vlay->addWidget(lineToday);
@@ -285,6 +249,7 @@ void cgFinance::createAccountTab()
     QWidget *wdt = new QWidget();
     wdt->setLayout(vlay);
 
+    m_accountTab->setLayout(new QHBoxLayout);
     m_accountTab->layout()->addWidget(account);
     m_accountTab->layout()->addWidget(wdt);
 }
