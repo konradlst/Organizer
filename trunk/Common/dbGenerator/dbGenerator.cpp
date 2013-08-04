@@ -59,7 +59,6 @@ bool dbGenerator::generate()
         return false;
     }
 
-    QSqlQuery query;
     if(!db.tables().isEmpty())
     {
         qDebug() << QString("Database %1 already exist").arg(m_pathToDb);
@@ -74,6 +73,7 @@ bool dbGenerator::generate()
     if(!tablesNode.isNull())
     {
         QDomNode tableNode = tablesNode.firstChild();
+        QStringList queryText;
         // Read every table in scheme
         while(!tableNode.isNull())
         {
@@ -90,11 +90,10 @@ bool dbGenerator::generate()
                 fieldNode = fieldNode.nextSibling();
             }
             QString tableName = tableNode.toElement().attribute(Scheme::attrName);
-            QString tempFields = fields.join(", ");
-            createTable(tableName, tempFields);
-
+            queryText << CREATE.arg(tableName, fields.join(", "));
             tableNode = tableNode.nextSibling();
         }
+        createTable(queryText);
     }
 
     //test data
@@ -120,8 +119,8 @@ bool dbGenerator::generate()
             QString tableName = tableNode.toElement().attribute(Scheme::attrName);
 
             QString insertQuery = INSERT.arg(tableName)
-                    .arg(fieldsName.join(", "))
-                    .arg(fieldsValue.join(", "));
+                                        .arg(fieldsName.join(", "))
+                                        .arg(fieldsValue.join(", "));
             qDebug() << "insertQuery:" << insertQuery;
             QSqlQuery query;
             if(query.exec(insertQuery))
@@ -193,10 +192,13 @@ void dbGenerator::parseField(const QDomElement &field, QString &data)
     data.append(d.join(""));
 }
 
-bool dbGenerator::createTable(QString &tableName, QString &fieldsData)
+bool dbGenerator::createTable(QStringList &queryText)
 {
     QSqlQuery query;
-
-    qDebug() << "execQuery:" << CREATE.arg(tableName, fieldsData);
-    return query.exec(CREATE.arg(tableName, fieldsData));
+    foreach (QString q, queryText)
+    {
+        qDebug() << QString("execQuery: %1").arg(q);
+        query.exec(q);
+    }
+    return true;
 }

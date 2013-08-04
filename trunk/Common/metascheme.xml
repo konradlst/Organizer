@@ -31,9 +31,9 @@
             <field name="name" type="VARCHAR(50)"/>
             <field name="section" type="VARCHAR(50)"/>
             <field name="format" type="VARCHAR(50)"/>
-            <field name="pages" type="VARCHAR(50)"/>
+            <field name="pages" type="INTEGER"/>
             <field name="year" type="INTEGER"/>
-            <field name="ISBN" type="VARCHAR(50)"/>
+            <field name="ISBN" type="VARCHAR(20)"/>
             <field name="publishing" type="VARCHAR(50)"/>
             <field name="count" type="INTEGER"/>
         </table>
@@ -52,10 +52,9 @@
             <field name="price" type="INTEGER"/>
             <field name="duration" type="TIME"/>
         </table>
-
         <table name="CG_CONTACTS">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="alias" type="VARCHAR(255)" unq="1" nullable="0" default="'alias'"/>/>
+            <field name="alias" type="VARCHAR(255)" unq="1" nullable="0" default="'alias'"/>
             <field name="name" type="VARCHAR(100)"/>
             <field name="lastName" type="VARCHAR(100)"/>
             <field name="otherName" type="VARCHAR(100)"/>

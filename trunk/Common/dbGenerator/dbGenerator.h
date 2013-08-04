@@ -3,6 +3,7 @@
 
 class QString;
 class QDomElement;
+class QStringList;
 
 class dbGenerator
 {
@@ -16,7 +17,7 @@ private:
 
     bool loadScheme(QDomElement &scheme);
     void parseField(const QDomElement &field, QString &data);
-    bool createTable(QString &tableName, QString &fieldsData);
+    bool createTable(QStringList &queryText);
 };
 
 #endif // DBGENERATOR_H
