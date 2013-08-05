@@ -6,11 +6,12 @@
 class QGroupBox;
 class QDoubleSpinBox;
 class QFormLayout;
+class QProgressBar;
 
 class cgAccount
 {
 public:
-    cgAccount(QString &name, qint64 &value);
+    cgAccount(QString name, qint64 value);
     QString name() const;
     qint64 value() const;
 private:
@@ -36,6 +37,7 @@ private:
     QDoubleSpinBox *m_totalView;
     qint64 m_total;
     QList<cgAccount> *m_accounts;
+    QHash<QString, QProgressBar *> *m_accountsView;
 
     void createView();
 };

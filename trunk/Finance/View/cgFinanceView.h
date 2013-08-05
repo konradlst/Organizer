@@ -1,22 +1,17 @@
 #ifndef CGFINANCEVIEW_H
 #define CGFINANCEVIEW_H
 
-#include <QWidget>
-
 class QDoubleSpinBox;
 class QFrame;
-class QProgressBar;
 class QDateEdit;
+class QWidget;
 
-class cgFinanceView : public QWidget
+namespace View
 {
-    Q_OBJECT
-public:
-    explicit cgFinanceView(QWidget *parent = 0);
-    QDoubleSpinBox *getDoubleSpinBox();
-    QFrame *getLine();
-    QProgressBar *getProgressBar();
-    QDateEdit *getDateWidget();
-};
+QDoubleSpinBox *DoubleSpinBox();
+QFrame *Line();
+QDateEdit *DateWidget();
+QWidget *TodayList();
+}
 
 #endif // CGFINANCEVIEW_H

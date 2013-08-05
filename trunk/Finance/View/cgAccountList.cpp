@@ -5,7 +5,7 @@
 #include <QDoubleSpinBox>
 #include <QProgressBar>
 
-cgAccount::cgAccount(QString &name, qint64 &value) :
+cgAccount::cgAccount(QString name, qint64 value) :
     m_name(name),
     m_value(value)
 {
@@ -25,10 +25,15 @@ cgAccountList::cgAccountList() :
     m_view(new QGroupBox("Accounts")),
     m_mainLayout(new QFormLayout),
     m_totalView(new QDoubleSpinBox),
-    m_accounts(new QList<cgAccount>())
+    m_total(0),
+    m_accounts(new QList<cgAccount>()),
+    m_accountsView(new QHash<QString,QProgressBar *>())
 {
     createView();
-    m_total = 500;
+    cgAccount acc = cgAccount(QString("Deposit"), 70);
+    addAccount(acc);
+    cgAccount acc2 = cgAccount(QString("Cash"), 24);
+    addAccount(acc2);
     m_totalView->setValue(m_total);
 }
 
@@ -39,20 +44,25 @@ QWidget *cgAccountList::view()
 
 void cgAccountList::addAccount(cgAccount &account)
 {
+    QProgressBar *bar = new QProgressBar();
+
+    m_accountsView->insert(account.name(), bar);
     m_accounts->append(account);
     m_total += account.value();
 
-    QProgressBar *bar = new QProgressBar();
     bar->setTextVisible(true);
     bar->setFormat("%v p.");
+    QList<QString> list = m_accountsView->keys();
+    foreach (QString key, list)
+        m_accountsView->value(key)->setMaximum(m_total);
     bar->setValue(account.value());
-    bar->setMaximum(m_total);
 
     m_mainLayout->insertRow(0, account.name(), bar);
 }
 
 bool cgAccountList::removeAccount(const int &index)
 {
+    m_accountsView->remove(m_accounts->at(index).name());
     m_total -= m_accounts->at(index).value();
     m_accounts->removeAt(index);
 

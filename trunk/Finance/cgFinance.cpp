@@ -8,6 +8,7 @@
 #include "cgFinance.h"
 #include "dbGenerator.h"
 #include "cgFinanceView.h"
+#include <cgAccountList.h>
 
 namespace {
 const QString INSERT_DEFAULT = QString("INSERT INTO %1 DEFAULT VALUES");
@@ -145,53 +146,11 @@ void cgFinance::createInterface()
 
 void cgFinance::createAccountTab()
 {
-    //FIXME simple
-    cgFinanceView view;
-
-    QFrame *lineAccount       = view.getLine();
-    QFrame *lineToday         = view.getLine();
-    QDateEdit *date           = view.getDateWidget();
-    QProgressBar *cashBar     = view.getProgressBar();
-    QProgressBar *depositBar  = view.getProgressBar();
-    QDoubleSpinBox *resumeBox = view.getDoubleSpinBox();
-    QDoubleSpinBox *dsbTravel = view.getDoubleSpinBox();
-    QDoubleSpinBox *dsbZp     = view.getDoubleSpinBox();
-    cashBar->setMaximum(100);
-    cashBar->setValue(24);
-    depositBar->setMaximum(100);
-    depositBar->setValue(70);
-    resumeBox->setValue(500);
-    dsbTravel->setValue(-20);
-    dsbZp->setValue(15000);
-
-    QFormLayout *lay = new QFormLayout;
-    lay->addRow("Cash", cashBar);
-    lay->addRow("Deposit", depositBar);
-    lay->addRow(lineAccount);
-    lay->addRow("Total :", resumeBox);
-
-    QGroupBox *account = new QGroupBox("Accounts");
-    account->setLayout(lay);
-
-    QFormLayout *layToday = new QFormLayout;
-    layToday->addRow("travel", dsbTravel);
-    layToday->addRow("ZP", dsbZp);
-
-    QGroupBox *gbToday = new QGroupBox("Today");
-    gbToday->setLayout(layToday);
-
-    QVBoxLayout *vlay = new QVBoxLayout(m_accountTab);
-    vlay->addWidget(date);
-    vlay->addWidget(new QPushButton("Add Transaction"));
-    vlay->addWidget(lineToday);
-    vlay->addWidget(gbToday);
-
-    QWidget *wdt = new QWidget();
-    wdt->setLayout(vlay);
+    cgAccountList *accounts = new cgAccountList;
 
     m_accountTab->setLayout(new QHBoxLayout);
-    m_accountTab->layout()->addWidget(account);
-    m_accountTab->layout()->addWidget(wdt);
+    m_accountTab->layout()->addWidget(accounts->view());
+    m_accountTab->layout()->addWidget(View::TodayList());
 }
 
 QString cgFinance::openDb()
