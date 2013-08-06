@@ -25,22 +25,21 @@ const QString Organizations("organizations");
 #define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT_VERSION)
 #define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(new QWidget(), ERROR, ERR_CANNOT_OPEN)
 
-QDate string2Data(QString data) {
+QDate string2Data(QString data)
+{
     if(data.isEmpty())
         return DEFAULT_DATE;
     return QDate::fromString(data,DEFAULT_DATE_FORMAT);
 }
 
-QString data2String(QDate data) {
+QString data2String(QDate data)
+{
     return data.toString(DEFAULT_DATE_FORMAT);
 }
 
 const QString CONTACT("contact");
 const QString COMPANY("company");
 const QString ADDRESS("address");
-enum { ALIAS = 0, NAME, SURNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
-enum { COMP_NAME = 0, PHONE, DEPARTMENT, POST, COMP_ADDRESS, DATEIN, DATEOUT };
-enum { COUNTRY = 0, CITY, STREET, HOME, APARTMENT };
 }
 
 DriverXml::DriverXml()

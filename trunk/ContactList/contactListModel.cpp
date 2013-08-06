@@ -4,7 +4,6 @@
 #include "driverManager.h"
 
 namespace {
-const int ALIAS = 0;
 const QString CONTACT("contact");
 }
 

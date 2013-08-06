@@ -20,8 +20,7 @@ public:
 private:
     void contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,
                           const int i) const;
-    void sqlToContactData(const QSqlQuery &query, const QSqlRecord &record,
-                          Data::ContactData *contact) const;
+    void sqlToContactData(const QSqlQuery &query, Data::ContactData *contact) const;
 };
 
 #endif // DRIVERSQLITE_H

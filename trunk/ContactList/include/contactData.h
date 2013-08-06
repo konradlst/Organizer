@@ -7,6 +7,10 @@
 #include <QPixmap>
 #include "channel.h"
 
+enum { ALIAS = 0, NAME, SURNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
+enum { COMP_NAME = 0, PHONE, DEPARTMENT, POST, COMP_ADDRESS, DATEIN, DATEOUT };
+enum { COUNTRY = 0, CITY, STREET, HOME, APARTMENT };
+
 namespace Attribute
 {
 const QString Version("version");
