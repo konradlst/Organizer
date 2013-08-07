@@ -5,35 +5,15 @@
 #include <QDoubleSpinBox>
 #include <QProgressBar>
 
-cgAccount::cgAccount(QString name, qint64 value) :
-    m_name(name),
-    m_value(value)
-{
-}
-
-QString cgAccount::name() const
-{
-    return m_name;
-}
-
-qint64 cgAccount::value() const
-{
-    return m_value;
-}
-
 cgAccountList::cgAccountList() :
     m_view(new QGroupBox("Accounts")),
-    m_mainLayout(new QFormLayout),
+    m_mainLayout(new QFormLayout(m_view)),
     m_totalView(new QDoubleSpinBox),
     m_total(0),
     m_accounts(new QList<cgAccount>()),
     m_accountsView(new QHash<QString,QProgressBar *>())
 {
     createView();
-    cgAccount acc = cgAccount(QString("Deposit"), 70);
-    addAccount(acc);
-    cgAccount acc2 = cgAccount(QString("Cash"), 24);
-    addAccount(acc2);
     m_totalView->setValue(m_total);
 }
 
@@ -42,28 +22,28 @@ QWidget *cgAccountList::view()
     return m_view;
 }
 
-void cgAccountList::addAccount(cgAccount &account)
+void cgAccountList::addAccount(const cgAccount &account)
 {
     QProgressBar *bar = new QProgressBar();
 
-    m_accountsView->insert(account.name(), bar);
+    m_accountsView->insert(account.m_name, bar);
     m_accounts->append(account);
-    m_total += account.value();
+    m_total += account.m_value;
 
     bar->setTextVisible(true);
     bar->setFormat("%v p.");
     QList<QString> list = m_accountsView->keys();
     foreach (QString key, list)
         m_accountsView->value(key)->setMaximum(m_total);
-    bar->setValue(account.value());
+    bar->setValue(account.m_value);
 
-    m_mainLayout->insertRow(0, account.name(), bar);
+    m_mainLayout->insertRow(0, account.m_name, bar);
 }
 
 bool cgAccountList::removeAccount(const int &index)
 {
-    m_accountsView->remove(m_accounts->at(index).name());
-    m_total -= m_accounts->at(index).value();
+    m_accountsView->remove(m_accounts->at(index).m_name);
+    m_total -= m_accounts->at(index).m_value;
     m_accounts->removeAt(index);
 
     delete m_mainLayout->itemAt(index, QFormLayout::LabelRole);
@@ -88,9 +68,6 @@ void cgAccountList::createView()
 
     m_mainLayout->addRow(line);
     m_mainLayout->addRow("Total :", m_totalView);
-
-    m_view = new QGroupBox("Accounts");
-    m_view->setLayout(m_mainLayout);
 }
 
 

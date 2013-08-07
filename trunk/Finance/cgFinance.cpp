@@ -1,3 +1,4 @@
+#include "cgFinance.h"
 #include <QtGui>
 #include <QtSql>
 #include <QtWidgets>
@@ -5,10 +6,9 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QComboBox>
-#include "cgFinance.h"
 #include "dbGenerator.h"
-#include "cgFinanceView.h"
-#include <cgAccountList.h>
+#include "cgAccountList.h"
+#include "cgTransactionList.h"
 
 namespace {
 const QString INSERT_DEFAULT = QString("INSERT INTO %1 DEFAULT VALUES");
@@ -147,10 +147,26 @@ void cgFinance::createInterface()
 void cgFinance::createAccountTab()
 {
     cgAccountList *accounts = new cgAccountList;
+    cgTransactionList *transactions = new cgTransactionList;
 
     m_accountTab->setLayout(new QHBoxLayout);
     m_accountTab->layout()->addWidget(accounts->view());
-    m_accountTab->layout()->addWidget(View::TodayList());
+    m_accountTab->layout()->addWidget(transactions->view());
+
+    //test Data
+    cgAccount acc = cgAccount(QString("Deposit"), 70);
+    accounts->addAccount(acc);
+    acc.m_name = QString("Cash");
+    acc.m_value = 24;
+    accounts->addAccount(acc);
+
+    cgTransaction trans;
+    trans.m_comment = "Travel";
+    trans.m_value = -20;
+    transactions->addTransaction(trans);
+    trans.m_comment = "ZP";
+    trans.m_value = 15000;
+    transactions->addTransaction(trans);
 }
 
 QString cgFinance::openDb()
@@ -164,5 +180,5 @@ void cgFinance::dbGenerate()
 {
     QString path = openDb();
     dbGenerator gen = dbGenerator(metascheme, path);
-    gen.generate();
+    gen.generate(true);
 }

@@ -16,16 +16,16 @@ INCLUDEPATH += "../Common/dbGenerator"
 INCLUDEPATH += "./View"
 
 SOURCES += main.cpp\
-        cgFinance.cpp \
-        ../Common/dbGenerator/dbGenerator.cpp \
-        View/cgFinanceView.cpp \
-    View/cgAccountList.cpp
+    cgFinance.cpp \
+    ../Common/dbGenerator/dbGenerator.cpp \
+    View/cgAccountList.cpp \
+    View/cgTransactionList.cpp
 
 HEADERS  += \
-        cgFinance.h \
-        ../Common/dbGenerator/dbGenerator.h \
-        View/cgFinanceView.h \
-    View/cgAccountList.h
+    cgFinance.h \
+    ../Common/dbGenerator/dbGenerator.h \
+    View/cgAccountList.h \
+    View/cgTransactionList.h
 
 OTHER_FILES += \
     metascheme.xml \

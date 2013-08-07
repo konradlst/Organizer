@@ -8,13 +8,12 @@ class QDoubleSpinBox;
 class QFormLayout;
 class QProgressBar;
 
-class cgAccount
+struct cgAccount
 {
-public:
-    cgAccount(QString name, qint64 value);
-    QString name() const;
-    qint64 value() const;
-private:
+    cgAccount(QString name, qint64 value) :
+        m_name(name),
+        m_value(value)
+    {}
     QString m_name;
     qint64 m_value;
 };
@@ -24,7 +23,7 @@ class cgAccountList
 public:
     cgAccountList();
     QWidget *view();
-    void addAccount(cgAccount &account);
+    void addAccount(const cgAccount &account);
     bool removeAccount(const QString &name);
     bool removeAccount(const int &index);
     qint64 total();
