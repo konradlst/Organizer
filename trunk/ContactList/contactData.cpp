@@ -89,7 +89,7 @@ void ContactData::setMainData(const QString &type, const QString &value)
         m_alias = value;
     else if(type == Attribute::Name)
         m_name = value;
-    else if(type == Attribute::SurName)
+    else if(type == Attribute::LastName)
         m_surName = value;
     else if(type == Attribute::OtherName)
         m_otherName = value;

@@ -7,7 +7,7 @@
 #include <QPixmap>
 #include "channel.h"
 
-enum { ALIAS = 0, NAME, SURNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
+enum { ALIAS = 0, NAME, LASTNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
 enum { COMP_NAME = 0, PHONE, DEPARTMENT, POST, COMP_ADDRESS, DATEIN, DATEOUT };
 enum { COUNTRY = 0, CITY, STREET, HOME, APARTMENT };
 
@@ -16,7 +16,7 @@ namespace Attribute
 const QString Version("version");
 const QString Alias("alias");
 const QString Name("name");
-const QString SurName("surName");
+const QString LastName("lastName");
 const QString OtherName("otherName");
 const QString Birthday("birthday");
 const QString PathToUserPic("pathToUserPic");

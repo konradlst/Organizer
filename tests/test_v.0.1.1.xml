@@ -1,34 +1,34 @@
 <tree version="0.1.1">
 <record>
-<data alias="Ivanov account" surName="Ivanov" otherName="Ivanovich" birthday="10.11.1912" pathToUserPic="" comment="this is test data" name="Ivan"/>
+<data comment="this is test data" alias="Ivanov account" name="Ivan" lastName="Ivanov" otherName="Ivanovich" birthday="10.11.1912" pathToUserPic=""/>
 <addresses>
-<data street="Zaparozskaia" city="Samara" country="Russia" home="9" apartment="3"/>
+<data country="Russia" city="Samara" home="9" apartment="3" street="Zaparozskaia"/>
 </addresses>
 <channels>
-<data type="Phone" subtype="mts" value="+7 987 1234567"/>
-<data type="Phone" subtype="megafon" value="7 937 1234567"/>
-<data type="Email" subtype="home" value="i.ivan@gmail.com"/>
-<data type="Skype" subtype="work" value="i_ivan"/>
-<data type="Site" subtype="work" value="ivanov.com"/>
+<data subtype="megafon" value="7 937 1234567" type="Phone"/>
+<data subtype="mts" value="+7 987 1234567" type="Phone"/>
+<data subtype="home" value="i.ivan@gmail.com" type="Email"/>
+<data subtype="work" value="i_ivan" type="Skype"/>
+<data subtype="work" value="ivanov.com" type="Site"/>
 </channels>
 <organizations>
-<data address="Samara, Dibenko, 60, 30" dateIn="07.08.2002" department="very good" dateOut="25.11.2012" name="good work" phone="+7 (846) 1234567" post="team leader"/>
+<data department="very good" dateIn="07.08.2002" phone="+7 (846) 1234567" dateOut="25.11.2012" name="good work" post="team leader" address="Samara, Dibenko, 60, 30"/>
 </organizations>
 </record>
 <record>
-<data alias="Petrov account" surName="Petrov" otherName="Petrovich" birthday="19.03.1956" pathToUserPic="" comment="this is test data 2" name="Petr"/>
+<data comment="this is test data 2" alias="Petrov account" name="Petr" lastName="Petrov" otherName="Petrovich" birthday="19.03.1956" pathToUserPic=""/>
 <addresses>
-<data street="test street" city="Mockow" country="Russia" home="17" apartment="22"/>
+<data country="Russia" city="Mockow" home="17" apartment="22" street="test street"/>
 </addresses>
 <channels>
-<data type="Phone" subtype="smarts" value="+7 987 7654321"/>
-<data type="Phone" subtype="beeline" value="7 907 7654321"/>
-<data type="Email" subtype="home" value="p.petrov@ya.ru"/>
-<data type="Skype" subtype="work" value="p_perov"/>
-<data type="Site" subtype="work" value="petrov.com"/>
+<data subtype="smarts" value="+7 987 7654321" type="Phone"/>
+<data subtype="beeline" value="7 907 7654321" type="Phone"/>
+<data subtype="home" value="p.petrov@ya.ru" type="Email"/>
+<data subtype="work" value="p_perov" type="Skype"/>
+<data subtype="work" value="petrov.com" type="Site"/>
 </channels>
 <organizations>
-<data address="Moscow, test street, 10, 15" dateIn="01.12.2003" department="best of the best" dateOut="11.02.2008" name="syper work" phone="+7 (945) 7654321" post="director"/>
+<data department="best of the best" dateIn="01.12.2003" phone="+7 (945) 7654321" dateOut="11.02.2008" name="syper work" post="director" address="Moscow, test street, 10, 15"/>
 </organizations>
 </record>
 </tree>

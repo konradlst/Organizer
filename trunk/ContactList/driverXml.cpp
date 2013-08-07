@@ -228,7 +228,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
                 QStringList list;
                 list << fieldElement.attribute(Attribute::Alias)
                      << fieldElement.attribute(Attribute::Name)
-                     << fieldElement.attribute(Attribute::SurName)
+                     << fieldElement.attribute(Attribute::LastName)
                      << fieldElement.attribute(Attribute::OtherName)
                      << fieldElement.attribute(Attribute::Birthday)
                      << fieldElement.attribute(Attribute::PathToUserPic)
@@ -292,7 +292,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &d
     QDomElement field = record.firstChildElement(Tag::Data);
     field.setAttribute(Attribute::Alias, data.data(CONTACT).at(ALIAS));
     field.setAttribute(Attribute::Name, data.data(CONTACT).at(NAME));
-    field.setAttribute(Attribute::SurName, data.data(CONTACT).at(SURNAME));
+    field.setAttribute(Attribute::LastName, data.data(CONTACT).at(LASTNAME));
     field.setAttribute(Attribute::OtherName, data.data(CONTACT).at(OTHERNAME));
     field.setAttribute(Attribute::Birthday, data.data(CONTACT).at(BIRTHDAY));
     field.setAttribute(Attribute::PathToUserPic, data.data(CONTACT).at(USER_PIC));

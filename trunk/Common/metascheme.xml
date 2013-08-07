@@ -59,32 +59,37 @@
             <field name="lastName" type="VARCHAR(100)"/>
             <field name="otherName" type="VARCHAR(100)"/>
             <field name="birthday" type="DATE"/>
+            <field name="pathToUserPic" type="VARCHAR(255)"/>
+            <field name="comment" type="VARCHAR(255)"/>
         </table>
         <table name="CG_COMPANIES">
             <field name="id" type="INTEGER" pk="1"/>
             <field name="name" type="VARCHAR(100)" unq="1"/>
             <field name="phone" type="VARCHAR(100)"/>
-            <field name="department" type="VARCHAR(100)"/>
+            <field name="department" type="VARCHAR(127)"/>
             <field name="post" type="VARCHAR(100)"/>
             <field name="address" type="VARCHAR(255)"/>
             <field name="dateIn" type="DATE"/>
             <field name="dateOut" type="DATE"/>
+            <field name="ownerId" type="INTEGER"/>
         </table>
         <table name="CG_ADDRESSES">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="country" type="VARCHAR(100)" nullable="0"/>
-            <field name="city" type="VARCHAR(100)"/>
-            <field name="street" type="VARCHAR(100)"/>
+            <field name="country" type="VARCHAR(127)"/>
+            <field name="city" type="VARCHAR(127)"/>
+            <field name="street" type="VARCHAR(127)"/>
             <field name="home" type="VARCHAR(100)"/>
             <field name="apartment" type="VARCHAR(100)"/>
             <field name="type" type="VARCHAR(100)"/>
+            <field name="ownerId" type="INTEGER"/>
         </table>
         <table name="CG_CHANNELS">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="format" type="VARCHAR(100)" nullable="0"/>
+            <field name="format" type="VARCHAR(100)" nullable="0" default="'Phone'"/>
             <field name="title" type="VARCHAR(100)"/>
             <field name="value" type="VARCHAR(100)"/>
             <field name="type" type="VARCHAR(100)"/>
+            <field name="ownerId" type="INTEGER"/>
         </table>
     </tables>
     <values>

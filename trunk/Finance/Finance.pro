@@ -28,4 +28,5 @@ HEADERS  += \
     View/cgAccountList.h
 
 OTHER_FILES += \
-    metascheme.xml
+    metascheme.xml \
+    ../Common/metascheme.xml

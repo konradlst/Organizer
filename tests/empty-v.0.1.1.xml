@@ -1,6 +1,6 @@
 ﻿<tree version="0.1.1">
 	<record>
-		<data alias="" name="" surName="" otherName="" birthday="" pathToUserPic="" comment=""/>
+		<data alias="" name="" lastName="" otherName="" birthday="" pathToUserPic="" comment=""/>
 		<addresses>
 			<data country="" city="" street="" home="" apartment=""/>
 		</addresses>

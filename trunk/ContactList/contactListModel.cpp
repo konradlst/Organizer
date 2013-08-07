@@ -98,7 +98,7 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
 
     if(key == Attribute::Alias ||
        key == Attribute::Name ||
-       key == Attribute::SurName ||
+       key == Attribute::LastName ||
        key == Attribute::OtherName ||
        key == Attribute::Birthday ||
        key == Attribute::PathToUserPic ||

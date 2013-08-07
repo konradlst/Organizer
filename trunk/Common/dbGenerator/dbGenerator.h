@@ -8,12 +8,12 @@ class QStringList;
 class dbGenerator
 {
 public:
-    dbGenerator(QString &metascheme, QString &pathToDb);
-    bool generate();
+    dbGenerator(const QString &metascheme, const QString &pathToDb);
+    bool generate(const bool fillTable = false);
 
 private:
-    QString &m_metascheme;
-    QString &m_pathToDb;
+    const QString &m_metascheme;
+    const QString &m_pathToDb;
 
     bool loadScheme(QDomElement &scheme);
     void parseField(const QDomElement &field, QString &data);

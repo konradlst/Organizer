@@ -18,8 +18,7 @@ public:
     Data::ContactData *loadContact(const QString &);
 
 private:
-    void contactDataToSql(QSqlQuery &query, const Data::ContactData *contact,
-                          const int i) const;
+    void contactDataToSql(const Data::ContactData *contact, const int i) const;
     void sqlToContactData(const QSqlQuery &query, Data::ContactData *contact) const;
 };
 

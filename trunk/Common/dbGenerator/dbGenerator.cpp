@@ -43,13 +43,13 @@ const QString attrUnq("unq");
 const QString attrDefault("default");
 }
 
-dbGenerator::dbGenerator(QString &metascheme, QString &pathToDb) :
+dbGenerator::dbGenerator(const QString &metascheme, const QString &pathToDb) :
     m_metascheme(metascheme),
     m_pathToDb(pathToDb)
 {
 }
 
-bool dbGenerator::generate()
+bool dbGenerator::generate(const bool fillTable)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
     db.setDatabaseName(m_pathToDb);
@@ -96,40 +96,41 @@ bool dbGenerator::generate()
         createTable(queryText);
     }
 
-    //test data
-    tablesNode = scheme.firstChildElement(Scheme::tagValues);
-    if(!tablesNode.isNull())
+    if(fillTable)
     {
-        QDomNode tableNode = tablesNode.firstChild();
-        // Read every table in scheme
-        while(!tableNode.isNull())
+        tablesNode = scheme.firstChildElement(Scheme::tagValues);
+        if(!tablesNode.isNull())
         {
-            QDomNode fieldNode = tableNode.firstChild();
-            QStringList fieldsName;
-            QStringList fieldsValue;
-            // Read every field in table
-            while(!fieldNode.isNull())
+            QDomNode tableNode = tablesNode.firstChild();
+            // Read every table in scheme
+            while(!tableNode.isNull())
             {
-                QDomElement fieldElement = fieldNode.toElement();
-                fieldsName << setQuotes(fieldElement.attribute(Scheme::attrName));
-                fieldsValue << setQuotes(fieldElement.attribute(Scheme::attrValue));
+                QDomNode fieldNode = tableNode.firstChild();
+                QStringList fieldsName;
+                QStringList fieldsValue;
+                // Read every field in table
+                while(!fieldNode.isNull())
+                {
+                    QDomElement fieldElement = fieldNode.toElement();
+                    fieldsName << setQuotes(fieldElement.attribute(Scheme::attrName));
+                    fieldsValue << setQuotes(fieldElement.attribute(Scheme::attrValue));
 
-                fieldNode = fieldNode.nextSibling();
+                    fieldNode = fieldNode.nextSibling();
+                }
+                QString tableName = tableNode.toElement().attribute(Scheme::attrName);
+
+                QString insertQuery = INSERT.arg(tableName)
+                                            .arg(fieldsName.join(", "))
+                                            .arg(fieldsValue.join(", "));
+                qDebug() << "insertQuery:" << insertQuery;
+                QSqlQuery query;
+                if(query.exec(insertQuery))
+                    qDebug() << MSG_INSERT.arg(tableName);
+
+                tableNode = tableNode.nextSibling();
             }
-            QString tableName = tableNode.toElement().attribute(Scheme::attrName);
-
-            QString insertQuery = INSERT.arg(tableName)
-                                        .arg(fieldsName.join(", "))
-                                        .arg(fieldsValue.join(", "));
-            qDebug() << "insertQuery:" << insertQuery;
-            QSqlQuery query;
-            if(query.exec(insertQuery))
-                qDebug() << MSG_INSERT.arg(tableName);
-
-            tableNode = tableNode.nextSibling();
         }
     }
-
     return true;
 }
 

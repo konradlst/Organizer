@@ -125,7 +125,7 @@ void ContactListView::setContactData(const Data::ContactData *contact)
     disconnectSignals();
     ui->leAlias->setText(contact->data(CONTACT).at(ALIAS));
     ui->leName->setText(contact->data(CONTACT).at(NAME));
-    ui->leSurName->setText(contact->data(CONTACT).at(SURNAME));
+    ui->leSurName->setText(contact->data(CONTACT).at(LASTNAME));
     ui->leOtherName->setText(contact->data(CONTACT).at(OTHERNAME));
     ui->deBirthday->setDate(contact->birthday());
     ui->lbUserPic->setPixmap(contact->userPic());
@@ -434,7 +434,7 @@ void ContactListView::textChanged(QString text)
     else if(send == ui->leName)
         emit dataChanged(text, Attribute::Name, ui->lwContactList->currentRow());
     else if(send == ui->leSurName)
-        emit dataChanged(text, Attribute::SurName, ui->lwContactList->currentRow());
+        emit dataChanged(text, Attribute::LastName, ui->lwContactList->currentRow());
     else if(send == ui->leOtherName)
         emit dataChanged(text, Attribute::OtherName, ui->lwContactList->currentRow());
     else if(send == ui->leCountry)

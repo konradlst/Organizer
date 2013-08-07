@@ -4,12 +4,15 @@
 #
 #-------------------------------------------------
 
+include(./local_deploy.pri)
+
 QT       += core gui xml sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ContactList
 TEMPLATE = app
+INCLUDEPATH += "../Common/dbGenerator"
 INCLUDEPATH += "./include/"
 
 SOURCES += main.cpp\
@@ -23,7 +26,8 @@ SOURCES += main.cpp\
     driverSqlite.cpp \
     driverManager.cpp \
     contactView.cpp \
-    channel.cpp
+    channel.cpp \
+    ../Common/dbGenerator/dbGenerator.cpp \
 
 HEADERS  += \
     include/contactListView.h \
@@ -38,6 +42,7 @@ HEADERS  += \
     include/driverManager.h \
     include/contactView.h \
     include/channel.h
+    ../Common/dbGenerator/dbGenerator.h \
 
 FORMS    += contactListView.ui \
     settingsView.ui
@@ -46,3 +51,6 @@ RESOURCES += \
     res.qrc
 
 TRANSLATIONS += ContactList.ru_RU.ts
+
+OTHER_FILES += \
+    ../Common/metascheme.xml

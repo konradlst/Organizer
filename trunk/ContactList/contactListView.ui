@@ -241,9 +241,9 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLabel" name="lbSurName">
+          <widget class="QLabel" name="lbLastName">
            <property name="text">
-            <string>SurName:</string>
+            <string>LastName:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

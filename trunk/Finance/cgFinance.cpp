@@ -16,8 +16,8 @@ const QString DELETE = QString("DELETE FROM %1 WHERE id=%2");
 
 enum { TAB_LOG = 0, TAB_ACCOUNT, TAB_TIME, TAB_BOOK, TAB_SPORT, TAB_DEAL };
 
-QString metascheme = QString("./metascheme.xml");
-QString DEFAULT_DB = QString("concierge.sqlite");
+const QString metascheme("./metascheme.xml");
+const QString DEFAULT_DB("concierge.sqlite");
 
 const QString CG_FINANCEACCOUNTS("CG_FINANCEACCOUNTS");
 const QString CG_FINANCELOG("CG_FINANCELOG");

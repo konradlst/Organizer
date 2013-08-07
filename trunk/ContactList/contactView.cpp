@@ -39,7 +39,7 @@ void ContactView::createGrid()
     QFormLayout *formLay = new QFormLayout;
     formLay->addRow(Attribute::Alias, m_alias);
     formLay->addRow(Attribute::Name, m_name);
-    formLay->addRow(Attribute::SurName, m_surName);
+    formLay->addRow(Attribute::LastName, m_surName);
     formLay->addRow(Attribute::OtherName, m_otherName);
     formLay->addRow(Attribute::Birthday, m_birthday);
 
