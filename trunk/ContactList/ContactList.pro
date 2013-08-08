@@ -12,6 +12,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ContactList
 TEMPLATE = app
+INCLUDEPATH += "../Common/"
 INCLUDEPATH += "../Common/dbGenerator"
 INCLUDEPATH += "./include/"
 
@@ -41,8 +42,9 @@ HEADERS  += \
     include/driverSqlite.h \
     include/driverManager.h \
     include/contactView.h \
-    include/channel.h
+    include/channel.h \
     ../Common/dbGenerator/dbGenerator.h \
+    ../Common/cgErrorMessage.h
 
 FORMS    += contactListView.ui \
     settingsView.ui

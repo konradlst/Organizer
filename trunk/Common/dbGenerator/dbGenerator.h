@@ -1,9 +1,15 @@
 #ifndef DBGENERATOR_H
 #define DBGENERATOR_H
 
+#include <QSqlDatabase>
 class QString;
 class QDomElement;
 class QStringList;
+
+namespace Db
+{
+const QString SQLITE("QSQLITE");
+}
 
 class dbGenerator
 {
@@ -14,10 +20,11 @@ public:
 private:
     const QString &m_metascheme;
     const QString &m_pathToDb;
+    QSqlDatabase m_db;
 
     bool loadScheme(QDomElement &scheme);
     void parseField(const QDomElement &field, QString &data);
-    bool createTable(QStringList &queryText);
+    bool execQueries(const QStringList &list);
 };
 
 #endif // DBGENERATOR_H

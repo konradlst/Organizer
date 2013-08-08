@@ -11,6 +11,10 @@ enum { ALIAS = 0, NAME, LASTNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
 enum { COMP_NAME = 0, PHONE, DEPARTMENT, POST, COMP_ADDRESS, DATEIN, DATEOUT };
 enum { COUNTRY = 0, CITY, STREET, HOME, APARTMENT };
 
+const QString CONTACT("contact");
+const QString COMPANY("company");
+const QString ADDRESS("address");
+
 namespace Attribute
 {
 const QString Version("version");

@@ -2,10 +2,9 @@
 #include "driverXml.h"
 #include <QFile>
 #include <QTextStream>
-#include <QMessageBox>
 #include <QDomDocument>
+#include "cgErrorMessage.h"
 
-namespace {
 namespace Tag {
 const QString Tree("tree");
 const QString Record("record");
@@ -16,30 +15,18 @@ const QString Channels("channels");
 const QString Organizations("organizations");
 }
 
-#define ERROR QObject::trUtf8("Error")
-#define ERR_INCORRECT QObject::trUtf8("This file has incorrect format!")
-#define ERR_INCORRECT_VERSION QObject::trUtf8("This file has incorrect version!")
-#define ERR_CANNOT_OPEN QObject::trUtf8("Can not open this file for read or this file has not a text format!")
-
-#define ERROR_MESSAGE_INCORRECT QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT)
-#define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT_VERSION)
-#define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(new QWidget(), ERROR, ERR_CANNOT_OPEN)
-
+namespace {
 QDate string2Data(QString data)
 {
     if(data.isEmpty())
         return DEFAULT_DATE;
-    return QDate::fromString(data,DEFAULT_DATE_FORMAT);
+    return QDate::fromString(data, DEFAULT_DATE_FORMAT);
 }
 
 QString data2String(QDate data)
 {
     return data.toString(DEFAULT_DATE_FORMAT);
 }
-
-const QString CONTACT("contact");
-const QString COMPANY("company");
-const QString ADDRESS("address");
 }
 
 DriverXml::DriverXml()
@@ -53,14 +40,15 @@ DriverXml::~DriverXml()
 bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
 {
     QFile file(path);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        ERROR_MESSAGE_CANNOT_OPEN;
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        ERROR_CANNOT_OPEN;
         return false;
     }
 
     QDomDocument doc;
     QDomElement root = doc.createElement(Tag::Tree);
-    root.setAttribute(Attribute::Version,qApp->applicationVersion());
+    root.setAttribute(Attribute::Version, qApp->applicationVersion());
     doc.appendChild(root);
     for(int i=0; i<data.size(); ++i) {
         QDomElement record = doc.createElement(Tag::Record);
@@ -105,34 +93,36 @@ Data::Contacts *DriverXml::loadData(const QString &path)
 {
     QDomDocument *doc = new QDomDocument();
     QFile file(path);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        ERROR_MESSAGE_CANNOT_OPEN;
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        ERROR_CANNOT_OPEN;
         return 0;
     }
-    if (!doc->setContent(&file)) {
-        ERROR_MESSAGE_INCORRECT;
+    if (!doc->setContent(&file))
+    {
+        ERROR_INCORRECT_FORMAT;
         return 0;
     }
     file.close();
 
     QDomElement rootElement = doc->documentElement();
-    if (rootElement.nodeName() != Tag::Tree) {
-        ERROR_MESSAGE_INCORRECT;
+    if (rootElement.nodeName() != Tag::Tree)
+    {
+        ERROR_INCORRECT_FORMAT;
         return 0;
     }
-    if(rootElement.attribute(Attribute::Version) != qApp->applicationVersion()) {
-        ERROR_MESSAGE_INCORRECT_VERSION;
+    if(rootElement.attribute(Attribute::Version) != qApp->applicationVersion())
+    {
+        ERROR_INCORRECT_VERSION;
         return 0;
     }
 
     Data::Contacts *contacts = new Data::Contacts();
     QDomNode recordNode = rootElement.firstChild();
-     // Read every tag in tree
     while(!recordNode.isNull()) {
         QDomElement recordElement = recordNode.toElement();
         if(!recordElement.isNull()) {
             Data::ContactData *currentContact = new Data::ContactData();
-            // Read every contact data
             xmlToContactData(recordElement,*currentContact);
             contacts->append(currentContact);
         }
@@ -144,8 +134,9 @@ Data::Contacts *DriverXml::loadData(const QString &path)
 bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
 {
     QFile file(path);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        ERROR_MESSAGE_CANNOT_OPEN;
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        ERROR_CANNOT_OPEN;
         return false;
     }
 
@@ -168,7 +159,8 @@ bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
         addresses.appendChild(address);
     }
 
-    for(int id = 0; id < data.countChannels(); ++id) {
+    for(int id = 0; id < data.countChannels(); ++id)
+    {
         QDomElement communication = doc.createElement(Tag::Data);
         communications.appendChild(communication);
     }
@@ -191,23 +183,27 @@ Data::ContactData *DriverXml::loadContact(const QString &path)
 {
     QDomDocument *doc = new QDomDocument();
     QFile file(path);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        ERROR_MESSAGE_CANNOT_OPEN;
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        ERROR_CANNOT_OPEN;
         return 0;
     }
-    if (!doc->setContent(&file)) {
-        ERROR_MESSAGE_INCORRECT;
+    if (!doc->setContent(&file))
+    {
+        ERROR_INCORRECT_FORMAT;
         return 0;
     }
     file.close();
 
     QDomElement recordElement = doc->documentElement();
-    if (recordElement.nodeName() != Tag::Record) {
-        ERROR_MESSAGE_INCORRECT;
+    if (recordElement.nodeName() != Tag::Record)
+    {
+        ERROR_INCORRECT_FORMAT;
         return 0;
     }
-    if(recordElement.attribute(Attribute::Version) != qApp->applicationVersion()) {
-        ERROR_MESSAGE_INCORRECT_VERSION;
+    if(recordElement.attribute(Attribute::Version) != qApp->applicationVersion())
+    {
+        ERROR_INCORRECT_VERSION;
         return 0;
     }
 
@@ -238,8 +234,8 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
             else if(fieldElement.tagName() == Tag::Addresses)
             {
                 QDomNode dataNode = fieldElement.firstChild();
-                // Read all address in contact
-                while(!dataNode.isNull()) {
+                while(!dataNode.isNull())
+                {
                     QDomElement dataElement = dataNode.toElement();
                     QStringList list;
                     list << dataElement.attribute(Address::Country)
@@ -254,8 +250,8 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
             else if(fieldElement.tagName() == Tag::Channels)
             {
                 QDomNode dataNode = fieldElement.firstChild();
-                // Read all communications from the contact
-                while(!dataNode.isNull()) {
+                while(!dataNode.isNull())
+                {
                     QDomElement dataElement = dataNode.toElement();
 
                     QString type = dataElement.attribute(Attribute::Type);
@@ -265,10 +261,11 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
                     dataNode = dataNode.nextSibling();
                 }
             }
-            else if(fieldElement.tagName() == Tag::Organizations) {
+            else if(fieldElement.tagName() == Tag::Organizations)
+            {
                 QDomNode dataNode = fieldElement.firstChild();
-                // Read every organization when working this contact
-                while(!dataNode.isNull()) {
+                while(!dataNode.isNull())
+                {
                     QDomElement dataElement = dataNode.toElement();
                     QStringList list;
                     list << dataElement.attribute(Attribute::Name)

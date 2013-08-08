@@ -22,6 +22,7 @@ private slots:
     void submit();
     void addRecord();
     void removeRecord();
+    void revertAll();
     void dbGenerate();
 
 private:

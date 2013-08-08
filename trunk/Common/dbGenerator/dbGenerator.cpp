@@ -2,31 +2,10 @@
 #include <QString>
 #include <QFile>
 #include <QTextStream>
-#include <QMessageBox>
 #include <QDomDocument>
 #include <QtSql>
 #include <QDebug>
-
-namespace {
-#define ERROR QObject::trUtf8("Error")
-#define ERR_INCORRECT QObject::trUtf8("This file has incorrect format!")
-#define ERR_INCORRECT_VERSION QObject::trUtf8("This file has incorrect version!")
-#define ERR_CANNOT_OPEN QObject::trUtf8("Can not open this file for read or this file has not a text format!")
-#define ERROR_MESSAGE_INCORRECT QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT)
-#define ERROR_MESSAGE_INCORRECT_VERSION QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT_VERSION)
-#define ERROR_MESSAGE_CANNOT_OPEN QMessageBox::warning(new QWidget(), ERROR, ERR_CANNOT_OPEN)
-
-const QString QSQLITE("QSQLITE");
-const QString INSERT("INSERT INTO %1(%2) VALUES(%3);");
-const QString CREATE("CREATE TABLE %1 (%2);");
-const QString MSG_INSERT("Added new data in '%1'");
-const QString VERSION("0.1");
-
-QString setQuotes(QString str)
-{
-    return QString("'%1'").arg(str);
-}
-}
+#include "cgErrorMessage.h"
 
 namespace Scheme {
 const QString tagRoot("cg_db_scheme");
@@ -43,6 +22,19 @@ const QString attrUnq("unq");
 const QString attrDefault("default");
 }
 
+namespace {
+const QString COMMA(", ");
+const QString INSERT("INSERT INTO %1(%2) VALUES(%3);");
+const QString CREATE("CREATE TABLE %1 (%2);");
+const QString MSG_INSERT("Added new data in '%1'");
+const QString VERSION("0.1");
+
+QString setQuotes(QString str)
+{
+    return QString("'%1'").arg(str);
+}
+}
+
 dbGenerator::dbGenerator(const QString &metascheme, const QString &pathToDb) :
     m_metascheme(metascheme),
     m_pathToDb(pathToDb)
@@ -51,19 +43,20 @@ dbGenerator::dbGenerator(const QString &metascheme, const QString &pathToDb) :
 
 bool dbGenerator::generate(const bool fillTable)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
-    db.setDatabaseName(m_pathToDb);
-    if (!db.open())
+    m_db = QSqlDatabase::addDatabase(Db::SQLITE, "generateDb");
+    m_db.setDatabaseName(m_pathToDb);
+    if (!m_db.open())
     {
-        ERROR_MESSAGE_CANNOT_OPEN;
+        ERROR_CANNOT_OPEN;
         return false;
     }
 
-    if(!db.tables().isEmpty())
+    if(!m_db.tables().isEmpty())
     {
         qDebug() << QString("Database %1 already exist").arg(m_pathToDb);
         return true;
     }
+    m_db.close();
 
     QDomElement scheme;
     if(!loadScheme(scheme))
@@ -73,13 +66,11 @@ bool dbGenerator::generate(const bool fillTable)
     if(!tablesNode.isNull())
     {
         QDomNode tableNode = tablesNode.firstChild();
-        QStringList queryText;
-        // Read every table in scheme
+        QStringList queryList;
         while(!tableNode.isNull())
         {
             QDomNode fieldNode = tableNode.firstChild();
             QStringList fields;
-            // Read every field in table
             while(!fieldNode.isNull())
             {
                 QDomElement fieldElement = fieldNode.toElement();
@@ -89,11 +80,11 @@ bool dbGenerator::generate(const bool fillTable)
 
                 fieldNode = fieldNode.nextSibling();
             }
-            QString tableName = tableNode.toElement().attribute(Scheme::attrName);
-            queryText << CREATE.arg(tableName, fields.join(", "));
+            QString table = tableNode.toElement().attribute(Scheme::attrName);
+            queryList << CREATE.arg(table, fields.join(COMMA));
             tableNode = tableNode.nextSibling();
         }
-        createTable(queryText);
+        execQueries(queryList);
     }
 
     if(fillTable)
@@ -102,33 +93,27 @@ bool dbGenerator::generate(const bool fillTable)
         if(!tablesNode.isNull())
         {
             QDomNode tableNode = tablesNode.firstChild();
-            // Read every table in scheme
+            QStringList queryList;
             while(!tableNode.isNull())
             {
-                QDomNode fieldNode = tableNode.firstChild();
-                QStringList fieldsName;
-                QStringList fieldsValue;
-                // Read every field in table
-                while(!fieldNode.isNull())
+                QDomNode fldNode = tableNode.firstChild();
+                QStringList fieldNames;
+                QStringList fieldValues;
+                while(!fldNode.isNull())
                 {
-                    QDomElement fieldElement = fieldNode.toElement();
-                    fieldsName << setQuotes(fieldElement.attribute(Scheme::attrName));
-                    fieldsValue << setQuotes(fieldElement.attribute(Scheme::attrValue));
+                    QDomElement field = fldNode.toElement();
+                    fieldNames << setQuotes(field.attribute(Scheme::attrName));
+                    fieldValues << setQuotes(field.attribute(Scheme::attrValue));
 
-                    fieldNode = fieldNode.nextSibling();
+                    fldNode = fldNode.nextSibling();
                 }
-                QString tableName = tableNode.toElement().attribute(Scheme::attrName);
-
-                QString insertQuery = INSERT.arg(tableName)
-                                            .arg(fieldsName.join(", "))
-                                            .arg(fieldsValue.join(", "));
-                qDebug() << "insertQuery:" << insertQuery;
-                QSqlQuery query;
-                if(query.exec(insertQuery))
-                    qDebug() << MSG_INSERT.arg(tableName);
-
+                QString table = tableNode.toElement().attribute(Scheme::attrName);
+                queryList << INSERT.arg(table)
+                                   .arg(fieldNames.join(COMMA))
+                                   .arg(fieldValues.join(COMMA));
                 tableNode = tableNode.nextSibling();
             }
+            execQueries(queryList);
         }
     }
     return true;
@@ -140,12 +125,12 @@ bool dbGenerator::loadScheme(QDomElement &scheme)
     QFile file(m_metascheme);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        ERROR_MESSAGE_CANNOT_OPEN;
+        ERROR_CANNOT_OPEN;
         return false;
     }
     if (!doc.setContent(&file))
     {
-        ERROR_MESSAGE_INCORRECT;
+        ERROR_INCORRECT_FORMAT;
         return false;
     }
     file.close();
@@ -153,12 +138,12 @@ bool dbGenerator::loadScheme(QDomElement &scheme)
     scheme = doc.documentElement();
     if (scheme.nodeName() != Scheme::tagRoot)
     {
-        ERROR_MESSAGE_INCORRECT;
+        ERROR_INCORRECT_FORMAT;
         return false;
     }
     if(scheme.attribute(Scheme::attrVersion) != VERSION)
     {
-        ERROR_MESSAGE_INCORRECT_VERSION;
+        ERROR_INCORRECT_VERSION;
         return false;
     }
     return true;
@@ -193,13 +178,16 @@ void dbGenerator::parseField(const QDomElement &field, QString &data)
     data.append(d.join(""));
 }
 
-bool dbGenerator::createTable(QStringList &queryText)
+bool dbGenerator::execQueries(const QStringList &list)
 {
-    QSqlQuery query;
-    foreach (QString q, queryText)
+    m_db.open();
+    QSqlQuery query(m_db);
+    foreach (QString q, list)
     {
         qDebug() << QString("execQuery: %1").arg(q);
-        query.exec(q);
+        if(!query.exec(q))
+            query.lastError();
     }
+    m_db.close();
     return true;
 }

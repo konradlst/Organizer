@@ -1,18 +1,11 @@
-#include <QMessageBox>
 #include "driverManager.h"
 #include "driverXml.h"
 #include "driverSqlite.h"
+#include "cgErrorMessage.h"
 
 namespace File {
 const QString XML(".xml");
 const QString SQLITE(".sqlite");
-}
-
-namespace {
-#define ERROR QObject::trUtf8("Error")
-#define ERR_INCORRECT QObject::trUtf8("This file has incorrect format!")
-#define ERR_INCORRECT_SAVE_AS QObject::trUtf8("This file has incorrect format! File will be save as %1")
-#define ERROR_MESSAGE_INCORRECT QMessageBox::warning(new QWidget(), ERROR, ERR_INCORRECT)
 }
 
 DriverManager::DriverManager() :
@@ -47,7 +40,7 @@ Data::Contacts *DriverManager::loadData(const QString &path)
     }
     else
     {
-        ERROR_MESSAGE_INCORRECT;
+        ERROR_INCORRECT_FORMAT;
         return 0;
     }
 }
@@ -68,7 +61,7 @@ Data::ContactData *DriverManager::loadContact(const QString &path)
     }
     else
     {
-        ERROR_MESSAGE_INCORRECT;
+        ERROR_INCORRECT_FORMAT;
         return 0;
     }
 }

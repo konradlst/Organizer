@@ -52,9 +52,9 @@ cgFinance::cgFinance(QWidget *parent)
 
     connect(m_tableComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(currentTableChanged(int)));
     connect(m_btnOpenDb, SIGNAL(clicked()), this, SLOT(dbGenerate()));
-    connect(m_btnAdd, SIGNAL(clicked()), this, SLOT(addRecord()));
+    connect(m_btnAdd,    SIGNAL(clicked()), this, SLOT(addRecord()));
     connect(m_btnSubmit, SIGNAL(clicked()), this, SLOT(submit()));
-    connect(m_btnRevert, SIGNAL(clicked()), m_models->value(m_currentTable), SLOT(revertAll()));
+    connect(m_btnRevert, SIGNAL(clicked()), this, SLOT(revertAll()));
     connect(m_btnRemove, SIGNAL(clicked()), this, SLOT(removeRecord()));
 }
 
@@ -88,24 +88,28 @@ void cgFinance::addRecord()
 void cgFinance::removeRecord()
 {
     QSqlQuery query;
-    int id = m_view->model()->index(m_view->currentIndex().row(),0).data().toInt();
+    int id = m_view->model()->index(m_view->currentIndex().row() ,0).data().toInt();
 
     query.exec(DELETE.arg(m_currentTable)
                      .arg(id));
     m_models->value(m_currentTable)->select();
 }
 
+void cgFinance::revertAll()
+{
+    m_models->value(m_currentTable)->database().rollback();
+    m_models->value(m_currentTable)->revertAll();
+}
+
 void cgFinance::initModel()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","initModel");
+    QSqlDatabase db = QSqlDatabase::addDatabase(Db::SQLITE);
     db.setDatabaseName(m_currentPathToDb);
     db.open();
     m_tables =  db.tables();
-    db.close();
 
     m_currentTable = m_tables.at(0);
     m_tableComboBox->addItems(m_tables);
-
     foreach (QString table, m_tables)
     {
         QSqlTableModel *model = new QSqlTableModel(this);

@@ -12,10 +12,6 @@ const QString FORMAT("format");
 const QString VALUE("value");
 const QString ID("id");
 
-const QString CONTACT("contact");
-const QString COMPANY("company");
-const QString ADDRESS("address");
-
 const QString FLD_CONTACT("alias, name, lastName, otherName, birthday, pathToUserPic, comment");
 const QString FLD_COMPANY("name, phone, department, post, address, dateIn, dateOut, ownerId");
 const QString FLD_ADDRESS("country, city, street, home, apartment, type, ownerId");

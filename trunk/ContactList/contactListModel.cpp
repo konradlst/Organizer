@@ -3,10 +3,6 @@
 #include "contactListModel.h"
 #include "driverManager.h"
 
-namespace {
-const QString CONTACT("contact");
-}
-
 ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent) :
     QWidget(parent),
     m_controller(controller),

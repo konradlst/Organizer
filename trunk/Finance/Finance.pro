@@ -12,6 +12,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Finance
 TEMPLATE = app
+INCLUDEPATH += "../Common/"
 INCLUDEPATH += "../Common/dbGenerator"
 INCLUDEPATH += "./View"
 
@@ -25,7 +26,8 @@ HEADERS  += \
     cgFinance.h \
     ../Common/dbGenerator/dbGenerator.h \
     View/cgAccountList.h \
-    View/cgTransactionList.h
+    View/cgTransactionList.h \
+    ../Common/cgErrorMessage.h
 
 OTHER_FILES += \
     metascheme.xml \

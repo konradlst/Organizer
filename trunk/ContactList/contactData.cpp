@@ -2,10 +2,6 @@
 #include "contactData.h"
 
 namespace {
-const QString CONTACT("contact");
-const QString COMPANY("company");
-const QString ADDRESS("address");
-
 QDate string2Date(QString data) {
     if(data.isEmpty())
         return DEFAULT_DATE;

@@ -37,10 +37,6 @@ QPixmap pathToPixmap(QString path) {
         pix = QPixmap(":/logo");
     return pix.scaled(pix.size());
 }
-
-const QString CONTACT("contact");
-const QString COMPANY("company");
-const QString ADDRESS("address");
 }
 
 ContactListView::ContactListView(ContactListController *controller, QWidget *parent) :
