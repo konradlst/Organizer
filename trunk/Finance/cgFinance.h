@@ -45,6 +45,7 @@ private:
     void createInterface();
     void createAccountTab();
     QString openDb();
+    void setDelegates();
 };
 
 #endif // CGFINANCE_H

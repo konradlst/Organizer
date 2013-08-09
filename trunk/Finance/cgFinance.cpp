@@ -9,6 +9,8 @@
 #include "dbGenerator.h"
 #include "cgAccountList.h"
 #include "cgTransactionList.h"
+#include "cgDelegateManager.h"
+#include "cgComboBoxDelegate.h"
 
 namespace {
 const QString INSERT_DEFAULT = QString("INSERT INTO %1 DEFAULT VALUES");
@@ -127,6 +129,7 @@ void cgFinance::createInterface()
 
     m_view->setModel(m_models->value(m_currentTable));
     m_view->verticalHeader()->hide();
+    setDelegates();
 
     m_btnOpenDb->setDefault(true);
 
@@ -142,7 +145,6 @@ void cgFinance::createInterface()
     vlay->addLayout(hlay);
     vlay->addWidget(m_tabWidget);
 
-    centralWidget->setLayout(vlay);
     setCentralWidget(centralWidget);
     setWindowTitle(tr("Сoncierge: Finance"));
     resize(760,230);
@@ -178,6 +180,18 @@ QString cgFinance::openDb()
     QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,FILE_TYPES);
     m_currentPathToDb = path.isEmpty() ? DEFAULT_DB : path;
     return m_currentPathToDb;
+}
+
+void cgFinance::setDelegates()
+{
+//    QList<QAbstractItemDelegate *> *list =  cgDelegateManager::getDelegateList(m_currentTable);
+
+//    int i=0;
+//    foreach (QAbstractItemDelegate d, list)
+//    {
+//        m_view->setItemDelegateForColumn(i, d);
+//        ++i;
+//    }
 }
 
 void cgFinance::dbGenerate()
