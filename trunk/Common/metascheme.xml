@@ -78,8 +78,8 @@
             <field name="country" type="VARCHAR(127)"/>
             <field name="city" type="VARCHAR(127)"/>
             <field name="street" type="VARCHAR(127)"/>
-            <field name="home" type="VARCHAR(100)"/>
-            <field name="apartment" type="VARCHAR(100)"/>
+            <field name="home" type="VARCHAR(127)"/>
+            <field name="apartment" type="VARCHAR(127)"/>
             <field name="type" type="VARCHAR(100)"/>
             <field name="ownerId" type="INTEGER"/>
         </table>

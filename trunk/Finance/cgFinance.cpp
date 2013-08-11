@@ -184,14 +184,15 @@ QString cgFinance::openDb()
 
 void cgFinance::setDelegates()
 {
-//    QList<QAbstractItemDelegate *> *list =  cgDelegateManager::getDelegateList(m_currentTable);
+    QList<QAbstractItemDelegate *> *list =  cgDelegateManager::getDelegateList(m_currentTable);
 
-//    int i=0;
-//    foreach (QAbstractItemDelegate d, list)
-//    {
-//        m_view->setItemDelegateForColumn(i, d);
-//        ++i;
-//    }
+    int i=0;
+    foreach (QAbstractItemDelegate *d, *list)
+    {
+        if(d)
+            m_view->setItemDelegateForColumn(i, d);
+        ++i;
+    }
 }
 
 void cgFinance::dbGenerate()
