@@ -68,6 +68,7 @@ void cgFinance::currentTableChanged(const int &index)
 {
     m_currentTable = m_tables.at(index);
     m_view->setModel(m_models->value(m_currentTable));
+    setDelegates();
 }
 
 void cgFinance::submit()
@@ -184,6 +185,10 @@ QString cgFinance::openDb()
 
 void cgFinance::setDelegates()
 {
+    for(int i=0; i<m_view->model()->columnCount(); ++i)
+    {
+        m_view->setItemDelegateForColumn(i, 0);
+    }
     QList<QAbstractItemDelegate *> *list =  cgDelegateManager::getDelegateList(m_currentTable);
 
     int i=0;

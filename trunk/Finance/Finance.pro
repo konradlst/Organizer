@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     ../Common/delegates/cgTimeDelegate.cpp \
     ../Common/delegates/cgDateTimeDelegate.cpp \
     ../Common/delegates/cgDelegateManager.cpp \
-    ../Common/delegates/cgCheckBoxDelegate.cpp
+    ../Common/delegates/cgCheckBoxDelegate.cpp \
+    ../Common/delegates/cgSpinBoxDelegate.cpp
 
 HEADERS  += \
     cgFinance.h \
@@ -42,7 +43,8 @@ HEADERS  += \
     ../Common/delegates/cgTimeDelegate.h \
     ../Common/delegates/cgDateTimeDelegate.h \
     ../Common/delegates/cgDelegateManager.h \
-    ../Common/delegates/cgCheckBoxDelegate.h
+    ../Common/delegates/cgCheckBoxDelegate.h \
+    ../Common/delegates/cgSpinBoxDelegate.h
 
 OTHER_FILES += \
     metascheme.xml \

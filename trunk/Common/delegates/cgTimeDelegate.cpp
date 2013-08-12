@@ -17,6 +17,7 @@ QWidget *cgTimeDelegate::createEditor(QWidget *parent,
 {
     QTimeEdit *time = new QTimeEdit(parent);
     time->setTime(QTime::currentTime());
+    time->setDisplayFormat(FORMAT);
     return time;
 }
 

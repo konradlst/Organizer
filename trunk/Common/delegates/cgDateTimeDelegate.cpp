@@ -18,6 +18,7 @@ QWidget *cgDateTimeDelegate::createEditor(QWidget *parent,
     QDateTimeEdit *dateTime = new QDateTimeEdit(parent);
     dateTime->setDateTime(QDateTime::currentDateTime());
     dateTime->setCalendarPopup(true);
+    dateTime->setDisplayFormat(FORMAT);
     return dateTime;
 }
 

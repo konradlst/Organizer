@@ -7,7 +7,7 @@ class cgLineEditDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit cgLineEditDelegate(int maxLength, QString mask, bool readOnly,
+    explicit cgLineEditDelegate(int maxLength, QString mask,
                                 QObject *parent = 0);
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &, const QModelIndex &) const;
     void setEditorData(QWidget *editor, const QModelIndex &index) const;
@@ -17,7 +17,6 @@ public:
 
 private:
     QString m_mask;
-    bool m_readOnly;
     int m_maxLength;
 };
 

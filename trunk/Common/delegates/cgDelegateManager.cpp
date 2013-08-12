@@ -3,11 +3,13 @@
 #include <QFile>
 #include "cgComboBoxDelegate.h"
 #include "cgCheckBoxDelegate.h"
+#include "cgSpinBoxDelegate.h"
 #include "cgDateDelegate.h"
 #include "cgDateTimeDelegate.h"
 #include "cgTimeDelegate.h"
 #include "cgLineEditDelegate.h"
 #include "cgErrorMessage.h"
+#include <QDebug>
 
 namespace Scheme {
 const QString tagRoot("cg_db_scheme");
@@ -26,6 +28,7 @@ namespace delegateName {
 const QString line("lineEdit");
 const QString comboBox("comboBoxEdit");
 const QString checkBox("checkBoxEdit");
+const QString spinBox("spinBoxEdit");
 const QString date("dateEdit");
 const QString time("timeEdit");
 const QString dateTime("dateTimeEdit");
@@ -36,6 +39,7 @@ namespace
 {
 const QString metascheme("./metascheme.xml");
 const int MAX_PARAMS = 3;
+const QString SPLITTER(";");
 const QString VERSION("0.1");
 }
 
@@ -50,24 +54,44 @@ QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString
     QDomElement delegates = scheme.firstChildElement(Scheme::tagDelegates);
     if(!tablesNode.isNull())
     {
-        QDomElement tableElement = tablesNode.firstChildElement(tableName);
-        if(!tableElement.isNull())
+        QDomNode tableNode = tablesNode.firstChildElement(Scheme::tagTable);
+        if(!tableNode.isNull())
         {
-            QString delegateName = tableElement.attribute(Scheme::attrDelegate);
-            QDomElement delegate = delegates.firstChildElement(Scheme::tagDelegate);
-            while (delegate.attribute(Scheme::attrName) != delegateName)
-                delegate.nextSiblingElement(Scheme::tagDelegate);
+            while (tableNode.toElement().attribute(Scheme::attrName) != tableName)
+                tableNode = tableNode.nextSibling();
 
-            QStringList lst;
-            lst << delegate.attribute(Scheme::attrType);
-
-            int i = 1;
-            while (delegate.hasAttribute(Scheme::attrParam + QString::number(i)))
+            QDomNode fieldNode = tableNode.firstChild();
+            while(!fieldNode.isNull())
             {
-                lst << delegate.attribute(Scheme::attrParam + QString::number(i));
-                ++i;
+                QDomElement fieldElement = fieldNode.toElement();
+
+                QString delegateName = fieldElement.attribute(Scheme::attrDelegate);
+                if(!delegateName.isNull())
+                {
+                    QDomNode delegateNode = delegates.firstChildElement(Scheme::tagDelegate);
+                    while (delegateNode.toElement().attribute(Scheme::attrName) != delegateName)
+                        delegateNode = delegateNode.nextSibling();
+
+                    QStringList lst;
+                    QDomElement delegate = delegateNode.toElement();
+                    lst << delegate.attribute(Scheme::attrType);
+
+                    int i = 1;
+                    while (delegate.hasAttribute(Scheme::attrParam + QString::number(i)))
+                    {
+                        lst << delegate.attribute(Scheme::attrParam + QString::number(i));
+                        ++i;
+                    }
+                    list->append(createDelegate(lst));
+                }
+                else
+                {
+                    list->append(0);
+                }
+
+
+                fieldNode = fieldNode.nextSibling();
             }
-            list->append(createDelegate(lst));
         }
     }
     return list;
@@ -109,11 +133,15 @@ QAbstractItemDelegate *cgDelegateManager::createDelegate(QStringList &list)
     QString type = list.at(0);
     if(type == delegateName::line)
     {
-        return new cgLineEditDelegate(list.at(1).toInt(), list.at(2), list.at(3).toInt());
+        return new cgLineEditDelegate(list.at(1).toInt(), list.at(2));
     }
     else if(type == delegateName::comboBox)
     {
-        return new cgComboBoxDelegate(QStringList(list.at(1)), list.at(2).toInt());
+        return new cgComboBoxDelegate(list.at(1).split(SPLITTER), list.at(2).toInt());
+    }
+    else if(type == delegateName::spinBox)
+    {
+        return new cgSpinBoxDelegate(list.at(1).toInt());
     }
     else if(type == delegateName::checkBox)
     {

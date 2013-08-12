@@ -1,11 +1,10 @@
 #include "cgLineEditDelegate.h"
 #include <QLineEdit>
 
-cgLineEditDelegate::cgLineEditDelegate(int maxLength, QString mask, bool readOnly,
+cgLineEditDelegate::cgLineEditDelegate(int maxLength, QString mask,
                                        QObject *parent) :
     QStyledItemDelegate(parent),
     m_mask(mask),
-    m_readOnly(readOnly),
     m_maxLength(maxLength)
 {
 }
@@ -17,7 +16,6 @@ QWidget *cgLineEditDelegate::createEditor(QWidget *parent,
     QLineEdit *delegate = new QLineEdit(parent);
     delegate->setInputMask(m_mask);
     delegate->setMaxLength(m_maxLength);
-    delegate ->setReadOnly(m_readOnly);
     return delegate;
 }
 
