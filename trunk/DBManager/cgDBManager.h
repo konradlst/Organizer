@@ -1,5 +1,5 @@
-#ifndef CGFINANCE_H
-#define CGFINANCE_H
+#ifndef CGDBMANAGER_H
+#define CGDBMANAGER_H
 
 #include <QMainWindow>
 
@@ -10,12 +10,12 @@ class QTableView;
 class QComboBox;
 QT_END_NAMESPACE
 
-class cgFinance : public QMainWindow
+class cgDBManager : public QMainWindow
 {
     Q_OBJECT
 public:
-    cgFinance(QWidget *parent = 0);
-    ~cgFinance();
+    cgDBManager(QWidget *parent = 0);
+    ~cgDBManager();
 
 private slots:
     void currentTableChanged(const int &index);
@@ -27,7 +27,6 @@ private slots:
 
 private:
     QWidget          *centralWidget;
-    QTabWidget       *m_tabWidget;
     QTableView       *m_view;
     QHash<QString, QSqlTableModel *> *m_models;
     QComboBox        *m_tableComboBox;
@@ -36,16 +35,14 @@ private:
     QPushButton      *m_btnSubmit;
     QPushButton      *m_btnRevert;
     QPushButton      *m_btnRemove;
-    QWidget          *m_accountTab;
     QStringList       m_tables;
     QString           m_currentTable;
     QString           m_currentPathToDb;
 
     void initModel();
     void createInterface();
-    void createAccountTab();
     QString openDb();
     void setDelegates();
 };
 
-#endif // CGFINANCE_H
+#endif // CGDBMANAGER_H

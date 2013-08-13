@@ -1,14 +1,15 @@
-#include "cgFinance.h"
-#include <QtGui>
-#include <QtSql>
-#include <QtWidgets>
+#include "cgDBManager.h"
+#include <QSqlQuery>
+#include <QSqlTableModel>
+#include <QTableView>
+#include <QPushButton>
+#include <QBoxLayout>
+#include <QHeaderView>
 #include <QDebug>
 #include <QFileDialog>
 #include <QDir>
 #include <QComboBox>
 #include "dbGenerator.h"
-#include "cgAccountList.h"
-#include "cgTransactionList.h"
 #include "cgDelegateManager.h"
 #include "cgComboBoxDelegate.h"
 
@@ -33,10 +34,9 @@ const QString CG_DEAL("CG_DEAL");
 #define FILE_TYPES QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite)")
 }
 
-cgFinance::cgFinance(QWidget *parent)
+cgDBManager::cgDBManager(QWidget *parent)
     : QMainWindow(parent),
       centralWidget(new QWidget(this)),
-      m_tabWidget(new QTabWidget(centralWidget)),
       m_view(new QTableView),
       m_models(new QHash<QString, QSqlTableModel *>),
       m_tableComboBox(new QComboBox(this)),
@@ -44,12 +44,9 @@ cgFinance::cgFinance(QWidget *parent)
       m_btnAdd(new QPushButton(tr("Add"))),
       m_btnSubmit(new QPushButton(tr("Submit"))),
       m_btnRevert(new QPushButton(tr("&Revert All"))),
-      m_btnRemove(new QPushButton(tr("Remove"))),
-      m_accountTab(new QWidget(this))
+      m_btnRemove(new QPushButton(tr("Remove")))
 {
-    createAccountTab();
     dbGenerate();
-    initModel();
     createInterface();
 
     connect(m_tableComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(currentTableChanged(int)));
@@ -60,18 +57,18 @@ cgFinance::cgFinance(QWidget *parent)
     connect(m_btnRemove, SIGNAL(clicked()), this, SLOT(removeRecord()));
 }
 
-cgFinance::~cgFinance()
+cgDBManager::~cgDBManager()
 {
 }
 
-void cgFinance::currentTableChanged(const int &index)
+void cgDBManager::currentTableChanged(const int &index)
 {
     m_currentTable = m_tables.at(index);
     m_view->setModel(m_models->value(m_currentTable));
     setDelegates();
 }
 
-void cgFinance::submit()
+void cgDBManager::submit()
 {
     m_models->value(m_currentTable)->database().transaction();
     if (m_models->value(m_currentTable)->submitAll())
@@ -81,14 +78,14 @@ void cgFinance::submit()
     m_models->value(m_currentTable)->select();
 }
 
-void cgFinance::addRecord()
+void cgDBManager::addRecord()
 {
     QSqlQuery query;
     query.exec(INSERT_DEFAULT.arg(m_currentTable));
     m_models->value(m_currentTable)->select();
 }
 
-void cgFinance::removeRecord()
+void cgDBManager::removeRecord()
 {
     QSqlQuery query;
     int id = m_view->model()->index(m_view->currentIndex().row() ,0).data().toInt();
@@ -98,13 +95,13 @@ void cgFinance::removeRecord()
     m_models->value(m_currentTable)->select();
 }
 
-void cgFinance::revertAll()
+void cgDBManager::revertAll()
 {
     m_models->value(m_currentTable)->database().rollback();
     m_models->value(m_currentTable)->revertAll();
 }
 
-void cgFinance::initModel()
+void cgDBManager::initModel()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase(Db::SQLITE);
     db.setDatabaseName(m_currentPathToDb);
@@ -121,13 +118,11 @@ void cgFinance::initModel()
         model->select();
         m_models->insert(table, model);
     }
+    currentTableChanged(0);
 }
 
-void cgFinance::createInterface()
+void cgDBManager::createInterface()
 {
-    m_tabWidget->addTab(m_view, QString("Tables"));
-    m_tabWidget->addTab(m_accountTab, QString("Accounts"));
-
     m_view->setModel(m_models->value(m_currentTable));
     m_view->verticalHeader()->hide();
     setDelegates();
@@ -144,51 +139,25 @@ void cgFinance::createInterface()
 
     QVBoxLayout *vlay = new QVBoxLayout(centralWidget);
     vlay->addLayout(hlay);
-    vlay->addWidget(m_tabWidget);
+    vlay->addWidget(m_view);
 
     setCentralWidget(centralWidget);
-    setWindowTitle(tr("Сoncierge: Finance"));
+    setWindowTitle(tr("Сoncierge: DBManager"));
     resize(760,230);
 }
 
-void cgFinance::createAccountTab()
-{
-    cgAccountList *accounts = new cgAccountList;
-    cgTransactionList *transactions = new cgTransactionList;
-
-    m_accountTab->setLayout(new QHBoxLayout);
-    m_accountTab->layout()->addWidget(accounts->view());
-    m_accountTab->layout()->addWidget(transactions->view());
-
-    //test Data
-    cgAccount acc = cgAccount(QString("Deposit"), 70);
-    accounts->addAccount(acc);
-    acc.m_name = QString("Cash");
-    acc.m_value = 24;
-    accounts->addAccount(acc);
-
-    cgTransaction trans;
-    trans.m_comment = "Travel";
-    trans.m_value = -20;
-    transactions->addTransaction(trans);
-    trans.m_comment = "ZP";
-    trans.m_value = 15000;
-    transactions->addTransaction(trans);
-}
-
-QString cgFinance::openDb()
+QString cgDBManager::openDb()
 {
     QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,FILE_TYPES);
     m_currentPathToDb = path.isEmpty() ? DEFAULT_DB : path;
     return m_currentPathToDb;
 }
 
-void cgFinance::setDelegates()
+void cgDBManager::setDelegates()
 {
     for(int i=0; i<m_view->model()->columnCount(); ++i)
-    {
         m_view->setItemDelegateForColumn(i, 0);
-    }
+
     QList<QAbstractItemDelegate *> *list =  cgDelegateManager::getDelegateList(m_currentTable);
 
     int i=0;
@@ -200,9 +169,10 @@ void cgFinance::setDelegates()
     }
 }
 
-void cgFinance::dbGenerate()
+void cgDBManager::dbGenerate()
 {
     QString path = openDb();
     dbGenerator gen = dbGenerator(metascheme, path);
     gen.generate(true);
+    initModel();
 }

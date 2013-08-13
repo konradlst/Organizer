@@ -3,7 +3,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDomDocument>
-#include <QtSql>
+#include <QSqlQuery>
+#include <QSqlError>
 #include <QDebug>
 #include "cgErrorMessage.h"
 
