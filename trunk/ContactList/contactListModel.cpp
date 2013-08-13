@@ -41,12 +41,12 @@ QString *ContactListModel::pathToData() const
     return m_pathToCurrentData;
 }
 
-Data::ContactData *ContactListModel::contact(int index) const
+ContactData *ContactListModel::contact(int index) const
 {
     return m_data->at(index);
 }
 
-Data::ContactData *ContactListModel::newData() const
+ContactData *ContactListModel::newData() const
 {
     m_data->clear();
     m_pathToCurrentData->clear();
@@ -54,15 +54,15 @@ Data::ContactData *ContactListModel::newData() const
     return m_data->at(0);
 }
 
-Data::ContactData *ContactListModel::newContact() const
+ContactData *ContactListModel::newContact() const
 {
-    m_data->append(new Data::ContactData());
+    m_data->append(new ContactData());
     return m_data->last();
 }
 
-Data::ContactData *ContactListModel::copyContact(const int index) const
+ContactData *ContactListModel::copyContact(const int index) const
 {
-    m_data->append(new Data::ContactData(*m_data->at(index)));
+    m_data->append(new ContactData(*m_data->at(index)));
     return m_data->last();
 }
 
@@ -72,9 +72,9 @@ void ContactListModel::deleteContact(const int index)
         m_data->remove(index);
 }
 
-Data::ContactData *ContactListModel::loadContact(const QString &path)
+ContactData *ContactListModel::loadContact(const QString &path)
 {
-    Data::ContactData *data = m_driver->loadContact(path);
+    ContactData *data = m_driver->loadContact(path);
     if(data != 0) {
         m_data->append(data);
         return data;
@@ -82,7 +82,7 @@ Data::ContactData *ContactListModel::loadContact(const QString &path)
     return 0;
 }
 
-void ContactListModel::saveContact(const Data::ContactData &data, const QString &path)
+void ContactListModel::saveContact(const ContactData &data, const QString &path)
 {
     if(m_driver->saveContact(data, path))
             *m_pathToCurrentData = path;
@@ -90,7 +90,7 @@ void ContactListModel::saveContact(const Data::ContactData &data, const QString 
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)
 {
-    Data::ContactData *contact = m_data->at(contactId);
+    ContactData *contact = m_data->at(contactId);
 
     if(key == Attribute::Alias ||
        key == Attribute::Name ||
@@ -127,16 +127,9 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
     }
 }
 
-void ContactListModel::dataChanged(const QPixmap data, QString key, int contactId)
-{
-    Data::ContactData *contact = m_data->at(contactId);
-    if(key == Attribute::Userpic)
-        contact->setUserPic(data);
-}
-
 void ContactListModel::dataChanged(const QDate data, QString key, int contactId)
 {
-    Data::ContactData *contact = m_data->at(contactId);
+    ContactData *contact = m_data->at(contactId);
     if(key == Attribute::Birthday)
         contact->setBirthday(data);
     else if(key == Attribute::DateIn ||

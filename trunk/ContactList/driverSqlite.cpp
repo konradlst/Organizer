@@ -72,26 +72,26 @@ Data::Contacts *DriverSqlite::loadData(const QString &path)
 
     while (query.next())
     {
-        Data::ContactData *contact = new Data::ContactData();
+        ContactData *contact = new ContactData();
         sqlToContactData(query, contact);
         data->append(contact);
     }
     return data;
 }
 
-bool DriverSqlite::saveContact(const Data::ContactData &, const QString &)
+bool DriverSqlite::saveContact(const ContactData &, const QString &)
 {
     //not used
     return false;
 }
 
-Data::ContactData *DriverSqlite::loadContact(const QString &)
+ContactData *DriverSqlite::loadContact(const QString &)
 {
     //not used
     return 0;
 }
 
-void DriverSqlite::contactDataToSql(const Data::ContactData *contact, const int i) const
+void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) const
 {
     QString index = QString::number(i+1);
 
@@ -150,7 +150,7 @@ void DriverSqlite::contactDataToSql(const Data::ContactData *contact, const int 
         qDebug() << query.lastError();
 }
 
-void DriverSqlite::sqlToContactData(const QSqlQuery &query, Data::ContactData *contact) const
+void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact) const
 {
     QStringList list;
     for(int i=1; i<query.record().count(); ++i)

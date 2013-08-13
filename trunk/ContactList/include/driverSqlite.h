@@ -14,12 +14,12 @@ public:
     bool saveData(const Data::Contacts &data, const QString &path);
     Data::Contacts *loadData(const QString &path);
 
-    bool saveContact(const Data::ContactData &, const QString &);
-    Data::ContactData *loadContact(const QString &);
+    bool saveContact(const ContactData &, const QString &);
+    ContactData *loadContact(const QString &);
 
 private:
-    void contactDataToSql(const Data::ContactData *contact, const int i) const;
-    void sqlToContactData(const QSqlQuery &query, Data::ContactData *contact) const;
+    void contactDataToSql(const ContactData *contact, const int i) const;
+    void sqlToContactData(const QSqlQuery &query, ContactData *contact) const;
 };
 
 #endif // DRIVERSQLITE_H

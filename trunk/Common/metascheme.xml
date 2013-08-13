@@ -123,7 +123,7 @@
         <delegate name="int" type="spinBoxEdit" param1="0"/>
         <delegate name="string100" type="lineEdit" param1="100" param2=""/>
         <delegate name="string127" type="lineEdit" param1="127" param2=""/>
-        <delegate name="string256" type="lineEdit" param1="255" param2=""/>
+        <delegate name="string255" type="lineEdit" param1="255" param2=""/>
         <delegate name="checkBox" type="chechBoxEdit"/>
         <delegate name="time" type="timeEdit"/>
         <delegate name="date" type="dateEdit"/>

@@ -4,7 +4,6 @@
 #include <QVector>
 #include <QHash>
 #include <QDate>
-#include <QPixmap>
 #include "channel.h"
 
 enum { ALIAS = 0, NAME, LASTNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
@@ -24,7 +23,6 @@ const QString LastName("lastName");
 const QString OtherName("otherName");
 const QString Birthday("birthday");
 const QString PathToUserPic("pathToUserPic");
-const QString Userpic("userPic");
 const QString Comment("comment");
 const QString Type("type");
 const QString Subtype("subtype");
@@ -90,6 +88,7 @@ struct Company
                phone.isEmpty();
     }
 };
+}
 
 //FIXME !!!!!
 class ContactData
@@ -100,7 +99,6 @@ public:
     QStringList data(const QString &type, const int &index = 0) const;
     void setMainData(const QString &type, const QString &value);
     void setBirthday(const QDate &data);
-    void setUserPic(const QPixmap &data);
     void setMainData(const QStringList &data);
     void setAddressData(const QString &type, const QString &data, const int &index = 0);
     void setAddressData(const QStringList &data, const int &index = 0);
@@ -110,7 +108,6 @@ public:
     void setChannel(const QString &type, const QString &subType, const QString &value);
 
     QDate   birthday()           const;
-    QPixmap userPic()            const;
     QDate dateIn(int index = 0)  const;
     QDate dateOut(int index = 0) const;
 
@@ -121,29 +118,25 @@ public:
     QList<QString> channels(const QString &type) const;
     QList<QString> channelsTypes(const QString &type) const;
 
-    bool isExistChannel(const QString type, const QString &key) const;
-
-    int appendAddress(const QStringList &value);
-    int appendCompany(const QStringList &value);
-
 private:
     QString m_alias;
     QString m_name;
     QString m_surName;
     QString m_otherName;
     QDate m_birthday;
-    QVector<Address> *m_addresses;
+    QVector<Data::Address> *m_addresses;
     typedef QHash<QString,QString> Channels;
     Channels *m_phones;
     Channels *m_emails;
     Channels *m_skypes;
     Channels *m_sites;
-    QVector<Company> *m_companies;
+    QVector<Data::Company> *m_companies;
     QString m_pathToUserPic;
-    QPixmap m_userPic;
     QString m_comment;
 };
 
+namespace Data
+{
 typedef QVector<ContactData *> Contacts;
 };
 

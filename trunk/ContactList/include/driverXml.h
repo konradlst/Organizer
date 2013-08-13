@@ -14,12 +14,12 @@ public:
     bool saveData(const Data::Contacts &data, const QString &path);
     Data::Contacts *loadData(const QString &path);
 
-    bool saveContact(const Data::ContactData &data, const QString &path);
-    Data::ContactData *loadContact(const QString &path);
+    bool saveContact(const ContactData &data, const QString &path);
+    ContactData *loadContact(const QString &path);
 
 private:
-    void xmlToContactData(const QDomElement &record, Data::ContactData &data) const;
-    void contactDataToXml(QDomElement &record, const Data::ContactData &data) const;
+    void xmlToContactData(const QDomElement &record, ContactData &data) const;
+    void contactDataToXml(QDomElement &record, const ContactData &data) const;
 };
 
 #endif // DRIVERXML_H

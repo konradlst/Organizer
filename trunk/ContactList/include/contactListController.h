@@ -17,11 +17,11 @@ public:
 
     QStringList *contactList() const;
     QString *pathToData() const;
-    Data::ContactData *contact(int index) const;
-    Data::ContactData *newData() const;
-    Data::ContactData *newContact() const;
-    Data::ContactData *copyContact(const int index) const;
-    Data::ContactData *loadContact(const QString &path);
+    ContactData *contact(int index) const;
+    ContactData *newData() const;
+    ContactData *newContact() const;
+    ContactData *copyContact(const int index) const;
+    ContactData *loadContact(const QString &path);
     QStringList *loadData(const QString &path);
 
     SettingsView *getSettingsPtr();

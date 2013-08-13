@@ -45,7 +45,7 @@ Data::Contacts *DriverManager::loadData(const QString &path)
     }
 }
 
-bool DriverManager::saveContact(const Data::ContactData &data, const QString &path)
+bool DriverManager::saveContact(const ContactData &data, const QString &path)
 {
     if(path.endsWith(File::XML))
         return m_xml->saveContact(data, path);
@@ -53,7 +53,7 @@ bool DriverManager::saveContact(const Data::ContactData &data, const QString &pa
         return m_xml->saveContact(data, path + File::XML);
 }
 
-Data::ContactData *DriverManager::loadContact(const QString &path)
+ContactData *DriverManager::loadContact(const QString &path)
 {
     if(path.endsWith(File::XML))
     {

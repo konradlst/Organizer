@@ -14,8 +14,8 @@ public:
     virtual bool saveData(const Data::Contacts &data, const QString &path) = 0;
     virtual Data::Contacts *loadData(const QString &path) = 0;
 
-    virtual bool saveContact(const Data::ContactData &data, const QString &path) = 0;
-    virtual Data::ContactData *loadContact(const QString &path) = 0;
+    virtual bool saveContact(const ContactData &data, const QString &path) = 0;
+    virtual ContactData *loadContact(const QString &path) = 0;
 };
 
 #endif // DRIVER_H

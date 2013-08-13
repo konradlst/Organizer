@@ -18,8 +18,8 @@ public:
     bool saveData(const Data::Contacts &data, const QString &path);
     Data::Contacts *loadData(const QString &path);
 
-    bool saveContact(const Data::ContactData &data, const QString &path);
-    Data::ContactData *loadContact(const QString &path);
+    bool saveContact(const ContactData &data, const QString &path);
+    ContactData *loadContact(const QString &path);
 
 private:
     DriverXml *m_xml;

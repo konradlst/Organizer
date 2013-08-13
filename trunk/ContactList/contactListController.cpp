@@ -12,11 +12,10 @@ ContactListController::ContactListController(QWidget *parent) :
 {
     m_view->show();
     connect(m_view, SIGNAL(dataChanged(QString,QString,int)), m_model, SLOT(dataChanged(QString,QString,int)));
-    connect(m_view, SIGNAL(dataChanged(QPixmap,QString,int)), m_model, SLOT(dataChanged(QPixmap,QString,int)));
     connect(m_view, SIGNAL(dataChanged(QDate,QString,int)), m_model, SLOT(dataChanged(QDate,QString,int)));
     connect(m_view, SIGNAL(deleteContact(int)), m_model, SLOT(deleteContact(int)));
     connect(m_view, SIGNAL(saveData(QString)), m_model, SLOT(saveData(QString)));
-    connect(m_view, SIGNAL(saveContact(Data::ContactData,QString)), m_model, SLOT(saveContact(Data::ContactData,QString)));
+    connect(m_view, SIGNAL(saveContact(ContactData,QString)), m_model, SLOT(saveContact(ContactData,QString)));
     connect(m_settings, SIGNAL(logging(bool,QString)), SLOT(logging(bool,QString)));
 }
 
@@ -30,27 +29,27 @@ QString *ContactListController::pathToData() const
     return m_model->pathToData();
 }
 
-Data::ContactData *ContactListController::contact(int index) const
+ContactData *ContactListController::contact(int index) const
 {
     return m_model->contact(index);
 }
 
-Data::ContactData *ContactListController::newData() const
+ContactData *ContactListController::newData() const
 {
     return m_model->newData();
 }
 
-Data::ContactData *ContactListController::newContact() const
+ContactData *ContactListController::newContact() const
 {
     return m_model->newContact();
 }
 
-Data::ContactData *ContactListController::copyContact(const int index) const
+ContactData *ContactListController::copyContact(const int index) const
 {
     return m_model->copyContact(index);
 }
 
-Data::ContactData *ContactListController::loadContact(const QString &path)
+ContactData *ContactListController::loadContact(const QString &path)
 {
     return m_model->loadContact(path);
 }

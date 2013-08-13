@@ -16,20 +16,19 @@ public:
 
     QStringList *contactList() const;
     QString *pathToData() const;
-    Data::ContactData *contact(int index) const;
-    Data::ContactData *newData() const;
-    Data::ContactData *newContact() const;
-    Data::ContactData *copyContact(const int index) const;
+    ContactData *contact(int index) const;
+    ContactData *newData() const;
+    ContactData *newContact() const;
+    ContactData *copyContact(const int index) const;
 
-    Data::ContactData *loadContact(const QString &path);
+    ContactData *loadContact(const QString &path);
 
 public slots:
     void dataChanged(const QString data, QString key, int contactId);
-    void dataChanged(const QPixmap data, QString key, int contactId);
     void dataChanged(const QDate data, QString key, int contactId);
     void deleteContact(const int index);
     void saveData(const QString &path);
-    void saveContact(const Data::ContactData &data, const QString &path);
+    void saveContact(const ContactData &data, const QString &path);
 
 private:
     ContactListController *m_controller;

@@ -50,7 +50,8 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
     QDomElement root = doc.createElement(Tag::Tree);
     root.setAttribute(Attribute::Version, qApp->applicationVersion());
     doc.appendChild(root);
-    for(int i=0; i<data.size(); ++i) {
+    for(int i=0; i<data.size(); ++i)
+    {
         QDomElement record = doc.createElement(Tag::Record);
         QDomElement field = doc.createElement(Tag::Data);
         QDomElement addresses = doc.createElement(Tag::Addresses);
@@ -122,7 +123,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     while(!recordNode.isNull()) {
         QDomElement recordElement = recordNode.toElement();
         if(!recordElement.isNull()) {
-            Data::ContactData *currentContact = new Data::ContactData();
+            ContactData *currentContact = new ContactData();
             xmlToContactData(recordElement,*currentContact);
             contacts->append(currentContact);
         }
@@ -131,7 +132,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     return contacts;
 }
 
-bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
+bool DriverXml::saveContact(const ContactData &data, const QString &path)
 {
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -179,7 +180,7 @@ bool DriverXml::saveContact(const Data::ContactData &data, const QString &path)
     return true;
 }
 
-Data::ContactData *DriverXml::loadContact(const QString &path)
+ContactData *DriverXml::loadContact(const QString &path)
 {
     QDomDocument *doc = new QDomDocument();
     QFile file(path);
@@ -207,13 +208,13 @@ Data::ContactData *DriverXml::loadContact(const QString &path)
         return 0;
     }
 
-    Data::ContactData *currentContact = new Data::ContactData;
+    ContactData *currentContact = new ContactData;
     xmlToContactData(recordElement,*currentContact);
 
     return currentContact;
 }
 
-void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &data) const
+void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) const
 {
     QDomNode fieldNode = record.firstChild();
     while(!fieldNode.isNull()) {
@@ -243,7 +244,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
                          << dataElement.attribute(Address::Street)
                          << dataElement.attribute(Address::Home)
                          << dataElement.attribute(Address::Apartment);
-                    data.appendAddress(list);
+                    data.setAddressData(list, data.countAddresses());
                     dataNode = dataNode.nextSibling();
                 }
             }
@@ -275,7 +276,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
                          << dataElement.attribute(Attribute::Phone)
                          << dataElement.attribute(Attribute::DateIn)
                          << dataElement.attribute(Attribute::DateOut);
-                    data.appendCompany(list);
+                    data.setCompanyData(list, data.countCompanies());
                     dataNode = dataNode.nextSibling();
                 }
             }
@@ -284,7 +285,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, Data::ContactData &d
     }
 }
 
-void DriverXml::contactDataToXml(QDomElement &record, const Data::ContactData &data) const
+void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) const
 {
     QDomElement field = record.firstChildElement(Tag::Data);
     field.setAttribute(Attribute::Alias, data.data(CONTACT).at(ALIAS));

@@ -20,15 +20,14 @@ public:
 
 signals:
     void dataChanged(QString, QString, int);
-    void dataChanged(QPixmap, QString, int);
     void dataChanged(QDate, QString, int);
     void deleteContact(int);
     void saveData(QString);
-    void saveContact(const Data::ContactData &, const QString &);
+    void saveContact(const ContactData &, const QString &);
 
 private:
     void activateContactBotton();
-    void setContactData(const Data::ContactData *contact);
+    void setContactData(const ContactData *contact);
     void setDefaultSettings();
     void clearAll();
     void refreshContactList(int currentIndex = 0);
