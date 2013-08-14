@@ -16,10 +16,13 @@ SOURCES += main.cpp\
     cgFinanceView.cpp \
     View/cgAccountList.cpp \
     View/cgTransactionList.cpp \
+    View/cgTransactionView.cpp
 
 HEADERS  += \
     cgFinanceView.h \
     View/cgAccountList.h \
     View/cgTransactionList.h \
+    View/cgTransactionView.h
 
-FORMS    += cgFinanceView.ui
+FORMS    += cgFinanceView.ui \
+    View/cgTransactionView.ui

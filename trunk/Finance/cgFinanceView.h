@@ -6,6 +6,8 @@
 namespace Ui {
 class cgFinanceView;
 }
+class cgAccountList;
+class cgTransactionList;
 
 class cgFinanceView : public QMainWindow
 {
@@ -14,9 +16,12 @@ class cgFinanceView : public QMainWindow
 public:
     explicit cgFinanceView(QWidget *parent = 0);
     ~cgFinanceView();
+    bool addTransaction();
     
 private:
     Ui::cgFinanceView *ui;
+    cgAccountList *m_accounts;
+    cgTransactionList *m_transactions;
 
     void createAccountTab();
 };

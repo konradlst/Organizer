@@ -6,7 +6,9 @@
 
 cgFinanceView::cgFinanceView(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::cgFinanceView)
+    ui(new Ui::cgFinanceView),
+    m_accounts(new cgAccountList),
+    m_transactions(new cgTransactionList)
 {
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->vLayout);
@@ -19,27 +21,31 @@ cgFinanceView::~cgFinanceView()
     delete ui;
 }
 
+bool cgFinanceView::addTransaction()
+{
+    cgTransaction transaction;
+    m_transactions->addTransaction(transaction);
+    return true;
+}
+
 void cgFinanceView::createAccountTab()
 {
-    cgAccountList *accounts = new cgAccountList;
-    cgTransactionList *transactions = new cgTransactionList;
-
     ui->tabMain->setLayout(new QHBoxLayout);
-    ui->tabMain->layout()->addWidget(accounts->view());
-    ui->tabMain->layout()->addWidget(transactions->view());
+    ui->tabMain->layout()->addWidget(m_accounts->view());
+    ui->tabMain->layout()->addWidget(m_transactions->view());
 
     //test Data
     cgAccount acc = cgAccount(QString("Deposit"), 70);
-    accounts->addAccount(acc);
+    m_accounts->addAccount(acc);
     acc.m_name = QString("Cash");
     acc.m_value = 24;
-    accounts->addAccount(acc);
+    m_accounts->addAccount(acc);
 
     cgTransaction trans;
     trans.m_comment = "Travel";
     trans.m_value = -20;
-    transactions->addTransaction(trans);
+    m_transactions->addTransaction(trans);
     trans.m_comment = "ZP";
     trans.m_value = 15000;
-    transactions->addTransaction(trans);
+    m_transactions->addTransaction(trans);
 }
