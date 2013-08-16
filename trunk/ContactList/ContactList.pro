@@ -27,8 +27,8 @@ SOURCES += main.cpp\
     driverSqlite.cpp \
     driverManager.cpp \
     contactView.cpp \
-    channel.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
+    ../Common/cgMetaschemeConst.cpp
 
 HEADERS  += \
     include/contactListView.h \
@@ -42,9 +42,9 @@ HEADERS  += \
     include/driverSqlite.h \
     include/driverManager.h \
     include/contactView.h \
-    include/channel.h \
     ../Common/dbGenerator/dbGenerator.h \
-    ../Common/cgErrorMessage.h
+    ../Common/cgErrorMessage.h \
+    ../Common/cgMetaschemeConst.h
 
 FORMS    += contactListView.ui \
     settingsView.ui

@@ -9,8 +9,8 @@
 class Driver
 {
 public:
-    explicit Driver(){};
-    virtual ~Driver(){};
+    explicit Driver() {};
+    virtual ~Driver() {};
     virtual bool saveData(const Data::Contacts &data, const QString &path) = 0;
     virtual Data::Contacts *loadData(const QString &path) = 0;
 

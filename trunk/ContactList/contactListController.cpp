@@ -2,21 +2,25 @@
 #include "contactListView.h"
 #include "contactListModel.h"
 #include "settingsView.h"
+#include "myLog.h"
 
-ContactListController::ContactListController(QWidget *parent) :
-    QWidget(parent),
-    m_log(myLog::instance()),
-    m_settings(new SettingsView(this)),
-    m_model(new ContactListModel(this)),
-    m_view(new ContactListView(this))
+ContactListController::ContactListController(QWidget *parent)
+    : QWidget(parent),
+      m_log(myLog::instance()),
+      m_settings(new SettingsView(this)),
+      m_model(new ContactListModel(this)),
+      m_view(new ContactListView(this))
 {
     m_view->show();
-    connect(m_view, SIGNAL(dataChanged(QString,QString,int)), m_model, SLOT(dataChanged(QString,QString,int)));
-    connect(m_view, SIGNAL(dataChanged(QDate,QString,int)), m_model, SLOT(dataChanged(QDate,QString,int)));
+    connect(m_view, SIGNAL(dataChanged(QString, QString,int)),
+            m_model, SLOT(dataChanged(QString, QString,int)));
+    connect(m_view, SIGNAL(dataChanged(QDate, QString,int)),
+            m_model, SLOT(dataChanged(QDate, QString,int)));
     connect(m_view, SIGNAL(deleteContact(int)), m_model, SLOT(deleteContact(int)));
     connect(m_view, SIGNAL(saveData(QString)), m_model, SLOT(saveData(QString)));
-    connect(m_view, SIGNAL(saveContact(ContactData,QString)), m_model, SLOT(saveContact(ContactData,QString)));
-    connect(m_settings, SIGNAL(logging(bool,QString)), SLOT(logging(bool,QString)));
+    connect(m_view, SIGNAL(saveContact(ContactData, QString)),
+            m_model, SLOT(saveContact(ContactData, QString)));
+    connect(m_settings, SIGNAL(logging(bool, QString)), SLOT(logging(bool, QString)));
 }
 
 QStringList *ContactListController::contactList() const

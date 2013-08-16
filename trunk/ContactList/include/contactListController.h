@@ -2,9 +2,9 @@
 #define CONTACTLISTCONTROLLER_H
 
 #include <QWidget>
-#include "contactData.h"
-#include "myLog.h"
 
+class myLog;
+class ContactData;
 class ContactListView;
 class ContactListModel;
 class SettingsView;

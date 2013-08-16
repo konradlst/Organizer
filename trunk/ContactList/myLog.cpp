@@ -2,18 +2,20 @@
 #include <QFile>
 #include <QDateTime>
 
-namespace {
+namespace
+{
 #define CURRENT_DATETIME QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz")
 
-QString logMessage(QString data) {
+QString logMessage(QString data)
+{
     return CURRENT_DATETIME + " " + data + "\n";
 }
 }
 
-myLog::myLog() :
-    m_path(new QString(Log::defaultPathToLog)),
-    m_logFile(new QFile(*m_path)),
-    m_logging(true)
+myLog::myLog()
+    : m_path(new QString(Log::defaultPathToLog)),
+      m_logFile(new QFile(*m_path)),
+      m_logging(true)
 {
 }
 
@@ -32,7 +34,8 @@ myLog *myLog::instance()
 
 void myLog::operator <<(const QString &data)
 {
-    if(m_logging) {
+    if(m_logging)
+    {
         m_logFile->open(QIODevice::Append | QIODevice::Text);
         m_logFile->write(logMessage(data).toLatin1());
         m_logFile->close();

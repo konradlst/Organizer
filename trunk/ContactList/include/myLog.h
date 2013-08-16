@@ -6,7 +6,8 @@
 
 class QFile;
 
-namespace Log {
+namespace Log
+{
 const QString StartApp = QObject::trUtf8("Start Application");
 const QString StopApp = QObject::trUtf8("Stop Application");
 

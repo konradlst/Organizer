@@ -4,7 +4,6 @@
 #include <QVector>
 #include <QHash>
 #include <QDate>
-#include "channel.h"
 
 enum { ALIAS = 0, NAME, LASTNAME, OTHERNAME, BIRTHDAY, USER_PIC, COMMENT };
 enum { COMP_NAME = 0, PHONE, DEPARTMENT, POST, COMP_ADDRESS, DATEIN, DATEOUT };
@@ -45,6 +44,14 @@ const QString City("city");
 const QString Street("street");
 const QString Home("home");
 const QString Apartment("apartment");
+}
+
+namespace Channel
+{
+const QString Phone("Phone");
+const QString Email("Email");
+const QString Skype("Skype");
+const QString Site("Site");
 }
 
 namespace Data
@@ -100,12 +107,15 @@ public:
     void setMainData(const QString &type, const QString &value);
     void setBirthday(const QDate &data);
     void setMainData(const QStringList &data);
-    void setAddressData(const QString &type, const QString &data, const int &index = 0);
+    void setAddressData(const QString &type, const QString &data,
+                        const int &index = 0);
     void setAddressData(const QStringList &data, const int &index = 0);
-    void setCompanyData(const QString &type, const QString &data, const int &index = 0);
+    void setCompanyData(const QString &type, const QString &data,
+                        const int &index = 0);
     void setCompanyData(const QString &type, const QDate &data, const int &index = 0);
     void setCompanyData(const QStringList &data, const int &index = 0);
-    void setChannel(const QString &type, const QString &subType, const QString &value);
+    void setChannel(const QString &type, const QString &subType,
+                    const QString &value);
 
     QDate   birthday()           const;
     QDate dateIn(int index = 0)  const;

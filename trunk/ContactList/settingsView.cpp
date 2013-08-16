@@ -5,45 +5,54 @@
 #include "settingsView.h"
 #include "ui_settingsView.h"
 
-namespace {
-const int ENGLISH = 0;
-const int RUSSIAN = 1;
-const QString defaultPathToLog("ContactList.log");
-
-namespace Settings {
+namespace Settings
+{
 const QString LANGUAGE("main/Language");
 const QString DEFAULTDATA("main/DefaultData");
 const QString PATH_TO_DEFAULTDATA("main/PathToDefaultData");
 const QString LOGGING("main/Logging");
 const QString PATH_TO_LOGFILE("main/PathToLogFile");
 }
-#define DIALOG_CHOOSE_LOG_FILE QFileDialog::getSaveFileName(this,QObject::trUtf8("Choose Log File"))
-#define DIALOG_CHOOSE_CONTACT_LIST QFileDialog::getOpenFileName(this,QObject::trUtf8("Choose Contact List"))
+
+namespace
+{
+const int ENGLISH = 0;
+const int RUSSIAN = 1;
+const QString defaultPathToLog("ContactList.log");
+
+#define DIALOG_CHOOSE_LOG_FILE QFileDialog::getSaveFileName(this, QObject::trUtf8("Choose Log File"))
+#define DIALOG_CHOOSE_CONTACT_LIST QFileDialog::getOpenFileName(this, QObject::trUtf8("Choose Contact List"))
 }
 
-SettingsView::SettingsView(ContactListController *controller, QDialog *parent) :
-    QDialog(parent),
-    ui(new Ui::SettingsView),
-    m_controller(controller),
-    m_settings(new QSettings(QSettings::IniFormat,QSettings::UserScope,
-                                "AnBat","ContactList")),
-    m_RuTranslator(new QTranslator),
-    m_qtRuTranslator(new QTranslator)
+SettingsView::SettingsView(ContactListController *controller, QDialog *parent)
+    : QDialog(parent),
+      ui(new Ui::SettingsView),
+      m_controller(controller),
+      m_settings(new QSettings(QSettings::IniFormat,QSettings::UserScope,
+                               "AnBat","ContactList")),
+      m_RuTranslator(new QTranslator),
+      m_qtRuTranslator(new QTranslator)
 {
     ui->setupUi(this);
     ui->lbChangeLangMsg->setVisible(false);
     setLayout(ui->mainLayout);
     loadSettings();
 
-    connect(ui->pbCancel,SIGNAL(clicked()),SLOT(close()));
-    connect(ui->pbChooseContactList,SIGNAL(clicked()),SLOT(chooseContactList()));
-    connect(ui->pbChooseLogFile,SIGNAL(clicked()),SLOT(choosePathToLog()));
-    connect(ui->pbDefault,SIGNAL(clicked()),SLOT(setDefaultSettings()));
-    connect(ui->cbLanguage,SIGNAL(currentIndexChanged(int)),SLOT(languageChanged(int)));
-    connect(ui->gbLogging,SIGNAL(clicked(bool)),SLOT(loggingChanged(bool)));
-    connect(ui->lePathToLogFile,SIGNAL(textChanged(QString)),SLOT(pathToLogChanged(QString)));
-    connect(ui->gbDefaultContactList,SIGNAL(clicked(bool)),SLOT(defaultDataChanged(bool)));
-    connect(ui->lePathToContactList,SIGNAL(textChanged(QString)),SLOT(pathToDefaultData(QString)));
+    connect(ui->pbCancel, SIGNAL(clicked()), SLOT(close()));
+    connect(ui->pbChooseContactList, SIGNAL(clicked()), SLOT(chooseContactList()));
+    connect(ui->pbChooseLogFile, SIGNAL(clicked()), SLOT(choosePathToLog()));
+    connect(ui->pbDefault, SIGNAL(clicked()),
+            SLOT(setDefaultSettings()));
+    connect(ui->cbLanguage, SIGNAL(currentIndexChanged(int)),
+            SLOT(languageChanged(int)));
+    connect(ui->gbLogging, SIGNAL(clicked(bool)),
+            SLOT(loggingChanged(bool)));
+    connect(ui->lePathToLogFile, SIGNAL(textChanged(QString)),
+            SLOT(pathToLogChanged(QString)));
+    connect(ui->gbDefaultContactList, SIGNAL(clicked(bool)),
+            SLOT(defaultDataChanged(bool)));
+    connect(ui->lePathToContactList, SIGNAL(textChanged(QString)),
+            SLOT(pathToDefaultData(QString)));
 }
 
 SettingsView::~SettingsView()
@@ -53,8 +62,10 @@ SettingsView::~SettingsView()
 
 QPair<bool, QString> *SettingsView::defaultData()
 {
-    return new QPair<bool, QString>(m_settings->value(Settings::DEFAULTDATA).toBool(),
-                                    m_settings->value(Settings::PATH_TO_DEFAULTDATA).toString());
+    QPair<bool, QString> *p = new QPair<bool, QString>();
+    p->first = m_settings->value(Settings::DEFAULTDATA).toBool();
+    p->second = m_settings->value(Settings::PATH_TO_DEFAULTDATA).toString();
+    return p;
 }
 
 void SettingsView::chooseContactList()
@@ -91,15 +102,17 @@ void SettingsView::setDefaultSettings()
 
 void SettingsView::languageChanged(int language)
 {
-    if(language != m_currentLanguage) {
-        setFixedSize(width(),height()+15);
+    if(language != m_currentLanguage)
+    {
+        setFixedSize(width(), height()+15);
         ui->lbChangeLangMsg->setVisible(true);
     }
-    else {
-        setFixedSize(width(),height()-15);
+    else
+    {
+        setFixedSize(width(), height()-15);
         ui->lbChangeLangMsg->setVisible(false);
     }
-    m_settings->setValue(Settings::LANGUAGE,QVariant(language));
+    m_settings->setValue(Settings::LANGUAGE, QVariant(language));
 }
 
 void SettingsView::loggingChanged(bool flag)
@@ -130,23 +143,25 @@ void SettingsView::loadSettings()
     m_RuTranslator->load(":/lang_ru_RU");
     m_qtRuTranslator->load(":/qt_ru_RU");
 
-    if(QFile(m_settings->fileName()).exists()) {
-        ui->cbLanguage->setCurrentIndex(m_settings->value(Settings::LANGUAGE).toInt());
-        ui->gbDefaultContactList->setChecked(m_settings->value(Settings::DEFAULTDATA).toBool());
-        ui->lePathToContactList->setText(m_settings->value(Settings::PATH_TO_DEFAULTDATA).toString());
-        ui->gbLogging->setChecked(m_settings->value(Settings::LOGGING).toBool());
-        ui->lePathToLogFile->setText(m_settings->value(Settings::PATH_TO_LOGFILE).toString());
-
-        emit logging(m_settings->value(Settings::LOGGING).toBool(),
-                     m_settings->value(Settings::PATH_TO_LOGFILE).toString());
-
-        if(ui->cbLanguage->currentIndex() == RUSSIAN) {
-            qApp->installTranslator(m_RuTranslator);
-            qApp->installTranslator(m_qtRuTranslator);
-            m_currentLanguage = 1;
-        }
-    }
-    else {
+    if(!QFile(m_settings->fileName()).exists())
+    {
         setDefaultSettings();
+        return;
+    }
+
+    ui->cbLanguage->setCurrentIndex(m_settings->value(Settings::LANGUAGE).toInt());
+    ui->gbDefaultContactList->setChecked(m_settings->value(Settings::DEFAULTDATA).toBool());
+    ui->lePathToContactList->setText(m_settings->value(Settings::PATH_TO_DEFAULTDATA).toString());
+    ui->gbLogging->setChecked(m_settings->value(Settings::LOGGING).toBool());
+    ui->lePathToLogFile->setText(m_settings->value(Settings::PATH_TO_LOGFILE).toString());
+
+    emit logging(m_settings->value(Settings::LOGGING).toBool(),
+                 m_settings->value(Settings::PATH_TO_LOGFILE).toString());
+
+    if(ui->cbLanguage->currentIndex() == RUSSIAN)
+    {
+        qApp->installTranslator(m_RuTranslator);
+        qApp->installTranslator(m_qtRuTranslator);
+        m_currentLanguage = 1;
     }
 }

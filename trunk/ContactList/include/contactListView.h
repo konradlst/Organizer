@@ -2,6 +2,7 @@
 #define CONTACTLISTVIEW_H
 
 #include <QMainWindow>
+#include <QDate>
 #include "contactListController.h"
 
 namespace Ui {
@@ -13,7 +14,6 @@ class SettingsView;
 class ContactListView : public QMainWindow
 {
     Q_OBJECT
-    
 public:
     explicit ContactListView(ContactListController *controller, QWidget *parent = 0);
     ~ContactListView();

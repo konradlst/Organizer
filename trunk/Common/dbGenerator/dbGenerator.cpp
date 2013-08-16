@@ -1,34 +1,17 @@
 #include "dbGenerator.h"
-#include <QString>
-#include <QFile>
-#include <QTextStream>
-#include <QDomDocument>
+#include <QDomElement>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
 #include "cgErrorMessage.h"
+#include "cgMetaschemeConst.h"
 
-namespace Scheme {
-const QString tagRoot("cg_db_scheme");
-const QString tagTables("tables");
-const QString tagValues("values");
-const QString tagTable("table");
-const QString attrVersion("version");
-const QString attrName("name");
-const QString attrValue("value");
-const QString attrType("type");
-const QString attrPk("pk");
-const QString attrNullable("nullable");
-const QString attrUnq("unq");
-const QString attrDefault("default");
-}
-
-namespace {
-const QString COMMA(", ");
-const QString INSERT("INSERT INTO %1(%2) VALUES(%3);");
-const QString CREATE("CREATE TABLE %1 (%2);");
-const QString MSG_INSERT("Added new data in '%1'");
-const QString VERSION("0.1");
+namespace
+{
+const QString CONNECTION_NAME("generateDb");
+const QString DB_EXIST("Database %1 already exist");
+const QString TRUE("1");
+const QString FALSE("0");
 
 QString setQuotes(QString str)
 {
@@ -36,15 +19,14 @@ QString setQuotes(QString str)
 }
 }
 
-dbGenerator::dbGenerator(const QString &metascheme, const QString &pathToDb) :
-    m_metascheme(metascheme),
-    m_pathToDb(pathToDb)
+dbGenerator::dbGenerator(const QString &pathToDb)
+    : m_pathToDb(pathToDb)
 {
 }
 
 bool dbGenerator::generate(const bool fillTable)
 {
-    m_db = QSqlDatabase::addDatabase(Db::SQLITE, "generateDb");
+    m_db = QSqlDatabase::addDatabase(SQL::SQLITE, CONNECTION_NAME);
     m_db.setDatabaseName(m_pathToDb);
     if (!m_db.open())
     {
@@ -54,13 +36,13 @@ bool dbGenerator::generate(const bool fillTable)
 
     if(!m_db.tables().isEmpty())
     {
-        qDebug() << QString("Database %1 already exist").arg(m_pathToDb);
+        qDebug() << DB_EXIST.arg(m_pathToDb);
         return true;
     }
     m_db.close();
 
     QDomElement scheme;
-    if(!loadScheme(scheme))
+    if(!Scheme::loadScheme(scheme))
         return false;
 
     QDomNode tablesNode = scheme.firstChildElement(Scheme::tagTables);
@@ -82,7 +64,7 @@ bool dbGenerator::generate(const bool fillTable)
                 fieldNode = fieldNode.nextSibling();
             }
             QString table = tableNode.toElement().attribute(Scheme::attrName);
-            queryList << CREATE.arg(table, fields.join(COMMA));
+            queryList << SQL::CREATE.arg(table, fields.join(SQL::COMMA));
             tableNode = tableNode.nextSibling();
         }
         execQueries(queryList);
@@ -91,61 +73,31 @@ bool dbGenerator::generate(const bool fillTable)
     if(fillTable)
     {
         tablesNode = scheme.firstChildElement(Scheme::tagValues);
-        if(!tablesNode.isNull())
+        if(tablesNode.isNull())
+            return false;
+
+        QDomNode tableNode = tablesNode.firstChild();
+        QStringList queryList;
+        while(!tableNode.isNull())
         {
-            QDomNode tableNode = tablesNode.firstChild();
-            QStringList queryList;
-            while(!tableNode.isNull())
+            QDomNode fldNode = tableNode.firstChild();
+            QStringList fieldNames;
+            QStringList fieldValues;
+            while(!fldNode.isNull())
             {
-                QDomNode fldNode = tableNode.firstChild();
-                QStringList fieldNames;
-                QStringList fieldValues;
-                while(!fldNode.isNull())
-                {
-                    QDomElement field = fldNode.toElement();
-                    fieldNames << setQuotes(field.attribute(Scheme::attrName));
-                    fieldValues << setQuotes(field.attribute(Scheme::attrValue));
+                QDomElement field = fldNode.toElement();
+                fieldNames << setQuotes(field.attribute(Scheme::attrName));
+                fieldValues << setQuotes(field.attribute(Scheme::attrValue));
 
-                    fldNode = fldNode.nextSibling();
-                }
-                QString table = tableNode.toElement().attribute(Scheme::attrName);
-                queryList << INSERT.arg(table)
-                                   .arg(fieldNames.join(COMMA))
-                                   .arg(fieldValues.join(COMMA));
-                tableNode = tableNode.nextSibling();
+                fldNode = fldNode.nextSibling();
             }
-            execQueries(queryList);
+            QString table = tableNode.toElement().attribute(Scheme::attrName);
+            queryList << SQL::INSERT.arg(table)
+                         .arg(fieldNames.join(SQL::COMMA))
+                         .arg(fieldValues.join(SQL::COMMA));
+            tableNode = tableNode.nextSibling();
         }
-    }
-    return true;
-}
-
-bool dbGenerator::loadScheme(QDomElement &scheme)
-{
-    QDomDocument doc;
-    QFile file(m_metascheme);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        ERROR_CANNOT_OPEN;
-        return false;
-    }
-    if (!doc.setContent(&file))
-    {
-        ERROR_INCORRECT_FORMAT;
-        return false;
-    }
-    file.close();
-
-    scheme = doc.documentElement();
-    if (scheme.nodeName() != Scheme::tagRoot)
-    {
-        ERROR_INCORRECT_FORMAT;
-        return false;
-    }
-    if(scheme.attribute(Scheme::attrVersion) != VERSION)
-    {
-        ERROR_INCORRECT_VERSION;
-        return false;
+        execQueries(queryList);
     }
     return true;
 }
@@ -158,23 +110,23 @@ void dbGenerator::parseField(const QDomElement &field, QString &data)
       << field.attribute(Scheme::attrType);
 
     if(field.hasAttribute(Scheme::attrPk) &&
-       field.attribute(Scheme::attrPk) == "1")
+       field.attribute(Scheme::attrPk) == TRUE)
     {
-        d << " PRIMARY KEY";
+        d << SQL::PRIMARY_KEY;
     }
     if(field.hasAttribute(Scheme::attrNullable) &&
-       field.attribute(Scheme::attrNullable) == "0")
+       field.attribute(Scheme::attrNullable) == FALSE)
     {
-        d << " NOT NULL";
+        d << SQL::NOT_NULL;
     }
     if(field.hasAttribute(Scheme::attrUnq) &&
-       field.attribute(Scheme::attrUnq) == "1")
+       field.attribute(Scheme::attrUnq) == TRUE)
     {
-        d << " UNIQUE";
+        d << SQL::UNIQUE;
     }
     if(field.hasAttribute(Scheme::attrDefault))
     {
-        d << QString(" DEFAULT %1").arg(field.attribute(Scheme::attrDefault));
+        d << SQL::DEFAULT.arg(field.attribute(Scheme::attrDefault));
     }
     data.append(d.join(""));
 }
@@ -185,9 +137,8 @@ bool dbGenerator::execQueries(const QStringList &list)
     QSqlQuery query(m_db);
     foreach (QString q, list)
     {
-        qDebug() << QString("execQuery: %1").arg(q);
         if(!query.exec(q))
-            query.lastError();
+            qDebug() << query.lastError() << query.lastQuery();
     }
     m_db.close();
     return true;

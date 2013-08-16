@@ -3,19 +3,20 @@
 #include "contactListModel.h"
 #include "driverManager.h"
 
-ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent) :
-    QWidget(parent),
-    m_controller(controller),
-    m_driver(new DriverManager()),
-    m_pathToCurrentData(new QString()),
-    m_data(new Data::Contacts())
+ContactListModel::ContactListModel(ContactListController *controller, QWidget *parent)
+    : QWidget(parent),
+      m_controller(controller),
+      m_driver(new DriverManager()),
+      m_pathToCurrentData(new QString()),
+      m_data(new Data::Contacts())
 {
 }
 
 QStringList *ContactListModel::loadData(const QString &path)
 {
     Data::Contacts *data = m_driver->loadData(path);
-    if(data != 0) {
+    if(data)
+    {
         *m_pathToCurrentData = path;
         *m_data = *data;
     }
@@ -75,17 +76,17 @@ void ContactListModel::deleteContact(const int index)
 ContactData *ContactListModel::loadContact(const QString &path)
 {
     ContactData *data = m_driver->loadContact(path);
-    if(data != 0) {
-        m_data->append(data);
-        return data;
-    }
-    return 0;
+    if(!data)
+        return 0;
+
+    m_data->append(data);
+    return data;
 }
 
 void ContactListModel::saveContact(const ContactData &data, const QString &path)
 {
     if(m_driver->saveContact(data, path))
-            *m_pathToCurrentData = path;
+        *m_pathToCurrentData = path;
 }
 
 void ContactListModel::dataChanged(const QString data, QString key, int contactId)

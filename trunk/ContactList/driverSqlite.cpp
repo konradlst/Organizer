@@ -1,11 +1,10 @@
 #include <QtSql>
 #include "driverSqlite.h"
 #include "dbGenerator.h"
+#include "cgMetaschemeConst.h"
 
-namespace {
-const QString metascheme("./metascheme.xml");
-
-const QString QSQLITE("QSQLITE");
+namespace
+{
 const QString USER("user");
 const QString MAIN("main");
 const QString FORMAT("format");
@@ -17,11 +16,6 @@ const QString FLD_COMPANY("name, phone, department, post, address, dateIn, dateO
 const QString FLD_ADDRESS("country, city, street, home, apartment, type, ownerId");
 const QString FLD_CHANNEL("format, title, value, type, ownerId");
 
-const QString QUERY_INSERT("INSERT INTO %1(%2) VALUES (%3);");
-const QString QUERY_SELECT_SHORT("SELECT * FROM %1");
-const QString QUERY_SELECT_FULL("SELECT * FROM %1 WHERE ownerId = '%2'");
-const QString QUERY_SELECT_FULL_2("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
-
 QString quotesValue(QStringList list)
 {
     for(int i = 0; i < list.count(); ++i)
@@ -30,7 +24,8 @@ QString quotesValue(QStringList list)
 }
 }
 
-namespace Table {
+namespace Table
+{
 const QString Contacts("CG_CONTACTS");
 const QString Companies("CG_COMPANIES");
 const QString Addresses("CG_ADDRESSES");
@@ -47,11 +42,11 @@ DriverSqlite::~DriverSqlite()
 
 bool DriverSqlite::saveData(const Data::Contacts &data, const QString &path)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
+    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
     db.setDatabaseName(path);
     db.open();
 
-    dbGenerator gen = dbGenerator(metascheme, path);
+    dbGenerator gen = dbGenerator(path);
     gen.generate();
 
     for(int i=0; i < data.size(); ++i)
@@ -61,12 +56,12 @@ bool DriverSqlite::saveData(const Data::Contacts &data, const QString &path)
 
 Data::Contacts *DriverSqlite::loadData(const QString &path)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(QSQLITE);
+    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
     db.setDatabaseName(path);
     db.open();
 
     QSqlQuery query;
-    query.exec(QUERY_SELECT_SHORT.arg(Table::Contacts));
+    query.exec(SQL::SELECT_SHORT.arg(Table::Contacts));
 
     Data::Contacts *data = new Data::Contacts();
 
@@ -95,12 +90,11 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
 {
     QString index = QString::number(i+1);
 
-    QStringList contactVal = contact->data(CONTACT);
     QStringList companyVal = contact->data(COMPANY);
     companyVal << index;
+
     QStringList addressVal = contact->data(ADDRESS);
-    addressVal << USER
-               << index;
+    addressVal << USER << index;
 
     QStringList phoneVal;
     phoneVal << Channel::Phone
@@ -130,24 +124,29 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
             << USER
             << index;
 
+    QString insertChannel = SQL::INSERT.arg(Table::Channels)
+                                       .arg(FLD_CHANNEL);
+    QStringList queries;
+    queries << SQL::INSERT.arg(Table::Contacts)
+                          .arg(FLD_CONTACT)
+                          .arg(quotesValue(contact->data(CONTACT)))
+            << SQL::INSERT.arg(Table::Companies)
+                          .arg(FLD_COMPANY)
+                          .arg(quotesValue(companyVal))
+            << SQL::INSERT.arg(Table::Addresses)
+                          .arg(FLD_ADDRESS)
+                          .arg(quotesValue(addressVal))
+            << insertChannel.arg(quotesValue(phoneVal))
+            << insertChannel.arg(quotesValue(emailVal))
+            << insertChannel.arg(quotesValue(skypeVal))
+            << insertChannel.arg(quotesValue(siteVal));
+
     QSqlQuery query;
-    if(!query.exec(QUERY_INSERT.arg(Table::Contacts, FLD_CONTACT,
-                                    quotesValue(contactVal))))
-        qDebug() << query.lastError();
-    if(!query.exec(QUERY_INSERT.arg(Table::Companies, FLD_COMPANY,
-                                   quotesValue(companyVal))))
-        qDebug() << query.lastError();
-    if(!query.exec(QUERY_INSERT.arg(Table::Addresses, FLD_ADDRESS,
-                                   quotesValue(addressVal))))
-        qDebug() << query.lastError();
-    if(!query.exec(QUERY_INSERT.arg(Table::Channels, FLD_CHANNEL, quotesValue(phoneVal))))
-        qDebug() << query.lastError();
-    if(!query.exec(QUERY_INSERT.arg(Table::Channels, FLD_CHANNEL, quotesValue(emailVal))))
-        qDebug() << query.lastError();
-    if(!query.exec(QUERY_INSERT.arg(Table::Channels, FLD_CHANNEL, quotesValue(skypeVal))))
-        qDebug() << query.lastError();
-    if(!query.exec(QUERY_INSERT.arg(Table::Channels, FLD_CHANNEL, quotesValue(siteVal))))
-        qDebug() << query.lastError();
+    foreach (QString q, queries)
+    {
+        if(!query.exec(q))
+            qDebug() << query.lastError();
+    }
 }
 
 void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact) const
@@ -155,13 +154,13 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     QStringList list;
     for(int i=1; i<query.record().count(); ++i)
         list << query.record().value(i).toString();
+
     contact->setMainData(list);
 
     int index = query.record().value(ID).toInt();
 
     QSqlQuery tmpQ;
-    tmpQ.exec(QUERY_SELECT_FULL_2.arg(Table::Addresses, USER,
-                                           QString::number(index)));
+    tmpQ.exec(SQL::SELECT_2.arg(Table::Addresses, USER, QString::number(index)));
     while (tmpQ.next())
     {
         QStringList list;
@@ -171,7 +170,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     }
 
     tmpQ.clear();
-    tmpQ.exec(QUERY_SELECT_FULL.arg(Table::Companies, QString::number(index)));
+    tmpQ.exec(SQL::SELECT.arg(Table::Companies, QString::number(index)));
     while (tmpQ.next())
     {
         QStringList list;
@@ -181,7 +180,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     }
 
     tmpQ.clear();
-    tmpQ.exec(QUERY_SELECT_FULL_2.arg(Table::Channels, USER, QString::number(index)));
+    tmpQ.exec(SQL::SELECT_2.arg(Table::Channels, USER, QString::number(index)));
     while (tmpQ.next())
     {
         QString format = tmpQ.record().value(FORMAT).toString();

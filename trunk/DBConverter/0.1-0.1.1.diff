@@ -1,0 +1,21 @@
+<!DOCTYPE cg>
+<cg_db_converter version="0.1" newVersion="0.1.1">
+	<table name="CG_FINANCELOG">
+		<field name="timestamp" default="(strftime('%d.%m.%Y %H:%M:%f','now','localtime'))"/>
+	</table>
+	<table name="CG_TIME">
+		<field name="created" default="(strftime('%d.%m.%Y','now','localtime'))"/>
+	</table>
+	<table name="CG_BOOK">
+		<field name="lastUpdate" default="(strftime('%d.%m.%Y','now','localtime'))"/>
+	</table>
+	<table name="CG_SPORT">
+		<field name="created" default="(strftime('%d.%m.%Y','now','localtime'))"/>
+		<field name="type" default="'1'"/>
+		<field name="value" default="'0'"/>
+		<field name="duration" default="'00:05:00.000'"/>
+	</table>
+	<table name="CG_DEAL">
+		<field name="created" default="(strftime('%d.%m.%Y','now','localtime'))"/>
+	</table>
+</cg_db_converter>

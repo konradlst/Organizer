@@ -1,7 +1,8 @@
 #include <QPixmap>
 #include "contactData.h"
 
-namespace {
+namespace
+{
 QDate string2Date(QString data)
 {
     if(data.isEmpty())

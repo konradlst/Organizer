@@ -12,16 +12,15 @@
 #include "dbGenerator.h"
 #include "cgDelegateManager.h"
 #include "cgComboBoxDelegate.h"
+#include "cgMetaschemeConst.h"
 
-namespace {
-const QString INSERT_DEFAULT = QString("INSERT INTO %1 DEFAULT VALUES");
-const QString DELETE = QString("DELETE FROM %1 WHERE id=%2");
-
+namespace
+{
 enum { TAB_LOG = 0, TAB_ACCOUNT, TAB_TIME, TAB_BOOK, TAB_SPORT, TAB_DEAL };
 
-const QString metascheme("./metascheme.xml");
-const QString DEFAULT_DB("concierge.sqlite");
+const QString TITLE = QObject::trUtf8("Сoncierge: DBManager");
 
+const QString DEFAULT_DB("concierge.sqlite");
 const QString CG_FINANCEACCOUNTS("CG_FINANCEACCOUNTS");
 const QString CG_FINANCELOG("CG_FINANCELOG");
 const QString CG_TIME("CG_TIME");
@@ -29,7 +28,7 @@ const QString CG_BOOK("CG_BOOK");
 const QString CG_SPORT("CG_SPORT");
 const QString CG_DEAL("CG_DEAL");
 
-#define SAVE_TITLE QObject::trUtf8("Path from SQL database")
+#define OPEN_TITLE QObject::trUtf8("Path to SQL database")
 #define DEFAULT_PATH QDir::currentPath()
 #define FILE_TYPES QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite)")
 }
@@ -81,7 +80,7 @@ void cgDBManager::submit()
 void cgDBManager::addRecord()
 {
     QSqlQuery query;
-    query.exec(INSERT_DEFAULT.arg(m_currentTable));
+    query.exec(SQL::INSERT_DEFAULT.arg(m_currentTable));
     m_models->value(m_currentTable)->select();
 }
 
@@ -90,7 +89,7 @@ void cgDBManager::removeRecord()
     QSqlQuery query;
     int id = m_view->model()->index(m_view->currentIndex().row() ,0).data().toInt();
 
-    query.exec(DELETE.arg(m_currentTable)
+    query.exec(SQL::DELETE.arg(m_currentTable)
                      .arg(id));
     m_models->value(m_currentTable)->select();
 }
@@ -103,29 +102,33 @@ void cgDBManager::revertAll()
 
 void cgDBManager::initModel()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(Db::SQLITE);
+    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
     db.setDatabaseName(m_currentPathToDb);
     db.open();
     m_tables =  db.tables();
 
-    m_currentTable = m_tables.at(0);
-    m_tableComboBox->addItems(m_tables);
-    foreach (QString table, m_tables)
+    if(!m_tables.isEmpty())
     {
-        QSqlTableModel *model = new QSqlTableModel(this);
-        model->setTable(table);
-        model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-        model->select();
-        m_models->insert(table, model);
+        m_currentTable = m_tables.at(0);
+        m_tableComboBox->addItems(m_tables);
+        foreach (QString table, m_tables)
+        {
+            QSqlTableModel *model = new QSqlTableModel(this);
+            model->setTable(table);
+            model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+            model->select();
+            m_models->insert(table, model);
+        }
+        currentTableChanged(0);
     }
-    currentTableChanged(0);
 }
 
 void cgDBManager::createInterface()
 {
     m_view->setModel(m_models->value(m_currentTable));
     m_view->verticalHeader()->hide();
-    setDelegates();
+    if(!m_currentTable.isNull())
+        setDelegates();
 
     m_btnOpenDb->setDefault(true);
 
@@ -142,13 +145,14 @@ void cgDBManager::createInterface()
     vlay->addWidget(m_view);
 
     setCentralWidget(centralWidget);
-    setWindowTitle(tr("Сoncierge: DBManager"));
+    setWindowTitle(TITLE);
     resize(760,230);
 }
 
 QString cgDBManager::openDb()
 {
-    QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,FILE_TYPES);
+    QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE,
+                                                DEFAULT_PATH,FILE_TYPES);
     m_currentPathToDb = path.isEmpty() ? DEFAULT_DB : path;
     return m_currentPathToDb;
 }
@@ -171,8 +175,7 @@ void cgDBManager::setDelegates()
 
 void cgDBManager::dbGenerate()
 {
-    QString path = openDb();
-    dbGenerator gen = dbGenerator(metascheme, path);
+    dbGenerator gen = dbGenerator(openDb());
     gen.generate(true);
     initModel();
 }
