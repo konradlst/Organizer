@@ -18,7 +18,9 @@ namespace
 {
 const int ENGLISH = 0;
 const int RUSSIAN = 1;
-const QString defaultPathToLog("ContactList.log");
+const QString logPath = QString("ContactList.log");
+const QString settingsPath = QString("%2%1ContactList.ini")
+                                         .arg(QDir::separator());
 
 #define DIALOG_CHOOSE_LOG_FILE QFileDialog::getSaveFileName(this, QObject::trUtf8("Choose Log File"))
 #define DIALOG_CHOOSE_CONTACT_LIST QFileDialog::getOpenFileName(this, QObject::trUtf8("Choose Contact List"))
@@ -28,8 +30,8 @@ SettingsView::SettingsView(ContactListController *controller, QDialog *parent)
     : QDialog(parent),
       ui(new Ui::SettingsView),
       m_controller(controller),
-      m_settings(new QSettings(QSettings::IniFormat,QSettings::UserScope,
-                               "AnBat","ContactList")),
+      m_settings(new QSettings(settingsPath.arg(QCoreApplication::applicationDirPath()),
+                               QSettings::IniFormat)),
       m_RuTranslator(new QTranslator),
       m_qtRuTranslator(new QTranslator)
 {
@@ -38,7 +40,6 @@ SettingsView::SettingsView(ContactListController *controller, QDialog *parent)
     setLayout(ui->mainLayout);
     loadSettings();
 
-    connect(ui->pbCancel, SIGNAL(clicked()), SLOT(close()));
     connect(ui->pbChooseContactList, SIGNAL(clicked()), SLOT(chooseContactList()));
     connect(ui->pbChooseLogFile, SIGNAL(clicked()), SLOT(choosePathToLog()));
     connect(ui->pbDefault, SIGNAL(clicked()),
@@ -89,15 +90,15 @@ void SettingsView::setDefaultSettings()
     ui->gbDefaultContactList->setChecked(false);
     ui->lePathToContactList->setText(QString());
     ui->gbLogging->setChecked(true);
-    ui->lePathToLogFile->setText(defaultPathToLog);
+    ui->lePathToLogFile->setText(logPath);
 
     m_settings->setValue(Settings::LANGUAGE,QVariant(ENGLISH));
     m_settings->setValue(Settings::DEFAULTDATA,QVariant(false));
     m_settings->setValue(Settings::PATH_TO_DEFAULTDATA,QVariant(QString()));
     m_settings->setValue(Settings::LOGGING,QVariant(true));
-    m_settings->setValue(Settings::PATH_TO_LOGFILE,QVariant(defaultPathToLog));
+    m_settings->setValue(Settings::PATH_TO_LOGFILE,QVariant(logPath));
 
-    emit logging(true, defaultPathToLog);
+    emit logging(true, logPath);
 }
 
 void SettingsView::languageChanged(int language)

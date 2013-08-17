@@ -99,28 +99,28 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
     QStringList phoneVal;
     phoneVal << Channel::Phone
              << MAIN
-             << contact->channels(Channel::Phone).at(0)
+             << contact->data(Channel::Phone).at(0)
              << USER
              << index;
 
     QStringList emailVal;
     emailVal << Channel::Email
              << MAIN
-             << contact->channels(Channel::Email).at(0)
+             << contact->data(Channel::Email).at(0)
              << USER
              << index;
 
     QStringList skypeVal;
     skypeVal << Channel::Skype
              << MAIN
-             << contact->channels(Channel::Skype).at(0)
+             << contact->data(Channel::Skype).at(0)
              << USER
              << index;
 
     QStringList siteVal;
     siteVal << Channel::Site
             << MAIN
-            << contact->channels(Channel::Site).at(0)
+            << contact->data(Channel::Site).at(0)
             << USER
             << index;
 

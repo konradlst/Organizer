@@ -64,6 +64,22 @@ QStringList ContactData::data(const QString &type, const int &index) const
              << m_addresses->at(index).home
              << m_addresses->at(index).apartment;
     }
+    else if(type == Channel::Phone)
+        list = m_phones->values();
+    else if(type == Channel::Email)
+        list = m_emails->values();
+    else if(type == Channel::Skype)
+        list = m_skypes->values();
+    else if(type == Channel::Site)
+        list = m_sites->values();
+    else if(type == Channel::PhoneType)
+        return m_phones->keys();
+    else if(type == Channel::EmailType)
+        return m_emails->keys();
+    else if(type == Channel::SkypeType)
+        return m_skypes->keys();
+    else if(type == Channel::SiteType)
+        return m_sites->keys();
     return list;
 }
 
@@ -202,7 +218,9 @@ void ContactData::setCompanyData(const QStringList &data, const int &index)
     }
 }
 
-void ContactData::setChannel(const QString &type, const QString &subType, const QString &value)
+void ContactData::setChannel(const QString &type,
+                             const QString &subType,
+                             const QString &value)
 {
     if(type == Channel::Phone)
     {
@@ -230,35 +248,14 @@ void ContactData::setChannel(const QString &type, const QString &subType, const 
     }
 }
 
-QDate ContactData::birthday() const
-{
-    return m_birthday;
-}
-
-QDate ContactData::dateIn(int index) const
-{
-    return m_companies->at(index).dateIn;
-}
-
-QDate ContactData::dateOut(int index) const
-{
-    return m_companies->at(index).dateOut;
-}
-
-int ContactData::countCompanies() const
-{
-    return m_companies->count();
-}
-
-int ContactData::countAddresses() const
-{
-    return m_addresses->count();
-}
-
-int ContactData::countChannels(const QString &type) const
+int ContactData::countData(const QString &type) const
 {
     int count;
-    if(type == Channel::Phone)
+    if(type == COMPANY)
+        count = m_companies->count();
+    else if(type == ADDRESS)
+        count = m_addresses->count();
+    else if(type == Channel::Phone)
         count = m_phones->size();
     else if(type == Channel::Email)
         count = m_emails->size();
@@ -266,26 +263,12 @@ int ContactData::countChannels(const QString &type) const
         count = m_skypes->size();
     else if(type == Channel::Site)
         count = m_sites->size();
-    else
-        count = m_phones->size() +
-                m_emails->size() +
-                m_skypes->size() +
-                m_sites->size();
+    else if(type == Channel::All)
+        count = m_phones->size()
+                + m_emails->size()
+                + m_skypes->size()
+                + m_sites->size();
     return count;
-}
-
-QList<QString> ContactData::channels(const QString &type) const
-{
-    if(type == Channel::Phone)
-        return m_phones->values();
-    else if(type == Channel::Email)
-        return m_emails->values();
-    else if(type == Channel::Skype)
-        return m_skypes->values();
-    else if(type == Channel::Site)
-        return m_sites->values();
-    else
-        return QList<QString>();
 }
 
 QList<QString> ContactData::channelsTypes(const QString &type) const

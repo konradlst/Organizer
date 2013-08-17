@@ -64,21 +64,21 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
         record.appendChild(addresses);
         record.appendChild(communications);
         record.appendChild(companies);
-        int countAddr = data.at(i)->countAddresses();
+        int countAddr = data.at(i)->countData(ADDRESS);
         for(int id = 0; id < countAddr; ++id)
         {
             QDomElement address = doc.createElement(Tag::Data);
             addresses.appendChild(address);
         }
 
-        int countCommun = data.at(i)->countChannels();
+        int countCommun = data.at(i)->countData(Channel::All);
         for(int id = 0; id < countCommun; ++id)
         {
             QDomElement communication = doc.createElement(Tag::Data);
             communications.appendChild(communication);
         }
 
-        int countComp = data.at(i)->countCompanies();
+        int countComp = data.at(i)->countData(COMPANY);
         for(int id = 0; id < countComp; ++id)
         {
             QDomElement company = doc.createElement(Tag::Data);
@@ -160,20 +160,20 @@ bool DriverXml::saveContact(const ContactData &data, const QString &path)
     record.appendChild(addresses);
     record.appendChild(communications);
     record.appendChild(companies);
-    int countAddr = data.countAddresses();
+    int countAddr = data.countData(ADDRESS);
     for(int id = 0; id < countAddr; ++id)
     {
         QDomElement address = doc.createElement(Tag::Data);
         addresses.appendChild(address);
     }
 
-    for(int id = 0; id < data.countChannels(); ++id)
+    for(int id = 0; id < data.countData(Channel::All); ++id)
     {
         QDomElement communication = doc.createElement(Tag::Data);
         communications.appendChild(communication);
     }
 
-    int countComp = data.countCompanies();
+    int countComp = data.countData(COMPANY);
     for(int id = 0; id < countComp; ++id)
     {
         QDomElement company = doc.createElement(Tag::Data);
@@ -255,7 +255,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) c
                      << dataElement.attribute(Address::Street)
                      << dataElement.attribute(Address::Home)
                      << dataElement.attribute(Address::Apartment);
-                data.setAddressData(list, data.countAddresses());
+                data.setAddressData(list, data.countData(ADDRESS));
                 dataNode = dataNode.nextSibling();
             }
         }
@@ -287,7 +287,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) c
                      << dataElement.attribute(Attribute::Phone)
                      << dataElement.attribute(Attribute::DateIn)
                      << dataElement.attribute(Attribute::DateOut);
-                data.setCompanyData(list, data.countCompanies());
+                data.setCompanyData(list, data.countData(COMPANY));
                 dataNode = dataNode.nextSibling();
             }
         }
@@ -306,7 +306,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     field.setAttribute(Attribute::PathToUserPic, data.data(CONTACT).at(USER_PIC));
     field.setAttribute(Attribute::Comment, data.data(CONTACT).at(COMMENT));
 
-    int countAddresses = data.countAddresses();
+    int countAddresses = data.countData(ADDRESS);
     QDomElement address = record.firstChildElement(Tag::Addresses).firstChildElement(Tag::Data);
     for(int addressId = 0; addressId < countAddresses; ++addressId)
     {
@@ -323,46 +323,46 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
         address = address.nextSiblingElement(Tag::Data);
     }
 
-    QDomElement communication = record.firstChildElement(Tag::Channels).firstChildElement(Tag::Data);
+    QDomElement channels = record.firstChildElement(Tag::Channels).firstChildElement(Tag::Data);
 
-    QList<QString> phones = data.channels(Channel::Phone);
-    QList<QString> phoneTypes = data.channelsTypes(Channel::Phone);
-    for(int id = 0; id < data.countChannels(Channel::Phone); ++id)
+    QStringList phones = data.data(Channel::Phone);
+    QStringList phoneTypes = data.data(Channel::PhoneType);
+    for(int id = 0; id < data.countData(Channel::Phone); ++id)
     {
-        communication.setAttribute(Attribute::Type, Channel::Phone);
-        communication.setAttribute(Attribute::Subtype, phoneTypes.at(id));
-        communication.setAttribute(Attribute::Value, phones.at(id));
-        communication = communication.nextSiblingElement(Tag::Data);
+        channels.setAttribute(Attribute::Type, Channel::Phone);
+        channels.setAttribute(Attribute::Subtype, phoneTypes.at(id));
+        channels.setAttribute(Attribute::Value, phones.at(id));
+        channels = channels.nextSiblingElement(Tag::Data);
     }
-    QList<QString> emails = data.channels(Channel::Email);
-    QList<QString> emailTypes = data.channelsTypes(Channel::Email);
-    for(int id = 0; id < data.countChannels(Channel::Email); ++id)
+    QStringList emails = data.data(Channel::Email);
+    QStringList emailTypes = data.data(Channel::EmailType);
+    for(int id = 0; id < data.countData(Channel::Email); ++id)
     {
-        communication.setAttribute(Attribute::Type, Channel::Email);
-        communication.setAttribute(Attribute::Subtype, emailTypes.at(id));
-        communication.setAttribute(Attribute::Value, emails.at(id));
-        communication = communication.nextSiblingElement(Tag::Data);
+        channels.setAttribute(Attribute::Type, Channel::Email);
+        channels.setAttribute(Attribute::Subtype, emailTypes.at(id));
+        channels.setAttribute(Attribute::Value, emails.at(id));
+        channels = channels.nextSiblingElement(Tag::Data);
     }
-    QList<QString> skypes = data.channels(Channel::Skype);
-    QList<QString> skypeTypes = data.channelsTypes(Channel::Skype);
-    for(int id = 0; id < data.countChannels(Channel::Skype); ++id)
+    QStringList skypes = data.data(Channel::Skype);
+    QStringList skypeTypes = data.data(Channel::SkypeType);
+    for(int id = 0; id < data.countData(Channel::Skype); ++id)
     {
-        communication.setAttribute(Attribute::Type, Channel::Skype);
-        communication.setAttribute(Attribute::Subtype, skypeTypes.at(id));
-        communication.setAttribute(Attribute::Value, skypes.at(id));
-        communication = communication.nextSiblingElement(Tag::Data);
+        channels.setAttribute(Attribute::Type, Channel::Skype);
+        channels.setAttribute(Attribute::Subtype, skypeTypes.at(id));
+        channels.setAttribute(Attribute::Value, skypes.at(id));
+        channels = channels.nextSiblingElement(Tag::Data);
     }
-    QList<QString> sites = data.channels(Channel::Site);
-    QList<QString> siteTypes = data.channelsTypes(Channel::Site);
-    for(int id = 0; id < data.countChannels(Channel::Site); ++id)
+    QStringList sites = data.data(Channel::Site);
+    QStringList siteTypes = data.channelsTypes(Channel::Site);
+    for(int id = 0; id < data.countData(Channel::Site); ++id)
     {
-        communication.setAttribute(Attribute::Type, Channel::Site);
-        communication.setAttribute(Attribute::Subtype, siteTypes.at(id));
-        communication.setAttribute(Attribute::Value, sites.at(id));
-        communication = communication.nextSiblingElement(Tag::Data);
+        channels.setAttribute(Attribute::Type, Channel::Site);
+        channels.setAttribute(Attribute::Subtype, siteTypes.at(id));
+        channels.setAttribute(Attribute::Value, sites.at(id));
+        channels = channels.nextSiblingElement(Tag::Data);
     }
 
-    int countCompanies = data.countCompanies();
+    int countCompanies = data.countData(COMPANY);
     QDomElement company = record.firstChildElement(Tag::Organizations).firstChildElement(Tag::Data);
     for(int corpId = 0; corpId < countCompanies; ++corpId)
     {

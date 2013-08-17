@@ -34,12 +34,19 @@ QString pathToData(const QString *path)
         return QString();
 }
 
-QPixmap pathToPixmap(QString path)
+QPixmap path2Pixmap(QString path)
 {
     QPixmap pix = QPixmap(path);
     if(pix.isNull())
         pix = QPixmap(":/logo");
     return pix.scaled(pix.size());
+}
+
+QDate string2Date(QString data)
+{
+    if(data.isEmpty())
+        return DEFAULT_DATE;
+    return QDate::fromString(data, DEFAULT_DATE_FORMAT);
 }
 }
 
@@ -130,48 +137,64 @@ void ContactListView::setContactData(const ContactData *contact)
     ui->leAlias->setText(contactFlag ? contact->data(CONTACT).at(ALIAS) : QString());
     ui->leName->setText(contactFlag ? contact->data(CONTACT).at(NAME) : QString());
     ui->leSurName->setText(contactFlag
-                           ? contact->data(CONTACT).at(LASTNAME) : QString());
+                           ? contact->data(CONTACT).at(LASTNAME)
+                           : QString());
     ui->leOtherName->setText(contactFlag
-                             ? contact->data(CONTACT).at(OTHERNAME) : QString());
-    ui->deBirthday->setDate(contact->birthday());
-    ui->lbUserPic->setPixmap(pathToPixmap(contactFlag
-                                            ? contact->data(CONTACT).at(USER_PIC)
-                                            : QString()));
+                             ? contact->data(CONTACT).at(OTHERNAME)
+                             : QString());
+    ui->deBirthday->setDate(contactFlag
+                            ? string2Date(contact->data(CONTACT).at(BIRTHDAY))
+                            : QDate());
+    ui->lbUserPic->setPixmap(path2Pixmap(contactFlag
+                                         ? contact->data(CONTACT).at(USER_PIC)
+                                         : QString()));
 
     bool addressFlag = false;
-    if(contact->countAddresses() > 0 && contact->data(ADDRESS).count() >= 5)
+    if(contact->countData(ADDRESS) > 0 && contact->data(ADDRESS).count() >= 5)
         addressFlag = true;
     ui->leCountry->setText(addressFlag
-                           ? contact->data(ADDRESS).at(COUNTRY) : QString());
+                           ? contact->data(ADDRESS).at(COUNTRY)
+                           : QString());
     ui->leCity->setText(addressFlag
-                        ? contact->data(ADDRESS).at(CITY) : QString());
+                        ? contact->data(ADDRESS).at(CITY)
+                        : QString());
     ui->leStreet->setText(addressFlag
-                          ? contact->data(ADDRESS).at(STREET) : QString());
+                          ? contact->data(ADDRESS).at(STREET)
+                          : QString());
     ui->leHome->setText(addressFlag
-                        ? contact->data(ADDRESS).at(HOME) : QString());
+                        ? contact->data(ADDRESS).at(HOME)
+                        : QString());
     ui->leApartment->setText(addressFlag
-                             ? contact->data(ADDRESS).at(APARTMENT) : QString());
+                             ? contact->data(ADDRESS).at(APARTMENT)
+                             : QString());
 
-    ui->lePhone->setText(contact->channels(Channel::Phone).at(0));
-    ui->leEmail->setText(contact->channels(Channel::Email).at(0));
-    ui->leSkype->setText(contact->channels(Channel::Skype).at(0));
-    ui->leSite->setText(contact->channels(Channel::Site).at(0));
+    ui->lePhone->setText(contact->data(Channel::Phone).at(0));
+    ui->leEmail->setText(contact->data(Channel::Email).at(0));
+    ui->leSkype->setText(contact->data(Channel::Skype).at(0));
+    ui->leSite->setText(contact->data(Channel::Site).at(0));
 
     bool companyFlag = false;
-    if(contact->countCompanies() > 0 && contact->data(COMPANY).count() >= 7)
+    if(contact->countData(COMPANY) > 0 && contact->data(COMPANY).count() >= 7)
         companyFlag = true;
-    ui->leNameCompany->setText(companyFlag ?
-                                   contact->data(COMPANY).at(COMP_NAME) : QString());
-    ui->lePhoneCompany->setText(companyFlag ?
-                                    contact->data(COMPANY).at(PHONE) : QString());
-    ui->leDepartment->setText(companyFlag ?
-                                  contact->data(COMPANY).at(DEPARTMENT) : QString());
+    ui->leNameCompany->setText(companyFlag
+                               ? contact->data(COMPANY).at(COMP_NAME)
+                               : QString());
+    ui->lePhoneCompany->setText(companyFlag
+                                ? contact->data(COMPANY).at(PHONE)
+                                : QString());
+    ui->leDepartment->setText(companyFlag
+                              ? contact->data(COMPANY).at(DEPARTMENT)
+                              : QString());
     ui->lePost->setText(companyFlag ? contact->data(COMPANY).at(POST) : QString());
-    ui->leAddressCompany->setText(companyFlag ?
-                                      contact->data(COMPANY).at(COMP_ADDRESS) : QString());
-
-    ui->deStartWork->setDate(companyFlag ? contact->dateIn() : QDate::currentDate());
-    ui->deEndWork->setDate(companyFlag ? contact->dateOut() : QDate::currentDate());
+    ui->leAddressCompany->setText(companyFlag
+                                  ? contact->data(COMPANY).at(COMP_ADDRESS)
+                                  : QString());
+    ui->deStartWork->setDate(companyFlag
+                             ? string2Date(contact->data(COMPANY).at(DATEIN))
+                             : QDate::currentDate());
+    ui->deEndWork->setDate(companyFlag
+                           ? string2Date(contact->data(COMPANY).at(DATEOUT))
+                           : QDate::currentDate());
 
     connectSignals();
 }
@@ -476,7 +499,7 @@ void ContactListView::loadUserPic()
     QString path = QFileDialog::getOpenFileName(this, LOAD_USERPIC, DEFAULT_PATH);
     if(!path.isEmpty())
     {
-        QPixmap pic = pathToPixmap(path);
+        QPixmap pic = path2Pixmap(path);
         ui->lbUserPic->setPixmap(pic);
         emit dataChanged(path, Attribute::PathToUserPic,
                          ui->lwContactList->currentRow());

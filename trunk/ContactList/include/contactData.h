@@ -48,10 +48,15 @@ const QString Apartment("apartment");
 
 namespace Channel
 {
+const QString All("All");
 const QString Phone("Phone");
 const QString Email("Email");
 const QString Skype("Skype");
 const QString Site("Site");
+const QString PhoneType("PhoneType");
+const QString EmailType("EmailType");
+const QString SkypeType("SkypeType");
+const QString SiteType("SiteType");
 }
 
 namespace Data
@@ -97,7 +102,6 @@ struct Company
 };
 }
 
-//FIXME !!!!!
 class ContactData
 {
 public:
@@ -117,15 +121,7 @@ public:
     void setChannel(const QString &type, const QString &subType,
                     const QString &value);
 
-    QDate   birthday()           const;
-    QDate dateIn(int index = 0)  const;
-    QDate dateOut(int index = 0) const;
-
-    int countCompanies() const;
-    int countAddresses() const;
-    int countChannels(const QString &type = QString()) const;
-
-    QList<QString> channels(const QString &type) const;
+    int countData(const QString &type = QString()) const;
     QList<QString> channelsTypes(const QString &type) const;
 
 private:
