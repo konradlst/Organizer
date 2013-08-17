@@ -8,7 +8,7 @@
 #include "cgTimeDelegate.h"
 #include "cgLineEditDelegate.h"
 #include "cgMetaschemeConst.h"
-
+#include <QDebug>
 QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString &tableName)
 {
     QList<QAbstractItemDelegate *> *list = new QList<QAbstractItemDelegate *>();
@@ -33,12 +33,13 @@ QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString
     while(!fieldNode.isNull())
     {
         QString delegateName = fieldNode.toElement().attribute(Scheme::attrDelegate);
+        qDebug() << fieldNode.toElement().attribute(Scheme::attrName) << delegateName;
         if(delegateName.isNull())
         {
             list->append(0);
             fieldNode = fieldNode.nextSibling();
+            continue;
         }
-
         QDomNode delegateNode = delegates.firstChildElement(Scheme::tagDelegate);
         while (delegateNode.toElement().attribute(Scheme::attrName)!= delegateName)
             delegateNode = delegateNode.nextSibling();
