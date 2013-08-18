@@ -5,7 +5,8 @@
 #include <QDomDocument>
 #include "cgErrorMessage.h"
 
-namespace Tag {
+namespace Tag
+{
 const QString Tree("tree");
 const QString Record("record");
 const QString Data("data");
@@ -130,7 +131,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
         if(!recordElement.isNull())
         {
             ContactData *currentContact = new ContactData();
-            xmlToContactData(recordElement,*currentContact);
+            xmlToContactData(recordElement, *currentContact);
             contacts->append(currentContact);
         }
         recordNode = recordNode.nextSibling();
@@ -149,7 +150,7 @@ bool DriverXml::saveContact(const ContactData &data, const QString &path)
 
     QDomDocument doc;
     QDomElement record = doc.createElement(Tag::Record);
-    record.setAttribute(Attribute::Version,qApp->applicationVersion());
+    record.setAttribute(Attribute::Version, qApp->applicationVersion());
     QDomElement field = doc.createElement(Tag::Data);
     QDomElement addresses = doc.createElement(Tag::Addresses);
     QDomElement communications = doc.createElement(Tag::Channels);
@@ -363,7 +364,11 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     }
 
     int countCompanies = data.countData(COMPANY);
-    QDomElement company = record.firstChildElement(Tag::Organizations).firstChildElement(Tag::Data);
+    QDomElement companies = record.firstChildElement(Tag::Organizations);
+    if(companies.isNull())
+        return;
+
+    QDomElement company = companies.firstChildElement(Tag::Data);
     for(int corpId = 0; corpId < countCompanies; ++corpId)
     {
         company.setAttribute(Attribute::Name,

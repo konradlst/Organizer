@@ -220,20 +220,20 @@ void ContactListView::loadData()
 
 void ContactListView::loadData(const QString &path)
 {
-    if(!path.isEmpty())
-    {
-        QStringList list = *m_controller->loadData(path);
-        if(!list.isEmpty())
-        {
-            clearAll();
-            activateContactBotton();
-            setEditable(true);
-            setContactData(m_controller->contact(0));
-            refreshContactList();
-            m_path->setText(pathToData(m_controller->pathToData()));
-            MYLOG << Log::LoadContactList;
-        }
-    }
+    if(path.isEmpty())
+        return;
+
+    QStringList list = *m_controller->loadData(path);
+    if(list.isEmpty())
+        return;
+
+    clearAll();
+    activateContactBotton();
+    setEditable(true);
+    setContactData(m_controller->contact(0));
+    refreshContactList();
+    m_path->setText(pathToData(m_controller->pathToData()));
+    MYLOG << Log::LoadContactList;
     if(ui->lwContactList->count() == 1)
         emptyContactList(false);
 }
@@ -254,12 +254,12 @@ void ContactListView::saveAsData()
 {
     QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
                                             FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
-    if(!path.isEmpty())
-    {
-        emit saveData(path);
-        m_path->setText(pathToData(m_controller->pathToData()));
-        MYLOG << Log::SaveContactList.arg(m_path->text());
-    }
+    if(path.isEmpty())
+        return;
+
+    emit saveData(path);
+    m_path->setText(pathToData(m_controller->pathToData()));
+    MYLOG << Log::SaveContactList.arg(m_path->text());
 }
 
 void ContactListView::newData()
@@ -431,18 +431,17 @@ void ContactListView::loadContact()
 {
     QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
                                                 FILE_TYPES.arg(XML_TYPE, QString()));
-    if(!path.isEmpty())
-    {
-        ContactData *data = m_controller->loadContact(path);
-        if(data)
-        {
-            setContactData(data);
-            refreshContactList(ui->lwContactList->count());
-            ui->leAlias->setFocus();
-            ui->leAlias->selectAll();
-            MYLOG << Log::LoadContact.arg(path);
-        }
-    }
+    if(path.isEmpty())
+        return;
+
+    ContactData *data = m_controller->loadContact(path);
+    if(!data)
+        return;
+    setContactData(data);
+    refreshContactList(ui->lwContactList->count());
+    ui->leAlias->setFocus();
+    ui->leAlias->selectAll();
+    MYLOG << Log::LoadContact.arg(path);
     if(ui->lwContactList->count() == 1)
         emptyContactList(false);
 }
@@ -451,12 +450,13 @@ void ContactListView::saveContact()
 {
     QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
                                                 FILE_TYPES.arg(XML_TYPE, QString()));
-    if(!path.isEmpty())
-    {
-        int row = ui->lwContactList->currentRow();
-        emit saveContact(*m_controller->contact(row), path);
-        MYLOG << Log::SaveContact.arg(path);
-    }
+    if(path.isEmpty())
+        return;
+
+    int row = ui->lwContactList->currentRow();
+    emit saveContact(*m_controller->contact(row), path);
+    MYLOG << Log::SaveContact.arg(path);
+
 }
 
 void ContactListView::copyContact()
@@ -497,13 +497,13 @@ void ContactListView::currentContactChanged(int index)
 void ContactListView::loadUserPic()
 {
     QString path = QFileDialog::getOpenFileName(this, LOAD_USERPIC, DEFAULT_PATH);
-    if(!path.isEmpty())
-    {
-        QPixmap pic = path2Pixmap(path);
-        ui->lbUserPic->setPixmap(pic);
-        emit dataChanged(path, Attribute::PathToUserPic,
-                         ui->lwContactList->currentRow());
-    }
+    if(path.isEmpty())
+        return;
+
+    QPixmap pic = path2Pixmap(path);
+    ui->lbUserPic->setPixmap(pic);
+    emit dataChanged(path, Attribute::PathToUserPic,
+                     ui->lwContactList->currentRow());
 }
 
 void ContactListView::textChanged(QString text)
