@@ -131,70 +131,55 @@ void ContactListView::setEditable(bool flag)
 void ContactListView::setContactData(const ContactData *contact)
 {
     disconnectSignals();
-    bool contactFlag = false;
-    if(contact->data(CONTACT).count() >= 6)
-        contactFlag = true;
-    ui->leAlias->setText(contactFlag ? contact->data(CONTACT).at(ALIAS) : QString());
-    ui->leName->setText(contactFlag ? contact->data(CONTACT).at(NAME) : QString());
-    ui->leSurName->setText(contactFlag
-                           ? contact->data(CONTACT).at(LASTNAME)
-                           : QString());
-    ui->leOtherName->setText(contactFlag
-                             ? contact->data(CONTACT).at(OTHERNAME)
-                             : QString());
-    ui->deBirthday->setDate(contactFlag
-                            ? string2Date(contact->data(CONTACT).at(BIRTHDAY))
-                            : QDate());
-    ui->lbUserPic->setPixmap(path2Pixmap(contactFlag
-                                         ? contact->data(CONTACT).at(USER_PIC)
-                                         : QString()));
+    ui->leAlias->setText(contact->data(CONTACT).at(ALIAS));
+    ui->leName->setText(contact->data(CONTACT).at(NAME));
+    ui->leSurName->setText(contact->data(CONTACT).at(LASTNAME));
+    ui->leOtherName->setText(contact->data(CONTACT).at(OTHERNAME));
+    ui->deBirthday->setDate(string2Date(contact->data(CONTACT).at(BIRTHDAY)));
+    ui->lbUserPic->setPixmap(path2Pixmap(contact->data(CONTACT).at(USER_PIC)));
 
-    bool addressFlag = false;
-    if(contact->countData(ADDRESS) > 0 && contact->data(ADDRESS).count() >= 5)
-        addressFlag = true;
-    ui->leCountry->setText(addressFlag
-                           ? contact->data(ADDRESS).at(COUNTRY)
-                           : QString());
-    ui->leCity->setText(addressFlag
-                        ? contact->data(ADDRESS).at(CITY)
-                        : QString());
-    ui->leStreet->setText(addressFlag
-                          ? contact->data(ADDRESS).at(STREET)
-                          : QString());
-    ui->leHome->setText(addressFlag
-                        ? contact->data(ADDRESS).at(HOME)
-                        : QString());
-    ui->leApartment->setText(addressFlag
-                             ? contact->data(ADDRESS).at(APARTMENT)
-                             : QString());
+    if(contact->countData(ADDRESS) > 0)
+    {
+        ui->leCountry->setText(contact->data(ADDRESS).at(COUNTRY));
+        ui->leCity->setText(contact->data(ADDRESS).at(CITY));
+        ui->leStreet->setText(contact->data(ADDRESS).at(STREET));
+        ui->leHome->setText(contact->data(ADDRESS).at(HOME));
+        ui->leApartment->setText(contact->data(ADDRESS).at(APARTMENT));
+    }
+    else
+    {
+        ui->leCountry->clear();
+        ui->leCity->clear();
+        ui->leStreet->clear();
+        ui->leHome->clear();
+        ui->leApartment->clear();
+    }
 
     ui->lePhone->setText(contact->data(Channel::Phone).at(0));
     ui->leEmail->setText(contact->data(Channel::Email).at(0));
     ui->leSkype->setText(contact->data(Channel::Skype).at(0));
     ui->leSite->setText(contact->data(Channel::Site).at(0));
 
-    bool companyFlag = false;
-    if(contact->countData(COMPANY) > 0 && contact->data(COMPANY).count() >= 7)
-        companyFlag = true;
-    ui->leNameCompany->setText(companyFlag
-                               ? contact->data(COMPANY).at(COMP_NAME)
-                               : QString());
-    ui->lePhoneCompany->setText(companyFlag
-                                ? contact->data(COMPANY).at(PHONE)
-                                : QString());
-    ui->leDepartment->setText(companyFlag
-                              ? contact->data(COMPANY).at(DEPARTMENT)
-                              : QString());
-    ui->lePost->setText(companyFlag ? contact->data(COMPANY).at(POST) : QString());
-    ui->leAddressCompany->setText(companyFlag
-                                  ? contact->data(COMPANY).at(COMP_ADDRESS)
-                                  : QString());
-    ui->deStartWork->setDate(companyFlag
-                             ? string2Date(contact->data(COMPANY).at(DATEIN))
-                             : QDate::currentDate());
-    ui->deEndWork->setDate(companyFlag
-                           ? string2Date(contact->data(COMPANY).at(DATEOUT))
-                           : QDate::currentDate());
+    if(contact->countData(COMPANY) > 0)
+    {
+        ui->leNameCompany->setText(contact->data(COMPANY).at(COMP_NAME));
+        ui->lePhoneCompany->setText(contact->data(COMPANY).at(PHONE));
+        ui->leDepartment->setText(contact->data(COMPANY).at(DEPARTMENT));
+        ui->lePost->setText(contact->data(COMPANY).at(POST));
+        ui->leAddressCompany->setText(contact->data(COMPANY).at(COMP_ADDRESS));
+        ui->deStartWork->setDate(string2Date(contact->data(COMPANY).at(DATEIN)));
+        ui->deEndWork->setDate(string2Date(contact->data(COMPANY).at(DATEOUT)));
+    }
+    else
+    {
+        ui->leNameCompany->clear();
+        ui->lePhoneCompany->clear();
+        ui->leDepartment->clear();
+        ui->lePost->clear();
+        ui->leAddressCompany->clear();
+        ui->deStartWork->clear();
+        ui->deEndWork->clear();
+    }
 
     connectSignals();
 }
