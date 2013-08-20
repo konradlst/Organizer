@@ -9,6 +9,8 @@
 
 namespace
 {
+const QString Logo(":/logo");
+const QString PhoneMask("+9 (999) 999 99 99;_");
 #define NEW_CONTACT_TEXT QString("New contact")
 #define DEFAULT_PHONE_TEXT QString("+ ()   ")
 #define OPEN_TITLE QObject::trUtf8("Open Contact List")
@@ -24,7 +26,9 @@ namespace
 #define VERSION QObject::trUtf8("Version: %1")
 #define ABOUT_TEXT QObject::trUtf8("<b>%1 %2</b><br><br>" \
                                     "Based on Qt 5.0.1<br><br>" \
-                                    "Copyright 2013, Anton Batyaev. All rights reserved.").arg(qApp->applicationName(), APP_VERSION)
+                                    "Copyright 2013, Anton Batyaev. "\
+                                    "All rights reserved.")\
+                            .arg(qApp->applicationName(), APP_VERSION)
 
 QString pathToData(const QString *path)
 {
@@ -38,7 +42,7 @@ QPixmap path2Pixmap(QString path)
 {
     QPixmap pix = QPixmap(path);
     if(pix.isNull())
-        pix = QPixmap(":/logo");
+        pix = QPixmap(Logo);
     return pix.scaled(pix.size());
 }
 
@@ -66,7 +70,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     setEditable(false);
     setDefaultSettings();
 
-    ui->lePhone->setInputMask("+9 (999) 999 99 99;_");
+    ui->lePhone->setInputMask(PhoneMask);
     ui->deStartWork->setDate(QDate::currentDate());
     ui->deEndWork->setDate(QDate::currentDate());
     ui->deBirthday->calendarWidget()->setFirstDayOfWeek(Qt::Monday);

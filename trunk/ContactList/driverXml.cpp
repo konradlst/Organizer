@@ -52,40 +52,39 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
     QDomElement root = doc.createElement(Tag::Tree);
     root.setAttribute(Attribute::Version, qApp->applicationVersion());
     doc.appendChild(root);
-    for(int i=0; i<data.size(); ++i)
+    for (int i=0; i < data.size(); ++i)
     {
         QDomElement record = doc.createElement(Tag::Record);
         QDomElement field = doc.createElement(Tag::Data);
         QDomElement addresses = doc.createElement(Tag::Addresses);
-        QDomElement communications = doc.createElement(Tag::Channels);
+        QDomElement channels = doc.createElement(Tag::Channels);
         QDomElement companies = doc.createElement(Tag::Organizations);
 
         root.appendChild(record);
         record.appendChild(field);
         record.appendChild(addresses);
-        record.appendChild(communications);
+        record.appendChild(channels);
         record.appendChild(companies);
         int countAddr = data.at(i)->countData(ADDRESS);
-        for(int id = 0; id < countAddr; ++id)
+        for (int id = 0; id < countAddr; ++id)
         {
             QDomElement address = doc.createElement(Tag::Data);
             addresses.appendChild(address);
         }
 
-        int countCommun = data.at(i)->countData(Channel::All);
-        for(int id = 0; id < countCommun; ++id)
+        for (int id = 0; id < data.at(i)->countData(Channel::All); ++id)
         {
-            QDomElement communication = doc.createElement(Tag::Data);
-            communications.appendChild(communication);
+            QDomElement channel = doc.createElement(Tag::Data);
+            channels.appendChild(channel);
         }
 
         int countComp = data.at(i)->countData(COMPANY);
-        for(int id = 0; id < countComp; ++id)
+        for (int id = 0; id < countComp; ++id)
         {
             QDomElement company = doc.createElement(Tag::Data);
             companies.appendChild(company);
         }
-        contactDataToXml(record,*data.at(i));
+        contactDataToXml(record, *data.at(i));
     }
 
     QTextStream out(&file);
@@ -117,7 +116,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
         ERROR_INCORRECT_FORMAT;
         return 0;
     }
-    if(rootElement.attribute(Attribute::Version) != qApp->applicationVersion())
+    if (rootElement.attribute(Attribute::Version) != qApp->applicationVersion())
     {
         ERROR_INCORRECT_VERSION;
         return 0;
@@ -153,29 +152,29 @@ bool DriverXml::saveContact(const ContactData &data, const QString &path)
     record.setAttribute(Attribute::Version, qApp->applicationVersion());
     QDomElement field = doc.createElement(Tag::Data);
     QDomElement addresses = doc.createElement(Tag::Addresses);
-    QDomElement communications = doc.createElement(Tag::Channels);
+    QDomElement channels = doc.createElement(Tag::Channels);
     QDomElement companies = doc.createElement(Tag::Organizations);
 
     doc.appendChild(record);
     record.appendChild(field);
     record.appendChild(addresses);
-    record.appendChild(communications);
+    record.appendChild(channels);
     record.appendChild(companies);
     int countAddr = data.countData(ADDRESS);
-    for(int id = 0; id < countAddr; ++id)
+    for (int id = 0; id < countAddr; ++id)
     {
         QDomElement address = doc.createElement(Tag::Data);
         addresses.appendChild(address);
     }
 
-    for(int id = 0; id < data.countData(Channel::All); ++id)
+    for (int id = 0; id < data.countData(Channel::All); ++id)
     {
-        QDomElement communication = doc.createElement(Tag::Data);
-        communications.appendChild(communication);
+        QDomElement channel = doc.createElement(Tag::Data);
+        channels.appendChild(channel);
     }
 
     int countComp = data.countData(COMPANY);
-    for(int id = 0; id < countComp; ++id)
+    for (int id = 0; id < countComp; ++id)
     {
         QDomElement company = doc.createElement(Tag::Data);
         companies.appendChild(company);
@@ -183,7 +182,6 @@ bool DriverXml::saveContact(const ContactData &data, const QString &path)
     contactDataToXml(record,data);
 
     QTextStream out(&file);
-
     doc.save(out,0);
     file.close();
     return true;
@@ -211,14 +209,14 @@ ContactData *DriverXml::loadContact(const QString &path)
         ERROR_INCORRECT_FORMAT;
         return 0;
     }
-    if(recordElement.attribute(Attribute::Version) != qApp->applicationVersion())
+    if (recordElement.attribute(Attribute::Version) != qApp->applicationVersion())
     {
         ERROR_INCORRECT_VERSION;
         return 0;
     }
 
     ContactData *currentContact = new ContactData;
-    xmlToContactData(recordElement,*currentContact);
+    xmlToContactData(recordElement, *currentContact);
 
     return currentContact;
 }
@@ -226,13 +224,13 @@ ContactData *DriverXml::loadContact(const QString &path)
 void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) const
 {
     QDomNode fieldNode = record.firstChild();
-    while(!fieldNode.isNull())
+    while (!fieldNode.isNull())
     {
         QDomElement fieldElement = fieldNode.toElement();
-        if(fieldElement.isNull())
+        if (fieldElement.isNull())
             fieldNode = fieldNode.nextSibling();
 
-        if(fieldElement.tagName() == Tag::Data)
+        if (fieldElement.tagName() == Tag::Data)
         {
             QStringList list;
             list << fieldElement.attribute(Attribute::Alias)
@@ -244,10 +242,10 @@ void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) c
                  << fieldElement.attribute(Attribute::Comment);
             data.setMainData(list);
         }
-        else if(fieldElement.tagName() == Tag::Addresses)
+        else if (fieldElement.tagName() == Tag::Addresses)
         {
             QDomNode dataNode = fieldElement.firstChild();
-            while(!dataNode.isNull())
+            while (!dataNode.isNull())
             {
                 QDomElement dataElement = dataNode.toElement();
                 QStringList list;
@@ -260,7 +258,7 @@ void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) c
                 dataNode = dataNode.nextSibling();
             }
         }
-        else if(fieldElement.tagName() == Tag::Channels)
+        else if (fieldElement.tagName() == Tag::Channels)
         {
             QDomNode dataNode = fieldElement.firstChild();
             while(!dataNode.isNull())
@@ -274,10 +272,10 @@ void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) c
                 dataNode = dataNode.nextSibling();
             }
         }
-        else if(fieldElement.tagName() == Tag::Organizations)
+        else if (fieldElement.tagName() == Tag::Organizations)
         {
             QDomNode dataNode = fieldElement.firstChild();
-            while(!dataNode.isNull())
+            while (!dataNode.isNull())
             {
                 QDomElement dataElement = dataNode.toElement();
                 QStringList list;
@@ -307,20 +305,14 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     field.setAttribute(Attribute::PathToUserPic, data.data(CONTACT).at(USER_PIC));
     field.setAttribute(Attribute::Comment, data.data(CONTACT).at(COMMENT));
 
-    int countAddresses = data.countData(ADDRESS);
     QDomElement address = record.firstChildElement(Tag::Addresses).firstChildElement(Tag::Data);
-    for(int addressId = 0; addressId < countAddresses; ++addressId)
+    for (int id = 0; id < data.countData(ADDRESS); ++id)
     {
-        address.setAttribute(Address::Country,
-                             data.data(ADDRESS, addressId).at(COUNTRY));
-        address.setAttribute(Address::City,
-                             data.data(ADDRESS, addressId).at(CITY));
-        address.setAttribute(Address::Street,
-                             data.data(ADDRESS, addressId).at(STREET));
-        address.setAttribute(Address::Home,
-                             data.data(ADDRESS, addressId).at(HOME));
-        address.setAttribute(Address::Apartment,
-                             data.data(ADDRESS, addressId).at(APARTMENT));
+        address.setAttribute(Address::Country, data.data(ADDRESS, id).at(COUNTRY));
+        address.setAttribute(Address::City,  data.data(ADDRESS, id).at(CITY));
+        address.setAttribute(Address::Street,  data.data(ADDRESS, id).at(STREET));
+        address.setAttribute(Address::Home, data.data(ADDRESS, id).at(HOME));
+        address.setAttribute(Address::Apartment, data.data(ADDRESS, id).at(APARTMENT));
         address = address.nextSiblingElement(Tag::Data);
     }
 
@@ -328,7 +320,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
 
     QStringList phones = data.data(Channel::Phone);
     QStringList phoneTypes = data.data(Channel::PhoneType);
-    for(int id = 0; id < data.countData(Channel::Phone); ++id)
+    for (int id = 0; id < data.countData(Channel::Phone); ++id)
     {
         channels.setAttribute(Attribute::Type, Channel::Phone);
         channels.setAttribute(Attribute::Subtype, phoneTypes.at(id));
@@ -337,7 +329,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     }
     QStringList emails = data.data(Channel::Email);
     QStringList emailTypes = data.data(Channel::EmailType);
-    for(int id = 0; id < data.countData(Channel::Email); ++id)
+    for (int id = 0; id < data.countData(Channel::Email); ++id)
     {
         channels.setAttribute(Attribute::Type, Channel::Email);
         channels.setAttribute(Attribute::Subtype, emailTypes.at(id));
@@ -346,7 +338,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     }
     QStringList skypes = data.data(Channel::Skype);
     QStringList skypeTypes = data.data(Channel::SkypeType);
-    for(int id = 0; id < data.countData(Channel::Skype); ++id)
+    for (int id = 0; id < data.countData(Channel::Skype); ++id)
     {
         channels.setAttribute(Attribute::Type, Channel::Skype);
         channels.setAttribute(Attribute::Subtype, skypeTypes.at(id));
@@ -355,7 +347,7 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     }
     QStringList sites = data.data(Channel::Site);
     QStringList siteTypes = data.channelsTypes(Channel::Site);
-    for(int id = 0; id < data.countData(Channel::Site); ++id)
+    for (int id = 0; id < data.countData(Channel::Site); ++id)
     {
         channels.setAttribute(Attribute::Type, Channel::Site);
         channels.setAttribute(Attribute::Subtype, siteTypes.at(id));
@@ -363,26 +355,22 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
         channels = channels.nextSiblingElement(Tag::Data);
     }
 
-    int countCompanies = data.countData(COMPANY);
     QDomElement companies = record.firstChildElement(Tag::Organizations);
-    if(companies.isNull())
+    if (companies.isNull())
         return;
 
     QDomElement company = companies.firstChildElement(Tag::Data);
-    for(int corpId = 0; corpId < countCompanies; ++corpId)
+    for (int id = 0; id < data.countData(COMPANY); ++id)
     {
-        company.setAttribute(Attribute::Name,
-                             data.data(COMPANY, corpId).at(COMP_NAME));
+        company.setAttribute(Attribute::Name, data.data(COMPANY, id).at(COMP_NAME));
         company.setAttribute(Attribute::Department,
-                             data.data(COMPANY, corpId).at(DEPARTMENT));
-        company.setAttribute(Attribute::Post, data.data(COMPANY, corpId).at(POST));
+                             data.data(COMPANY, id).at(DEPARTMENT));
+        company.setAttribute(Attribute::Post, data.data(COMPANY, id).at(POST));
         company.setAttribute(Attribute::Address,
-                             data.data(COMPANY, corpId).at(COMP_ADDRESS));
-        company.setAttribute(Attribute::Phone, data.data(COMPANY, corpId).at(PHONE));
-        company.setAttribute(Attribute::DateIn,
-                             data.data(COMPANY, corpId).at(DATEIN));
-        company.setAttribute(Attribute::DateOut,
-                             data.data(COMPANY, corpId).at(DATEOUT));
+                             data.data(COMPANY, id).at(COMP_ADDRESS));
+        company.setAttribute(Attribute::Phone, data.data(COMPANY, id).at(PHONE));
+        company.setAttribute(Attribute::DateIn, data.data(COMPANY, id).at(DATEIN));
+        company.setAttribute(Attribute::DateOut, data.data(COMPANY, id).at(DATEOUT));
         company = company.nextSiblingElement(Tag::Data);
     }
 }
