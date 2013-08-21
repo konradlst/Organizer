@@ -11,32 +11,32 @@
 
 QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString &tableName)
 {
-    QList<QAbstractItemDelegate *> *list = new QList<QAbstractItemDelegate *>();
+    QList<QAbstractItemDelegate *> *list = new QList<QAbstractItemDelegate*>();
 
     QDomElement scheme;
     if(!Scheme::loadScheme(scheme))
         return list;
 
-    QDomNode tablesNode = scheme.firstChildElement(Scheme::tagTables);
-    if(tablesNode.isNull())
+    QDomNode tables = scheme.firstChildElement(Scheme::tagTables);
+    if(tables.isNull())
         return list;
 
-    QDomNode tableNode = tablesNode.firstChildElement(Scheme::tagTable);
-    if(tableNode.isNull())
+    QDomNode table = tables.firstChildElement(Scheme::tagTable);
+    if(table.isNull())
         return list;
 
-    while (tableNode.toElement().attribute(Scheme::attrName) != tableName)
-        tableNode = tableNode.nextSibling();
+    while (table.toElement().attribute(Scheme::attrName) != tableName)
+        table = table.nextSibling();
 
     QDomElement delegates = scheme.firstChildElement(Scheme::tagDelegates);
-    QDomNode fieldNode = tableNode.firstChild();
-    while(!fieldNode.isNull())
+    QDomNode field = table.firstChild();
+    while(!field.isNull())
     {
-        QString delegateName = fieldNode.toElement().attribute(Scheme::attrDelegate);
+        QString delegateName = field.toElement().attribute(Scheme::attrDelegate);
         if(delegateName.isNull())
         {
             list->append(0);
-            fieldNode = fieldNode.nextSibling();
+            field = field.nextSibling();
             continue;
         }
         QDomNode delegateNode = delegates.firstChildElement(Scheme::tagDelegate);
@@ -51,12 +51,12 @@ QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString
         while (delegate.hasAttribute(Scheme::attrParam + QString::number(i)))
             lst << delegate.attribute(Scheme::attrParam + QString::number(i++));
         list->append(createDelegate(lst));
-        fieldNode = fieldNode.nextSibling();
+        field = field.nextSibling();
     }
     return list;
 }
 
-QAbstractItemDelegate *cgDelegateManager::createDelegate(QStringList &list)
+QAbstractItemDelegate *cgDelegateManager::createDelegate(const QStringList &list)
 {
     QString type = list.at(0);
     if(type == delegateName::line)

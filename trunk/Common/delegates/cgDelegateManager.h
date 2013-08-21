@@ -9,8 +9,8 @@ class QAbstractItemDelegate;
 
 namespace cgDelegateManager
 {
-    QList<QAbstractItemDelegate *> *getDelegateList(const QString &tableName);
-    QAbstractItemDelegate *createDelegate(QStringList &list);
+    QList<QAbstractItemDelegate*> *getDelegateList(const QString &tableName);
+    QAbstractItemDelegate *createDelegate(const QStringList &list);
 };
 
 #endif // CGDELEGATEMANAGER_H

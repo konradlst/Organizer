@@ -7,6 +7,6 @@ int main(int argc, char *argv[])
 
     cgDBManager w;
     w.show();
-    
+
     return a.exec();
 }

@@ -16,7 +16,7 @@ private:
     const QString &m_pathToDb;
     QSqlDatabase m_db;
 
-    void parseField(const QDomElement &field, QString &data);
+    void parseField(const QDomElement &field, QString &data) const;
     bool execQueries(const QStringList &list);
 };
 

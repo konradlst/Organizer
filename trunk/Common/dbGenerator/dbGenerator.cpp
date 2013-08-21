@@ -102,7 +102,7 @@ bool dbGenerator::generate(const bool fillTable)
     return true;
 }
 
-void dbGenerator::parseField(const QDomElement &field, QString &data)
+void dbGenerator::parseField(const QDomElement &field, QString &data) const
 {
     QStringList d;
     d << field.attribute(Scheme::attrName)
