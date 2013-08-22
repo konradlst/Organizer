@@ -16,21 +16,6 @@ const QString Channels("channels");
 const QString Organizations("organizations");
 }
 
-namespace
-{
-QDate string2Data(QString data)
-{
-    if(data.isEmpty())
-        return DEFAULT_DATE;
-    return QDate::fromString(data, DEFAULT_DATE_FORMAT);
-}
-
-QString data2String(QDate data)
-{
-    return data.toString(DEFAULT_DATE_FORMAT);
-}
-}
-
 DriverXml::DriverXml()
 {
 }
@@ -263,12 +248,10 @@ void DriverXml::xmlToContactData(const QDomElement &record, ContactData &data) c
             QDomNode dataNode = fieldElement.firstChild();
             while(!dataNode.isNull())
             {
-                QDomElement dataElement = dataNode.toElement();
-
-                QString type = dataElement.attribute(Attribute::Type);
-
-                data.setChannel(type, dataElement.attribute(Attribute::Subtype),
-                                dataElement.attribute(Attribute::Value));
+                QDomElement channel = dataNode.toElement();
+                data.setChannel(channel.attribute(Attribute::Type),
+                                channel.attribute(Attribute::Subtype),
+                                channel.attribute(Attribute::Value));
                 dataNode = dataNode.nextSibling();
             }
         }
@@ -318,40 +301,12 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
 
     QDomElement channels = record.firstChildElement(Tag::Channels).firstChildElement(Tag::Data);
 
-    QStringList phones = data.data(Channel::Phone);
-    QStringList phoneTypes = data.data(Channel::PhoneType);
-    for (int id = 0; id < data.countData(Channel::Phone); ++id)
+    for (int id = 0; id < data.countData(Channel::All); ++id)
     {
-        channels.setAttribute(Attribute::Type, Channel::Phone);
-        channels.setAttribute(Attribute::Subtype, phoneTypes.at(id));
-        channels.setAttribute(Attribute::Value, phones.at(id));
-        channels = channels.nextSiblingElement(Tag::Data);
-    }
-    QStringList emails = data.data(Channel::Email);
-    QStringList emailTypes = data.data(Channel::EmailType);
-    for (int id = 0; id < data.countData(Channel::Email); ++id)
-    {
-        channels.setAttribute(Attribute::Type, Channel::Email);
-        channels.setAttribute(Attribute::Subtype, emailTypes.at(id));
-        channels.setAttribute(Attribute::Value, emails.at(id));
-        channels = channels.nextSiblingElement(Tag::Data);
-    }
-    QStringList skypes = data.data(Channel::Skype);
-    QStringList skypeTypes = data.data(Channel::SkypeType);
-    for (int id = 0; id < data.countData(Channel::Skype); ++id)
-    {
-        channels.setAttribute(Attribute::Type, Channel::Skype);
-        channels.setAttribute(Attribute::Subtype, skypeTypes.at(id));
-        channels.setAttribute(Attribute::Value, skypes.at(id));
-        channels = channels.nextSiblingElement(Tag::Data);
-    }
-    QStringList sites = data.data(Channel::Site);
-    QStringList siteTypes = data.channelsTypes(Channel::Site);
-    for (int id = 0; id < data.countData(Channel::Site); ++id)
-    {
-        channels.setAttribute(Attribute::Type, Channel::Site);
-        channels.setAttribute(Attribute::Subtype, siteTypes.at(id));
-        channels.setAttribute(Attribute::Value, sites.at(id));
+        QStringList channel = data.data(Channel::All, id);
+        channels.setAttribute(Attribute::Type, channel.at(0));
+        channels.setAttribute(Attribute::Subtype, channel.at(1));
+        channels.setAttribute(Attribute::Value, channel.at(2));
         channels = channels.nextSiblingElement(Tag::Data);
     }
 

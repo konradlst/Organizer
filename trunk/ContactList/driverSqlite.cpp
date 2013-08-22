@@ -6,8 +6,8 @@
 namespace
 {
 const QString USER("user");
-const QString MAIN("main");
 const QString FORMAT("format");
+const QString SUB_TYPE("title");
 const QString VALUE("value");
 const QString ID("id");
 
@@ -96,36 +96,6 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
     QStringList addressVal = contact->data(ADDRESS);
     addressVal << USER << index;
 
-    QStringList phoneVal;
-    phoneVal << Channel::Phone
-             << MAIN
-             << contact->data(Channel::Phone).at(0)
-             << USER
-             << index;
-
-    QStringList emailVal;
-    emailVal << Channel::Email
-             << MAIN
-             << contact->data(Channel::Email).at(0)
-             << USER
-             << index;
-
-    QStringList skypeVal;
-    skypeVal << Channel::Skype
-             << MAIN
-             << contact->data(Channel::Skype).at(0)
-             << USER
-             << index;
-
-    QStringList siteVal;
-    siteVal << Channel::Site
-            << MAIN
-            << contact->data(Channel::Site).at(0)
-            << USER
-            << index;
-
-    QString insertChannel = SQL::INSERT.arg(Table::Channels)
-                                       .arg(FLD_CHANNEL);
     QStringList queries;
     queries << SQL::INSERT.arg(Table::Contacts)
                           .arg(FLD_CONTACT)
@@ -135,11 +105,15 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
                           .arg(quotesValue(companyVal))
             << SQL::INSERT.arg(Table::Addresses)
                           .arg(FLD_ADDRESS)
-                          .arg(quotesValue(addressVal))
-            << insertChannel.arg(quotesValue(phoneVal))
-            << insertChannel.arg(quotesValue(emailVal))
-            << insertChannel.arg(quotesValue(skypeVal))
-            << insertChannel.arg(quotesValue(siteVal));
+                          .arg(quotesValue(addressVal));
+
+    QString insertChannel = SQL::INSERT.arg(Table::Channels, FLD_CHANNEL);
+    for(int id = 0; id < contact->countData(Channel::All); ++id)
+    {
+        QStringList data = contact->data(Channel::All, id);
+        data << USER << index;
+        queries << insertChannel.arg(quotesValue(data));
+    }
 
     QSqlQuery query;
     foreach (QString q, queries)
@@ -183,8 +157,8 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     tmpQ.exec(SQL::SELECT_2.arg(Table::Channels, USER, QString::number(index)));
     while (tmpQ.next())
     {
-        QString format = tmpQ.record().value(FORMAT).toString();
-        QString value = tmpQ.record().value(VALUE).toString();
-        contact->setChannel(format, MAIN, value);
+        contact->setChannel(tmpQ.record().value(FORMAT).toString(),
+                            tmpQ.record().value(SUB_TYPE).toString(),
+                            tmpQ.record().value(VALUE).toString());
     }
 }

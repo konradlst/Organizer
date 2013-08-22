@@ -159,10 +159,14 @@ void ContactListView::setContactData(const ContactData *contact)
         ui->leApartment->clear();
     }
 
-    ui->lePhone->setText(contact->data(Channel::Phone).at(0));
-    ui->leEmail->setText(contact->data(Channel::Email).at(0));
-    ui->leSkype->setText(contact->data(Channel::Skype).at(0));
-    ui->leSite->setText(contact->data(Channel::Site).at(0));
+
+    if(contact->countData(Channel::All) > 0)
+    {
+        ui->lePhone->setText(contact->data(Channel::Phone).at(2));
+        ui->leEmail->setText(contact->data(Channel::Email).at(2));
+        ui->leSkype->setText(contact->data(Channel::Skype).at(2));
+        ui->leSite->setText(contact->data(Channel::Site).at(2));
+    }
 
     if(contact->countData(COMPANY) > 0)
     {

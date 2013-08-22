@@ -51,7 +51,7 @@
       <height>441</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="hLayoutMain">
+    <layout class="QHBoxLayout" name="hLayoutMain" stretch="0">
      <property name="spacing">
       <number>5</number>
      </property>
@@ -71,589 +71,594 @@
       <number>3</number>
      </property>
      <item>
-      <widget class="QListWidget" name="lwContactList">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <widget class="QSplitter" name="splitter">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="vLayContact">
-       <item>
-        <layout class="QGridLayout" name="MainData">
-         <property name="leftMargin">
-          <number>5</number>
-         </property>
-         <property name="topMargin">
-          <number>3</number>
-         </property>
-         <property name="rightMargin">
-          <number>5</number>
-         </property>
-         <property name="bottomMargin">
-          <number>3</number>
-         </property>
-         <property name="horizontalSpacing">
-          <number>5</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>0</number>
-         </property>
-         <item row="0" column="0" rowspan="5">
-          <widget class="QLabel" name="lbUserPic">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+       <widget class="QListWidget" name="lwContactList">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+       <widget class="QWidget" name="ContactWidget" native="true">
+        <layout class="QVBoxLayout" name="vLayContact">
+         <item>
+          <layout class="QGridLayout" name="MainData">
+           <property name="leftMargin">
+            <number>5</number>
            </property>
-           <property name="minimumSize">
-            <size>
-             <width>120</width>
-             <height>120</height>
-            </size>
+           <property name="topMargin">
+            <number>3</number>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>120</width>
-             <height>120</height>
-            </size>
+           <property name="rightMargin">
+            <number>5</number>
            </property>
-           <property name="pixmap">
-            <pixmap resource="res.qrc">:/logo</pixmap>
+           <property name="bottomMargin">
+            <number>3</number>
            </property>
-           <property name="scaledContents">
-            <bool>true</bool>
+           <property name="horizontalSpacing">
+            <number>5</number>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QLineEdit" name="leOtherName">
-           <property name="maxLength">
-            <number>100</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="lbAlias">
-           <property name="text">
-            <string>Alias:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLineEdit" name="leAlias">
-           <property name="maxLength">
-            <number>150</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLabel" name="lbOtherName">
-           <property name="text">
-            <string>OtherName:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLineEdit" name="leName">
-           <property name="maxLength">
-            <number>100</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLabel" name="lbName">
-           <property name="text">
-            <string>Name:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLabel" name="lbBirthday">
-           <property name="text">
-            <string>Birthday:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pbEditUserPic">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>25</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>25</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="res.qrc">
-             <normaloff>:/editContact</normaloff>:/editContact</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QDateEdit" name="deBirthday">
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-           <property name="currentSectionIndex">
+           <property name="verticalSpacing">
             <number>0</number>
            </property>
-          </widget>
+           <item row="0" column="0" rowspan="5">
+            <widget class="QLabel" name="lbUserPic">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="res.qrc">:/logo</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLineEdit" name="leOtherName">
+             <property name="maxLength">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="lbAlias">
+             <property name="text">
+              <string>Alias:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="leAlias">
+             <property name="maxLength">
+              <number>150</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="lbOtherName">
+             <property name="text">
+              <string>OtherName:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLineEdit" name="leName">
+             <property name="maxLength">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="lbName">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="lbBirthday">
+             <property name="text">
+              <string>Birthday:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QPushButton" name="pbEditUserPic">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/editContact</normaloff>:/editContact</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QDateEdit" name="deBirthday">
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="currentSectionIndex">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLineEdit" name="leSurName">
+             <property name="maxLength">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="lbLastName">
+             <property name="text">
+              <string>LastName:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
-         <item row="2" column="2">
-          <widget class="QLineEdit" name="leSurName">
-           <property name="maxLength">
-            <number>100</number>
+         <item>
+          <widget class="QTabWidget" name="DetailData">
+           <property name="currentIndex">
+            <number>1</number>
            </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLabel" name="lbLastName">
-           <property name="text">
-            <string>LastName:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
+           <widget class="QWidget" name="tabChannels">
+            <attribute name="title">
+             <string>Channels</string>
+            </attribute>
+            <widget class="QWidget" name="gridLayoutWidget_3">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>451</width>
+               <height>171</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gLayChannels">
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>3</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
+              <property name="horizontalSpacing">
+               <number>5</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <item row="2" column="1">
+               <widget class="QLabel" name="lbSkype">
+                <property name="text">
+                 <string>Skype:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLineEdit" name="leSkype"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="lbEmail">
+                <property name="text">
+                 <string>Email:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="lbSite">
+                <property name="text">
+                 <string>Site:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLineEdit" name="lePhone"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="res.qrc">:/editContact</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLineEdit" name="leSite"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLineEdit" name="leEmail"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="lbPhone">
+                <property name="text">
+                 <string>Phone:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="res.qrc">:/editContact</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0" colspan="3">
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="res.qrc">:/editContact</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="res.qrc">:/editContact</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Add</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="res.qrc">
+                  <normaloff>:/newContact</normaloff>:/newContact</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="tabAddress">
+            <attribute name="title">
+             <string>Address</string>
+            </attribute>
+            <widget class="QWidget" name="formLayoutWidget">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>451</width>
+               <height>161</height>
+              </rect>
+             </property>
+             <layout class="QFormLayout" name="gLayAddress">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              </property>
+              <property name="horizontalSpacing">
+               <number>5</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>3</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lbCountry">
+                <property name="text">
+                 <string>Country:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="leCountry"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lbCity">
+                <property name="text">
+                 <string>City:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="leCity"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lbStreet">
+                <property name="text">
+                 <string>Street:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="leStreet"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lbHome">
+                <property name="text">
+                 <string>Home:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="leHome"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="lbApartment">
+                <property name="text">
+                 <string>Apartment:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="leApartment"/>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="tabCompany">
+            <attribute name="title">
+             <string>Company</string>
+            </attribute>
+            <widget class="QWidget" name="formLayoutWidget_2">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>451</width>
+               <height>219</height>
+              </rect>
+             </property>
+             <layout class="QFormLayout" name="gLayCompany">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              </property>
+              <property name="horizontalSpacing">
+               <number>5</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>3</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>3</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lbNameCompany">
+                <property name="text">
+                 <string>Name:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="leNameCompany"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lbPhoneCompany">
+                <property name="text">
+                 <string>Phone:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lePhoneCompany"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lbDapartment">
+                <property name="text">
+                 <string>Department:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="leDepartment"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lbPost">
+                <property name="text">
+                 <string>Post:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lePost"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="lbAddressCompany">
+                <property name="text">
+                 <string>Address:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="leAddressCompany"/>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="lbStartWork">
+                <property name="text">
+                 <string>Start work:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QDateEdit" name="deStartWork">
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="lbEndWork">
+                <property name="text">
+                 <string>End work:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QDateEdit" name="deEndWork">
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QTabWidget" name="DetailData">
-         <property name="currentIndex">
-          <number>1</number>
-         </property>
-         <widget class="QWidget" name="tabChannels">
-          <attribute name="title">
-           <string>Channels</string>
-          </attribute>
-          <widget class="QWidget" name="gridLayoutWidget_3">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>451</width>
-             <height>171</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gLayChannels">
-            <property name="leftMargin">
-             <number>5</number>
-            </property>
-            <property name="topMargin">
-             <number>3</number>
-            </property>
-            <property name="rightMargin">
-             <number>5</number>
-            </property>
-            <property name="bottomMargin">
-             <number>3</number>
-            </property>
-            <property name="horizontalSpacing">
-             <number>5</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <item row="2" column="1">
-             <widget class="QLabel" name="lbSkype">
-              <property name="text">
-               <string>Skype:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLineEdit" name="leSkype"/>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="lbEmail">
-              <property name="text">
-               <string>Email:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="lbSite">
-              <property name="text">
-               <string>Site:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLineEdit" name="lePhone"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap resource="res.qrc">:/editContact</pixmap>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QLineEdit" name="leSite"/>
-            </item>
-            <item row="1" column="2">
-             <widget class="QLineEdit" name="leEmail"/>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="lbPhone">
-              <property name="text">
-               <string>Phone:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap resource="res.qrc">:/editContact</pixmap>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0" colspan="3">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap resource="res.qrc">:/editContact</pixmap>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap resource="res.qrc">:/editContact</pixmap>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QPushButton" name="pushButton">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Add</string>
-              </property>
-              <property name="icon">
-               <iconset resource="res.qrc">
-                <normaloff>:/newContact</normaloff>:/newContact</iconset>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="tabAddress">
-          <attribute name="title">
-           <string>Address</string>
-          </attribute>
-          <widget class="QWidget" name="formLayoutWidget">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>451</width>
-             <height>161</height>
-            </rect>
-           </property>
-           <layout class="QFormLayout" name="gLayAddress">
-            <property name="fieldGrowthPolicy">
-             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-            </property>
-            <property name="horizontalSpacing">
-             <number>5</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>5</number>
-            </property>
-            <property name="topMargin">
-             <number>3</number>
-            </property>
-            <property name="rightMargin">
-             <number>5</number>
-            </property>
-            <property name="bottomMargin">
-             <number>3</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lbCountry">
-              <property name="text">
-               <string>Country:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="leCountry"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lbCity">
-              <property name="text">
-               <string>City:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="leCity"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="lbStreet">
-              <property name="text">
-               <string>Street:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="leStreet"/>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="lbHome">
-              <property name="text">
-               <string>Home:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLineEdit" name="leHome"/>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="lbApartment">
-              <property name="text">
-               <string>Apartment:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLineEdit" name="leApartment"/>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="tabCompany">
-          <attribute name="title">
-           <string>Company</string>
-          </attribute>
-          <widget class="QWidget" name="formLayoutWidget_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>451</width>
-             <height>219</height>
-            </rect>
-           </property>
-           <layout class="QFormLayout" name="gLayCompany">
-            <property name="fieldGrowthPolicy">
-             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-            </property>
-            <property name="horizontalSpacing">
-             <number>5</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>5</number>
-            </property>
-            <property name="topMargin">
-             <number>3</number>
-            </property>
-            <property name="rightMargin">
-             <number>5</number>
-            </property>
-            <property name="bottomMargin">
-             <number>3</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lbNameCompany">
-              <property name="text">
-               <string>Name:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="leNameCompany"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lbPhoneCompany">
-              <property name="text">
-               <string>Phone:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="lePhoneCompany"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="lbDapartment">
-              <property name="text">
-               <string>Department:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="leDepartment"/>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="lbPost">
-              <property name="text">
-               <string>Post:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLineEdit" name="lePost"/>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="lbAddressCompany">
-              <property name="text">
-               <string>Address:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLineEdit" name="leAddressCompany"/>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="lbStartWork">
-              <property name="text">
-               <string>Start work:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QDateEdit" name="deStartWork">
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="lbEndWork">
-              <property name="text">
-               <string>End work:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1">
-             <widget class="QDateEdit" name="deEndWork">
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </widget>
-       </item>
-      </layout>
+       </widget>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -938,7 +943,6 @@
  </widget>
  <layoutdefault spacing="6" margin="6"/>
  <tabstops>
-  <tabstop>lwContactList</tabstop>
   <tabstop>leAlias</tabstop>
   <tabstop>leName</tabstop>
   <tabstop>leSurName</tabstop>

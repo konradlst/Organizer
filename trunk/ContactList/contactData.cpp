@@ -16,27 +16,19 @@ QString date2String(QDate data)
 }
 }
 
-ContactData::ContactData() :
-    m_addresses(new QVector<Data::Address>),
-    m_phones(new Channels),
-    m_emails(new Channels),
-    m_skypes(new Channels),
-    m_sites(new Channels),
-    m_companies(new QVector<Data::Company>)
+ContactData::ContactData()
+    : m_addresses(new QVector<Address::Data*>),
+      m_channels(new QVector<Channel::Data*>),
+      m_companies(new QVector<Company::Data*>)
 {
     m_alias = QString("New contact");
     m_birthday = DEFAULT_DATE;
-
-    m_phones->insert(Channel::Phone,QString());
-    m_emails->insert(Channel::Email,QString());
-    m_skypes->insert(Channel::Skype,QString());
-    m_sites->insert(Channel::Site,QString());
 }
 
 QStringList ContactData::data(const QString &type, const int &index) const
 {
     QStringList list;
-    if(type == CONTACT)
+    if (type == CONTACT)
     {
         list << m_alias
              << m_name
@@ -46,40 +38,43 @@ QStringList ContactData::data(const QString &type, const int &index) const
              << m_pathToUserPic
              << m_comment;
     }
-    else if(type == COMPANY && index < m_companies->count())
+    else if (type == COMPANY && index < m_companies->count())
     {
-        list << m_companies->at(index).name
-             << m_companies->at(index).phone
-             << m_companies->at(index).department
-             << m_companies->at(index).post
-             << m_companies->at(index).address
-             << date2String(m_companies->at(index).dateIn)
-             << date2String(m_companies->at(index).dateOut);
+        list << m_companies->at(index)->name
+             << m_companies->at(index)->phone
+             << m_companies->at(index)->department
+             << m_companies->at(index)->post
+             << m_companies->at(index)->address
+             << date2String(m_companies->at(index)->dateIn)
+             << date2String(m_companies->at(index)->dateOut);
     }
-    else if(type == ADDRESS && index < m_addresses->count())
+    else if (type == ADDRESS && index < m_addresses->count())
     {
-        list << m_addresses->at(index).country
-             << m_addresses->at(index).city
-             << m_addresses->at(index).street
-             << m_addresses->at(index).home
-             << m_addresses->at(index).apartment;
+        list << m_addresses->at(index)->country
+             << m_addresses->at(index)->city
+             << m_addresses->at(index)->street
+             << m_addresses->at(index)->home
+             << m_addresses->at(index)->apartment;
     }
-    else if(type == Channel::Phone)
-        list = m_phones->values();
-    else if(type == Channel::Email)
-        list = m_emails->values();
-    else if(type == Channel::Skype)
-        list = m_skypes->values();
-    else if(type == Channel::Site)
-        list = m_sites->values();
-    else if(type == Channel::PhoneType)
-        return m_phones->keys();
-    else if(type == Channel::EmailType)
-        return m_emails->keys();
-    else if(type == Channel::SkypeType)
-        return m_skypes->keys();
-    else if(type == Channel::SiteType)
-        return m_sites->keys();
+    else if (type == Channel::All && index < m_channels->count())
+    {
+        list << m_channels->at(index)->m_type
+             << m_channels->at(index)->m_subType
+             << m_channels->at(index)->m_value;
+    }
+    else if (m_channels->count() > 0
+             && (type == Channel::Phone
+                 || type == Channel::Email
+                 || type == Channel::Skype
+                 || type == Channel::Site))
+    {
+        int id = 0;
+        while (type != m_channels->at(id)->m_type)
+            ++id;
+        list << m_channels->at(id)->m_type
+             << m_channels->at(id)->m_subType
+             << m_channels->at(id)->m_value;
+    }
     return list;
 }
 
@@ -108,35 +103,34 @@ void ContactData::setBirthday(const QDate &data)
 
 void ContactData::setMainData(const QStringList &data)
 {
-    if(data.size() > 4)
+    if(data.size() < 4)
+        return;
+    m_alias = data.at(0);
+    m_name = data.at(1);
+    m_surName = data.at(2);
+    m_otherName = data.at(3);
+    m_birthday = string2Date(data.at(4));
+    if(data.size() == 7)
     {
-        m_alias = data.at(0);
-        m_name = data.at(1);
-        m_surName = data.at(2);
-        m_otherName = data.at(3);
-        m_birthday = string2Date(data.at(4));
-        if(data.size() == 7)
-        {
-            m_pathToUserPic = data.at(5);
-            m_comment = data.at(6);
-        }
+        m_pathToUserPic = data.at(5);
+        m_comment = data.at(6);
     }
 }
 
 void ContactData::setAddressData(const QString &type, const QString &data,
                                  const int &index)
 {
-    Data::Address temp;
+    Address::Data *temp = new Address::Data;
     if(type == Address::Country)
-        temp.country = data;
+        temp->country = data;
     else if(type == Address::City)
-        temp.city = data;
+        temp->city = data;
     else if(type == Address::Street)
-        temp.street = data;
+        temp->street = data;
     else if(type == Address::Home)
-        temp.home = data;
+        temp->home = data;
     else if(type == Address::Apartment)
-        temp.apartment = data;
+        temp->apartment = data;
     if(index < m_addresses->count())
         m_addresses->replace(index, temp);
     else
@@ -145,39 +139,34 @@ void ContactData::setAddressData(const QString &type, const QString &data,
 
 void ContactData::setAddressData(const QStringList &data, const int &index)
 {
-    if(data.size() == 5)
-    {
-        Data::Address temp;
-        temp.country = data.at(0);
-        temp.city = data.at(1);
-        temp.street = data.at(2);
-        temp.home = data.at(3);
-        temp.apartment = data.at(4);
-        if(index < m_addresses->count())
-            m_addresses->replace(index, temp);
-        else
-            m_addresses->append(temp);
-    }
+    if(data.size() != 5)
+        return;
+    Address::Data *temp = new Address::Data(data.at(0), data.at(1), data.at(2),
+                                            data.at(3), data.at(4));
+    if(index < m_addresses->count())
+        m_addresses->replace(index, temp);
+    else
+        m_addresses->append(temp);
 }
 
 void ContactData::setCompanyData(const QString &type, const QString &data,
                                  const int &index)
 {
-    Data::Company temp;
+    Company::Data *temp = new Company::Data;
     if(type == Attribute::NameOrganization)
-        temp.name = data;
+        temp->name = data;
     else if(type == Attribute::Department)
-        temp.department = data;
+        temp->department = data;
     else if(type == Attribute::Post)
-        temp.post = data;
+        temp->post = data;
     else if(type == Attribute::AddressOrganization)
-        temp.address = data;
+        temp->address = data;
     else if(type == Attribute::PhoneOrganization)
-        temp.phone = data;
+        temp->phone = data;
     else if(type == Attribute::DateIn)
-        temp.dateIn = string2Date(data);
+        temp->dateIn = string2Date(data);
     else if(type == Attribute::DateOut)
-        temp.dateOut = string2Date(data);
+        temp->dateOut = string2Date(data);
     if(index < m_companies->count())
         m_companies->replace(index, temp);
     else
@@ -187,11 +176,11 @@ void ContactData::setCompanyData(const QString &type, const QString &data,
 void ContactData::setCompanyData(const QString &type, const QDate &data,
                                  const int &index)
 {
-    Data::Company temp;
+    Company::Data *temp = new Company::Data;
     if(type == Attribute::DateIn)
-        temp.dateIn = data;
+        temp->dateIn = data;
     else if(type == Attribute::DateOut)
-        temp.dateOut = data;
+        temp->dateOut = data;
 
     if(index < m_companies->count())
         m_companies->replace(index, temp);
@@ -201,86 +190,33 @@ void ContactData::setCompanyData(const QString &type, const QDate &data,
 
 void ContactData::setCompanyData(const QStringList &data, const int &index)
 {
-    if(data.size() == 7)
-    {
-        Data::Company temp;
-        temp.name = data.at(0);
-        temp.department = data.at(1);
-        temp.post = data.at(2);
-        temp.address = data.at(3);
-        temp.phone = data.at(4);
-        temp.dateIn = string2Date(data.at(5));
-        temp.dateOut = string2Date(data.at(6));
-        if(index < m_companies->count())
-            m_companies->replace(index, temp);
-        else
-            m_companies->append(temp);
-    }
+    if(data.count() != 7)
+        return;
+    Company::Data *temp = new Company::Data(data.at(0), data.at(1), data.at(2),
+                                            data.at(3), data.at(4),
+                                            string2Date(data.at(5)),
+                                            string2Date(data.at(6)));
+    if(index < m_companies->count())
+        m_companies->replace(index, temp);
+    else
+        m_companies->append(temp);
 }
 
 void ContactData::setChannel(const QString &type,
                              const QString &subType,
                              const QString &value)
 {
-    if(type == Channel::Phone)
-    {
-        if(m_phones->contains(Channel::Phone))
-            m_phones->remove(Channel::Phone);
-        m_phones->insert(subType,value);
-    }
-    else if(type == Channel::Email)
-    {
-        if(m_emails->contains(Channel::Email))
-            m_emails->remove(Channel::Email);
-        m_emails->insert(subType,value);
-    }
-    else if(type == Channel::Skype)
-    {
-        if(m_skypes->contains(Channel::Skype))
-            m_skypes->remove(Channel::Skype);
-        m_skypes->insert(subType,value);
-    }
-    else if(type == Channel::Site)
-    {
-        if(m_sites->contains(Channel::Site))
-            m_sites->remove(Channel::Site);
-        m_sites->insert(subType,value);
-    }
+    Channel::Data *channel = new Channel::Data(type, subType, value);
+    m_channels->append(channel);
 }
 
 int ContactData::countData(const QString &type) const
 {
-    int count;
     if(type == COMPANY)
-        count = m_companies->count();
+        return m_companies->count();
     else if(type == ADDRESS)
-        count = m_addresses->count();
-    else if(type == Channel::Phone)
-        count = m_phones->size();
-    else if(type == Channel::Email)
-        count = m_emails->size();
-    else if(type == Channel::Skype)
-        count = m_skypes->size();
-    else if(type == Channel::Site)
-        count = m_sites->size();
+        return m_addresses->count();
     else if(type == Channel::All)
-        count = m_phones->size()
-                + m_emails->size()
-                + m_skypes->size()
-                + m_sites->size();
-    return count;
-}
-
-QList<QString> ContactData::channelsTypes(const QString &type) const
-{
-    if(type == Channel::Phone)
-        return m_phones->keys();
-    else if(type == Channel::Email)
-        return m_emails->keys();
-    else if(type == Channel::Skype)
-        return m_skypes->keys();
-    else if(type == Channel::Site)
-        return m_sites->keys();
-    else
-        return QList<QString>();
+        return m_channels->count();
+    return 0;
 }

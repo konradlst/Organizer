@@ -44,29 +44,18 @@ const QString City("city");
 const QString Street("street");
 const QString Home("home");
 const QString Apartment("apartment");
-}
 
-namespace Channel
+struct Data
 {
-const QString All("All");
-const QString Phone("Phone");
-const QString Email("Email");
-const QString Skype("Skype");
-const QString Site("Site");
-const QString PhoneType("PhoneType");
-const QString EmailType("EmailType");
-const QString SkypeType("SkypeType");
-const QString SiteType("SiteType");
-}
-
-namespace Data
-{
-#define DEFAULT_DATE QDate(1900,1,1)
-#define DEFAULT_DATE_FORMAT "dd.MM.yyyy"
-#define DEFAULT_USER_PIC ":/logo"
-
-struct Address
-{
+    Data() {}
+    Data(QString _country, QString _city, QString _street, QString _home,
+         QString _apartment)
+        : country(_country),
+          city(_city),
+          street(_street),
+          home(_home),
+          apartment(_apartment)
+    {}
     QString country;
     QString city;
     QString street;
@@ -81,9 +70,53 @@ struct Address
                apartment.isEmpty();
     }
 };
+}
 
-struct Company
+namespace Channel
 {
+const QString All("All");
+const QString Phone("Phone");
+const QString Email("Email");
+const QString Skype("Skype");
+const QString Site("Site");
+const QString PhoneType("PhoneType");
+const QString EmailType("EmailType");
+const QString SkypeType("SkypeType");
+const QString SiteType("SiteType");
+
+struct Data
+{
+    Data() {}
+    Data(QString type, QString subType, QString value)
+        : m_type(type),
+          m_subType(subType),
+          m_value(value)
+    {}
+    QString m_type;
+    QString m_subType;
+    QString m_value;
+    bool isEmpty() const
+    {
+        return m_type.isEmpty() && m_subType.isEmpty() && m_value.isEmpty();
+    }
+};
+}
+
+namespace Company
+{
+struct Data
+{
+    Data() {}
+    Data(QString _name, QString _department, QString _post, QString _address,
+         QString _phone, QDate _dateIn, QDate _dateOut)
+        : name(_name),
+          department(_department),
+          post(_post),
+          address(_address),
+          phone(_phone),
+          dateIn(_dateIn),
+          dateOut(_dateOut)
+    {}
     QString name;
     QString department;
     QString post;
@@ -120,9 +153,7 @@ public:
     void setCompanyData(const QStringList &data, const int &index = 0);
     void setChannel(const QString &type, const QString &subType,
                     const QString &value);
-
     int countData(const QString &type = QString()) const;
-    QList<QString> channelsTypes(const QString &type) const;
 
 private:
     QString m_alias;
@@ -130,20 +161,19 @@ private:
     QString m_surName;
     QString m_otherName;
     QDate m_birthday;
-    QVector<Data::Address> *m_addresses;
-    typedef QHash<QString,QString> Channels;
-    Channels *m_phones;
-    Channels *m_emails;
-    Channels *m_skypes;
-    Channels *m_sites;
-    QVector<Data::Company> *m_companies;
+    QVector<Address::Data*> *m_addresses;
+    QVector<Channel::Data*> *m_channels;
+    QVector<Company::Data*> *m_companies;
     QString m_pathToUserPic;
     QString m_comment;
 };
 
 namespace Data
 {
-typedef QVector<ContactData *> Contacts;
+#define DEFAULT_DATE QDate(1900,1,1)
+#define DEFAULT_DATE_FORMAT "dd.MM.yyyy"
+#define DEFAULT_USER_PIC ":/logo"
+typedef QVector<ContactData*> Contacts;
 };
 
 #endif // CONTACTDATA_H

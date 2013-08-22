@@ -76,8 +76,8 @@ void cgDBManager::addRecord()
 void cgDBManager::removeRecord()
 {
     QSqlQuery query;
-    int id = m_view->model()->index(m_view->currentIndex().row() ,0).data().toInt();
-    query.exec(SQL::DELETE.arg(m_currentTable, id));
+    int id = m_view->model()->index(m_view->currentIndex().row(), 0).data().toInt();
+    query.exec(SQL::DELETE.arg(m_currentTable, QString::number(id)));
     m_models->value(m_currentTable)->select();
 }
 
@@ -112,7 +112,8 @@ void cgDBManager::initModel()
 void cgDBManager::createInterface()
 {
     m_view->setModel(m_models->value(m_currentTable));
-    m_view->verticalHeader()->hide();
+    m_view->setSortingEnabled(true);
+    m_view->setColumnHidden(0, true);
     if(!m_currentTable.isNull())
         setDelegates();
 
@@ -140,7 +141,7 @@ void cgDBManager::setDelegates()
     for(int i=0; i<m_view->model()->columnCount(); ++i)
         m_view->setItemDelegateForColumn(i, 0);
 
-    QList<QAbstractItemDelegate *> *list =  cgDelegateManager::getDelegateList(m_currentTable);
+    QList<QAbstractItemDelegate*> *list =  cgDelegateManager::getDelegateList(m_currentTable);
 
     int i=0;
     foreach (QAbstractItemDelegate *d, *list)

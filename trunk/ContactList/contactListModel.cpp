@@ -124,7 +124,7 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
             key == Channel::Skype ||
             key == Channel::Site)
     {
-        contact->setChannel(key, contact->data(Channel::PhoneType).at(0), data);
+        contact->setChannel(key, contact->data(Channel::All).at(1), data);
     }
 }
 
