@@ -11,134 +11,403 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ConciergeView</string>
+   <string>Concierge</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QToolBox" name="toolBox">
+   <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>50</y>
-      <width>441</width>
-      <height>291</height>
+      <x>10</x>
+      <y>10</y>
+      <width>481</width>
+      <height>371</height>
      </rect>
     </property>
-    <property name="currentIndex">
-     <number>1</number>
-    </property>
-    <widget class="QWidget" name="timePage">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>441</width>
-       <height>175</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Time</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="financePage">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>441</width>
-       <height>175</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Finance</string>
-     </attribute>
-     <widget class="QWidget" name="verticalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>391</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="financeLayout">
-       <item>
-        <widget class="QPushButton" name="pbAddTransaction">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+    <layout class="QVBoxLayout" name="mainLayout">
+     <item>
+      <widget class="QDateEdit" name="deToday">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolBox" name="toolBox">
+       <property name="currentIndex">
+        <number>3</number>
+       </property>
+       <widget class="QWidget" name="timePage">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>479</width>
+          <height>222</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Time</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>251</height>
+          </rect>
          </property>
-         <property name="text">
-          <string>Add Transaction</string>
-         </property>
+         <layout class="QVBoxLayout" name="timeLayout">
+          <item>
+           <layout class="QFormLayout" name="timeForm">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="lblTimeType">
+              <property name="text">
+               <string>Type</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cbTimeType"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblTimeDuration">
+              <property name="text">
+               <string>Duration</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QTimeEdit" name="teTimeDuration"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lblTimeFrom">
+              <property name="text">
+               <string>From</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QTimeEdit" name="teTimeFrom"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="lblTimeTo">
+              <property name="text">
+               <string>To</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QTimeEdit" name="teTimeTo"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbTimeSubmit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Submit</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="lwTimeList">
+            <item>
+             <property name="text">
+              <string>&lt;time_hh:mm&gt; : &lt;type&gt;</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>&lt;from_hh:mm&gt; - &lt;to_hh:mm&gt; : &lt;type&gt;</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="sportPage">
-     <attribute name="label">
-      <string>Sport</string>
-     </attribute>
-     <widget class="QWidget" name="formLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>341</width>
-        <height>141</height>
-       </rect>
-      </property>
-      <layout class="QFormLayout" name="sportLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="lbl1Sport">
-         <property name="text">
-          <string>1 sport :</string>
+       </widget>
+       <widget class="QWidget" name="financePage">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>479</width>
+          <height>222</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Finance</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>441</width>
+           <height>276</height>
+          </rect>
          </property>
+         <layout class="QVBoxLayout" name="financeLayout">
+          <item>
+           <layout class="QFormLayout" name="financeForm">
+            <item row="0" column="0">
+             <widget class="QLabel" name="lblFinanceOperation">
+              <property name="text">
+               <string>Operation :</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cbFinanceOperation"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblFinanceFrom">
+              <property name="text">
+               <string>From :</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="cbFinanceFrom"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lblFinanceTo">
+              <property name="text">
+               <string>To</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="cbFinanceTo"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="lblFinanceValue">
+              <property name="text">
+               <string>Value :</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="lblFinanceComment">
+              <property name="text">
+               <string>Comment :</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="leFinanceComment"/>
+            </item>
+            <item row="3" column="1">
+             <widget class="QSpinBox" name="sbFinanceValue"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbAddTransaction">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Add Transaction</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="lwFinanceList">
+            <item>
+             <property name="text">
+              <string>&lt;Operation&gt; from &lt;From&gt; to &lt;To&gt; &lt;value&gt;. Comment: &lt;comment&gt;</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="sb1Sport"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="lbl2Sport">
-         <property name="text">
-          <string>2 sport :</string>
+       </widget>
+       <widget class="QWidget" name="sportPage">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>479</width>
+          <height>222</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Sport</string>
+        </attribute>
+        <widget class="QWidget" name="formLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>341</width>
+           <height>141</height>
+          </rect>
          </property>
+         <layout class="QFormLayout" name="sportLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl1Sport">
+            <property name="text">
+             <string>1 sport :</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="sb1Sport"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl2Sport">
+            <property name="text">
+             <string>2 sport :</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="sb2Sport"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl3Sport">
+            <property name="text">
+             <string>3 sport :</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="sb3Sport"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl4Sport">
+            <property name="text">
+             <string>4 sport :</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="sb4Sport"/>
+          </item>
+         </layout>
         </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QSpinBox" name="sb2Sport"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="lbl3Sport">
-         <property name="text">
-          <string>3 sport :</string>
+       </widget>
+       <widget class="QWidget" name="dealPage">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>479</width>
+          <height>222</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Deal</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>441</width>
+           <height>245</height>
+          </rect>
          </property>
+         <layout class="QVBoxLayout" name="dealLayout">
+          <item>
+           <layout class="QFormLayout" name="dealForm">
+            <item row="0" column="0">
+             <widget class="QLabel" name="lblDealDeadLine">
+              <property name="text">
+               <string>DeadLine</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDateEdit" name="deDealDeadLine"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblDealDuration">
+              <property name="text">
+               <string>Duration</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QTimeEdit" name="teDealDuration"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lblDealPrice">
+              <property name="text">
+               <string>Price</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="sbDealPrice"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="lblDealDescription">
+              <property name="text">
+               <string>Description</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="leDealDescription"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbDealSubmit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Submit</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="lwDealList">
+            <item>
+             <property name="text">
+              <string>Daedline: &lt;DeadLine&gt; Duration: &lt;duration&gt; Price: &lt;Price&gt; Comment: &lt;Comment&gt;</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QSpinBox" name="sb3Sport"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="lbl4Sport">
-         <property name="text">
-          <string>4 sport :</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QSpinBox" name="sb4Sport"/>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="dealPage">
-     <attribute name="label">
-      <string>Deal</string>
-     </attribute>
-    </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -162,6 +431,32 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>deToday</tabstop>
+  <tabstop>cbTimeType</tabstop>
+  <tabstop>teTimeDuration</tabstop>
+  <tabstop>teTimeFrom</tabstop>
+  <tabstop>teTimeTo</tabstop>
+  <tabstop>pbTimeSubmit</tabstop>
+  <tabstop>lwTimeList</tabstop>
+  <tabstop>cbFinanceOperation</tabstop>
+  <tabstop>cbFinanceFrom</tabstop>
+  <tabstop>cbFinanceTo</tabstop>
+  <tabstop>sbFinanceValue</tabstop>
+  <tabstop>leFinanceComment</tabstop>
+  <tabstop>pbAddTransaction</tabstop>
+  <tabstop>lwFinanceList</tabstop>
+  <tabstop>sb1Sport</tabstop>
+  <tabstop>sb2Sport</tabstop>
+  <tabstop>sb3Sport</tabstop>
+  <tabstop>sb4Sport</tabstop>
+  <tabstop>deDealDeadLine</tabstop>
+  <tabstop>teDealDuration</tabstop>
+  <tabstop>sbDealPrice</tabstop>
+  <tabstop>leDealDescription</tabstop>
+  <tabstop>pbDealSubmit</tabstop>
+  <tabstop>lwDealList</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
