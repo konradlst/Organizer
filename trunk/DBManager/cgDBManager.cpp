@@ -77,7 +77,7 @@ void cgDBManager::removeRecord()
 {
     QSqlQuery query;
     int id = m_view->model()->index(m_view->currentIndex().row(), 0).data().toInt();
-    query.exec(SQL::DELETE.arg(m_currentTable, QString::number(id)));
+    query.exec(SQL::DELETE_WHERE.arg(m_currentTable, QString::number(id)));
     m_models->value(m_currentTable)->select();
 }
 
@@ -154,7 +154,7 @@ void cgDBManager::setDelegates()
 
 QString cgDBManager::openDb()
 {
-    QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, QDir::currentPath(),
+    QString path = QFileDialog::getSaveFileName(this, OPEN_TITLE, QDir::currentPath(),
                                                 FILE_TYPES);
     m_currentPathToDb = path.isEmpty() ? DEFAULT_DB : path;
     return m_currentPathToDb;

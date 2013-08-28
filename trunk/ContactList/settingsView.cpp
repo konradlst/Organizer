@@ -38,6 +38,7 @@ SettingsView::SettingsView(ContactListController *controller, QDialog *parent)
     ui->setupUi(this);
     ui->lbChangeLangMsg->setVisible(false);
     setLayout(ui->mainLayout);
+    setWindowModality(Qt::ApplicationModal);
     loadSettings();
 
     connect(ui->pbChooseContactList, SIGNAL(clicked()), SLOT(chooseContactList()));

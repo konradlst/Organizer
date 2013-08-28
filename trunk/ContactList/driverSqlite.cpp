@@ -134,7 +134,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     int index = query.record().value(ID).toInt();
 
     QSqlQuery tmpQ;
-    tmpQ.exec(SQL::SELECT_2.arg(Table::Addresses, USER, QString::number(index)));
+    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Addresses, USER, QString::number(index)));
     while (tmpQ.next())
     {
         QStringList list;
@@ -154,7 +154,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     }
 
     tmpQ.clear();
-    tmpQ.exec(SQL::SELECT_2.arg(Table::Channels, USER, QString::number(index)));
+    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Channels, USER, QString::number(index)));
     while (tmpQ.next())
     {
         contact->setChannel(tmpQ.record().value(FORMAT).toString(),

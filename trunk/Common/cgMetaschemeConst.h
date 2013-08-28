@@ -46,12 +46,12 @@ namespace SQL
 const QString SQLITE("QSQLITE");
 const QString COMMA(", ");
 const QString INSERT("INSERT INTO %1(%2) VALUES(%3);");
-const QString INSERT_DEFAULT = QString("INSERT INTO %1 DEFAULT VALUES");
-const QString DELETE = QString("DELETE FROM %1 WHERE id=%2;");
+const QString INSERT_DEFAULT("INSERT INTO %1 DEFAULT VALUES;");
+const QString DELETE_WHERE("DELETE FROM %1 WHERE id=%2;");
 const QString CREATE("CREATE TABLE %1 (%2);");
 const QString SELECT_SHORT("SELECT * FROM %1");
 const QString SELECT("SELECT * FROM %1 WHERE ownerId = '%2'");
-const QString SELECT_2("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
+const QString SELECT_WHERE("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
 
 const QString PRIMARY_KEY(" PRIMARY KEY");
 const QString NOT_NULL(" NOT NULL");

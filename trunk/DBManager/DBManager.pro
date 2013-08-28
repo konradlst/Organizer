@@ -4,8 +4,6 @@
 #
 #-------------------------------------------------
 
-include(./local_deploy.pri)
-
 QT       += core gui sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -15,6 +13,8 @@ TEMPLATE = app
 INCLUDEPATH += "../Common/"
 INCLUDEPATH += "../Common/dbGenerator"
 INCLUDEPATH += "../Common/delegates"
+
+include(../Common/local_deploy.pri)
 
 SOURCES += main.cpp\
     cgDBManager.cpp \
