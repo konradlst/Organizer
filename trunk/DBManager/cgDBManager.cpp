@@ -36,17 +36,12 @@ cgDBManager::cgDBManager(QWidget *parent)
     dbGenerate();
     createInterface();
 
-    connect(m_tableComboBox, SIGNAL(currentIndexChanged(int)),
-                             SLOT(currentTableChanged(int)));
+    connect(m_tableComboBox, SIGNAL(currentIndexChanged(int)), SLOT(currentTableChanged(int)));
     connect(m_btnOpenDb, SIGNAL(clicked()), SLOT(dbGenerate()));
     connect(m_btnAdd,    SIGNAL(clicked()), SLOT(addRecord()));
     connect(m_btnSubmit, SIGNAL(clicked()), SLOT(submit()));
     connect(m_btnRevert, SIGNAL(clicked()), SLOT(revertAll()));
     connect(m_btnRemove, SIGNAL(clicked()), SLOT(removeRecord()));
-}
-
-cgDBManager::~cgDBManager()
-{
 }
 
 void cgDBManager::currentTableChanged(const int &index)
@@ -133,12 +128,12 @@ void cgDBManager::createInterface()
 
     setCentralWidget(centralWidget);
     setWindowTitle(TITLE);
-    resize(760, 230);
+    resize(550, 550);
 }
 
 void cgDBManager::setDelegates()
 {
-    for(int i=0; i<m_view->model()->columnCount(); ++i)
+    for(int i = 0; i < m_view->model()->columnCount(); ++i)
         m_view->setItemDelegateForColumn(i, 0);
 
     QList<QAbstractItemDelegate*> *list =  cgDelegateManager::getDelegateList(m_currentTable);
@@ -154,8 +149,7 @@ void cgDBManager::setDelegates()
 
 QString cgDBManager::openDb()
 {
-    QString path = QFileDialog::getSaveFileName(this, OPEN_TITLE, QDir::currentPath(),
-                                                FILE_TYPES);
+    QString path = QFileDialog::getSaveFileName(this, OPEN_TITLE, QDir::currentPath(), FILE_TYPES);
     m_currentPathToDb = path.isEmpty() ? DEFAULT_DB : path;
     return m_currentPathToDb;
 }

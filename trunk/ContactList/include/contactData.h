@@ -140,19 +140,33 @@ class ContactData
 public:
     explicit ContactData();
 
+    //! Получает данные заданного типа \param по заданному индексу \param index.
     QStringList data(const QString &type, const int &index = 0) const;
+    //! Устанавливает у контакта значение \param value для заданного параметра \param type.
     void setMainData(const QString &type, const QString &value);
+    //! Устанавливает день рождения \param data контакта.
     void setBirthday(const QDate &data);
+    //! Устанавливает основные данные \param data контакта.
     void setMainData(const QStringList &data);
-    void setAddressData(const QString &type, const QString &data,
-                        const int &index = 0);
+    //! Устанавливает данные \param data заданного типа \param type
+    //! для адреса по заданному индексу \param index.
+    void setAddressData(const QString &type, const QString &data, const int &index = 0);
+    //! Устанавливает данные \param data адреса по заданному индексу \param index.
     void setAddressData(const QStringList &data, const int &index = 0);
-    void setCompanyData(const QString &type, const QString &data,
-                        const int &index = 0);
+
+    //! Устанавливает данные \param data заданного типа \param type
+    //! для компании по заданному индексу \param index.
+    void setCompanyData(const QString &type, const QString &data, const int &index = 0);
+    //! Устанавливает данные \param data заданного типа \param type
+    //! для компании по заданному индексу \param index.
     void setCompanyData(const QString &type, const QDate &data, const int &index = 0);
+    //! Устанавливает данные \param data компании по заданному индексу \param index.
     void setCompanyData(const QStringList &data, const int &index = 0);
+    //! Устанавливает данные \param value канала связи заданного вида \param type
+    //! указанного типа \param subType.
     void setChannel(const QString &type, const QString &subType,
                     const QString &value);
+    //! Возвращает количество данные указанного типа \param type.
     int countData(const QString &type = QString()) const;
 
 private:

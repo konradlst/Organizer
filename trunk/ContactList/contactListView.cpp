@@ -32,7 +32,7 @@ const QString PhoneMask("+9 (999) 999 99 99;_");
 
 QString pathToData(const QString *path)
 {
-    if(!path->isEmpty())
+    if (!path->isEmpty())
         return QObject::trUtf8("Path: %1").arg(*path);
     else
         return QString();
@@ -41,14 +41,14 @@ QString pathToData(const QString *path)
 QPixmap path2Pixmap(QString path)
 {
     QPixmap pix = QPixmap(path);
-    if(pix.isNull())
+    if (pix.isNull())
         pix = QPixmap(Logo);
     return pix.scaled(pix.size());
 }
 
 QDate string2Date(QString data)
 {
-    if(data.isEmpty())
+    if (data.isEmpty())
         return DEFAULT_DATE;
     return QDate::fromString(data, DEFAULT_DATE_FORMAT);
 }
@@ -91,8 +91,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     connect(ui->actionDelete_Contact, SIGNAL(triggered()), SLOT(deleteContact()));
     connect(ui->actionSettings, SIGNAL(triggered()), SLOT(settings()));
     connect(ui->actionEditable, SIGNAL(triggered(bool)), SLOT(setEditable(bool)));
-    connect(ui->lwContactList, SIGNAL(currentRowChanged(int)),
-            SLOT(currentContactChanged(int)));
+    connect(ui->lwContactList, SIGNAL(currentRowChanged(int)), SLOT(currentContactChanged(int)));
     connect(ui->pbEditUserPic, SIGNAL(clicked()), SLOT(loadUserPic()));
     connect(ui->actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(ui->actionAbout, SIGNAL(triggered()), SLOT(about()));
@@ -142,7 +141,7 @@ void ContactListView::setContactData(const ContactData *contact)
     ui->deBirthday->setDate(string2Date(contact->data(CONTACT).at(BIRTHDAY)));
     ui->lbUserPic->setPixmap(path2Pixmap(contact->data(CONTACT).at(USER_PIC)));
 
-    if(contact->countData(ADDRESS) > 0)
+    if (contact->countData(ADDRESS) > 0)
     {
         ui->leCountry->setText(contact->data(ADDRESS).at(COUNTRY));
         ui->leCity->setText(contact->data(ADDRESS).at(CITY));
@@ -160,7 +159,7 @@ void ContactListView::setContactData(const ContactData *contact)
     }
 
 
-    if(contact->countData(Channel::All) > 0)
+    if (contact->countData(Channel::All) > 0)
     {
         ui->lePhone->setText(contact->data(Channel::Phone).at(2));
         ui->leEmail->setText(contact->data(Channel::Email).at(2));
@@ -168,7 +167,7 @@ void ContactListView::setContactData(const ContactData *contact)
         ui->leSite->setText(contact->data(Channel::Site).at(2));
     }
 
-    if(contact->countData(COMPANY) > 0)
+    if (contact->countData(COMPANY) > 0)
     {
         ui->leNameCompany->setText(contact->data(COMPANY).at(COMP_NAME));
         ui->lePhoneCompany->setText(contact->data(COMPANY).at(PHONE));
@@ -195,7 +194,7 @@ void ContactListView::setContactData(const ContactData *contact)
 void ContactListView::setDefaultSettings()
 {
     QPair<bool, QString> data = *m_settings->defaultData();
-    if(data.first && QFile(data.second).exists())
+    if (data.first && QFile(data.second).exists())
         loadData(data.second);
 }
 
@@ -207,7 +206,7 @@ void ContactListView::about()
 void ContactListView::loadData()
 {
     QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
-                                            FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
+                                                FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
     loadData(path);
 }
 
@@ -217,7 +216,7 @@ void ContactListView::loadData(const QString &path)
         return;
 
     QStringList list = *m_controller->loadData(path);
-    if(list.isEmpty())
+    if (list.isEmpty())
         return;
 
     clearAll();
@@ -233,7 +232,7 @@ void ContactListView::loadData(const QString &path)
 
 void ContactListView::saveData()
 {
-    if(m_controller->pathToData()->isEmpty())
+    if (m_controller->pathToData()->isEmpty())
     {
         saveAsData();
         return;
@@ -246,7 +245,7 @@ void ContactListView::saveData()
 void ContactListView::saveAsData()
 {
     QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
-                                            FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
+                                                FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
     if(path.isEmpty())
         return;
 
@@ -296,7 +295,7 @@ void ContactListView::emptyContactList(bool flag)
     ui->actionDelete_Contact->setEnabled(flag);
     ui->actionEditable->setEnabled(flag);
     setEditable(flag);
-    if(!flag)
+    if (!flag)
         clearContact();
 }
 
@@ -315,16 +314,11 @@ void ContactListView::connectSignals()
     connect(ui->leEmail,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leSkype,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
     connect(ui->leSite,SIGNAL(textChanged(QString)),SLOT(textChanged(QString)));
-    connect(ui->leNameCompany,SIGNAL(textChanged(QString)),
-            SLOT(textChanged(QString)));
-    connect(ui->lePhoneCompany,SIGNAL(textChanged(QString)),
-            SLOT(textChanged(QString)));
-    connect(ui->leDepartment,SIGNAL(textChanged(QString)),
-            SLOT(textChanged(QString)));
-    connect(ui->lePost,SIGNAL(textChanged(QString)),
-            SLOT(textChanged(QString)));
-    connect(ui->leAddressCompany,SIGNAL(textChanged(QString)),
-            SLOT(textChanged(QString)));
+    connect(ui->leNameCompany,SIGNAL(textChanged(QString)), SLOT(textChanged(QString)));
+    connect(ui->lePhoneCompany,SIGNAL(textChanged(QString)), SLOT(textChanged(QString)));
+    connect(ui->leDepartment,SIGNAL(textChanged(QString)), SLOT(textChanged(QString)));
+    connect(ui->lePost,SIGNAL(textChanged(QString)), SLOT(textChanged(QString)));
+    connect(ui->leAddressCompany,SIGNAL(textChanged(QString)), SLOT(textChanged(QString)));
 
     connect(ui->deBirthday,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
     connect(ui->deStartWork,SIGNAL(dateChanged(QDate)),SLOT(dateChanged(QDate)));
@@ -333,49 +327,28 @@ void ContactListView::connectSignals()
 
 void ContactListView::disconnectSignals()
 {
-    disconnect(ui->leAlias,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leName,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leSurName,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leOtherName,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leCountry,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leCity,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leStreet,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leHome,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leApartment,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->lePhone,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leEmail,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leSkype,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leSite,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leNameCompany,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->lePhoneCompany,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leDepartment,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->lePost,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
-    disconnect(ui->leAddressCompany,SIGNAL(textChanged(QString)),
-               this,SLOT(textChanged(QString)));
+    disconnect(ui->leAlias,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leName,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leSurName,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leOtherName,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leCountry,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leCity,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leStreet,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leHome,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leApartment,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->lePhone,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leEmail,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leSkype,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leSite,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leNameCompany,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->lePhoneCompany,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leDepartment,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->lePost,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
+    disconnect(ui->leAddressCompany,SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
 
-    disconnect(ui->deBirthday,SIGNAL(dateChanged(QDate)),
-               this,SLOT(dateChanged(QDate)));
-    disconnect(ui->deStartWork,SIGNAL(dateChanged(QDate)),
-               this,SLOT(dateChanged(QDate)));
-    disconnect(ui->deEndWork,SIGNAL(dateChanged(QDate)),
-               this,SLOT(dateChanged(QDate)));
+    disconnect(ui->deBirthday,SIGNAL(dateChanged(QDate)), this, SLOT(dateChanged(QDate)));
+    disconnect(ui->deStartWork,SIGNAL(dateChanged(QDate)), this, SLOT(dateChanged(QDate)));
+    disconnect(ui->deEndWork,SIGNAL(dateChanged(QDate)), this, SLOT(dateChanged(QDate)));
 }
 
 void ContactListView::clearContact()
@@ -415,7 +388,7 @@ void ContactListView::newContact()
     refreshContactList(ui->lwContactList->count());
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
-    if(ui->lwContactList->count() == 1)
+    if (ui->lwContactList->count() == 1)
         emptyContactList(false);
     MYLOG << Log::NewContact;
 }
@@ -424,18 +397,18 @@ void ContactListView::loadContact()
 {
     QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
                                                 FILE_TYPES.arg(XML_TYPE, QString()));
-    if(path.isEmpty())
+    if (path.isEmpty())
         return;
 
     ContactData *data = m_controller->loadContact(path);
-    if(!data)
+    if (!data)
         return;
     setContactData(data);
     refreshContactList(ui->lwContactList->count());
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
     MYLOG << Log::LoadContact.arg(path);
-    if(ui->lwContactList->count() == 1)
+    if (ui->lwContactList->count() == 1)
         emptyContactList(false);
 }
 
@@ -443,7 +416,7 @@ void ContactListView::saveContact()
 {
     QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
                                                 FILE_TYPES.arg(XML_TYPE, QString()));
-    if(path.isEmpty())
+    if (path.isEmpty())
         return;
 
     int row = ui->lwContactList->currentRow();
@@ -468,12 +441,12 @@ void ContactListView::deleteContact()
     int index = ui->lwContactList->currentRow();
     emit deleteContact(index);
     MYLOG << Log::DeleteContact.arg(ui->leAlias->text());
-    if(index + 1 == ui->lwContactList->count())
+    if (index + 1 == ui->lwContactList->count())
         refreshContactList(index - 1);
     else
         refreshContactList(index);
     ui->leAlias->setFocus();
-    if(!ui->lwContactList->count())
+    if (!ui->lwContactList->count())
         emptyContactList();
 }
 
@@ -490,13 +463,12 @@ void ContactListView::currentContactChanged(int index)
 void ContactListView::loadUserPic()
 {
     QString path = QFileDialog::getOpenFileName(this, LOAD_USERPIC, DEFAULT_PATH);
-    if(path.isEmpty())
+    if (path.isEmpty())
         return;
 
     QPixmap pic = path2Pixmap(path);
     ui->lbUserPic->setPixmap(pic);
-    emit dataChanged(path, Attribute::PathToUserPic,
-                     ui->lwContactList->currentRow());
+    emit dataChanged(path, Attribute::PathToUserPic, ui->lwContactList->currentRow());
 }
 
 void ContactListView::textChanged(QString text)
@@ -505,51 +477,51 @@ void ContactListView::textChanged(QString text)
     if(send == ui->leAlias)
         ui->lwContactList->item(ui->lwContactList->currentRow())->setText(text);
 
-    if(send == ui->leAlias)
+    if (send == ui->leAlias)
         emit dataChanged(text, Attribute::Alias, ui->lwContactList->currentRow());
-    else if(send == ui->leName)
+    else if (send == ui->leName)
         emit dataChanged(text, Attribute::Name, ui->lwContactList->currentRow());
-    else if(send == ui->leSurName)
+    else if (send == ui->leSurName)
         emit dataChanged(text, Attribute::LastName, ui->lwContactList->currentRow());
-    else if(send == ui->leOtherName)
+    else if (send == ui->leOtherName)
         emit dataChanged(text, Attribute::OtherName, ui->lwContactList->currentRow());
-    else if(send == ui->leCountry)
+    else if (send == ui->leCountry)
         emit dataChanged(text, Address::Country, ui->lwContactList->currentRow());
-    else if(send == ui->leCity)
+    else if (send == ui->leCity)
         emit dataChanged(text, Address::City, ui->lwContactList->currentRow());
-    else if(send == ui->leStreet)
+    else if (send == ui->leStreet)
         emit dataChanged(text, Address::Street, ui->lwContactList->currentRow());
-    else if(send == ui->leHome)
+    else if (send == ui->leHome)
         emit dataChanged(text, Address::Home, ui->lwContactList->currentRow());
-    else if(send == ui->leApartment)
+    else if (send == ui->leApartment)
         emit dataChanged(text, Address::Apartment, ui->lwContactList->currentRow());
-    else if(send == ui->lePhone)
+    else if (send == ui->lePhone)
         emit dataChanged(text, Channel::Phone, ui->lwContactList->currentRow());
-    else if(send == ui->leEmail)
+    else if (send == ui->leEmail)
         emit dataChanged(text, Channel::Email, ui->lwContactList->currentRow());
-    else if(send == ui->leSkype)
+    else if (send == ui->leSkype)
         emit dataChanged(text, Channel::Skype, ui->lwContactList->currentRow());
-    else if(send == ui->leSite)
+    else if (send == ui->leSite)
         emit dataChanged(text, Channel::Site, ui->lwContactList->currentRow());
-    else if(send == ui->leNameCompany)
+    else if (send == ui->leNameCompany)
         emit dataChanged(text, Attribute::NameOrganization, ui->lwContactList->currentRow());
-    else if(send == ui->lePhoneCompany)
+    else if (send == ui->lePhoneCompany)
         emit dataChanged(text, Attribute::PhoneOrganization, ui->lwContactList->currentRow());
-    else if(send == ui->leDepartment)
+    else if (send == ui->leDepartment)
         emit dataChanged(text, Attribute::Department, ui->lwContactList->currentRow());
-    else if(send == ui->lePost)
+    else if (send == ui->lePost)
         emit dataChanged(text, Attribute::Post, ui->lwContactList->currentRow());
-    else if(send == ui->leAddressCompany)
+    else if (send == ui->leAddressCompany)
         emit dataChanged(text, Attribute::AddressOrganization, ui->lwContactList->currentRow());
 }
 
 void ContactListView::dateChanged(QDate date)
 {
     QDateEdit *send = qobject_cast<QDateEdit*>(sender());
-    if(send == ui->deBirthday)
+    if (send == ui->deBirthday)
         emit dataChanged(date, Attribute::Birthday, ui->lwContactList->currentRow());
-    else if(send == ui->deStartWork)
+    else if (send == ui->deStartWork)
         emit dataChanged(date, Attribute::DateIn, ui->lwContactList->currentRow());
-    else if(send == ui->deEndWork)
+    else if (send == ui->deEndWork)
         emit dataChanged(date, Attribute::DateOut, ui->lwContactList->currentRow());
 }

@@ -21,9 +21,9 @@ DriverManager::~DriverManager()
 
 bool DriverManager::saveData(const Data::Contacts &data, const QString &path)
 {
-    if(path.endsWith(File::XML))
+    if (path.endsWith(File::XML))
         return m_xml->saveData(data, path);
-    else if(path.endsWith(File::SQLITE))
+    else if (path.endsWith(File::SQLITE))
         return m_sqlite->saveData(data, path);
 
     return m_sqlite->saveData(data, path + File::SQLITE);
@@ -31,9 +31,9 @@ bool DriverManager::saveData(const Data::Contacts &data, const QString &path)
 
 Data::Contacts *DriverManager::loadData(const QString &path)
 {
-    if(path.endsWith(File::XML))
+    if (path.endsWith(File::XML))
         return m_xml->loadData(path);
-    else if(path.endsWith(File::SQLITE))
+    else if (path.endsWith(File::SQLITE))
         return m_sqlite->loadData(path);
 
     ERROR_INCORRECT_FORMAT;
@@ -42,7 +42,7 @@ Data::Contacts *DriverManager::loadData(const QString &path)
 
 bool DriverManager::saveContact(const ContactData &data, const QString &path)
 {
-    if(path.endsWith(File::XML))
+    if (path.endsWith(File::XML))
         return m_xml->saveContact(data, path);
     else
         return m_xml->saveContact(data, path + File::XML);
@@ -50,7 +50,7 @@ bool DriverManager::saveContact(const ContactData &data, const QString &path)
 
 ContactData *DriverManager::loadContact(const QString &path)
 {
-    if(path.endsWith(File::XML))
+    if (path.endsWith(File::XML))
         return m_xml->loadContact(path);
 
     ERROR_INCORRECT_FORMAT;

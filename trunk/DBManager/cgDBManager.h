@@ -13,7 +13,6 @@ class cgDBManager : public QMainWindow
     Q_OBJECT
 public:
     cgDBManager(QWidget *parent = 0);
-    ~cgDBManager();
 
 private slots:
     void currentTableChanged(const int &index);

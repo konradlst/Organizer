@@ -15,7 +15,7 @@ ContactListModel::ContactListModel(ContactListController *controller, QWidget *p
 QStringList *ContactListModel::loadData(const QString &path)
 {
     Data::Contacts *data = m_driver->loadData(path);
-    if(data)
+    if (data)
     {
         *m_pathToCurrentData = path;
         *m_data = *data;
@@ -25,14 +25,14 @@ QStringList *ContactListModel::loadData(const QString &path)
 
 void ContactListModel::saveData(const QString &path)
 {
-    if(m_driver->saveData(*m_data, path))
+    if (m_driver->saveData(*m_data, path))
         *m_pathToCurrentData = path;
 }
 
 QStringList *ContactListModel::contactList() const
 {
     QStringList *data = new QStringList();
-    for(int i=0; i<m_data->size(); ++i)
+    for (int i=0; i<m_data->size(); ++i)
         data->append(m_data->at(i)->data(CONTACT).at(ALIAS));
     return data;
 }
@@ -69,14 +69,14 @@ ContactData *ContactListModel::copyContact(const int index) const
 
 void ContactListModel::deleteContact(const int index)
 {
-    if(m_data->size())
+    if (m_data->size())
         m_data->remove(index);
 }
 
 ContactData *ContactListModel::loadContact(const QString &path)
 {
     ContactData *data = m_driver->loadContact(path);
-    if(!data)
+    if (!data)
         return 0;
 
     m_data->append(data);
@@ -85,7 +85,7 @@ ContactData *ContactListModel::loadContact(const QString &path)
 
 void ContactListModel::saveContact(const ContactData &data, const QString &path)
 {
-    if(m_driver->saveContact(data, path))
+    if (m_driver->saveContact(data, path))
         *m_pathToCurrentData = path;
 }
 
@@ -93,36 +93,36 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
 {
     ContactData *contact = m_data->at(contactId);
 
-    if(key == Attribute::Alias ||
-       key == Attribute::Name ||
-       key == Attribute::LastName ||
-       key == Attribute::OtherName ||
-       key == Attribute::Birthday ||
-       key == Attribute::PathToUserPic ||
-       key == Attribute::Comment)
+    if (key == Attribute::Alias ||
+        key == Attribute::Name ||
+        key == Attribute::LastName ||
+        key == Attribute::OtherName ||
+        key == Attribute::Birthday ||
+        key == Attribute::PathToUserPic ||
+        key == Attribute::Comment)
     {
         contact->setMainData(key, data);
     }
-    else if(key == Address::Country ||
-            key == Address::City ||
-            key == Address::Street ||
-            key == Address::Home ||
-            key == Address::Apartment)
+    else if (key == Address::Country ||
+             key == Address::City ||
+             key == Address::Street ||
+             key == Address::Home ||
+             key == Address::Apartment)
     {
         contact->setAddressData(key, data);
     }
-    else if(key == Attribute::NameOrganization ||
-            key == Attribute::Department ||
-            key == Attribute::Post ||
-            key == Attribute::AddressOrganization ||
-            key == Attribute::PhoneOrganization)
+    else if (key == Attribute::NameOrganization ||
+             key == Attribute::Department ||
+             key == Attribute::Post ||
+             key == Attribute::AddressOrganization ||
+             key == Attribute::PhoneOrganization)
     {
         contact->setCompanyData(key, data);
     }
-    else if(key == Channel::Phone ||
-            key == Channel::Email ||
-            key == Channel::Skype ||
-            key == Channel::Site)
+    else if (key == Channel::Phone ||
+             key == Channel::Email ||
+             key == Channel::Skype ||
+             key == Channel::Site)
     {
         contact->setChannel(key, contact->data(Channel::All).at(1), data);
     }
@@ -131,9 +131,9 @@ void ContactListModel::dataChanged(const QString data, QString key, int contactI
 void ContactListModel::dataChanged(const QDate data, QString key, int contactId)
 {
     ContactData *contact = m_data->at(contactId);
-    if(key == Attribute::Birthday)
+    if (key == Attribute::Birthday)
         contact->setBirthday(data);
-    else if(key == Attribute::DateIn ||
-            key == Attribute::DateOut)
+    else if (key == Attribute::DateIn ||
+             key == Attribute::DateOut)
         contact->setCompanyData(key, data);
 }

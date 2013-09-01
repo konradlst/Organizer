@@ -108,7 +108,7 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
                           .arg(quotesValue(addressVal));
 
     QString insertChannel = SQL::INSERT.arg(Table::Channels, FLD_CHANNEL);
-    for(int id = 0; id < contact->countData(Channel::All); ++id)
+    for (int id = 0; id < contact->countData(Channel::All); ++id)
     {
         QStringList data = contact->data(Channel::All, id);
         data << USER << index;
@@ -118,7 +118,7 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
     QSqlQuery query;
     foreach (QString q, queries)
     {
-        if(!query.exec(q))
+        if (!query.exec(q))
             qDebug() << query.lastError();
     }
 }
@@ -126,7 +126,7 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
 void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact) const
 {
     QStringList list;
-    for(int i=1; i<query.record().count(); ++i)
+    for (int i=1; i<query.record().count(); ++i)
         list << query.record().value(i).toString();
 
     contact->setMainData(list);
@@ -138,7 +138,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     while (tmpQ.next())
     {
         QStringList list;
-        for(int i = 1; i < tmpQ.record().count() - 2; ++i)
+        for (int i = 1; i < tmpQ.record().count() - 2; ++i)
             list << tmpQ.record().value(i).toString();
         contact->setAddressData(list);
     }

@@ -57,10 +57,10 @@ void ConciergeView::addTimeRecord()
 {
     if (!ui->cbTimeType->count())
         return;
+
     if (ui->teTimeDuration->time() != QTime(0, 0))
     {
-        ui->lwTimeList->addItem(ui->teTimeDuration->text() + " : "
-                                + ui->cbTimeType->currentText());
+        ui->lwTimeList->addItem(ui->teTimeDuration->text() + " : " + ui->cbTimeType->currentText());
     }
     else
     {
@@ -74,6 +74,7 @@ void ConciergeView::addDealRecord()
     ui->leDealDescription->setText(ui->leDealDescription->text().trimmed());
     if (ui->leDealDescription->text().isEmpty())
         return;
+
     ui->lwDealList->addItem("Deadline: " + ui->deDealDeadLine->text()
                             + "; duration: " + ui->teDealDuration->text()
                             + "; price: " + ui->sbDealPrice->text()
