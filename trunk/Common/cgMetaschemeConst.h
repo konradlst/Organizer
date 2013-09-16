@@ -20,6 +20,8 @@ const QString attrName("name");
 const QString attrValue("value");
 const QString attrType("type");
 const QString attrPk("pk");
+const QString attrFk("fk");
+const QString attrFkField("fkField");
 const QString attrNullable("nullable");
 const QString attrUnq("unq");
 const QString attrDefault("default");
@@ -54,6 +56,7 @@ const QString SELECT("SELECT * FROM %1 WHERE ownerId = '%2'");
 const QString SELECT_WHERE("SELECT * FROM %1 WHERE type = '%2' AND ownerId = '%3'");
 
 const QString PRIMARY_KEY("PRIMARY KEY");
+const QString FOREIGN_KEY("FOREIGN KEY (%1) REFERENCES %2(%3) ON UPDATE CASCADE ON DELETE CASCADE");
 const QString NOT_NULL("NOT NULL");
 const QString DEFAULT("DEFAULT %1");
 const QString UNIQUE("UNIQUE");

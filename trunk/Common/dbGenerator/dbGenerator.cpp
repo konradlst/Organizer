@@ -109,6 +109,11 @@ void dbGenerator::parseField(const QDomElement &field, QString &data) const
 
     if (field.hasAttribute(Scheme::attrPk) && field.attribute(Scheme::attrPk) == TRUE)
         d << SQL::PRIMARY_KEY;
+    else if (field.hasAttribute(Scheme::attrFk) && field.hasAttribute(Scheme::attrFkField))
+        d << SQL::FOREIGN_KEY.arg(field.attribute(Scheme::attrName))
+                             .arg(field.attribute(Scheme::attrFk))
+                             .arg(field.attribute(Scheme::attrFkField));
+
     if (field.hasAttribute(Scheme::attrNullable) && field.attribute(Scheme::attrNullable) == FALSE)
         d << SQL::NOT_NULL;
     if (field.hasAttribute(Scheme::attrUnq) && field.attribute(Scheme::attrUnq) == TRUE)
