@@ -3,20 +3,17 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class CgCalendarView;
-}
-
 class CgCalendarView : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit CgCalendarView(QWidget *parent = 0);
-    ~CgCalendarView();
 
 private:
-    Ui::CgCalendarView *ui;
+    QTabWidget *m_calendars;
+
+private:
+    void addTab(QWidget *calendar, const QString &name, int position = -1);
 };
 
 #endif // CGCALENDARVIEW_H

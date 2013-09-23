@@ -1,5 +1,5 @@
 <!DOCTYPE cg>
-<cg_db_scheme version="0.1.1">
+<cg_db_scheme version="0.2">
     <tables>
         <table name="CG_FINANCEACCOUNTS">
             <field name="id" type="INTEGER" pk="1"/>
@@ -63,28 +63,25 @@
             <field name="comment" type="VARCHAR(255)" delegate="string255"/>
         </table>
         <table name="CG_COMPANIES">
-			<field name="phone" type="VARCHAR(100)" delegate="string100"/>
-			<field name="department" type="VARCHAR(127)" delegate="string127"/>
-			<field name="post" type="VARCHAR(100)" delegate="string100"/>
-			<field name="address" type="VARCHAR(255)" delegate="string255"/>
-			<field name="dateIn" type="DATE" delegate="date"/>
-			<field name="dateOut" type="DATE" delegate="date"/>
-			<field name="ownerCompanyId" type="INTEGER" delegate="int" fk="CG_COMPANIES" fkField="ID"/>
-		</table>
-		<table name="CG_EMPLOYEE">
-			<field name="id" type="INTEGER" pk="1"/>
-			<field name="name" type="VARCHAR(100)" unq="1" delegate="string100" fk="CG_CONTACTS" fkField="ID"/>
-			<field name="phone" type="VARCHAR(100)" delegate="string100"/>
-			<field name="department" type="VARCHAR(127)" delegate="string127"/>
-			<field name="post" type="VARCHAR(100)" delegate="string100"/>
-			<field name="chief" type="VARCHAR(255)" delegate="string255" fk="CG_EMPLOYEE" fkField="ID"/>
-			<field name="dateIn" type="DATE" delegate="date"/>
-			<field name="dateOut" type="DATE" delegate="date"/>
-			<field name="cabinet" type="VARCHAR(100)" delegate="string100"/>
-			<field name="city" type="VARCHAR(100)" delegate="string100"/>
-			<field name="email" type="DATE" delegate="date"/>
-			<field name="legalEntity" type="VARCHAR(255)" fk="CG_COMPANIES" fkField="ID"/>
-		</table>
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="name" type="VARCHAR(100)" delegate="string100"/>
+            <field name="phone" type="VARCHAR(100)" delegate="string100"/>
+            <field name="ownerCompanyId" type="INTEGER" delegate="int"/>
+        </table>
+        <table name="CG_EMPLOYEE">
+            <field name="id" type="INTEGER" pk="1"/>
+            <field name="name" type="VARCHAR(100)" unq="1" delegate="string100"/>
+            <field name="phone" type="VARCHAR(100)" delegate="string100"/>
+            <field name="department" type="VARCHAR(127)" delegate="string127"/>
+            <field name="post" type="VARCHAR(100)" delegate="string100"/>
+            <field name="chief" type="VARCHAR(255)" delegate="string255"/>
+            <field name="dateIn" type="DATE" delegate="date"/>
+            <field name="dateOut" type="DATE" delegate="date"/>
+            <field name="cabinet" type="VARCHAR(100)" delegate="string100"/>
+            <field name="city" type="VARCHAR(100)" delegate="string100"/>
+            <field name="email" type="DATE" delegate="date"/>
+            <field name="legalEntity" type="VARCHAR(255)"/>
+        </table>
         <table name="CG_ADDRESSES">
             <field name="id" type="INTEGER" pk="1"/>
             <field name="country" type="VARCHAR(127)" delegate="string127"/>

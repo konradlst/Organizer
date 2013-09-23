@@ -17,4 +17,4 @@ SOURCES += main.cpp\
 
 HEADERS  += cgCalendarView.h
 
-FORMS    += cgCalendarView.ui
+FORMS    +=

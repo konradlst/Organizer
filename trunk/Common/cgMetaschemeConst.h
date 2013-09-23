@@ -8,7 +8,7 @@ namespace Scheme
 {
 const QString metaschemeFile("./metascheme.xml");
 const QString SPLITTER(";");
-const QString VERSION("0.1.1");
+const QString VERSION("0.2");
 const QString tagRoot("cg_db_scheme");
 const QString tagTables("tables");
 const QString tagValues("values");
