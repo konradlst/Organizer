@@ -79,7 +79,7 @@
             <field name="dateOut" type="DATE" delegate="date"/>
             <field name="cabinet" type="VARCHAR(100)" delegate="string100"/>
             <field name="city" type="VARCHAR(100)" delegate="string100"/>
-            <field name="email" type="DATE" delegate="date"/>
+            <field name="email" type="VARCHAR(100)" delegate="string100"/>
             <field name="legalEntity" type="VARCHAR(255)"/>
         </table>
         <table name="CG_ADDRESSES">

@@ -1,5 +1,6 @@
 #include <QPushButton>
 #include <QDate>
+#include <QDebug>
 #include "cgCalendarView.h"
 #include "cgCalendarWidget.h"
 
@@ -28,10 +29,27 @@ void CgCalendarView::setToday()
 
 void CgCalendarView::addHoliday()
 {
-    //create dialog create new task(type=holiday)
+    // Create gialog.
+    // type: Holiday\Task
+    // frequency: every___Day\every___Week\every___Mounth\every___Year
+    // description: ____
+    // price: ___
+    // deadline: __day\__date\__week\__mouth\__year
+    // Ok & Cancel
+    Duration d = Duration(QDate::currentDate().day(), DurationType(m_calendars->currentIndex()));
+    createDialog(Holiday, d, QString(), 0, d);
 }
 
 void CgCalendarView::addTask()
 {
-    //create dialog create new task(type = task with current duration, duration depends on current calendar)
+    Duration d = Duration(QDate::currentDate().day(), DurationType(m_calendars->currentIndex()));
+    createDialog(Task, d, QString(), 0, d);
+}
+
+void CgCalendarView::createDialog(TaskType type, CgCalendarView::Duration frequency,
+                                  QString description, double price,
+                                  CgCalendarView::Duration deadline)
+{
+    //FIXME:
+    qDebug() << type << frequency << description << price << deadline;
 }

@@ -4,6 +4,7 @@
 #include <QTableWidget>
 #include <QPushButton>
 #include <QHeaderView>
+#include <QCalendarWidget>
 #include "cgCalendarWidget.h"
 
 cgCalendarWidget::cgCalendarWidget(const TypeCalendar type, bool shTasks,
@@ -35,7 +36,7 @@ void cgCalendarWidget::showSystemButton(bool status)
     m_addHoliday->setVisible(status);
     m_addTask->setVisible(status);
 }
-#include <QCalendarWidget>
+
 void cgCalendarWidget::setDate(const QDate &date)
 {
     switch (m_type)
@@ -47,20 +48,20 @@ void cgCalendarWidget::setDate(const QDate &date)
         break;
     case Week:
     {
-        //FIXME
+        qobject_cast<QTableWidget*>(m_calendar)->setCurrentCell(QTime::currentTime().hour(),
+                                                                QDate::currentDate().dayOfWeek()-1);
     }
         break;
     case ThreeDay:
     {
-        //FIXME
+        qobject_cast<QTableWidget*>(m_calendar)->setCurrentCell(QTime::currentTime().hour(), 1);
     }
         break;
     case Today:
     {
-        //FIXME
+        qobject_cast<QTableWidget*>(m_calendar)->setCurrentCell(QTime::currentTime().hour(), 0);
     }
     }
-    //set current date
 }
 
 QPushButton *cgCalendarWidget::pbSetToday() const
