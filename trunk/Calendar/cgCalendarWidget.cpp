@@ -161,13 +161,10 @@ void cgCalendarWidget::createInterface()
 
 void cgCalendarWidget::initTimeList(QStringList &list)
 {
-    static const QString patternTime1 = "0%1:00";
-    static const QString patternTime2 = "%1:00";
+    QTime time(0, 0);
     for (int i = 0; i <= 24; ++i)
     {
-        if (i < 10)
-            list << patternTime1.arg(i);
-        else
-            list << patternTime2.arg(i);
+        list << time.toString("hh:mm");
+        time = time.addSecs(3600);
     }
 }
