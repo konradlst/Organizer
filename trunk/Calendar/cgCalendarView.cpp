@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "cgCalendarView.h"
 #include "cgCalendarWidget.h"
+#include "cgTaskDialog.h"
 
 CgCalendarView::CgCalendarView(QWidget *parent)
     : QMainWindow(parent),
@@ -29,13 +30,6 @@ void CgCalendarView::setToday()
 
 void CgCalendarView::addHoliday()
 {
-    // Create gialog.
-    // type: Holiday\Task
-    // frequency: every___Day\every___Week\every___Mounth\every___Year
-    // description: ____
-    // price: ___
-    // deadline: __day\__date\__week\__mouth\__year
-    // Ok & Cancel
     Duration d = Duration(QDate::currentDate().day(), DurationType(m_calendars->currentIndex()));
     createDialog(Holiday, d, QString(), 0, d);
 }
@@ -51,5 +45,6 @@ void CgCalendarView::createDialog(TaskType type, CgCalendarView::Duration freque
                                   CgCalendarView::Duration deadline)
 {
     //FIXME:
+    cgTaskDialog dialog;
     qDebug() << type << frequency << description << price << deadline;
 }

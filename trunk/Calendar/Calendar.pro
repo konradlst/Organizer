@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         cgCalendarView.cpp \
-    cgCalendarWidget.cpp
+    cgCalendarWidget.cpp \
+    cgTaskDialog.cpp
 
 HEADERS  += cgCalendarView.h \
-    cgCalendarWidget.h
+    cgCalendarWidget.h \
+    cgTaskDialog.h
 
 FORMS    +=
