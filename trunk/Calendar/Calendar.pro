@@ -19,6 +19,7 @@ SOURCES += main.cpp\
 
 HEADERS  += cgCalendarView.h \
     cgCalendarWidget.h \
-    cgTaskDialog.h
+    cgTaskDialog.h \
+    cgCalendarConst.h
 
 FORMS    +=

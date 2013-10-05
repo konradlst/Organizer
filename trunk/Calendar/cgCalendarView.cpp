@@ -1,6 +1,5 @@
 #include <QPushButton>
 #include <QDate>
-#include <QDebug>
 #include "cgCalendarView.h"
 #include "cgCalendarWidget.h"
 #include "cgTaskDialog.h"
@@ -30,21 +29,23 @@ void CgCalendarView::setToday()
 
 void CgCalendarView::addHoliday()
 {
-    Duration d = Duration(QDate::currentDate().day(), DurationType(m_calendars->currentIndex()));
-    createDialog(Holiday, d, QString(), 0, d);
+    Calendar::Duration d(QDate::currentDate().day(), Calendar::DurationType(m_calendars->currentIndex()));
+    createDialog(Calendar::Holiday, d, QString(), 500, d);
 }
 
 void CgCalendarView::addTask()
 {
-    Duration d = Duration(QDate::currentDate().day(), DurationType(m_calendars->currentIndex()));
-    createDialog(Task, d, QString(), 0, d);
+    Calendar::Duration d(QDate::currentDate().day(), Calendar::DurationType(m_calendars->currentIndex()));
+    createDialog(Calendar::Task, d, QString(), 0, d);
 }
 
-void CgCalendarView::createDialog(TaskType type, CgCalendarView::Duration frequency,
-                                  QString description, double price,
-                                  CgCalendarView::Duration deadline)
+void CgCalendarView::createDialog(Calendar::TaskType type,
+                                  Calendar::Duration frequency,
+                                  QString description,
+                                  double price,
+                                  Calendar::Duration deadline)
 {
-    //FIXME:
-    cgTaskDialog dialog;
-    qDebug() << type << frequency << description << price << deadline;
+    cgTaskDialog *dialog = new cgTaskDialog();
+    dialog->init(type, frequency, description, price, deadline);
+    dialog->show();
 }

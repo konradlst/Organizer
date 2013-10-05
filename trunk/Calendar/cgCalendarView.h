@@ -2,11 +2,9 @@
 #define CGCALENDARVIEW_H
 
 #include <QMainWindow>
+#include "cgCalendarConst.h"
 
 class cgCalendarWidget;
-
-enum TaskType { Task = 0, Holiday };
-enum DurationType { Day = 0, Week, Mounth, Year };
 
 class CgCalendarView : public QMainWindow
 {
@@ -20,8 +18,7 @@ private slots:
     void addTask();
 
 private:
-    typedef QPair<int, DurationType> Duration;
-    void createDialog(TaskType type, Duration frequency, QString description, double price, Duration deadline);
+    void createDialog(Calendar::TaskType type, Calendar::Duration frequency, QString description, double price, Calendar::Duration deadline);
 
 private:
     QTabWidget *m_calendars;

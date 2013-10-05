@@ -7,8 +7,10 @@
 #include <QCalendarWidget>
 #include "cgCalendarWidget.h"
 
-cgCalendarWidget::cgCalendarWidget(const TypeCalendar type, bool shTasks,
-                                   bool shSysButton, QWidget *parent)
+cgCalendarWidget::cgCalendarWidget(const TypeCalendar type,
+                                   bool shTasks,
+                                   bool shSysButton,
+                                   QWidget *parent)
     : QWidget(parent),
       m_calendar(0),
       m_holidays(new QGroupBox("Holidays")),
