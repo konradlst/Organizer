@@ -16,6 +16,8 @@ cgTaskDialog::cgTaskDialog(QWidget *parent)
       m_cancel(new QPushButton("Cancel", this))
 {
     createInterface();
+    connect(m_ok, SIGNAL(clicked()), SLOT(close()));
+    connect(m_cancel, SIGNAL(clicked()), SLOT(close()));
 }
 
 void cgTaskDialog::init(Calendar::TaskType type,
@@ -31,7 +33,7 @@ void cgTaskDialog::init(Calendar::TaskType type,
     m_deadline->setCurrentIndex(deadline.second);
 }
 
-QStringList cgTaskDialog::data()
+QStringList cgTaskDialog::data() const
 {
     QStringList list;
     return list << m_type->currentText()
@@ -43,29 +45,29 @@ QStringList cgTaskDialog::data()
 
 void cgTaskDialog::createInterface()
 {
-    // Create gialog.
-    // type: Holiday\Task
-    // frequency: every___Day\every___Week\every___Mounth\every___Year
-    // description: ____
-    // price: ___
-    // deadline: __day\__date\__week\__mouth\__year
-    // Ok & Cancel
-
-    m_type->addItems(QString("Holiday;Task").split(";"));
-    m_frequency->addItems(QString("every Day;every Week;every Mounth;every Year").split(";"));
-    m_deadline->addItems(QString("Today;Date;Week;Mouth;Year").split(";"));
+    m_type->addItems(QString("Task;Holiday").split(";"));
+    m_frequency->addItems(QString("every Day;every Three day;every Week;every Mounth;every Year").split(";"));
+    m_price->setMaximum(999999);
+    m_price->setMinimum(-999999);
+    m_deadline->addItems(QString("Today;Tomorrow;This Week;This Mouth;This Year").split(";"));
 
     static const QStringList labels = QString("Type :;Frequency :;Description :;Price :;Deadline :").split(";");
+    QHBoxLayout *buttonsLayout = new QHBoxLayout();
+    buttonsLayout->setSpacing(5);
+    buttonsLayout->addWidget(m_ok);
+    buttonsLayout->addWidget(m_cancel);
+
     QFormLayout *mLay = new QFormLayout(this);
     mLay->addRow(labels[0], m_type);
     mLay->addRow(labels[1], m_frequency);
     mLay->addRow(labels[2], m_description);
     mLay->addRow(labels[3], m_price);
     mLay->addRow(labels[4], m_deadline);
-    mLay->addWidget(m_ok);
-    mLay->addWidget(m_cancel);
+    mLay->addItem(buttonsLayout);
     setLayout(mLay);
+    mLay->setSpacing(10);
 
     setWindowTitle("Add new Task");
+    setFixedSize(350, 200);
     setWindowModality(Qt::ApplicationModal);
 }

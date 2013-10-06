@@ -92,47 +92,47 @@ void cgCalendarWidget::createCalendarWidget()
     initTimeList(timeList);
     switch (m_type)
     {
-    case Mounth:
-    {
-        QCalendarWidget *mounthCalendar = new QCalendarWidget;
-        mounthCalendar->setSelectedDate(QDate::currentDate());
-        mounthCalendar->setFirstDayOfWeek(Qt::Monday);
-        m_calendar = mounthCalendar;
-        m_name = "Month";
-    }
-        break;
-    case Week:
-    {
-        static const QStringList dayOfWeek = QString("Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday").split(";");
-        QTableWidget *weekCalendar = new QTableWidget(24, 7);
-        weekCalendar->setVerticalHeaderLabels(timeList);
-        weekCalendar->setHorizontalHeaderLabels(dayOfWeek);
-        weekCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-        m_calendar = weekCalendar;
-        m_name = "Week";
-    }
-        break;
-    case ThreeDay:
-    {
-        static const QStringList threeDayNames = QString("Yesterday;Today;Tomorrow").split(";");
-        QTableWidget *threeDayCalendar = new QTableWidget(24, 3);
-        threeDayCalendar->setVerticalHeaderLabels(timeList);
-        threeDayCalendar->setHorizontalHeaderLabels(threeDayNames);
-        threeDayCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-        m_calendar = threeDayCalendar;
-        m_name = "Three day";
-    }
-        break;
-    case Today:
-    {
-        static const QStringList todayName("Today");
-        QTableWidget *todayCalendar = new QTableWidget(24, 1);
-        todayCalendar->setVerticalHeaderLabels(timeList);
-        todayCalendar->setHorizontalHeaderLabels(todayName);
-        todayCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-        m_calendar = todayCalendar;
-        m_name = "Today";
-    }
+        case Mounth:
+        {
+            QCalendarWidget *mounthCalendar = new QCalendarWidget;
+            mounthCalendar->setSelectedDate(QDate::currentDate());
+            mounthCalendar->setFirstDayOfWeek(Qt::Monday);
+            m_calendar = mounthCalendar;
+            m_name = "Month";
+        }
+            break;
+        case Week:
+        {
+            static const QStringList dayOfWeek = QString("Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday").split(";");
+            QTableWidget *weekCalendar = new QTableWidget(24, 7);
+            weekCalendar->setVerticalHeaderLabels(timeList);
+            weekCalendar->setHorizontalHeaderLabels(dayOfWeek);
+            weekCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            m_calendar = weekCalendar;
+            m_name = "Week";
+        }
+            break;
+        case ThreeDay:
+        {
+            static const QStringList threeDayNames = QString("Yesterday;Today;Tomorrow").split(";");
+            QTableWidget *threeDayCalendar = new QTableWidget(24, 3);
+            threeDayCalendar->setVerticalHeaderLabels(timeList);
+            threeDayCalendar->setHorizontalHeaderLabels(threeDayNames);
+            threeDayCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            m_calendar = threeDayCalendar;
+            m_name = "Three day";
+        }
+            break;
+        case Today:
+        {
+            static const QStringList todayName("Today");
+            QTableWidget *todayCalendar = new QTableWidget(24, 1);
+            todayCalendar->setVerticalHeaderLabels(timeList);
+            todayCalendar->setHorizontalHeaderLabels(todayName);
+            todayCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            m_calendar = todayCalendar;
+            m_name = "Today";
+        }
     }
 }
 

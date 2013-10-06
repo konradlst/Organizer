@@ -7,7 +7,8 @@
 CgCalendarView::CgCalendarView(QWidget *parent)
     : QMainWindow(parent),
       m_calendars(new QTabWidget),
-      m_tabs(new QVector<cgCalendarWidget*>())
+      m_tabs(new QVector<cgCalendarWidget*>()),
+      m_taskDialog(new cgTaskDialog())
 {
     setCentralWidget(m_calendars);
 
@@ -30,13 +31,13 @@ void CgCalendarView::setToday()
 void CgCalendarView::addHoliday()
 {
     Calendar::Duration d(QDate::currentDate().day(), Calendar::DurationType(m_calendars->currentIndex()));
-    createDialog(Calendar::Holiday, d, QString(), 500, d);
+    createDialog(Calendar::Holiday, d, QString("add new Holiday"), 500, d);
 }
 
 void CgCalendarView::addTask()
 {
     Calendar::Duration d(QDate::currentDate().day(), Calendar::DurationType(m_calendars->currentIndex()));
-    createDialog(Calendar::Task, d, QString(), 0, d);
+    createDialog(Calendar::Task, d, QString("add new Task"), 0, d);
 }
 
 void CgCalendarView::createDialog(Calendar::TaskType type,
@@ -45,7 +46,6 @@ void CgCalendarView::createDialog(Calendar::TaskType type,
                                   double price,
                                   Calendar::Duration deadline)
 {
-    cgTaskDialog *dialog = new cgTaskDialog();
-    dialog->init(type, frequency, description, price, deadline);
-    dialog->show();
+    m_taskDialog->init(type, frequency, description, price, deadline);
+    m_taskDialog->show();
 }

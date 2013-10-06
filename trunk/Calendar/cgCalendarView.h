@@ -5,6 +5,7 @@
 #include "cgCalendarConst.h"
 
 class cgCalendarWidget;
+class cgTaskDialog;
 
 class CgCalendarView : public QMainWindow
 {
@@ -18,11 +19,13 @@ private slots:
     void addTask();
 
 private:
-    void createDialog(Calendar::TaskType type, Calendar::Duration frequency, QString description, double price, Calendar::Duration deadline);
+    void createDialog(Calendar::TaskType type, Calendar::Duration frequency,
+                      QString description, double price, Calendar::Duration deadline);
 
 private:
     QTabWidget *m_calendars;
     QVector<cgCalendarWidget*> *m_tabs;
+    cgTaskDialog *m_taskDialog;
 };
 
 #endif // CGCALENDARVIEW_H

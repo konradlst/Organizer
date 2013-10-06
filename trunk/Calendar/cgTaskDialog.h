@@ -15,7 +15,7 @@ public:
     explicit cgTaskDialog(QWidget *parent = 0);
     void init(Calendar::TaskType type, Calendar::Duration frequency, QString description,
               double price, Calendar::Duration deadline);
-    QStringList data();
+    QStringList data() const;
 
 private:
     void createInterface();

@@ -12,7 +12,7 @@ class cgCalendarWidget : public QWidget
 {
     Q_OBJECT
 public:
-    enum TypeCalendar { Mounth = 0, Week, ThreeDay, Today };
+    enum TypeCalendar { Today = 0, ThreeDay, Week, Mounth };
     explicit cgCalendarWidget(const TypeCalendar type, bool shTasks = true,
                               bool shSysButton = true, QWidget *parent = 0);
     void showTasks(bool status);
