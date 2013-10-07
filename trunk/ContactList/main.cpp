@@ -1,7 +1,7 @@
-﻿#include "contactListController.h"
-#include <QApplication>
+﻿#include <QApplication>
 #include <QTextCodec>
 #include <QIcon>
+#include "contactListController.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":/app_pic"));
-    a.setApplicationName("Contact List");
-    a.setApplicationVersion("0.1.1");
+    a.setApplicationName("Сoncierge: Contact List");
+    a.setApplicationVersion("0.2");
     a.setOrganizationDomain("a.batyaev@gmail.com");
     a.setOrganizationName("Anton Batyaev");
 

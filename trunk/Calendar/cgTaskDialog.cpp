@@ -1,8 +1,8 @@
+#include <QDoubleSpinBox>
 #include <QFormLayout>
+#include <QPushButton>
 #include <QComboBox>
 #include <QLineEdit>
-#include <QPushButton>
-#include <QDoubleSpinBox>
 #include "cgTaskDialog.h"
 
 cgTaskDialog::cgTaskDialog(QWidget *parent)
@@ -12,8 +12,8 @@ cgTaskDialog::cgTaskDialog(QWidget *parent)
       m_description(new QLineEdit(this)),
       m_price(new QDoubleSpinBox(this)),
       m_deadline(new QComboBox(this)),
-      m_ok(new QPushButton("Ok", this)),
-      m_cancel(new QPushButton("Cancel", this))
+      m_ok(new QPushButton(QObject::trUtf8("Ok"), this)),
+      m_cancel(new QPushButton(QObject::trUtf8("Cancel"), this))
 {
     createInterface();
     connect(m_ok, SIGNAL(clicked()), SLOT(close()));
@@ -45,29 +45,36 @@ QStringList cgTaskDialog::data() const
 
 void cgTaskDialog::createInterface()
 {
-    m_type->addItems(QString("Task;Holiday").split(";"));
-    m_frequency->addItems(QString("every Day;every Three day;every Week;every Mounth;every Year").split(";"));
-    m_price->setMaximum(999999);
-    m_price->setMinimum(-999999);
-    m_deadline->addItems(QString("Today;Tomorrow;This Week;This Mouth;This Year").split(";"));
+    static const double PriceExtremum = 999999;
+    static const QChar Separator = ';';
+    static const QString Title = QObject::trUtf8("Add new Task");
+    static const QStringList Types = QObject::trUtf8("Task;Holiday").split(Separator);
+    static const QStringList Labels = QObject::trUtf8("Type :;Frequency :;Description :;Price :;Deadline :").split(Separator);
+    static const QStringList Frequencies = QObject::trUtf8("every Day;every Three day;every Week;every Mounth;every Year").split(Separator);
+    static const QStringList Deadlines = QObject::trUtf8("Today;Tomorrow;This Week;This Mouth;This Year").split(Separator);
 
-    static const QStringList labels = QString("Type :;Frequency :;Description :;Price :;Deadline :").split(";");
+    m_type->addItems(Types);
+    m_frequency->addItems(Frequencies);
+    m_price->setMaximum(PriceExtremum);
+    m_price->setMinimum(-PriceExtremum);
+    m_deadline->addItems(Deadlines);
+
     QHBoxLayout *buttonsLayout = new QHBoxLayout();
     buttonsLayout->setSpacing(5);
     buttonsLayout->addWidget(m_ok);
     buttonsLayout->addWidget(m_cancel);
 
     QFormLayout *mLay = new QFormLayout(this);
-    mLay->addRow(labels[0], m_type);
-    mLay->addRow(labels[1], m_frequency);
-    mLay->addRow(labels[2], m_description);
-    mLay->addRow(labels[3], m_price);
-    mLay->addRow(labels[4], m_deadline);
+    mLay->addRow(Labels[0], m_type);
+    mLay->addRow(Labels[1], m_frequency);
+    mLay->addRow(Labels[2], m_description);
+    mLay->addRow(Labels[3], m_price);
+    mLay->addRow(Labels[4], m_deadline);
     mLay->addItem(buttonsLayout);
     setLayout(mLay);
     mLay->setSpacing(10);
 
-    setWindowTitle("Add new Task");
+    setWindowTitle(Title);
     setFixedSize(350, 200);
     setWindowModality(Qt::ApplicationModal);
 }

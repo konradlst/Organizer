@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Contact List</string>
+   <string>Сoncierge: Contact List</string>
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
@@ -672,7 +672,7 @@
      <x>0</x>
      <y>0</y>
      <width>753</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="defaultUp">

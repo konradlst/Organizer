@@ -9,33 +9,18 @@
 
 namespace
 {
-const QString Logo(":/logo");
-const QString PhoneMask("+9 (999) 999 99 99;_");
-#define NEW_CONTACT_TEXT QString("New contact")
-#define DEFAULT_PHONE_TEXT QString("+ ()   ")
-#define OPEN_TITLE QObject::trUtf8("Open Contact List")
-#define SAVE_TITLE QObject::trUtf8("Save Contact List")
-#define LOAD_USERPIC QObject::trUtf8("Load User Pic")
-#define DEFAULT_PATH QDir::currentPath()
-#define FILE_TYPES QObject::trUtf8("All Files (*.*)%1%2")
-#define SQLITE_TYPE QObject::trUtf8(";;SQLite files (*.sqlite)")
-#define XML_TYPE QObject::trUtf8(";;XML files (*.xml)")
-
-#define APP_VERSION QString("v."+ qApp->applicationVersion())
-#define ABOUT_TITLE QObject::trUtf8("About %1").arg(qApp->applicationName())
-#define VERSION QObject::trUtf8("Version: %1")
-#define ABOUT_TEXT QObject::trUtf8("<b>%1 %2</b><br><br>" \
-                                    "Based on Qt 5.0.1<br><br>" \
-                                    "Copyright 2013, Anton Batyaev. "\
-                                    "All rights reserved.")\
-                            .arg(qApp->applicationName(), APP_VERSION)
+const QString Logo = ":/logo";
+const QString PhoneMask = "+9 (999) 999 99 99;_";
+const QString OpenTitle = QObject::trUtf8("Open Contact List");
+const QString SaveTitle = QObject::trUtf8("Save Contact List");
+const QString FileTypes = QObject::trUtf8("All Files (*.*);;XML files (*.xml)");
+const QString FileTypesFull = QObject::trUtf8("All Files (*.*);;XML files (*.xml);;SQLite files (*.sqlite)");
 
 QString pathToData(const QString *path)
 {
-    if (!path->isEmpty())
-        return QObject::trUtf8("Path: %1").arg(*path);
-    else
-        return QString();
+    static const QString Path = QObject::trUtf8("Path: %1");
+
+    return (!path->isEmpty()) ? Path.arg(*path) : QString();
 }
 
 QPixmap path2Pixmap(QString path)
@@ -48,9 +33,7 @@ QPixmap path2Pixmap(QString path)
 
 QDate string2Date(QString data)
 {
-    if (data.isEmpty())
-        return DEFAULT_DATE;
-    return QDate::fromString(data, DEFAULT_DATE_FORMAT);
+    return (data.isEmpty()) ? DEFAULT_DATE : QDate::fromString(data, DEFAULT_DATE_FORMAT);
 }
 }
 
@@ -61,6 +44,8 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
       m_path(new QLabel()),
       m_settings(m_controller->getSettingsPtr())
 {
+    static const QString AppVersion = QObject::trUtf8("Version: %1").arg(qApp->applicationVersion());
+
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->hLayoutMain);
     ui->tabAddress->setLayout(ui->gLayAddress);
@@ -74,7 +59,7 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     ui->deStartWork->setDate(QDate::currentDate());
     ui->deEndWork->setDate(QDate::currentDate());
     ui->deBirthday->calendarWidget()->setFirstDayOfWeek(Qt::Monday);
-    ui->statusBar->addWidget(new QLabel(VERSION.arg(APP_VERSION)));
+    ui->statusBar->addWidget(new QLabel(AppVersion));
 
     m_path->setText(*m_controller->pathToData());
     ui->statusBar->addWidget(m_path);
@@ -200,13 +185,18 @@ void ContactListView::setDefaultSettings()
 
 void ContactListView::about()
 {
-    QMessageBox::about(this, ABOUT_TITLE, ABOUT_TEXT);
+    static const QString AboutTitle = QObject::trUtf8("About %1").arg(qApp->applicationName());
+    static const QString AboutText = QObject::trUtf8(
+                "<b>%1 %2</b><br><br>Based on Qt 5.0.1<br><br>"
+                "Copyright 2013, Anton Batyaev.<br>All rights reserved.")
+                                .arg(qApp->applicationName(), qApp->applicationVersion());
+
+    QMessageBox::about(this, AboutTitle, AboutText);
 }
 
 void ContactListView::loadData()
 {
-    QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
-                                                FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
+    QString path = QFileDialog::getOpenFileName(this, OpenTitle, QDir::currentPath(), FileTypesFull);
     loadData(path);
 }
 
@@ -244,8 +234,7 @@ void ContactListView::saveData()
 
 void ContactListView::saveAsData()
 {
-    QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
-                                                FILE_TYPES.arg(SQLITE_TYPE, XML_TYPE));
+    QString path = QFileDialog::getSaveFileName(this, SaveTitle, QDir::currentPath(), FileTypesFull);
     if(path.isEmpty())
         return;
 
@@ -395,8 +384,7 @@ void ContactListView::newContact()
 
 void ContactListView::loadContact()
 {
-    QString path = QFileDialog::getOpenFileName(this, OPEN_TITLE, DEFAULT_PATH,
-                                                FILE_TYPES.arg(XML_TYPE, QString()));
+    QString path = QFileDialog::getOpenFileName(this, OpenTitle, QDir::currentPath(), FileTypes);
     if (path.isEmpty())
         return;
 
@@ -414,8 +402,7 @@ void ContactListView::loadContact()
 
 void ContactListView::saveContact()
 {
-    QString path = QFileDialog::getSaveFileName(this, SAVE_TITLE, DEFAULT_PATH,
-                                                FILE_TYPES.arg(XML_TYPE, QString()));
+    QString path = QFileDialog::getSaveFileName(this, SaveTitle, QDir::currentPath(), FileTypes);
     if (path.isEmpty())
         return;
 
@@ -462,7 +449,9 @@ void ContactListView::currentContactChanged(int index)
 
 void ContactListView::loadUserPic()
 {
-    QString path = QFileDialog::getOpenFileName(this, LOAD_USERPIC, DEFAULT_PATH);
+    static const QString LoadUserPic = QObject::trUtf8("Load User Pic");
+
+    QString path = QFileDialog::getOpenFileName(this, LoadUserPic, QDir::currentPath());
     if (path.isEmpty())
         return;
 

@@ -31,13 +31,13 @@ void CgCalendarView::setToday()
 void CgCalendarView::addHoliday()
 {
     Calendar::Duration d(QDate::currentDate().day(), Calendar::DurationType(m_calendars->currentIndex()));
-    createDialog(Calendar::Holiday, d, QString("add new Holiday"), 500, d);
+    createDialog(Calendar::Holiday, d, QObject::trUtf8("add new Holiday"), 500, d);
 }
 
 void CgCalendarView::addTask()
 {
     Calendar::Duration d(QDate::currentDate().day(), Calendar::DurationType(m_calendars->currentIndex()));
-    createDialog(Calendar::Task, d, QString("add new Task"), 0, d);
+    createDialog(Calendar::Task, d, QObject::trUtf8("add new Task"), 0, d);
 }
 
 void CgCalendarView::createDialog(Calendar::TaskType type,

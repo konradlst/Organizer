@@ -5,9 +5,11 @@
 #include <QDate>
 #include "contactListController.h"
 
-namespace Ui {
+namespace Ui
+{
 class ContactListView;
 }
+
 class QLabel;
 class SettingsView;
 
