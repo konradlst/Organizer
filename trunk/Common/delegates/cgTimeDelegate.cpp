@@ -3,7 +3,7 @@
 
 namespace
 {
-const QString FORMAT("hh:mm:ss.zzz");
+const QString Format("hh:mm:ss.zzz");
 }
 
 cgTimeDelegate::cgTimeDelegate(QObject *parent) :
@@ -17,7 +17,7 @@ QWidget *cgTimeDelegate::createEditor(QWidget *parent,
 {
     QTimeEdit *time = new QTimeEdit(parent);
     time->setTime(QTime::currentTime());
-    time->setDisplayFormat(FORMAT);
+    time->setDisplayFormat(Format);
     return time;
 }
 
@@ -33,7 +33,7 @@ void cgTimeDelegate::setModelData(QWidget *editor,
                                   const QModelIndex &index) const
 {
     QTimeEdit *time = static_cast<QTimeEdit*>(editor);
-    model->setData(index, time->time().toString(FORMAT), Qt::EditRole);
+    model->setData(index, time->time().toString(Format), Qt::EditRole);
 }
 
 void cgTimeDelegate::updateEditorGeometry(QWidget *editor,

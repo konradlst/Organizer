@@ -318,11 +318,9 @@ void DriverXml::contactDataToXml(QDomElement &record, const ContactData &data) c
     for (int id = 0; id < data.countData(COMPANY); ++id)
     {
         company.setAttribute(Attribute::Name, data.data(COMPANY, id).at(COMP_NAME));
-        company.setAttribute(Attribute::Department,
-                             data.data(COMPANY, id).at(DEPARTMENT));
+        company.setAttribute(Attribute::Department, data.data(COMPANY, id).at(DEPARTMENT));
         company.setAttribute(Attribute::Post, data.data(COMPANY, id).at(POST));
-        company.setAttribute(Attribute::Address,
-                             data.data(COMPANY, id).at(COMP_ADDRESS));
+        company.setAttribute(Attribute::Address, data.data(COMPANY, id).at(COMP_ADDRESS));
         company.setAttribute(Attribute::Phone, data.data(COMPANY, id).at(PHONE));
         company.setAttribute(Attribute::DateIn, data.data(COMPANY, id).at(DATEIN));
         company.setAttribute(Attribute::DateOut, data.data(COMPANY, id).at(DATEOUT));

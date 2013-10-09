@@ -1,14 +1,12 @@
-﻿#include "myLog.h"
+﻿#include <QDateTime>
 #include <QFile>
-#include <QDateTime>
+#include "myLog.h"
 
 namespace
 {
-#define CURRENT_DATETIME QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz")
-
 QString logMessage(QString data)
 {
-    return CURRENT_DATETIME + " " + data + "\n";
+    return QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz") + " " + data + "\n";
 }
 }
 

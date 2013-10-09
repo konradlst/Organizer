@@ -5,16 +5,16 @@
 
 namespace
 {
-const QString USER("user");
-const QString FORMAT("format");
-const QString SUB_TYPE("title");
-const QString VALUE("value");
-const QString ID("id");
+const QString User = "user";
+const QString Format = "format";
+const QString SubType = "title";
+const QString Value = "value";
+const QString Id = "id";
 
-const QString FLD_CONTACT("alias, name, lastName, otherName, birthday, pathToUserPic, comment");
-const QString FLD_COMPANY("name, phone, department, post, address, dateIn, dateOut, ownerId");
-const QString FLD_ADDRESS("country, city, street, home, apartment, type, ownerId");
-const QString FLD_CHANNEL("format, title, value, type, ownerId");
+const QString FldContact("alias, name, lastName, otherName, birthday, pathToUserPic, comment");
+const QString FldCompany("name, phone, department, post, address, dateIn, dateOut, ownerId");
+const QString FldAddress("country, city, street, home, apartment, type, ownerId");
+const QString FldChannel("format, title, value, type, ownerId");
 
 QString quotesValue(QStringList list)
 {
@@ -54,7 +54,7 @@ bool DriverSqlite::saveData(const Data::Contacts &data, const QString &path)
     return true;
 }
 
-Data::Contacts *DriverSqlite::loadData(const QString &path)
+Data::Contacts* DriverSqlite::loadData(const QString &path)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
     db.setDatabaseName(path);
@@ -74,13 +74,13 @@ Data::Contacts *DriverSqlite::loadData(const QString &path)
     return data;
 }
 
-bool DriverSqlite::saveContact(const ContactData &, const QString &)
+bool DriverSqlite::saveContact(const ContactData&, const QString&)
 {
     //not used
     return false;
 }
 
-ContactData *DriverSqlite::loadContact(const QString &)
+ContactData *DriverSqlite::loadContact(const QString&)
 {
     //not used
     return 0;
@@ -94,24 +94,18 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
     companyVal << index;
 
     QStringList addressVal = contact->data(ADDRESS);
-    addressVal << USER << index;
+    addressVal << User << index;
 
     QStringList queries;
-    queries << SQL::INSERT.arg(Table::Contacts)
-                          .arg(FLD_CONTACT)
-                          .arg(quotesValue(contact->data(CONTACT)))
-            << SQL::INSERT.arg(Table::Companies)
-                          .arg(FLD_COMPANY)
-                          .arg(quotesValue(companyVal))
-            << SQL::INSERT.arg(Table::Addresses)
-                          .arg(FLD_ADDRESS)
-                          .arg(quotesValue(addressVal));
+    queries << SQL::INSERT.arg(Table::Contacts, FldContact, quotesValue(contact->data(CONTACT)))
+            << SQL::INSERT.arg(Table::Companies, FldCompany, quotesValue(companyVal))
+            << SQL::INSERT.arg(Table::Addresses, FldAddress, quotesValue(addressVal));
 
-    QString insertChannel = SQL::INSERT.arg(Table::Channels, FLD_CHANNEL);
+    QString insertChannel = SQL::INSERT.arg(Table::Channels, FldChannel);
     for (int id = 0; id < contact->countData(Channel::All); ++id)
     {
         QStringList data = contact->data(Channel::All, id);
-        data << USER << index;
+        data << User << index;
         queries << insertChannel.arg(quotesValue(data));
     }
 
@@ -131,10 +125,10 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
 
     contact->setMainData(list);
 
-    int index = query.record().value(ID).toInt();
+    int index = query.record().value(Id).toInt();
 
     QSqlQuery tmpQ;
-    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Addresses, USER, QString::number(index)));
+    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Addresses, User, QString::number(index)));
     while (tmpQ.next())
     {
         QStringList list;
@@ -154,11 +148,11 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     }
 
     tmpQ.clear();
-    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Channels, USER, QString::number(index)));
+    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Channels, User, QString::number(index)));
     while (tmpQ.next())
     {
-        contact->setChannel(tmpQ.record().value(FORMAT).toString(),
-                            tmpQ.record().value(SUB_TYPE).toString(),
-                            tmpQ.record().value(VALUE).toString());
+        contact->setChannel(tmpQ.record().value(Format).toString(),
+                            tmpQ.record().value(SubType).toString(),
+                            tmpQ.record().value(Value).toString());
     }
 }

@@ -3,7 +3,7 @@
 
 namespace
 {
-const QString FORMAT("dd.MM.yyyy");
+const QString Format("dd.MM.yyyy");
 }
 
 cgDateDelegate::cgDateDelegate(QObject *parent) :
@@ -17,7 +17,7 @@ QWidget *cgDateDelegate::createEditor(QWidget *parent,
 {
     QDateEdit *date = new QDateEdit(parent);
     date->setDate(QDate::currentDate());
-    date->setDisplayFormat(FORMAT);
+    date->setDisplayFormat(Format);
     date->setCalendarPopup(true);
     return date;
 }
@@ -34,7 +34,7 @@ void cgDateDelegate::setModelData(QWidget *editor,
                                   const QModelIndex &index) const
 {
     QDateEdit *date = static_cast<QDateEdit*>(editor);
-    model->setData(index, date->date().toString(FORMAT), Qt::EditRole);
+    model->setData(index, date->date().toString(Format), Qt::EditRole);
 }
 
 void cgDateDelegate::updateEditorGeometry(QWidget *editor,

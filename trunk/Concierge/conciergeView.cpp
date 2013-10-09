@@ -32,25 +32,31 @@ void ConciergeView::createInterface()
     ui->cbTimeType->setEditable(true);
 
     //test
-    ui->cbTimeType->addItems(QString("sleep;work;travel;study;sport;read").split(";"));
-    ui->cbFinanceOperation->addItems(QString("debet;credit;transfer").split(";"));
-    QString account("cash;card;deposit");
-    ui->cbFinanceFrom->addItems(account.split(";"));
-    ui->cbFinanceTo->addItems(account.split(";"));
+    static const QChar Separator = ';';
+    static const QStringList TimeType = QString("sleep;work;travel;study;sport;read").split(Separator);
+    static const QStringList FinanceOperation = QString("debet;credit;transfer").split(Separator);
+    static const QStringList Accounts = QString("cash;card;deposit").split(Separator);
+
+    ui->cbTimeType->addItems(TimeType);
+    ui->cbFinanceOperation->addItems(FinanceOperation);
+    ui->cbFinanceFrom->addItems(Accounts);
+    ui->cbFinanceTo->addItems(Accounts);
 }
 
 void ConciergeView::addTransaction()
 {
+    static const QString FinanceTransaction = QObject::trUtf8("%1 from %2 to %3 : %4 ( %5 ).");
+
     if (ui->sbFinanceValue->value() == 0
             || !ui->cbFinanceOperation->count()
             || !ui->cbFinanceFrom->count()
             || !ui->cbFinanceTo->count())
         return;
-    ui->lwFinanceList->addItem(ui->cbFinanceOperation->currentText() + " from "
-                               + ui->cbFinanceFrom->currentText() + " to "
-                               + ui->cbFinanceTo->currentText() + " : "
-                               + ui->sbFinanceValue->text()
-                               + QString(" ( %1 ).").arg(ui->leFinanceComment->text()));
+    ui->lwFinanceList->addItem(FinanceTransaction.arg(ui->cbFinanceOperation->currentText())
+                                                 .arg(ui->cbFinanceFrom->currentText())
+                                                 .arg(ui->cbFinanceTo->currentText())
+                                                 .arg(ui->sbFinanceValue->text())
+                                                 .arg(ui->leFinanceComment->text()));
 }
 
 void ConciergeView::addTimeRecord()
@@ -59,24 +65,22 @@ void ConciergeView::addTimeRecord()
         return;
 
     if (ui->teTimeDuration->time() != QTime(0, 0))
-    {
         ui->lwTimeList->addItem(ui->teTimeDuration->text() + " : " + ui->cbTimeType->currentText());
-    }
     else
-    {
         ui->lwTimeList->addItem(ui->teTimeFrom->text() + " - " + ui->teTimeTo->text()
                                 + " : " + ui->cbTimeType->currentText());
-    }
 }
 
 void ConciergeView::addDealRecord()
 {
+    static const QString Deal = "Deadline: %1; duration: %2; price: %3; do: %4";
+
     ui->leDealDescription->setText(ui->leDealDescription->text().trimmed());
     if (ui->leDealDescription->text().isEmpty())
         return;
 
-    ui->lwDealList->addItem("Deadline: " + ui->deDealDeadLine->text()
-                            + "; duration: " + ui->teDealDuration->text()
-                            + "; price: " + ui->sbDealPrice->text()
-                            + "; do: " + ui->leDealDescription->text());
+    ui->lwDealList->addItem(Deal.arg(ui->deDealDeadLine->text())
+                                .arg(ui->teDealDuration->text())
+                                .arg(ui->sbDealPrice->text())
+                                .arg(ui->leDealDescription->text()));
 }

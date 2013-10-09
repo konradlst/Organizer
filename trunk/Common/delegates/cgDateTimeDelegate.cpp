@@ -3,7 +3,7 @@
 
 namespace
 {
-const QString FORMAT("dd.MM.yyyy hh:mm:ss.zzz");
+const QString Format("dd.MM.yyyy hh:mm:ss.zzz");
 }
 
 cgDateTimeDelegate::cgDateTimeDelegate(QObject *parent) :
@@ -18,7 +18,7 @@ QWidget *cgDateTimeDelegate::createEditor(QWidget *parent,
     QDateTimeEdit *dateTime = new QDateTimeEdit(parent);
     dateTime->setDateTime(QDateTime::currentDateTime());
     dateTime->setCalendarPopup(true);
-    dateTime->setDisplayFormat(FORMAT);
+    dateTime->setDisplayFormat(Format);
     return dateTime;
 }
 
@@ -34,7 +34,7 @@ void cgDateTimeDelegate::setModelData(QWidget *editor,
                                       const QModelIndex &index) const
 {
     QDateTimeEdit *dateTime = static_cast<QDateTimeEdit*>(editor);
-    model->setData(index, dateTime->dateTime().toString(FORMAT), Qt::EditRole);
+    model->setData(index, dateTime->dateTime().toString(Format), Qt::EditRole);
 }
 
 void cgDateTimeDelegate::updateEditorGeometry(QWidget *editor,
