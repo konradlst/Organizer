@@ -11,7 +11,7 @@
         </table>
         <table name="CG_FINANCELOG">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="timestamp" type="TIMESTAMP" unq="1" default="(strftime('%d.%m.%Y %H:%M:%f','now','localtime'))" delegate="dateTime"/>
+            <field name="timestamp" type="TIMESTAMP" default="(strftime('%d.%m.%Y %H:%M:%f','now','localtime'))" delegate="dateTime"/>
             <field name="operation" type="VARCHAR(100)" delegate="typeOperation"/>
             <field name="value" type="INTEGER" nullable="0" default="'0'" delegate="int"/>
             <field name="sendfrom" type="VARCHAR(20)" delegate="typeAccount"/>
@@ -110,7 +110,7 @@
             <field name="value" value="5000"/>
         </table>
         <table name="CG_FINANCELOG">
-            <field name="timestamp" value="01.01.2000 00:00:00.000"/>
+            <field name="timestamp" value="01.01.2000 00:00:00"/>
             <field name="operation" value="1"/>
             <field name="value" value="3000"/>
             <field name="sendfrom" value="vtb debet"/>

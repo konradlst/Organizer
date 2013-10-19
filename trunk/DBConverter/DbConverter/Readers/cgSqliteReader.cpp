@@ -2,12 +2,13 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QStringList>
+#include <QVariant>
 
-namespace SQL
+namespace
 {
+const QString Qsqlite = "QSQLITE";
 const QString Select = "SELECT %1 FROM %2";
-const QString Insert = "SELECT %1 FROM %2";
-const QString CreateTable = "CREATE TABLE %1 (%2)";
+const QString Insert = "INSERT INTO %1(%2) VALUES %3";
 }
 
 cgSqliteReader::cgSqliteReader(QObject *parent)
@@ -18,21 +19,24 @@ cgSqliteReader::cgSqliteReader(QObject *parent)
 aScheme *cgSqliteReader::loadData(const QString &path) const
 {
     //FIXME
-    QSqlDatabase db("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase(Qsqlite, "ReaderConnectionName");
+    db.setDatabaseName(path);
     db.open();
     QStringList fieldNames;
     QString tableName;
-    QString query = SQL::Select.arg(fieldNames.join(","), tableName);
+    QString query = Select.arg(fieldNames.join(","), tableName);
     QSqlQuery qry(query, db);
 
-    aScheme *scheme = new aScheme();
+    aTable table;
     while (qry.next())
     {
         aRow row;
         for (int i = 0; i < fieldNames.count(); ++i)
             row.append(qry.value(fieldNames.at(i)));
-        scheme->append(row);
+        table.append(row);
     }
+    aScheme *scheme = new aScheme();
+    scheme->append(table);
     db.close();
     return scheme;
 }

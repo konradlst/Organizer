@@ -16,7 +16,6 @@ QWidget *cgDateDelegate::createEditor(QWidget *parent,
                                       const QModelIndex &) const
 {
     QDateEdit *date = new QDateEdit(parent);
-    date->setDate(QDate::currentDate());
     date->setDisplayFormat(Format);
     date->setCalendarPopup(true);
     return date;
@@ -24,7 +23,7 @@ QWidget *cgDateDelegate::createEditor(QWidget *parent,
 
 void cgDateDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    const QDate value = index.model()->data(index, Qt::EditRole).toDate();
+    const QDate value = QDate::fromString(index.model()->data(index).toString(), Format);
     QDateEdit *date = static_cast<QDateEdit*>(editor);
     date->setDate(value);
 }

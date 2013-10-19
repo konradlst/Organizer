@@ -10,6 +10,9 @@ public:
     explicit cgCsvReader(QObject *parent = 0);
     virtual aScheme* loadData(const QString &path) const;
     virtual bool saveData(const aScheme &scheme, const QString &path) const;
+
+private:
+    QString m_separator;
 };
 
 #endif // CGCSVREADER_H

@@ -1,12 +1,12 @@
 #include <QFileDialog>
 #include "cgDbConverterView.h"
 #include "ui_cgDbConverterView.h"
-#include "Readers/cgReader.h"
 #include "Readers/cgCsvReader.h"
 #include "Readers/cgSqliteReader.h"
 
 namespace
 {
+    const int AllFiles = 0;
     const QString Separator = ";;";
     const QString TitleChooseSourceFile = QObject::trUtf8("DbConverter: Choose source database.");
     const QString TitleChooseNewFile = QObject::trUtf8("DbConverter: Choose source database.");
@@ -31,18 +31,37 @@ void cgDbConverterView::on_pbChooseSourceFile_clicked()
 {
     QString path = QFileDialog::getOpenFileName(this, TitleChooseSourceFile, QDir::currentPath(), FileTypes.join(Separator));
     ui->SourceFile->setText(path);
-    ui->SourceFileFormat->setCurrentText(FileTypes.filter(QFileInfo(path).suffix()).first());
+
+    foreach (const QString &type, FileTypes)
+    {
+        if (type.contains(QFileInfo(path).suffix()))
+        {
+            ui->SourceFileFormat->setCurrentText(type);
+            return;
+        }
+    }
+    ui->SourceFileFormat->setCurrentIndex(AllFiles);
 }
 
 void cgDbConverterView::on_pbChooseNewFile_clicked()
 {
-    QString path = QFileDialog::getSaveFileName(this, TitleChooseNewFile, QDir::currentPath(), FileTypes.join(Separator));
+    QString path = QFileDialog::getSaveFileName(this, TitleChooseNewFile,
+                                                QDir::currentPath(), FileTypes.join(Separator));
     ui->NewFile->setText(path);
-    ui->NewFileFormat->setCurrentText(FileTypes.filter(QFileInfo(path).suffix()).first());
+
+    foreach (const QString &type, FileTypes)
+    {
+        if (type.contains(QFileInfo(path).suffix()))
+        {
+            ui->NewFileFormat->setCurrentText(type);
+            return;
+        }
+    }
+    ui->NewFileFormat->setCurrentIndex(AllFiles);
 }
 
 void cgDbConverterView::on_Convert_clicked()
 {
-    QString typeFrom = QFileInfo(ui->SourceFileFormat->currentText()).suffix();
-    QString typeTo = QFileInfo(ui->SourceFileFormat->currentText()).suffix();
+    QString PathFrom = ui->SourceFile->text();
+    QString PathTo = ui->NewFile->text();
 }
