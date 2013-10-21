@@ -1,17 +1,25 @@
-#include "cgAccountList.h"
-#include <QGroupBox>
-#include <QFormLayout>
-#include <QFrame>
 #include <QDoubleSpinBox>
 #include <QProgressBar>
+#include <QFormLayout>
+#include <QGroupBox>
+#include <QFrame>
+#include "cgAccountList.h"
 
-cgAccountList::cgAccountList() :
-    m_view(new QGroupBox("Accounts")),
-    m_mainLayout(new QFormLayout(m_view)),
-    m_totalView(new QDoubleSpinBox),
-    m_total(0),
-    m_accounts(new QList<cgAccount>()),
-    m_accountsView(new QHash<QString,QProgressBar *>())
+namespace
+{
+const QString Accounts = QObject::trUtf8("Accounts");
+const QString Total = QObject::trUtf8("Total :");
+const QString FinanceFormat = "%v p.";
+const QString FinanceSuffix = " p.";
+}
+
+cgAccountList::cgAccountList()
+    : m_view(new QGroupBox(Accounts)),
+      m_mainLayout(new QFormLayout(m_view)),
+      m_totalView(new QDoubleSpinBox),
+      m_total(0),
+      m_accounts(new QList<cgAccount>()),
+      m_accountsView(new QHash<QString,QProgressBar *>())
 {
     createView();
     m_totalView->setValue(m_total);
@@ -31,7 +39,7 @@ void cgAccountList::addAccount(const cgAccount &account)
     m_total += account.m_value;
 
     bar->setTextVisible(true);
-    bar->setFormat("%v p.");
+    bar->setFormat(FinanceFormat);
     QList<QString> list = m_accountsView->keys();
     foreach (QString key, list)
         m_accountsView->value(key)->setMaximum(m_total);
@@ -58,7 +66,7 @@ void cgAccountList::createView()
 {
     m_totalView->setReadOnly(true);
     m_totalView->setButtonSymbols(QDoubleSpinBox::NoButtons);
-    m_totalView->setSuffix(" p.");
+    m_totalView->setSuffix(FinanceSuffix);
     m_totalView->setMinimum(-100000);
     m_totalView->setMaximum(100000);
 
@@ -67,7 +75,7 @@ void cgAccountList::createView()
     line->setFrameShadow(QFrame::Sunken);
 
     m_mainLayout->addRow(line);
-    m_mainLayout->addRow("Total :", m_totalView);
+    m_mainLayout->addRow(Total, m_totalView);
 }
 
 

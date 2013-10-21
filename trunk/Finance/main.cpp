@@ -1,5 +1,5 @@
-#include "cgFinanceView.h"
 #include <QApplication>
+#include "cgFinanceView.h"
 
 int main(int argc, char *argv[])
 {

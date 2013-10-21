@@ -39,7 +39,7 @@
            <x>10</x>
            <y>0</y>
            <width>411</width>
-           <height>355</height>
+           <height>361</height>
           </rect>
          </property>
          <layout class="QFormLayout" name="staticticLayout">
@@ -209,6 +209,13 @@
             </property>
            </widget>
           </item>
+          <item row="11" column="0">
+           <widget class="QPushButton" name="pbChooseDb">
+            <property name="text">
+             <string>Choose Database</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </widget>
@@ -228,7 +235,7 @@
      <x>0</x>
      <y>0</y>
      <width>497</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

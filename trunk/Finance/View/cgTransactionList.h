@@ -3,14 +3,15 @@
 
 #include <QObject>
 #include <QDateTime>
+
 class QDoubleSpinBox;
 class QFormLayout;
 
 struct cgTransaction
 {
-    cgTransaction() :
-        m_datetime(QDateTime::currentDateTime()),
-        m_value(0)
+    cgTransaction()
+        : m_datetime(QDateTime::currentDateTime()),
+          m_value(0)
     {}
     QDateTime m_datetime;
     QString m_from;

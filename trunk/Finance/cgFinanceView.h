@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 
-namespace Ui {
+namespace Ui
+{
 class cgFinanceView;
 }
 class cgAccountList;
@@ -17,7 +18,10 @@ public:
     explicit cgFinanceView(QWidget *parent = 0);
     ~cgFinanceView();
     bool addTransaction();
-    
+
+private slots:
+    void chooseDb();
+
 private:
     Ui::cgFinanceView *ui;
     cgAccountList *m_accounts;

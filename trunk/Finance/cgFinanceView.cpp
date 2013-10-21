@@ -1,19 +1,32 @@
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QHBoxLayout>
+#include <QFileDialog>
+#include "cgTransactionList.h"
+#include "cgAccountList.h"
 #include "cgFinanceView.h"
 #include "ui_cgFinanceView.h"
-#include <QHBoxLayout>
-#include "cgAccountList.h"
-#include "cgTransactionList.h"
 
-cgFinanceView::cgFinanceView(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::cgFinanceView),
-    m_accounts(new cgAccountList),
-    m_transactions(new cgTransactionList)
+namespace
+{
+    const QString Qsqlite = "QSQLITE";
+    const QString ConnectionName = "ChooseFinanceDataConnection";
+    const QString TitleChooseDb = QObject::trUtf8("Choose Db");
+    const QString FileTypes = QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite)");
+}
+
+cgFinanceView::cgFinanceView(QWidget *parent)
+    : QMainWindow(parent),
+      ui(new Ui::cgFinanceView),
+      m_accounts(new cgAccountList),
+      m_transactions(new cgTransactionList)
 {
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->vLayout);
     ui->tabStatistic->setLayout(ui->staticticLayout);
     createAccountTab();
+
+    connect(ui->pbChooseDb, SIGNAL(clicked()), this, SLOT(chooseDb()));
 }
 
 cgFinanceView::~cgFinanceView()
@@ -26,6 +39,18 @@ bool cgFinanceView::addTransaction()
     cgTransaction transaction;
     m_transactions->addTransaction(transaction);
     return true;
+}
+
+void cgFinanceView::chooseDb()
+{
+    QString path = QFileDialog::getOpenFileName(this, TitleChooseDb, QDir::currentPath(), FileTypes);
+    QSqlDatabase db = QSqlDatabase::addDatabase(Qsqlite, ConnectionName);
+    db.setDatabaseName(path);
+    db.open();
+//    QString queryCurrentIn = "SELECT SUM(VALUE) FROM CG_FINANCELOG WHERE timestamp=CURRENT_TIMESTAMP AND SENDFROM='IN'";
+//    QString queryCurrentOut = "SELECT SUM(VALUE) FROM CG_FINANCELOG WHERE timestamp=CURRENT_TIMESTAMP AND SENDTO='OUT'"
+//    QSqlQuery(query, db);
+    db.close();
 }
 
 void cgFinanceView::createAccountTab()

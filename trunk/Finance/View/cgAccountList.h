@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QList>
+
 class QGroupBox;
 class QDoubleSpinBox;
 class QFormLayout;
@@ -10,9 +11,9 @@ class QProgressBar;
 
 struct cgAccount
 {
-    cgAccount(QString name, qint64 value) :
-        m_name(name),
-        m_value(value)
+    cgAccount(QString name, qint64 value)
+        : m_name(name),
+          m_value(value)
     {}
     QString m_name;
     qint64 m_value;
