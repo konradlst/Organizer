@@ -47,10 +47,6 @@ ContactListView::ContactListView(ContactListController *controller, QWidget *par
     static const QString AppVersion = QObject::trUtf8("Version: %1").arg(qApp->applicationVersion());
 
     ui->setupUi(this);
-    ui->centralWidget->setLayout(ui->hLayoutMain);
-    ui->tabAddress->setLayout(ui->gLayAddress);
-    ui->tabChannels->setLayout(ui->gLayChannels);
-    ui->tabCompany->setLayout(ui->gLayCompany);
 //    ui->menuBar->hide();
     setEditable(false);
     setDefaultSettings();
@@ -202,7 +198,7 @@ void ContactListView::loadData()
 
 void ContactListView::loadData(const QString &path)
 {
-    if(path.isEmpty())
+    if (path.isEmpty())
         return;
 
     QStringList list = *m_controller->loadData(path);
@@ -216,7 +212,7 @@ void ContactListView::loadData(const QString &path)
     refreshContactList();
     m_path->setText(pathToData(m_controller->pathToData()));
     MYLOG << Log::LoadContactList;
-    if(ui->lwContactList->count() == 1)
+    if (ui->lwContactList->count() == 1)
         emptyContactList(false);
 }
 
@@ -235,7 +231,7 @@ void ContactListView::saveData()
 void ContactListView::saveAsData()
 {
     QString path = QFileDialog::getSaveFileName(this, SaveTitle, QDir::currentPath(), FileTypesFull);
-    if(path.isEmpty())
+    if (path.isEmpty())
         return;
 
     emit saveData(path);
@@ -253,7 +249,7 @@ void ContactListView::newData()
     ui->leAlias->setFocus();
     ui->leAlias->selectAll();
     MYLOG << Log::NewContactList;
-    if(ui->lwContactList->count() == 1)
+    if (ui->lwContactList->count() == 1)
         emptyContactList(false);
 }
 
@@ -463,7 +459,7 @@ void ContactListView::loadUserPic()
 void ContactListView::textChanged(QString text)
 {
     QLineEdit *send = qobject_cast<QLineEdit*>(sender());
-    if(send == ui->leAlias)
+    if (send == ui->leAlias)
         ui->lwContactList->item(ui->lwContactList->currentRow())->setText(text);
 
     if (send == ui->leAlias)

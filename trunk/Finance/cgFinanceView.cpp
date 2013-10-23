@@ -1,6 +1,5 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QHBoxLayout>
 #include <QFileDialog>
 #include "cgTransactionList.h"
 #include "cgAccountList.h"
@@ -22,8 +21,6 @@ cgFinanceView::cgFinanceView(QWidget *parent)
       m_transactions(new cgTransactionList)
 {
     ui->setupUi(this);
-    ui->centralWidget->setLayout(ui->vLayout);
-    ui->tabStatistic->setLayout(ui->staticticLayout);
     createAccountTab();
 
     connect(ui->pbChooseDb, SIGNAL(clicked()), this, SLOT(chooseDb()));
@@ -55,7 +52,6 @@ void cgFinanceView::chooseDb()
 
 void cgFinanceView::createAccountTab()
 {
-    ui->tabMain->setLayout(new QHBoxLayout);
     ui->tabMain->layout()->addWidget(m_accounts->view());
     ui->tabMain->layout()->addWidget(m_transactions->view());
 
