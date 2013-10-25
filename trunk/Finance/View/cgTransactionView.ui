@@ -13,81 +13,68 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="formLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>20</y>
-     <width>331</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <item row="5" column="0" colspan="2">
-     <widget class="QDialogButtonBox" name="buttonBox">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="lblDate">
-      <property name="text">
-       <string>Date :</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QDateEdit" name="deDate"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="lblFrom">
-      <property name="text">
-       <string>From :</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="cbFrom"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="lblTo">
-      <property name="text">
-       <string>To :</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="cbTo"/>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="lblOperation">
-      <property name="text">
-       <string>Operation :</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QComboBox" name="cbOperation"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="lblValue">
-      <property name="text">
-       <string>Value :</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QDoubleSpinBox" name="dsbValue"/>
-    </item>
-   </layout>
-  </widget>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="lblDate">
+     <property name="text">
+      <string>Date :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QDateEdit" name="deDate"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="lblFrom">
+     <property name="text">
+      <string>From :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="cbFrom"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="lblTo">
+     <property name="text">
+      <string>To :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="cbTo"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="lblOperation">
+     <property name="text">
+      <string>Operation :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="cbOperation"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="lblValue">
+     <property name="text">
+      <string>Value :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QDoubleSpinBox" name="dsbValue"/>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>

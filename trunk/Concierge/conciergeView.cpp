@@ -1,5 +1,6 @@
 #include "conciergeView.h"
 #include "ui_conciergeView.h"
+#include "ConciergeView2.h"
 
 ConciergeView::ConciergeView(QWidget *parent)
     : QMainWindow(parent),
@@ -20,13 +21,10 @@ ConciergeView::~ConciergeView()
 
 void ConciergeView::createInterface()
 {
+    ConciergeView2 *view = new ConciergeView2();
+    view->show();
     ui->deToday->setDate(QDate::currentDate());
     ui->deDealDeadLine->setDate(QDate::currentDate());
-    ui->centralWidget->setLayout(ui->mainLayout);
-    ui->timePage->setLayout(ui->timeLayout);
-    ui->financePage->setLayout(ui->financeLayout);
-    ui->sportPage->setLayout(ui->sportLayout);
-    ui->dealPage->setLayout(ui->dealLayout);
 
     ui->toolBox->setCurrentIndex(0);
     ui->cbTimeType->setEditable(true);

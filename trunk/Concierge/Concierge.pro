@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         conciergeView.cpp \
-    ../Common/drivers/driverSqlite.cpp
+    ../Common/drivers/driverSqlite.cpp \
+    ConciergeView2.cpp
 
 HEADERS  += conciergeView.h \
-    ../Common/drivers/driverSqlite.h
+    ../Common/drivers/driverSqlite.h \
+    ConciergeView2.h
 
-FORMS    += conciergeView.ui
+FORMS    += conciergeView.ui \
+    ConciergeView2.ui
