@@ -12,14 +12,13 @@ TARGET = Сoncierge
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        conciergeView.cpp \
-    ../Common/drivers/driverSqlite.cpp \
-    ConciergeView2.cpp
+SOURCES += main.cpp \
+    ConciergeView.cpp \
+    ../Common/drivers/driverSqlite.cpp
 
-HEADERS  += conciergeView.h \
-    ../Common/drivers/driverSqlite.h \
-    ConciergeView2.h
+HEADERS  += \
+    ConciergeView.h \
+    ../Common/drivers/driverSqlite.h
 
-FORMS    += conciergeView.ui \
-    ConciergeView2.ui
+FORMS    += \
+    ConciergeView.ui

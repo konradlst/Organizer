@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ConciergeView2</class>
- <widget class="QMainWindow" name="ConciergeView2">
+ <class>ConciergeView</class>
+ <widget class="QMainWindow" name="ConciergeView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Concierge</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -608,14 +608,14 @@
            <string>Accounts</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
-           <item row="0" column="0">
+           <item row="0" column="1">
             <widget class="QLabel" name="label_17">
              <property name="text">
               <string>NameAccount</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="0" column="2">
             <widget class="QProgressBar" name="progressBar">
              <property name="value">
               <number>24</number>
@@ -625,7 +625,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
+           <item row="0" column="3">
             <widget class="QPushButton" name="pushButton_5">
              <property name="minimumSize">
               <size>
@@ -643,6 +643,9 @@
               <string>X</string>
              </property>
             </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QComboBox" name="comboBox_2"/>
            </item>
           </layout>
          </widget>
