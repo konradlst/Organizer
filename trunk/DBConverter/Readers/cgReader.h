@@ -1,4 +1,4 @@
-#ifndef CGREADER_H
+﻿#ifndef CGREADER_H
 #define CGREADER_H
 
 #include <QObject>

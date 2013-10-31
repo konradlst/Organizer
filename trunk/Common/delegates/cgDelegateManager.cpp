@@ -1,4 +1,4 @@
-#include "cgDelegateManager.h"
+﻿#include "cgDelegateManager.h"
 #include <QDomElement>
 #include "cgComboBoxDelegate.h"
 #include "cgCheckBoxDelegate.h"

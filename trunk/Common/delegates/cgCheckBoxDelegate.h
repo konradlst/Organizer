@@ -1,4 +1,4 @@
-#ifndef CGCHECKBOXDELEGATE_H
+﻿#ifndef CGCHECKBOXDELEGATE_H
 #define CGCHECKBOXDELEGATE_H
 
 #include <QStyledItemDelegate>

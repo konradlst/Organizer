@@ -1,4 +1,4 @@
-#ifndef UNIFIEDFACTORY_H
+﻿#ifndef UNIFIEDFACTORY_H
 #define UNIFIEDFACTORY_H
 
 #include <QHash>

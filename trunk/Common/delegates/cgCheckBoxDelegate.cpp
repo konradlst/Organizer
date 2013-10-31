@@ -1,4 +1,4 @@
-#include "cgCheckBoxDelegate.h"
+﻿#include "cgCheckBoxDelegate.h"
 #include <QCheckBox>
 
 cgCheckBoxDelegate::cgCheckBoxDelegate(QObject *parent) :

@@ -1,4 +1,4 @@
-#ifndef CGACCOUNTLIST_H
+﻿#ifndef CGACCOUNTLIST_H
 #define CGACCOUNTLIST_H
 
 #include <QObject>

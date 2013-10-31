@@ -1,4 +1,4 @@
-#include "cgDBManager.h"
+﻿#include "cgDBManager.h"
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QTableView>

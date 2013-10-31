@@ -1,4 +1,4 @@
-win32 {
+﻿win32 {
     debug {
         QMAKE_POST_LINK += $$quote( xcopy /Y $$PWD/metascheme.xml ./debug & )
     }

@@ -1,4 +1,4 @@
-#ifndef CGCALENDARCONST_H
+﻿#ifndef CGCALENDARCONST_H
 #define CGCALENDARCONST_H
 
 #include <QPair>

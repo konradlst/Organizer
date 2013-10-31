@@ -1,4 +1,4 @@
-#include "dbGenerator.h"
+﻿#include "dbGenerator.h"
 #include <QDomElement>
 #include <QSqlQuery>
 #include <QSqlError>

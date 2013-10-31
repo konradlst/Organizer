@@ -1,4 +1,4 @@
-#ifndef CGFINANCEVIEW_H
+﻿#ifndef CGFINANCEVIEW_H
 #define CGFINANCEVIEW_H
 
 #include <QMainWindow>

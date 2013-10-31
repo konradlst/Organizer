@@ -1,4 +1,4 @@
-#ifndef CGLINEEDITDELEGATE_H
+﻿#ifndef CGLINEEDITDELEGATE_H
 #define CGLINEEDITDELEGATE_H
 
 #include <QStyledItemDelegate>

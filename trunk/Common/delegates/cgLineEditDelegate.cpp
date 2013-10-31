@@ -1,4 +1,4 @@
-#include "cgLineEditDelegate.h"
+﻿#include "cgLineEditDelegate.h"
 #include <QLineEdit>
 
 cgLineEditDelegate::cgLineEditDelegate(int maxLength, QString mask,

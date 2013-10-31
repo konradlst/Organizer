@@ -1,4 +1,4 @@
-#ifndef CONCIERGEVIEW2_H
+﻿#ifndef CONCIERGEVIEW2_H
 #define CONCIERGEVIEW2_H
 
 #include <QMainWindow>

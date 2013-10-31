@@ -1,4 +1,4 @@
-#ifndef DRIVERSQLITE_H
+﻿#ifndef DRIVERSQLITE_H
 #define DRIVERSQLITE_H
 
 #include <QObject>

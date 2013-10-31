@@ -1,4 +1,4 @@
-#ifndef CGSQLITEREADER_H
+﻿#ifndef CGSQLITEREADER_H
 #define CGSQLITEREADER_H
 
 #include "cgReader.h"

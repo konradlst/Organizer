@@ -1,4 +1,4 @@
-#ifndef CGDBCONVERTERVIEW_H
+﻿#ifndef CGDBCONVERTERVIEW_H
 #define CGDBCONVERTERVIEW_H
 
 #include <QWidget>

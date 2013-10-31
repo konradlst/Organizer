@@ -1,4 +1,4 @@
-#ifndef CGDELEGATEMANAGER_H
+﻿#ifndef CGDELEGATEMANAGER_H
 #define CGDELEGATEMANAGER_H
 
 #include <QList>

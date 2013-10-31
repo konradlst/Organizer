@@ -1,4 +1,4 @@
-#include <QtSql/QSqlDatabase>
+﻿#include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QStringList>
 #include <QVariant>

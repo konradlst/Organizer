@@ -1,4 +1,4 @@
-#include "cgTimeDelegate.h"
+﻿#include "cgTimeDelegate.h"
 #include <QTimeEdit>
 
 namespace

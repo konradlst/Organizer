@@ -1,1 +1,1 @@
-C:\cppcheck\cppcheck.exe -j 4 --enable=all C:\project\Organizer\trunk\ContactList\*.cpp C:\project\Organizer\trunk\ContactList\include\*.h > C:\project\Organizer\trunk\ContactList\scripts\cppCheckLog.txt
+﻿C:\cppcheck\cppcheck.exe -j 4 --enable=all C:\project\Organizer\trunk\ContactList\*.cpp C:\project\Organizer\trunk\ContactList\include\*.h > C:\project\Organizer\trunk\ContactList\scripts\cppCheckLog.txt

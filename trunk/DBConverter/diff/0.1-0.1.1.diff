@@ -1,4 +1,4 @@
-<!DOCTYPE cg>
+﻿<!DOCTYPE cg>
 <cg_db_converter version="0.1" newVersion="0.1.1">
 <!-- add default value-->
 	<table name="CG_FINANCELOG">

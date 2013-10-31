@@ -1,4 +1,4 @@
-#ifndef DBGENERATOR_H
+﻿#ifndef DBGENERATOR_H
 #define DBGENERATOR_H
 
 #include <QSqlDatabase>

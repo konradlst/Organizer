@@ -1,4 +1,4 @@
-#ifndef CGDATEDELEGATE_H
+﻿#ifndef CGDATEDELEGATE_H
 #define CGDATEDELEGATE_H
 
 #include <QStyledItemDelegate>

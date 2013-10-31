@@ -1,4 +1,4 @@
-#include <QSqlDatabase>
+﻿#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QFileDialog>
 #include "cgTransactionList.h"

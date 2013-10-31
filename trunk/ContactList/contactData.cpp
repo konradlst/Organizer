@@ -1,4 +1,4 @@
-#include <QPixmap>
+﻿#include <QPixmap>
 #include "contactData.h"
 
 namespace

@@ -1,4 +1,4 @@
-#include <QFileDialog>
+﻿#include <QFileDialog>
 #include <QGridLayout>
 #include <QPushButton>
 #include <QLineEdit>

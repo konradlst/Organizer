@@ -1,4 +1,4 @@
-#ifndef CGCSVREADER_H
+﻿#ifndef CGCSVREADER_H
 #define CGCSVREADER_H
 
 #include "cgReader.h"

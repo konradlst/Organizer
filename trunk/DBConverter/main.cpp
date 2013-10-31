@@ -1,4 +1,4 @@
-#include "cgDbConverterView.h"
+﻿#include "cgDbConverterView.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

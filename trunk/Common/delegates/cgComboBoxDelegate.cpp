@@ -1,4 +1,4 @@
-#include "cgComboBoxDelegate.h"
+﻿#include "cgComboBoxDelegate.h"
 #include <QComboBox>
 
 cgComboBoxDelegate::cgComboBoxDelegate(const QStringList &list, bool editable, QObject *parent) :

@@ -1,4 +1,4 @@
-#include "contactView.h"
+﻿#include "contactView.h"
 #include <QLayout>
 #include <QFormLayout>
 #include <QTabWidget>

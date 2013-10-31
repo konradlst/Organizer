@@ -1,4 +1,4 @@
-#include "cgMetaschemeConst.h"
+﻿#include "cgMetaschemeConst.h"
 #include <QFile>
 #include <QDomDocument>
 #include <QDebug>

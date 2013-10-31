@@ -1,4 +1,4 @@
-set targetBinFolder=C:\project\Organizer\distrib
+﻿set targetBinFolder=C:\project\Organizer\distrib
 set IBDIR=C:\InstallBuilder\bin
 
 mkdir output

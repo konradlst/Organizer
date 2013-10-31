@@ -1,4 +1,4 @@
-#include <QFile>
+﻿#include <QFile>
 #include <QDebug>
 #include <QStringList>
 #include "cgCsvReader.h"

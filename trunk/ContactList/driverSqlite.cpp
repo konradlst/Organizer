@@ -1,4 +1,4 @@
-#include <QtSql>
+﻿#include <QtSql>
 #include "driverSqlite.h"
 #include "dbGenerator.h"
 #include "cgMetaschemeConst.h"

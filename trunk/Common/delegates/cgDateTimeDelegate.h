@@ -1,4 +1,4 @@
-#ifndef CGDATETIMEDELEGATE_H
+﻿#ifndef CGDATETIMEDELEGATE_H
 #define CGDATETIMEDELEGATE_H
 
 #include <QStyledItemDelegate>

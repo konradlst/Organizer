@@ -1,4 +1,4 @@
-#ifndef CGSPINBOXDELEGATE_H
+﻿#ifndef CGSPINBOXDELEGATE_H
 #define CGSPINBOXDELEGATE_H
 
 #include <QStyledItemDelegate>

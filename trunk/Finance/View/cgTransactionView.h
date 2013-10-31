@@ -1,4 +1,4 @@
-#ifndef CGTRANSACTIONVIEW_H
+﻿#ifndef CGTRANSACTIONVIEW_H
 #define CGTRANSACTIONVIEW_H
 
 #include <QDialog>

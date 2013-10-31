@@ -1,4 +1,4 @@
-#ifndef ERRORMESSAGE_H
+﻿#ifndef ERRORMESSAGE_H
 #define ERRORMESSAGE_H
 
 #include <QObject>

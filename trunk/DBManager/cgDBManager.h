@@ -1,4 +1,4 @@
-#ifndef CGDBMANAGER_H
+﻿#ifndef CGDBMANAGER_H
 #define CGDBMANAGER_H
 
 #include <QMainWindow>

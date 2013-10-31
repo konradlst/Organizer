@@ -1,4 +1,4 @@
-#ifndef DRIVERMANAGER_H
+﻿#ifndef DRIVERMANAGER_H
 #define DRIVERMANAGER_H
 
 #include "driver.h"

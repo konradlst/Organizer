@@ -1,4 +1,4 @@
-#include "driverManager.h"
+﻿#include "driverManager.h"
 #include "driverXml.h"
 #include "driverSqlite.h"
 #include "cgErrorMessage.h"

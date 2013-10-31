@@ -1,4 +1,4 @@
-#include <QDoubleSpinBox>
+﻿#include <QDoubleSpinBox>
 #include <QFormLayout>
 #include <QPushButton>
 #include <QGroupBox>

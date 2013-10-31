@@ -1,4 +1,4 @@
-#ifndef CGCOMBOBOXDELEGATE_H
+﻿#ifndef CGCOMBOBOXDELEGATE_H
 #define CGCOMBOBOXDELEGATE_H
 
 #include <QStyledItemDelegate>

@@ -1,4 +1,4 @@
-#ifndef CGTASKDIALOG_H
+﻿#ifndef CGTASKDIALOG_H
 #define CGTASKDIALOG_H
 
 #include <QDialog>

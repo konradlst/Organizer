@@ -1,4 +1,4 @@
-#ifndef CGCALENDARVIEW_H
+﻿#ifndef CGCALENDARVIEW_H
 #define CGCALENDARVIEW_H
 
 #include <QMainWindow>

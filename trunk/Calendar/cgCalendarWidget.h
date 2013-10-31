@@ -1,4 +1,4 @@
-#ifndef CGCALENDARWIDGET_H
+﻿#ifndef CGCALENDARWIDGET_H
 #define CGCALENDARWIDGET_H
 
 #include <QWidget>

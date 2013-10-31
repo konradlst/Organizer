@@ -1,4 +1,4 @@
-<!DOCTYPE cg>
+﻿<!DOCTYPE cg>
 <cg_db_converter version="0.1.1" newVersion="0.2">
 <!-- add new table and change current table -->
 	<table name="CG_COMPANIES">

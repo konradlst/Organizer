@@ -1,4 +1,4 @@
-#include "cgDateTimeDelegate.h"
+﻿#include "cgDateTimeDelegate.h"
 #include <QDateTimeEdit>
 
 namespace

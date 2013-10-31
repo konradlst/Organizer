@@ -1,4 +1,4 @@
-#ifndef CGTRANSACTIONLIST_H
+﻿#ifndef CGTRANSACTIONLIST_H
 #define CGTRANSACTIONLIST_H
 
 #include <QObject>

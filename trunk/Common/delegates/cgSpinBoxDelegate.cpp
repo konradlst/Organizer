@@ -1,4 +1,4 @@
-#include "cgSpinBoxDelegate.h"
+﻿#include "cgSpinBoxDelegate.h"
 #include <QDoubleSpinBox>
 
 cgSpinBoxDelegate::cgSpinBoxDelegate(int decimals, QObject *parent) :

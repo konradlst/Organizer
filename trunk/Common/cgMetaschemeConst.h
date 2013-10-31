@@ -1,4 +1,4 @@
-#ifndef CGMETASCHEMECONST_H
+﻿#ifndef CGMETASCHEMECONST_H
 #define CGMETASCHEMECONST_H
 
 #include <QString>

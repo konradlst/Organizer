@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ConciergeView2</class>
  <widget class="QMainWindow" name="ConciergeView2">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -566,7 +566,95 @@
        <attribute name="title">
         <string>Finance</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2"/>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox_7">
+          <property name="title">
+           <string>Last transactions</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <item row="0" column="2">
+            <widget class="QSpinBox" name="spinBox_2">
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+             <property name="singleStep">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>NameTransaction</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QComboBox" name="comboBox"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="title">
+           <string>Accounts</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>NameAccount</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QProgressBar" name="progressBar">
+             <property name="value">
+              <number>24</number>
+             </property>
+             <property name="textDirection">
+              <enum>QProgressBar::TopToBottom</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QPushButton" name="pushButton_5">
+             <property name="minimumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>252</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>X</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QGroupBox" name="groupBox_8">
+          <property name="title">
+           <string>New transaction</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
@@ -574,45 +662,112 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="QRadioButton" name="radioButton">
-          <property name="text">
-           <string>deal1</string>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Type</string>
           </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QRadioButton" name="radioButton_4">
-          <property name="text">
-           <string>deal4</string>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QRadioButton" name="radioButton">
+             <property name="text">
+              <string>deal1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_2">
+             <property name="text">
+              <string>deal2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_3">
+             <property name="text">
+              <string>deal3</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_4">
+             <property name="text">
+              <string>deal4</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_5">
+             <property name="text">
+              <string>deal5</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_6">
+             <property name="text">
+              <string>deal6</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QRadioButton" name="radioButton_2">
-          <property name="text">
-           <string>deal2</string>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Duration</string>
           </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="1" column="0" colspan="2">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QTimeEdit" name="timeEdit_11"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QTimeEdit" name="timeEdit_10"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>End to :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>Start from :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>Total :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QTimeEdit" name="timeEdit_12"/>
+           </item>
+          </layout>
          </widget>
         </item>
-        <item row="0" column="2">
-         <widget class="QRadioButton" name="radioButton_3">
-          <property name="text">
-           <string>deal3</string>
+        <item row="2" column="0" colspan="2">
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Description</string>
           </property>
-         </widget>
-        </item>
-        <item row="0" column="4">
-         <widget class="QRadioButton" name="radioButton_5">
-          <property name="text">
-           <string>deal5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="QRadioButton" name="radioButton_6">
-          <property name="text">
-           <string>deal6</string>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QTextBrowser" name="textBrowser"/>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -625,14 +780,14 @@
         <item row="0" column="1">
          <widget class="QGroupBox" name="groupBox">
           <property name="title">
-           <string>GroupBox</string>
+           <string>Holidays</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
          <widget class="QGroupBox" name="groupBox_2">
           <property name="title">
-           <string>GroupBox</string>
+           <string>Deal</string>
           </property>
          </widget>
         </item>
@@ -949,6 +1104,11 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>Notes</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
     <item>
@@ -1004,7 +1164,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
