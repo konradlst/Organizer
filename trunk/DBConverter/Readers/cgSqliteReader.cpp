@@ -59,7 +59,7 @@ bool cgSqliteReader::saveData(const aScheme &scheme, const QString &path) const
             foreach (const QVariant &data, row)
                 values << data.toString();
 //            QString query = Insert.arg(tableName, fields.join(Separator), values.join(Separator));
-            QSqlQuery(query, db);
+//            QSqlQuery(query, db);
         }
     }
     db.close();
