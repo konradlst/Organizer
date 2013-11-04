@@ -6,23 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>804</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Concierge</string>
+   <string>Organizer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/app_pic</normaloff>:/app_pic</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>ContactList</string>
+        <string>Contacts</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -81,7 +85,7 @@
                  </size>
                 </property>
                 <property name="pixmap">
-                 <pixmap>:/logo</pixmap>
+                 <pixmap resource="res.qrc">:/logo</pixmap>
                 </property>
                 <property name="scaledContents">
                  <bool>true</bool>
@@ -176,7 +180,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset>
+                 <iconset resource="res.qrc">
                   <normaloff>:/editContact</normaloff>:/editContact</iconset>
                 </property>
                </widget>
@@ -220,7 +224,69 @@
                 <string>Channels</string>
                </attribute>
                <layout class="QGridLayout" name="gridLayout_2">
-                <item row="4" column="0" colspan="3">
+                <item row="7" column="0" colspan="3">
+                 <spacer name="vSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="leEmail"/>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="res.qrc">:/editContact</pixmap>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="lbSkype">
+                  <property name="text">
+                   <string>Skype:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0" colspan="2">
+                 <widget class="QTextEdit" name="textEdit"/>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLabel" name="label_3">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="res.qrc">:/editContact</pixmap>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="lePhone"/>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="lbSite">
+                  <property name="text">
+                   <string>Site:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0" colspan="3">
                  <widget class="QPushButton" name="pushButton">
                   <property name="minimumSize">
                    <size>
@@ -238,31 +304,8 @@
                    <string>Add</string>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="res.qrc">
                     <normaloff>:/newContact</normaloff>:/newContact</iconset>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0" colspan="3">
-                 <spacer name="vSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="lbPhone">
-                  <property name="text">
-                   <string>Phone:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -276,65 +319,13 @@
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="lbSkype">
-                  <property name="text">
-                   <string>Skype:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lePhone"/>
-                </item>
                 <item row="0" column="2">
                  <widget class="QLabel" name="label">
                   <property name="text">
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/editContact</pixmap>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLineEdit" name="leEmail"/>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="leSkype"/>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="lbSite">
-                  <property name="text">
-                   <string>Site:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="leSite"/>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap>:/editContact</pixmap>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
-                 <widget class="QLabel" name="label_3">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap>:/editContact</pixmap>
+                   <pixmap resource="res.qrc">:/editContact</pixmap>
                   </property>
                  </widget>
                 </item>
@@ -344,7 +335,30 @@
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/editContact</pixmap>
+                   <pixmap resource="res.qrc">:/editContact</pixmap>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QLineEdit" name="leSite"/>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="lbPhone">
+                  <property name="text">
+                   <string>Phone:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="leSkype"/>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QSlider" name="verticalSlider">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
                   </property>
                  </widget>
                 </item>
@@ -573,15 +587,28 @@
            <string>Last transactions</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_7">
-           <item row="1" column="1">
-            <widget class="QLabel" name="label_18">
+           <item row="1" column="0">
+            <widget class="QComboBox" name="comboBox"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_20">
              <property name="text">
-              <string>NameTransaction</string>
+              <string>Total :</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QComboBox" name="comboBox"/>
+           <item row="2" column="0" colspan="3">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item row="1" column="2">
             <widget class="QSpinBox" name="spinBox_2">
@@ -609,40 +636,10 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0" colspan="3">
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="5" column="0" colspan="3">
-            <widget class="QPushButton" name="pushButton_6">
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_18">
              <property name="text">
-              <string>New Transaction</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1" colspan="2">
-            <widget class="QSpinBox" name="spinBox_3">
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_20">
-             <property name="text">
-              <string>Total :</string>
+              <string>NameTransaction</string>
              </property>
             </widget>
            </item>
@@ -659,6 +656,16 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QSpinBox" name="spinBox_3">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub.</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -668,32 +675,6 @@
            <string>Accounts</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
-           <item row="0" column="3">
-            <widget class="QPushButton" name="pushButton_5">
-             <property name="minimumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>252</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>X</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="label_17">
-             <property name="text">
-              <string>NameAccount</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="2">
             <widget class="QProgressBar" name="progressBar">
              <property name="value">
@@ -704,40 +685,6 @@
              </property>
              <property name="format">
               <string>%v rub.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QComboBox" name="comboBox_2"/>
-           </item>
-           <item row="4" column="0">
-            <widget class="QPushButton" name="pushButton_7">
-             <property name="text">
-              <string>New Account</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_19">
-             <property name="text">
-              <string>Total :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1" colspan="3">
-            <widget class="QSpinBox" name="spinBox">
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="4">
-            <widget class="Line" name="line_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -754,27 +701,62 @@
              </property>
             </spacer>
            </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QGroupBox" name="groupBox_8">
-          <property name="title">
-           <string>New transaction</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <spacer name="verticalSpacer">
+           <item row="2" column="0" colspan="4">
+            <widget class="Line" name="line_3">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeHint" stdset="0">
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="3">
+            <widget class="QSpinBox" name="spinBox">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QComboBox" name="comboBox_2"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>NameAccount</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>Total :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QPushButton" name="pushButton_5">
+             <property name="minimumSize">
               <size>
-               <width>20</width>
-               <height>199</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
-            </spacer>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>252</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/deleteContact</normaloff>:/deleteContact</iconset>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -785,112 +767,147 @@
        <attribute name="title">
         <string>Time</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_4">
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QGroupBox" name="groupBox_11">
           <property name="title">
-           <string>Type</string>
+           <string>New Time</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QGroupBox" name="groupBox_4">
+               <property name="title">
+                <string>Type</string>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="QRadioButton" name="radioButton">
+                  <property name="text">
+                   <string>deal1</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_2">
+                  <property name="text">
+                   <string>deal2</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_3">
+                  <property name="text">
+                   <string>deal3</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_4">
+                  <property name="text">
+                   <string>deal4</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_5">
+                  <property name="text">
+                   <string>deal5</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="radioButton_6">
+                  <property name="text">
+                   <string>deal6</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_3">
+               <property name="title">
+                <string>Duration</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_5">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_14">
+                  <property name="text">
+                   <string>Total :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="5">
+                 <widget class="QLabel" name="label_16">
+                  <property name="text">
+                   <string>End to :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QLabel" name="label_15">
+                  <property name="text">
+                   <string>Start from :</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QTimeEdit" name="timeEdit_10"/>
+                </item>
+                <item row="0" column="6">
+                 <widget class="QTimeEdit" name="timeEdit_12"/>
+                </item>
+                <item row="0" column="4">
+                 <widget class="QTimeEdit" name="timeEdit_11"/>
+                </item>
+                <item row="0" column="2">
+                 <widget class="Line" name="line">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="title">
+              <string>Description</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <widget class="QPlainTextEdit" name="plainTextEdit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_10">
+          <property name="title">
+           <string>Last Time</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
-            <widget class="QRadioButton" name="radioButton">
-             <property name="text">
-              <string>deal1</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="radioButton_2">
-             <property name="text">
-              <string>deal2</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="radioButton_3">
-             <property name="text">
-              <string>deal3</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="radioButton_4">
-             <property name="text">
-              <string>deal4</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="radioButton_5">
-             <property name="text">
-              <string>deal5</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="radioButton_6">
-             <property name="text">
-              <string>deal6</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="title">
-           <string>Duration</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_5">
-           <item row="1" column="0" colspan="2">
-            <widget class="Line" name="line">
+            <spacer name="verticalSpacer_5">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Vertical</enum>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QTimeEdit" name="timeEdit_11"/>
-           </item>
-           <item row="0" column="1">
-            <widget class="QTimeEdit" name="timeEdit_10"/>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_16">
-             <property name="text">
-              <string>End to :</string>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>90</height>
+              </size>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_15">
-             <property name="text">
-              <string>Start from :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_14">
-             <property name="text">
-              <string>Total :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QTimeEdit" name="timeEdit_12"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QGroupBox" name="groupBox_5">
-          <property name="title">
-           <string>Description</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QTextBrowser" name="textBrowser"/>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -902,11 +919,25 @@
         <string>Calendar</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0" rowspan="2">
+         <widget class="QCalendarWidget" name="calendarWidget"/>
+        </item>
         <item row="0" column="1">
          <widget class="QGroupBox" name="groupBox">
           <property name="title">
            <string>Holidays</string>
           </property>
+          <layout class="QFormLayout" name="formLayout_5">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
+           <item row="0" column="0">
+            <widget class="QDateEdit" name="dateEdit_2"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPlainTextEdit" name="plainTextEdit_3"/>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="1" column="1">
@@ -914,10 +945,52 @@
           <property name="title">
            <string>Deal</string>
           </property>
+          <layout class="QFormLayout" name="formLayout_6">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_26">
+             <property name="text">
+              <string>Date :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDateEdit" name="dateEdit_3"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_27">
+             <property name="text">
+              <string>Money :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="spinBox_5"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_28">
+             <property name="text">
+              <string>Humans :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEdit_2"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_29">
+             <property name="text">
+              <string>DeadLine :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPlainTextEdit" name="plainTextEdit_4"/>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item row="0" column="0" rowspan="2">
-         <widget class="QCalendarWidget" name="calendarWidget"/>
         </item>
        </layout>
       </widget>
@@ -1017,12 +1090,36 @@
              <property name="readOnly">
               <bool>true</bool>
              </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
             </widget>
            </item>
            <item row="6" column="1">
             <widget class="QSpinBox" name="sbTodayIncome">
              <property name="readOnly">
               <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
              </property>
             </widget>
            </item>
@@ -1031,12 +1128,36 @@
              <property name="readOnly">
               <bool>true</bool>
              </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
             </widget>
            </item>
            <item row="8" column="1">
             <widget class="QSpinBox" name="sbCurrentAmountOfFunds">
              <property name="readOnly">
               <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
              </property>
             </widget>
            </item>
@@ -1045,12 +1166,36 @@
              <property name="readOnly">
               <bool>true</bool>
              </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
             </widget>
            </item>
            <item row="10" column="1">
             <widget class="QSpinBox" name="sbCurrentDebet">
              <property name="readOnly">
               <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
              </property>
             </widget>
            </item>
@@ -1059,12 +1204,36 @@
              <property name="readOnly">
               <bool>true</bool>
              </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
             </widget>
            </item>
            <item row="4" column="1">
             <widget class="QSpinBox" name="sbLastIncome">
              <property name="readOnly">
               <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
              </property>
             </widget>
            </item>
@@ -1073,6 +1242,18 @@
              <property name="readOnly">
               <bool>true</bool>
              </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
             </widget>
            </item>
            <item row="2" column="1">
@@ -1080,12 +1261,36 @@
              <property name="readOnly">
               <bool>true</bool>
              </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
             </widget>
            </item>
            <item row="1" column="1">
             <widget class="QSpinBox" name="sbMaxIncomePerDay">
              <property name="readOnly">
               <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
              </property>
             </widget>
            </item>
@@ -1098,6 +1303,9 @@
            <string>Time</string>
           </property>
           <layout class="QFormLayout" name="formLayout_3">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
            <item row="0" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
@@ -1107,6 +1315,12 @@
            </item>
            <item row="0" column="1">
             <widget class="QTimeEdit" name="timeEdit">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1121,6 +1335,12 @@
            </item>
            <item row="1" column="1">
             <widget class="QTimeEdit" name="timeEdit_2">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1135,6 +1355,12 @@
            </item>
            <item row="2" column="1">
             <widget class="QTimeEdit" name="timeEdit_3">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1149,6 +1375,12 @@
            </item>
            <item row="3" column="1">
             <widget class="QTimeEdit" name="timeEdit_4">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1163,6 +1395,12 @@
            </item>
            <item row="4" column="1">
             <widget class="QTimeEdit" name="timeEdit_5">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1177,6 +1415,12 @@
            </item>
            <item row="5" column="1">
             <widget class="QTimeEdit" name="timeEdit_6">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1191,6 +1435,12 @@
            </item>
            <item row="6" column="1">
             <widget class="QTimeEdit" name="timeEdit_7">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1205,6 +1455,12 @@
            </item>
            <item row="7" column="1">
             <widget class="QTimeEdit" name="timeEdit_8">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1219,6 +1475,12 @@
            </item>
            <item row="8" column="1">
             <widget class="QTimeEdit" name="timeEdit_9">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
              <property name="displayFormat">
               <string>hh:mm:ss</string>
              </property>
@@ -1233,6 +1495,116 @@
        <attribute name="title">
         <string>Notes</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox_8">
+          <property name="title">
+           <string>New Note</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_4">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_21">
+             <property name="text">
+              <string>Time :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QTimeEdit" name="timeEdit_13"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_22">
+             <property name="text">
+              <string>DeadLine :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>Money :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spinBox_4"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_24">
+             <property name="text">
+              <string>Humans :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEdit"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_25">
+             <property name="text">
+              <string>Description :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>Add</string>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/newContact</normaloff>:/newContact</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_9">
+          <property name="title">
+           <string>Last Notes</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>32</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QListWidget" name="listWidget"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -1243,7 +1615,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>804</width>
      <height>21</height>
     </rect>
    </property>
@@ -1284,7 +1656,38 @@
    <addaction name="separator"/>
    <addaction name="actionEdit_Contact"/>
   </widget>
+  <widget class="QToolBar" name="toolBar_3">
+   <property name="windowTitle">
+    <string>toolBar_3</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionToday"/>
+   <addaction name="actionAddHoliday"/>
+   <addaction name="actionAddTask"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_4">
+   <property name="windowTitle">
+    <string>toolBar_4</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAdd_Account"/>
+   <addaction name="actionAdd_Transaction"/>
+  </widget>
   <action name="actionChooseDatabase">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/loadContactList</normaloff>:/loadContactList</iconset>
+   </property>
    <property name="text">
     <string>Choose Database</string>
    </property>
@@ -1293,6 +1696,10 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/save</normaloff>:/save</iconset>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
@@ -1301,6 +1708,10 @@
    </property>
   </action>
   <action name="actionSaveAs">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/save</normaloff>:/save</iconset>
+   </property>
    <property name="text">
     <string>SaveAs</string>
    </property>
@@ -1309,6 +1720,10 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/exit</normaloff>:/exit</iconset>
+   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -1317,6 +1732,10 @@
    </property>
   </action>
   <action name="actionAdd_Contact">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/newContact</normaloff>:/newContact</iconset>
+   </property>
    <property name="text">
     <string>Add Contact</string>
    </property>
@@ -1325,6 +1744,10 @@
    </property>
   </action>
   <action name="actionLoad_Contact">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/loadContact</normaloff>:/loadContact</iconset>
+   </property>
    <property name="text">
     <string>Load Contact</string>
    </property>
@@ -1333,6 +1756,10 @@
    </property>
   </action>
   <action name="actionSave_Contact">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/save</normaloff>:/save</iconset>
+   </property>
    <property name="text">
     <string>Save Contact</string>
    </property>
@@ -1341,6 +1768,10 @@
    </property>
   </action>
   <action name="actionDelete_Contact">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/deleteContact</normaloff>:/deleteContact</iconset>
+   </property>
    <property name="text">
     <string>Delete Contact</string>
    </property>
@@ -1349,6 +1780,10 @@
    </property>
   </action>
   <action name="actionEdit_Contact">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/editContact</normaloff>:/editContact</iconset>
+   </property>
    <property name="text">
     <string>Edit Contact</string>
    </property>
@@ -1357,6 +1792,10 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/about</normaloff>:/about</iconset>
+   </property>
    <property name="text">
     <string>About</string>
    </property>
@@ -1365,6 +1804,10 @@
    </property>
   </action>
   <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/settings</normaloff>:/settings</iconset>
+   </property>
    <property name="text">
     <string>Settings</string>
    </property>
@@ -1372,7 +1815,49 @@
     <string>Settings</string>
    </property>
   </action>
+  <action name="actionToday">
+   <property name="text">
+    <string>Today</string>
+   </property>
+   <property name="toolTip">
+    <string>Today</string>
+   </property>
+  </action>
+  <action name="actionAddHoliday">
+   <property name="text">
+    <string>Add Holiday</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Holiday</string>
+   </property>
+  </action>
+  <action name="actionAddTask">
+   <property name="text">
+    <string>Add Task</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Task</string>
+   </property>
+  </action>
+  <action name="actionAdd_Account">
+   <property name="text">
+    <string>Add Account</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Account</string>
+   </property>
+  </action>
+  <action name="actionAdd_Transaction">
+   <property name="text">
+    <string>Add Transaction</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Transaction</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

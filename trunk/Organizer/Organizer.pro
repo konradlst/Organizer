@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Сoncierge
+TARGET = Organizer
 TEMPLATE = app
 
 
@@ -22,3 +22,6 @@ HEADERS  += \
 
 FORMS    += \
     ConciergeView.ui
+
+RESOURCES += \
+    res.qrc
