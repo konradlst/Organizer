@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ConciergeView</class>
- <widget class="QMainWindow" name="ConciergeView">
+ <class>OrganizerView</class>
+ <widget class="QMainWindow" name="OrganizerView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">

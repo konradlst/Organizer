@@ -2,37 +2,43 @@
 #define DRIVERSQLITE_H
 
 #include <QObject>
+#include "OrganizerConst.h"
+
 class QSqlDatabase;
 
 class DriverSqlite : public QObject
 {
     Q_OBJECT
 public:
-    typedef QList<QString> cgRecord;
-    typedef QList<cgRecord> cgTable;
-    typedef QList<cgTable> cgScheme;
     explicit DriverSqlite(QObject *parent = 0);
-    //! Запрашивает список финансовых операций в заданную дату \param date.
-    cgTable* getFinanceLog(const QDate &date) const;
-    //! Запрашивает на что было затраченно время в заданную дату \param date.
-    cgTable* getTimeLog(const QDate &date) const;
-    //! Запрашивает данные о физических тренировках в заданную дату \param date.
-    cgRecord* getSportLog(const QDate &date) const;
-    //! Запрашивает список дел на заданную дату \param date.
-    cgTable* getToDoList(const QDate &date) const;
-    //! Запрашивает список контактов.
-    cgTable* getContactList();
 
-    //! Добавляет новую финансовую операцию \param record.
-    void addTransaction(const cgRecord &record);
-    //! Добавляет новую запись о потраченном времени \param record.
-    void addTimeRecord(const cgRecord &record);
-    //! Добавляет новую запись о физических тренировках \param record.
-    void addSportRecord(const cgRecord &record);
-    //! Добавляет запись о новом деле \param record.
-    void addDeal(const cgRecord &record);
-    //! Добавляет запись о новом контакте.
-    void addContact();
+    //! Запрашивает список контактов.
+    Data::Table *contacts() const;
+    //! Запрашивает контакт по его \alias прозвищу.
+    Data::Record* contact(const QString &alias) const;
+    //! Запрашивает список счетов.
+    Data::Table *financeAccounts() const;
+    //! Запрашивает список транзакций в указанную дату \param date.
+    Data::Table *financeTransaction(const QDate &date) const;
+    //! Запрашивает список временных расходов в указанную дату \param date.
+    Data::Table *timeLine(const QDate &date) const;
+    //! Запрашивает список дел в указанную дату \param date.
+    Data::Table *deals(const QDate &date) const;
+    //! Запрашивает список заметок по заданными параметрам \param params.
+    Data::Table *notes(const QStringList &params) const;
+
+    //! Добавляет новый счет \param record.
+    void addAccount(const Data::Record &record);
+    //! Добавляет новую транзакцию \param record.
+    void addTransaction(const Data::Record &record);
+    //! Добавляет новую запись о времени \param record.
+    void addTimeRecord(const Data::Record &record);
+    //! Добавляет новое дело \param record.
+    void addDeal(const Data::Record &record);
+    //! Добавляет новый контакт.
+    void addContact(const Data::Record &record);
+    //! Добавляет новую заметку.
+    void addNote(const Data::Record &record);
 
 private:
     QSqlDatabase *m_db;

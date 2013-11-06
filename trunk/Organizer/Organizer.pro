@@ -4,24 +4,28 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Organizer
 TEMPLATE = app
-
+INCLUDEPATH += "../Common/"
 
 SOURCES += main.cpp \
-    ConciergeView.cpp \
+    OrganizerView.cpp \
     ../Common/drivers/driverSqlite.cpp
 
 HEADERS  += \
-    ConciergeView.h \
-    ../Common/drivers/driverSqlite.h
+    OrganizerView.h \
+    ../Common/drivers/driverSqlite.h \
+    OrganizerConst.h
 
 FORMS    += \
-    ConciergeView.ui
+    OrganizerView.ui
 
 RESOURCES += \
     res.qrc
+
+OTHER_FILES += \
+    ../Common/metascheme.xml

@@ -44,5 +44,4 @@ HEADERS  += \
     ../Common/cgMetaschemeConst.h
 
 OTHER_FILES += \
-    metascheme.xml \
     ../Common/metascheme.xml

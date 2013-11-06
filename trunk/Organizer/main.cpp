@@ -1,6 +1,6 @@
 ﻿#include <QApplication>
 #include <QTextCodec>
-#include "conciergeView.h"
+#include "OrganizerView.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     a.setOrganizationDomain("a.batyaev@gmail.com");
     a.setOrganizationName("Anton Batyaev");
 
-    ConciergeView w;
+    OrganizerView w;
     w.show();
     
     return a.exec();

@@ -1,6 +1,6 @@
 ﻿#include <QTableWidget>
-#include "ConciergeView.h"
-#include "ui_ConciergeView.h"
+#include "OrganizerView.h"
+#include "ui_OrganizerView.h"
 
 namespace
 {
@@ -15,20 +15,20 @@ const QStringList ThreeDayNames = QObject::trUtf8("Yesterday;Today;Tomorrow").sp
 const QStringList DayOfWeek = QObject::trUtf8("Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday").split(Separator);
 }
 
-ConciergeView::ConciergeView(QWidget *parent)
+OrganizerView::OrganizerView(QWidget *parent)
     : QMainWindow(parent),
-      ui(new Ui::ConciergeView)
+      ui(new Ui::OrganizerView)
 {
     createInterface();
     connect(ui->actionToday, SIGNAL(triggered()), this, SLOT(setToday()));
 }
 
-ConciergeView::~ConciergeView()
+OrganizerView::~OrganizerView()
 {
     delete ui;
 }
 
-void ConciergeView::setToday()
+void OrganizerView::setToday()
 {
     int time = QTime::currentTime().hour() * 2;
     if (QTime::currentTime().minute() > 30)
@@ -50,7 +50,7 @@ void ConciergeView::setToday()
     }
 }
 
-void ConciergeView::createInterface()
+void OrganizerView::createInterface()
 {
     ui->setupUi(this);
     ui->comboBox->addItems(FinanceOperation);
@@ -72,7 +72,7 @@ void ConciergeView::createInterface()
     ui->todayCalendar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
-void ConciergeView::initTimeList(QStringList &list)
+void OrganizerView::initTimeList(QStringList &list)
 {
     static const QString TimePattern = "hh:mm";
 

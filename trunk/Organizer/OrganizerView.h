@@ -4,22 +4,22 @@
 #include <QMainWindow>
 
 namespace Ui {
-class ConciergeView;
+class OrganizerView;
 }
 
-class ConciergeView : public QMainWindow
+class OrganizerView : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit ConciergeView(QWidget *parent = 0);
-    ~ConciergeView();
+    explicit OrganizerView(QWidget *parent = 0);
+    ~OrganizerView();
 
 private slots:
     void setToday();
 
 private:
-    Ui::ConciergeView *ui;
+    Ui::OrganizerView *ui;
 
 private:
     void createInterface();
