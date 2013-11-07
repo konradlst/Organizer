@@ -1,4 +1,5 @@
 ﻿#include <QSqlQuery>
+#include <QStringList>
 #include "driverSqlite.h"
 
 namespace
@@ -16,6 +17,9 @@ const QString Transactions = "CG_FINANCELOG";
 const QString TimeLine = "CG_TIME";
 const QString Books = "CG_BOOK";
 const QString Dealss = "CG_DEAL";
+
+const QString ConnectionName = "SqliteDriverConnection";
+const QString QSqlite = "QSQLITE";
 }
 
 DriverSqlite::DriverSqlite(QObject *parent)
@@ -74,11 +78,13 @@ Data::Table *DriverSqlite::notes(const QStringList &params) const
 
 void DriverSqlite::addAccount(const Data::Record &record)
 {
+    openDb();
     //FIXME :
 }
 
 void DriverSqlite::addTransaction(const Data::Record &record)
 {
+    openDb();
     //FIXME :
 }
 
@@ -89,15 +95,32 @@ void DriverSqlite::addTimeRecord(const Data::Record &record)
 
 void DriverSqlite::addDeal(const Data::Record &record)
 {
+    openDb();
     //FIXME :
 }
 
 void DriverSqlite::addContact(const Data::Record &record)
 {
+    openDb();
     //FIXME :
 }
 
 void DriverSqlite::addNote(const Data::Record &record)
 {
+    openDb();
     //FIXME :
+}
+
+bool DriverSqlite::openDb()
+{
+    if (QSqlDatabase::connectionNames().contains(ConnectionName))
+        m_db = QSqlDatabase::database(ConnectionName);
+    else
+        m_db = QSqlDatabase::addDatabase(QSqlite, ConnectionName);
+    m_db.setDatabaseName(m_pathToDb);
+    if (!m_db.open())
+    {
+//        ERROR_CANNOT_OPEN;
+        return false;
+    }
 }

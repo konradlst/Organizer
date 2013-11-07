@@ -2,9 +2,8 @@
 #define DRIVERSQLITE_H
 
 #include <QObject>
+#include <QSqlDatabase>
 #include "OrganizerConst.h"
-
-class QSqlDatabase;
 
 class DriverSqlite : public QObject
 {
@@ -41,7 +40,11 @@ public:
     void addNote(const Data::Record &record);
 
 private:
-    QSqlDatabase *m_db;
+    QSqlDatabase m_db;
+    QString m_pathToDb;
+
+private:
+    bool openDb();
 };
 
 #endif // DRIVERSQLITE_H
