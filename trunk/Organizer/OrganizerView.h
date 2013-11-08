@@ -17,6 +17,8 @@ public:
 
 private slots:
     void setToday();
+    void timeDialog();
+    void noteDialog();
 
 private:
     Ui::OrganizerView *ui;

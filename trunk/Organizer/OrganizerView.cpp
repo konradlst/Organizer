@@ -1,6 +1,7 @@
 ﻿#include <QTableWidget>
 #include "OrganizerView.h"
 #include "ui_OrganizerView.h"
+#include "Dialog.h"
 
 namespace
 {
@@ -21,6 +22,8 @@ OrganizerView::OrganizerView(QWidget *parent)
 {
     createInterface();
     connect(ui->actionToday, SIGNAL(triggered()), this, SLOT(setToday()));
+    connect(ui->actionAdd_Time, SIGNAL(triggered()), this, SLOT(timeDialog()));
+    connect(ui->actionAdd_Note, SIGNAL(triggered()), this, SLOT(noteDialog()));
 }
 
 OrganizerView::~OrganizerView()
@@ -48,6 +51,20 @@ void OrganizerView::setToday()
     case Mounth:
         ui->mounthCalendar->setSelectedDate(QDate::currentDate());
     }
+}
+
+void OrganizerView::timeDialog()
+{
+    ui->tabWidget->setCurrentIndex(2);
+    TimeDialog *d = new TimeDialog();
+    d->show();
+}
+
+void OrganizerView::noteDialog()
+{
+    ui->tabWidget->setCurrentIndex(5);
+    NoteDialog *d = new NoteDialog();
+    d->show();
 }
 
 void OrganizerView::createInterface()
