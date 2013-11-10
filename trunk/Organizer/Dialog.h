@@ -10,11 +10,18 @@ public:
     explicit TimeDialog(QWidget *parent = 0);
 };
 
-class NoteDialog : public QDialog
+class DealDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit NoteDialog(QWidget *parent = 0);
+    explicit DealDialog(QWidget *parent = 0);
+};
+
+class AccountDialog : public QDialog
+{
+    Q_OBJECT
+public:
+    explicit AccountDialog(QWidget *parent = 0);
 };
 
 #endif // DIALOG_H

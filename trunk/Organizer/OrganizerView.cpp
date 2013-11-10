@@ -6,6 +6,7 @@
 namespace
 {
 enum Calendars { Today = 0, ThreeDay, Week, Mounth };
+enum Tabs { ContactsTab, FinanceTab, TimeTab, CalendarTab, StatisticTab, NoteTab };
 
 const QChar Separator = ';';
 const QStringList TimeType = QString("sleep;work;travel;study;sport;read").split(Separator);
@@ -24,6 +25,7 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionToday, SIGNAL(triggered()), this, SLOT(setToday()));
     connect(ui->actionAdd_Time, SIGNAL(triggered()), this, SLOT(timeDialog()));
     connect(ui->actionAdd_Note, SIGNAL(triggered()), this, SLOT(noteDialog()));
+    connect(ui->actionAdd_Account, SIGNAL(triggered()), this, SLOT(accountDialog()));
 }
 
 OrganizerView::~OrganizerView()
@@ -55,15 +57,22 @@ void OrganizerView::setToday()
 
 void OrganizerView::timeDialog()
 {
-    ui->tabWidget->setCurrentIndex(2);
+    ui->tabWidget->setCurrentIndex(TimeTab);
     TimeDialog *d = new TimeDialog();
     d->show();
 }
 
 void OrganizerView::noteDialog()
 {
-    ui->tabWidget->setCurrentIndex(5);
-    NoteDialog *d = new NoteDialog();
+    ui->tabWidget->setCurrentIndex(NoteTab);
+    DealDialog *d = new DealDialog();
+    d->show();
+}
+
+void OrganizerView::accountDialog()
+{
+    ui->tabWidget->setCurrentIndex(FinanceTab);
+    AccountDialog *d = new AccountDialog();
     d->show();
 }
 
