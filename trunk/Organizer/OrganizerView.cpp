@@ -26,6 +26,7 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionAdd_Time, SIGNAL(triggered()), this, SLOT(timeDialog()));
     connect(ui->actionAdd_Note, SIGNAL(triggered()), this, SLOT(noteDialog()));
     connect(ui->actionAdd_Account, SIGNAL(triggered()), this, SLOT(accountDialog()));
+    connect(ui->actionAdd_Transaction, SIGNAL(triggered()), this, SLOT(transactionDialog()));
 }
 
 OrganizerView::~OrganizerView()
@@ -73,6 +74,13 @@ void OrganizerView::accountDialog()
 {
     ui->tabWidget->setCurrentIndex(FinanceTab);
     AccountDialog *d = new AccountDialog();
+    d->show();
+}
+
+void OrganizerView::transactionDialog()
+{
+    ui->tabWidget->setCurrentIndex(FinanceTab);
+    TransactionDialog *d = new TransactionDialog();
     d->show();
 }
 

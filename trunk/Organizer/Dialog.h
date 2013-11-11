@@ -24,4 +24,11 @@ public:
     explicit AccountDialog(QWidget *parent = 0);
 };
 
+class TransactionDialog : public QDialog
+{
+    Q_OBJECT
+public:
+    explicit TransactionDialog(QWidget *parent = 0);
+};
+
 #endif // DIALOG_H

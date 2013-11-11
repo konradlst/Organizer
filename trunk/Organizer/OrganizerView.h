@@ -20,6 +20,7 @@ private slots:
     void timeDialog();
     void noteDialog();
     void accountDialog();
+    void transactionDialog();
 
 private:
     Ui::OrganizerView *ui;
