@@ -31,35 +31,29 @@ const QString Total = QObject::trUtf8("Total :");
 }
 
 TimeDialog::TimeDialog(QWidget *parent)
-    : QDialog(parent)
+    : Dialog(parent)
 {
     setWindowTitle(TimeTitle);
 
-    QPushButton *ok = new QPushButton(Ok);
-    QFormLayout *mLay = new QFormLayout();
     QComboBox *type = new QComboBox();
     QTimeEdit *duration = new QTimeEdit();
     QTimeEdit *started = new QTimeEdit();
     QTimeEdit *stoped = new QTimeEdit();
     QPlainTextEdit *description = new QPlainTextEdit();
 
-    mLay->addRow(Type, type);
-    mLay->addRow(Duration, duration);
-    mLay->addRow(Started, started);
-    mLay->addRow(Stoped, stoped);
-    mLay->addRow(Description, description);
-    mLay->addWidget(ok);
-
-    setLayout(mLay);
+    m_lay->addRow(Type, type);
+    m_lay->addRow(Duration, duration);
+    m_lay->addRow(Started, started);
+    m_lay->addRow(Stoped, stoped);
+    m_lay->addRow(Description, description);
+    m_lay->addWidget(m_ok);
 }
 
 DealDialog::DealDialog(QWidget *parent)
-    : QDialog(parent)
+    : Dialog(parent)
 {
     setWindowTitle(DealTitle);
 
-    QPushButton *ok = new QPushButton(Ok);
-    QFormLayout *mLay = new QFormLayout();
     QComboBox *type = new QComboBox();
     QDateEdit *date = new QDateEdit();
     QTimeEdit *duration = new QTimeEdit();
@@ -68,26 +62,22 @@ DealDialog::DealDialog(QWidget *parent)
     QLineEdit *humans = new QLineEdit();
     QPlainTextEdit *description = new QPlainTextEdit();
 
-    mLay->addRow(Type, type);
-    mLay->addRow(Date, date);
-    mLay->addRow(Duration, duration);
-    mLay->addRow(DeadLine, deadLine);
-    mLay->addRow(Money, money);
-    mLay->addRow(Humans, humans);
-    mLay->addRow(Description, description);
-    mLay->addWidget(ok);
-
-    setLayout(mLay);
+    m_lay->addRow(Type, type);
+    m_lay->addRow(Date, date);
+    m_lay->addRow(Duration, duration);
+    m_lay->addRow(DeadLine, deadLine);
+    m_lay->addRow(Money, money);
+    m_lay->addRow(Humans, humans);
+    m_lay->addRow(Description, description);
+    m_lay->addWidget(m_ok);
 }
 
 
 AccountDialog::AccountDialog(QWidget *parent)
-    : QDialog(parent)
+    : Dialog(parent)
 {
     setWindowTitle(AccountTitle);
 
-    QPushButton *ok = new QPushButton(Ok);
-    QFormLayout *mLay = new QFormLayout();
     QComboBox *type = new QComboBox();
     QDateEdit *created = new QDateEdit();
     QLineEdit *name = new QLineEdit();
@@ -95,36 +85,39 @@ AccountDialog::AccountDialog(QWidget *parent)
     QSpinBox *total = new QSpinBox();
     QPlainTextEdit *description = new QPlainTextEdit();
 
-    mLay->addRow(Type, type);
-    mLay->addRow(Created, created);
-    mLay->addRow(Name, name);
-    mLay->addRow(Value, value);
-    mLay->addRow(Total, total);
-    mLay->addRow(Description, description);
-    mLay->addWidget(ok);
-
-    setLayout(mLay);
+    m_lay->addRow(Type, type);
+    m_lay->addRow(Created, created);
+    m_lay->addRow(Name, name);
+    m_lay->addRow(Value, value);
+    m_lay->addRow(Total, total);
+    m_lay->addRow(Description, description);
+    m_lay->addWidget(m_ok);
 }
 
 TransactionDialog::TransactionDialog(QWidget *parent)
-    : QDialog(parent)
+    : Dialog(parent)
 {
     setWindowTitle(TransactionTitle);
 
-    QPushButton *ok = new QPushButton(Ok);
-    QFormLayout *mLay = new QFormLayout();
     QComboBox *type = new QComboBox();
     QDateEdit *created = new QDateEdit();
     QLineEdit *name = new QLineEdit();
     QSpinBox *value = new QSpinBox();
     QPlainTextEdit *description = new QPlainTextEdit();
 
-    mLay->addRow(Type, type);
-    mLay->addRow(Created, created);
-    mLay->addRow(Name, name);
-    mLay->addRow(Value, value);
-    mLay->addRow(Description, description);
-    mLay->addWidget(ok);
+    m_lay->addRow(Type, type);
+    m_lay->addRow(Created, created);
+    m_lay->addRow(Name, name);
+    m_lay->addRow(Value, value);
+    m_lay->addRow(Description, description);
+    m_lay->addWidget(m_ok);
+}
 
-    setLayout(mLay);
+
+Dialog::Dialog(QWidget *parent)
+    : QDialog(parent),
+      m_ok(new QPushButton(Ok)),
+      m_lay(new QFormLayout())
+{
+    setLayout(m_lay);
 }
