@@ -15,13 +15,17 @@ INCLUDEPATH += "../Common/"
 SOURCES += main.cpp \
     OrganizerView.cpp \
     ../Common/drivers/driverSqlite.cpp \
-    Dialog.cpp
+    Dialog.cpp \
+    Views/accountView.cpp \
+    Views/transactionView.cpp
 
 HEADERS  += \
     OrganizerView.h \
     ../Common/drivers/driverSqlite.h \
     OrganizerConst.h \
-    Dialog.h
+    Dialog.h \
+    Views/accountView.h \
+    Views/transactionView.h
 
 FORMS    += \
     OrganizerView.ui

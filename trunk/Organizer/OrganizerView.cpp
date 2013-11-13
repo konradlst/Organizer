@@ -10,8 +10,6 @@ enum Tabs { ContactsTab, FinanceTab, TimeTab, CalendarTab, StatisticTab, NoteTab
 
 const QChar Separator = ';';
 const QStringList TimeType = QString("sleep;work;travel;study;sport;read").split(Separator);
-const QStringList FinanceOperation = QObject::trUtf8("debet;credit;transfer").split(Separator);
-const QStringList Accounts = QObject::trUtf8("cash;card;deposit").split(Separator);
 const QStringList TodayName = QObject::trUtf8("Today").split(Separator);
 const QStringList ThreeDayNames = QObject::trUtf8("Yesterday;Today;Tomorrow").split(Separator);
 const QStringList DayOfWeek = QObject::trUtf8("Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday").split(Separator);
@@ -87,8 +85,6 @@ void OrganizerView::transactionDialog()
 void OrganizerView::createInterface()
 {
     ui->setupUi(this);
-    ui->comboBox->addItems(FinanceOperation);
-    ui->comboBox_2->addItems(Accounts);
 
     QStringList timeList;
     initTimeList(timeList);

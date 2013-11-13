@@ -119,8 +119,5 @@ bool DriverSqlite::openDb()
         m_db = QSqlDatabase::addDatabase(QSqlite, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
     if (!m_db.open())
-    {
-//        ERROR_CANNOT_OPEN;
         return false;
-    }
 }
