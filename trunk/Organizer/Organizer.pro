@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     ../Common/drivers/driverSqlite.cpp \
     Dialog.cpp \
     Views/accountView.cpp \
-    Views/transactionView.cpp
+    Views/transactionView.cpp \
+    Views/timeView.cpp
 
 HEADERS  += \
     OrganizerView.h \
@@ -25,7 +26,8 @@ HEADERS  += \
     OrganizerConst.h \
     Dialog.h \
     Views/accountView.h \
-    Views/transactionView.h
+    Views/transactionView.h \
+    Views/timeView.h
 
 FORMS    += \
     OrganizerView.ui
