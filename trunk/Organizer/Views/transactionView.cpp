@@ -22,6 +22,7 @@ TransactionView::TransactionView(QWidget *parent)
     m_value->setMaximum(999999);
     m_value->setMaximum(-999999);
     m_value->setSuffix(" rub.");
+    m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
     m_delete->setIcon(QIcon(":/deleteContact"));
 

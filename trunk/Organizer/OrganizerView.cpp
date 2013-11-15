@@ -86,6 +86,16 @@ void OrganizerView::createInterface()
 {
     ui->setupUi(this);
 
+    ui->dateViewEvents->calendarPopup(false);
+    ui->tblCalendar1_3->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar4_6->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar7_9->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar10_12->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar1_3->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar4_6->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar7_9->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblCalendar10_12->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     QStringList timeList;
     initTimeList(timeList);
 

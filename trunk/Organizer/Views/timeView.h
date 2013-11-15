@@ -8,6 +8,8 @@ class QTimeEdit;
 class QLineEdit;
 class QPushButton;
 
+//! \class TimeView
+//! \brief Класс-представление записи о времени.
 class TimeView : public QWidget
 {
     Q_OBJECT
@@ -24,7 +26,6 @@ private:
     QTimeEdit *m_duration;
     QLineEdit *m_comment;
     QPushButton *m_delete;
-
 };
 
 #endif // TIMEVIEW_H

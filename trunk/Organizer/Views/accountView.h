@@ -8,6 +8,8 @@ class QComboBox;
 class QPushButton;
 class QProgressBar;
 
+//! \class AccountView
+//! \brief Класс-представление счета.
 class AccountView : public QWidget
 {
     Q_OBJECT

@@ -10,6 +10,7 @@ namespace
 {
 const QChar Separator = ';';
 const QStringList TimeType = QString("sleep;work;travel;study;sport;read").split(Separator);
+const QString CommentPlaceholder = QObject::trUtf8("Time description (comment)");
 
 QWidget *vLine()
 {
@@ -30,6 +31,8 @@ TimeView::TimeView(QWidget *parent)
       m_delete(new  QPushButton)
 {
     m_type->addItems(TimeType);
+    m_comment->setPlaceholderText(CommentPlaceholder);
+    m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
     m_delete->setIcon(QIcon(":/deleteContact"));
 
@@ -37,7 +40,6 @@ TimeView::TimeView(QWidget *parent)
     m_start->setTime(QTime(7, 15));
     m_stop->setTime(QTime(21, 30));
     m_duration->setTime(QTime(14, 15));
-    m_comment->setText("Test Transaction");
     //end test
 
     QHBoxLayout *lay = new QHBoxLayout();

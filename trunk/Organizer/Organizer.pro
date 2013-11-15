@@ -18,7 +18,9 @@ SOURCES += main.cpp \
     Dialog.cpp \
     Views/accountView.cpp \
     Views/transactionView.cpp \
-    Views/timeView.cpp
+    Views/timeView.cpp \
+    Views/dealView.cpp \
+    Views/dateView.cpp
 
 HEADERS  += \
     OrganizerView.h \
@@ -27,7 +29,9 @@ HEADERS  += \
     Dialog.h \
     Views/accountView.h \
     Views/transactionView.h \
-    Views/timeView.h
+    Views/timeView.h \
+    Views/dealView.h \
+    Views/dateView.h
 
 FORMS    += \
     OrganizerView.ui

@@ -8,6 +8,8 @@ class QComboBox;
 class QPushButton;
 class QSpinBox;
 
+//! \class TimeView
+//! \brief Класс-представление записи о финансовой транзакции.
 class TransactionView : public QWidget
 {
     Q_OBJECT
