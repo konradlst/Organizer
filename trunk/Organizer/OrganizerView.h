@@ -18,7 +18,7 @@ public:
 private slots:
     void setToday();
     void timeDialog();
-    void noteDialog();
+    void dealDialog();
     void accountDialog();
     void transactionDialog();
 

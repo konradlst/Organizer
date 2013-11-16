@@ -23,14 +23,14 @@
    <iconset resource="res.qrc">
     <normaloff>:/app_pic</normaloff>:/app_pic</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
-      <widget class="QSplitter" name="tab">
+      <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -48,7 +48,7 @@
        <widget class="QWidget" name="ContactWidget" native="true">
         <layout class="QVBoxLayout" name="vLayContact">
          <item>
-          <layout class="QGridLayout" name="MainData">
+          <layout class="QGridLayout" name="MainContactData">
            <property name="leftMargin">
             <number>5</number>
            </property>
@@ -68,7 +68,7 @@
             <number>0</number>
            </property>
            <item row="0" column="0" rowspan="5">
-            <widget class="QLabel" name="lbUserPic">
+            <widget class="QLabel" name="lblUserPic">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -106,7 +106,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLabel" name="lbAlias">
+            <widget class="QLabel" name="lblAlias">
              <property name="text">
               <string>Alias:</string>
              </property>
@@ -123,7 +123,7 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLabel" name="lbOtherName">
+            <widget class="QLabel" name="lblOtherName">
              <property name="text">
               <string>OtherName:</string>
              </property>
@@ -140,7 +140,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="lbName">
+            <widget class="QLabel" name="lblName">
              <property name="text">
               <string>Name:</string>
              </property>
@@ -150,7 +150,7 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QLabel" name="lbBirthday">
+            <widget class="QLabel" name="lblBirthday">
              <property name="text">
               <string>Birthday:</string>
              </property>
@@ -209,7 +209,7 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLabel" name="lbLastName">
+            <widget class="QLabel" name="lblLastName">
              <property name="text">
               <string>LastName:</string>
              </property>
@@ -221,7 +221,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTabWidget" name="DetailData">
+          <widget class="QTabWidget" name="DetailContactData">
            <property name="currentIndex">
             <number>0</number>
            </property>
@@ -231,7 +231,7 @@
             </attribute>
             <layout class="QGridLayout" name="gridLayout_2">
              <item row="5" column="0" colspan="3">
-              <spacer name="vSpacer">
+              <spacer name="vSpacerChannels">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -247,7 +247,7 @@
               <widget class="QLineEdit" name="leEmail"/>
              </item>
              <item row="1" column="2">
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="lblEditEmail">
                <property name="text">
                 <string/>
                </property>
@@ -267,7 +267,7 @@
               </widget>
              </item>
              <item row="2" column="2">
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="lblEditSkype">
                <property name="text">
                 <string/>
                </property>
@@ -290,7 +290,7 @@
               </widget>
              </item>
              <item row="4" column="0" colspan="3">
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="pbAddChannels">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -323,7 +323,7 @@
               </widget>
              </item>
              <item row="0" column="2">
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="lblEditPhone">
                <property name="text">
                 <string/>
                </property>
@@ -333,7 +333,7 @@
               </widget>
              </item>
              <item row="3" column="2">
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="lblEditSite">
                <property name="text">
                 <string/>
                </property>
@@ -372,7 +372,7 @@
               <widget class="QLineEdit" name="leCity"/>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="lbCountry">
+              <widget class="QLabel" name="lblCountry">
                <property name="text">
                 <string>Country:</string>
                </property>
@@ -382,7 +382,7 @@
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="lbCity">
+              <widget class="QLabel" name="lblCity">
                <property name="text">
                 <string>City:</string>
                </property>
@@ -398,7 +398,7 @@
               <widget class="QLineEdit" name="leHome"/>
              </item>
              <item row="4" column="0">
-              <widget class="QLabel" name="lbHome">
+              <widget class="QLabel" name="lblHome">
                <property name="text">
                 <string>Home:</string>
                </property>
@@ -411,7 +411,7 @@
               <widget class="QLineEdit" name="leStreet"/>
              </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="lbStreet">
+              <widget class="QLabel" name="lblStreet">
                <property name="text">
                 <string>Street:</string>
                </property>
@@ -421,7 +421,7 @@
               </widget>
              </item>
              <item row="5" column="0">
-              <widget class="QLabel" name="lbApartment">
+              <widget class="QLabel" name="lblApartment">
                <property name="text">
                 <string>Apartment:</string>
                </property>
@@ -431,7 +431,7 @@
               </widget>
              </item>
              <item row="6" column="0" colspan="2">
-              <spacer name="vSpacer_2">
+              <spacer name="vSpacerAddresses">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -454,7 +454,7 @@
               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
              </property>
              <item row="0" column="0">
-              <widget class="QLabel" name="lbNameCompany">
+              <widget class="QLabel" name="lblNameCompany">
                <property name="text">
                 <string>Name:</string>
                </property>
@@ -467,7 +467,7 @@
               <widget class="QLineEdit" name="leNameCompany"/>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="lbPhoneCompany">
+              <widget class="QLabel" name="lblPhoneCompany">
                <property name="text">
                 <string>Phone:</string>
                </property>
@@ -480,7 +480,7 @@
               <widget class="QLineEdit" name="lePhoneCompany"/>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="lbDapartment">
+              <widget class="QLabel" name="lblDapartment">
                <property name="text">
                 <string>Department:</string>
                </property>
@@ -493,7 +493,7 @@
               <widget class="QLineEdit" name="leDepartment"/>
              </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="lbPost">
+              <widget class="QLabel" name="lblPost">
                <property name="text">
                 <string>Post:</string>
                </property>
@@ -506,7 +506,7 @@
               <widget class="QLineEdit" name="lePost"/>
              </item>
              <item row="4" column="0">
-              <widget class="QLabel" name="lbAddressCompany">
+              <widget class="QLabel" name="lblAddressCompany">
                <property name="text">
                 <string>Address:</string>
                </property>
@@ -519,7 +519,7 @@
               <widget class="QLineEdit" name="leAddressCompany"/>
              </item>
              <item row="5" column="0">
-              <widget class="QLabel" name="lbStartWork">
+              <widget class="QLabel" name="lblStartWork">
                <property name="text">
                 <string>Start work:</string>
                </property>
@@ -536,7 +536,7 @@
               </widget>
              </item>
              <item row="6" column="0">
-              <widget class="QLabel" name="lbEndWork">
+              <widget class="QLabel" name="lblEndWork">
                <property name="text">
                 <string>End work:</string>
                </property>
@@ -550,7 +550,7 @@
               </widget>
              </item>
              <item row="7" column="0" colspan="2">
-              <spacer name="vSpacer_3">
+              <spacer name="vSpacerCompanies">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -569,172 +569,169 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QSplitter" name="FinanceTab">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
        <attribute name="title">
         <string>Finance</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox_7">
-          <property name="title">
-           <string>Transactions</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
+       <widget class="QGroupBox" name="gbAccounts">
+        <property name="title">
+         <string>Accounts</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="AccountView" name="accountView_1" native="true"/>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="Line" name="lineAccounts2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hLayTotalFinance">
            <item>
-            <widget class="DateView" name="dateViewTransaction" native="true"/>
-           </item>
-           <item>
-            <widget class="Line" name="line_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+            <widget class="QLabel" name="lblTotalFinance">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Total :</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="TransactionView" name="transactionView_1" native="true"/>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QSpinBox" name="sbTotalFinance">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
              </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="Line" name="line_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+             <property name="suffix">
+              <string> rub.</string>
              </property>
             </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="hLayTodayFinance">
-             <item>
-              <widget class="QLabel" name="lblTodayFinance">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Today :</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="sbTodayFinance">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-               <property name="suffix">
-                <string> rub.</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_6">
-          <property name="title">
-           <string>Accounts</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
+         </item>
+        </layout>
+       </widget>
+       <widget class="QGroupBox" name="gbTransactions">
+        <property name="title">
+         <string>Transactions</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <widget class="DateView" name="dateViewTransaction" native="true"/>
+         </item>
+         <item>
+          <widget class="Line" name="lineTransactions1">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="TransactionView" name="transactionView_1" native="true"/>
+         </item>
+         <item>
+          <spacer name="vSpacerTransactions">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="Line" name="lineTransactions2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hLayTodayFinance">
            <item>
-            <widget class="AccountView" name="accountView_1" native="true"/>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QLabel" name="lblTodayFinance">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
              </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="Line" name="line_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+             <property name="text">
+              <string>Today :</string>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="hLayTotalFinance">
-             <item>
-              <widget class="QLabel" name="lblTotalFinance">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Total :</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="sbTotalFinance">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-               <property name="suffix">
-                <string> rub.</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <widget class="QSpinBox" name="sbTodayFinance">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub.</string>
+             </property>
+            </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-       </layout>
+         </item>
+        </layout>
+       </widget>
       </widget>
-      <widget class="QWidget" name="tab_5">
+      <widget class="QWidget" name="TimeTab">
        <attribute name="title">
         <string>Time</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
-         <widget class="QGroupBox" name="groupBox_10">
+         <widget class="QGroupBox" name="gbTimes">
           <property name="title">
            <string>Today Time</string>
           </property>
@@ -743,7 +740,7 @@
             <widget class="DateView" name="dateViewTimes" native="true"/>
            </item>
            <item>
-            <widget class="Line" name="line">
+            <widget class="Line" name="lineTimes1">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -753,7 +750,7 @@
             <widget class="TimeView" name="timeView_1" native="true"/>
            </item>
            <item>
-            <spacer name="verticalSpacer_5">
+            <spacer name="vSpacerTimes">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -766,7 +763,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="Line" name="line_7">
+            <widget class="Line" name="lineTimes2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -816,13 +813,13 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_6">
+      <widget class="QWidget" name="DealTab">
        <attribute name="title">
         <string>Deals</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QGroupBox" name="groupBox_9">
+         <widget class="QGroupBox" name="dbDeals">
           <property name="title">
            <string>Deals</string>
           </property>
@@ -831,7 +828,7 @@
             <widget class="DateView" name="dateViewDeals" native="true"/>
            </item>
            <item>
-            <widget class="Line" name="line_5">
+            <widget class="Line" name="lineDeals1">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -841,7 +838,7 @@
             <widget class="DealView" name="dealView_1" native="true"/>
            </item>
            <item>
-            <spacer name="verticalSpacer">
+            <spacer name="vSpacerDeals">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -854,7 +851,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="Line" name="line_6">
+            <widget class="Line" name="lineDeals2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -904,7 +901,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QSplitter" name="tab_4">
+      <widget class="QSplitter" name="CalendarTab">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -929,7 +926,7 @@
         </property>
         <widget class="QWidget" name="tToday">
          <attribute name="title">
-          <string>Today</string>
+          <string>Current day</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_12">
           <item>
@@ -1518,7 +1515,7 @@
          </layout>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="groupBox">
+       <widget class="QGroupBox" name="gbEvents">
         <property name="title">
          <string>Events</string>
         </property>
@@ -1527,7 +1524,7 @@
           <widget class="DateView" name="dateViewEvents" native="true"/>
          </item>
          <item>
-          <widget class="Line" name="line_9">
+          <widget class="Line" name="lineEvents1">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -1536,10 +1533,10 @@
          <item>
           <layout class="QHBoxLayout" name="hLayoutEvent">
            <item>
-            <widget class="QDateEdit" name="dateEdit_2"/>
+            <widget class="QDateEdit" name="deEventDate"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="leEventDescription">
              <property name="placeholderText">
               <string>Event description (comment)</string>
              </property>
@@ -1548,7 +1545,7 @@
           </layout>
          </item>
          <item>
-          <spacer name="verticalSpacer_4">
+          <spacer name="vSpacerEvents">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -1561,7 +1558,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="Line" name="line_8">
+          <widget class="Line" name="lineEvents2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -1609,7 +1606,7 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="StatisticTab">
        <attribute name="title">
         <string>Statistic</string>
        </attribute>
@@ -1619,84 +1616,91 @@
           <property name="title">
            <string>Finance</string>
           </property>
-          <layout class="QFormLayout" name="formLayout_2">
-           <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-           </property>
-           <item row="4" column="0">
-            <widget class="QLabel" name="lblLastIncome">
-             <property name="text">
-              <string>Last income :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="lblCurrentAmountOfFunds">
-             <property name="text">
-              <string>Current amount of funds :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="lblLastOutcome">
-             <property name="text">
-              <string>Last outcome :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="lblMaximumOutcomePerDay">
-             <property name="text">
-              <string>Maximum outcome per day :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="lblTodayIncome">
-             <property name="text">
-              <string>Today income :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="lblMaximumIncomePerMonth">
-             <property name="text">
-              <string>Maximum income per month :</string>
-             </property>
-            </widget>
-           </item>
+          <layout class="QGridLayout" name="gridLayout_5">
            <item row="2" column="0">
-            <widget class="QLabel" name="lblMaximumOutcomePerMonth">
-             <property name="text">
-              <string>Maximum outcome per month :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="lblMaximumIncomePerDay">
+            <widget class="QLabel" name="lblMaxIncomePerDay">
              <property name="text">
               <string>Maximum income per day :</string>
              </property>
             </widget>
            </item>
-           <item row="9" column="0">
-            <widget class="QLabel" name="lblCurrentDebet">
-             <property name="text">
-              <string>Current debet :</string>
+           <item row="5" column="1">
+            <widget class="QSpinBox" name="sbMaxOutcomePerDay">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
              </property>
             </widget>
            </item>
-           <item row="7" column="0">
+           <item row="14" column="1">
+            <widget class="QSpinBox" name="sbTodayIncome">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="0">
             <widget class="QLabel" name="lblTodayOutcome">
              <property name="text">
               <string>Today outcome :</string>
              </property>
             </widget>
            </item>
-           <item row="10" column="0">
-            <widget class="QLabel" name="lblCurrentCredit">
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblMaxOutcomePerMonth">
              <property name="text">
-              <string>Current credit</string>
+              <string>Maximum outcome per month :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="0">
+            <widget class="QLabel" name="lblLastIncome">
+             <property name="text">
+              <string>Last income :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="lblMaxOutcomePerDay">
+             <property name="text">
+              <string>Maximum outcome per day :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="0">
+            <widget class="QLabel" name="lblTodayIncome">
+             <property name="text">
+              <string>Today income :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="0">
+            <widget class="QLabel" name="lblLastOutcome">
+             <property name="text">
+              <string>Last outcome :</string>
              </property>
             </widget>
            </item>
@@ -1719,8 +1723,8 @@
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
-            <widget class="QSpinBox" name="sbTodayIncome">
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="sbMaxIncomePerDay">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -1738,83 +1742,7 @@
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
-            <widget class="QSpinBox" name="sbTodayOutcome">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub</string>
-             </property>
-             <property name="minimum">
-              <number>-9999999</number>
-             </property>
-             <property name="maximum">
-              <number>9999999</number>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="1">
-            <widget class="QSpinBox" name="sbCurrentAmountOfFunds">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub</string>
-             </property>
-             <property name="minimum">
-              <number>-9999999</number>
-             </property>
-             <property name="maximum">
-              <number>9999999</number>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="1">
-            <widget class="QSpinBox" name="sbCurrentCredit">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub</string>
-             </property>
-             <property name="minimum">
-              <number>-9999999</number>
-             </property>
-             <property name="maximum">
-              <number>9999999</number>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="1">
-            <widget class="QSpinBox" name="sbCurrentDebet">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub</string>
-             </property>
-             <property name="minimum">
-              <number>-9999999</number>
-             </property>
-             <property name="maximum">
-              <number>9999999</number>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
+           <item row="13" column="1">
             <widget class="QSpinBox" name="sbLastOutcome">
              <property name="readOnly">
               <bool>true</bool>
@@ -1833,7 +1761,26 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="15" column="1">
+            <widget class="QSpinBox" name="sbTodayOutcome">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="1">
             <widget class="QSpinBox" name="sbLastIncome">
              <property name="readOnly">
               <bool>true</bool>
@@ -1853,25 +1800,6 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QSpinBox" name="sbMaxOutcomePerDay">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> rub</string>
-             </property>
-             <property name="minimum">
-              <number>-9999999</number>
-             </property>
-             <property name="maximum">
-              <number>9999999</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
             <widget class="QSpinBox" name="sbMaxOutcomePerMonth">
              <property name="readOnly">
               <bool>true</bool>
@@ -1890,8 +1818,74 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblMaxIncomePerMonth">
+             <property name="text">
+              <string>Maximum income per month :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QLabel" name="lblAverageOutcomePerWeek">
+             <property name="text">
+              <string>Average outcome per week :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <widget class="QLabel" name="lblAverageOutcomePerMonth">
+             <property name="text">
+              <string>Average outcome per month :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QDateEdit" name="dateAverageIncomePerDay">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QDateEdit" name="dateAverageIncomePerWeek">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>dd.MM - dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QDateEdit" name="dateAverageIncomePerMonth">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="sbMaxIncomePerDay">
+            <widget class="QSpinBox" name="sbMaxIncomePerWeek">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -1909,6 +1903,528 @@
              </property>
             </widget>
            </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="lblAverageIncomePerWeek">
+             <property name="text">
+              <string>Average income per week :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QDateEdit" name="dateMaxOutcomePerWeek">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>dd.MM - dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblMaxOutcomePerWeek">
+             <property name="text">
+              <string>Maximum outcome per week :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QSpinBox" name="sbAverageIncomePerWeek">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="18" column="2">
+            <widget class="QDateEdit" name="dateCurrentCredit">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="2">
+            <widget class="QDateEdit" name="dateTodayIncome">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="lblAverageIncomePerMonth">
+             <property name="text">
+              <string>Average income per month :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="2">
+            <widget class="QDateEdit" name="dateLastOutcome">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="2">
+            <widget class="QDateEdit" name="dateLastIncome">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QDateEdit" name="dateMaxOutcomePerMonth">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QDateEdit" name="dateMaxIncomePerDay">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QDateEdit" name="dateMaxIncomePerWeek">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>dd.MM - dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QSpinBox" name="sbAverageIncomePerDay">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="sbMaxOutcomePerWeek">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QSpinBox" name="sbAverageIncomePerMonth">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="2">
+            <widget class="QDateEdit" name="dateTodayOutcome">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QDateEdit" name="dateMaxOutcomePerDay">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblMaxIncomePerWeek">
+             <property name="text">
+              <string>Maximum income per week :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QDateEdit" name="dateMaxIncomePerMonth">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="lblAverageIncomePerDay">
+             <property name="text">
+              <string>Average income per day :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="1">
+            <widget class="QSpinBox" name="sbCurrentAmountOfFunds">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="17" column="0">
+            <widget class="QLabel" name="lblCurrentDebet">
+             <property name="text">
+              <string>Current debet :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="18" column="0">
+            <widget class="QLabel" name="lblCurrentCredit">
+             <property name="text">
+              <string>Current credit</string>
+             </property>
+            </widget>
+           </item>
+           <item row="18" column="1">
+            <widget class="QSpinBox" name="sbCurrentDebet">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="17" column="1">
+            <widget class="QSpinBox" name="sbCurrentCredit">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="19" column="0" colspan="3">
+            <spacer name="vSpacerFinanceStatistic">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="17" column="2">
+            <widget class="QDateEdit" name="dateCurrentDebet">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="0">
+            <widget class="QLabel" name="lblCurrentAmountOfFunds">
+             <property name="text">
+              <string>Current amount of funds :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="2">
+            <widget class="QDateEdit" name="dateCurrentAmountOfFunds">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="0">
+            <widget class="QLabel" name="lblAverageOutcomePerDay">
+             <property name="text">
+              <string>Average outcome per day :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QSpinBox" name="sbAverageOutcomePerMonth">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QSpinBox" name="sbAverageOutcomePerWeek">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1">
+            <widget class="QSpinBox" name="sbAverageOutcomePerDay">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> rub</string>
+             </property>
+             <property name="minimum">
+              <number>-9999999</number>
+             </property>
+             <property name="maximum">
+              <number>9999999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="2">
+            <widget class="QDateEdit" name="dateAverageOutcomePerMonth">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="2">
+            <widget class="QDateEdit" name="dateAverageOutcomePerWeek">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="2">
+            <widget class="QDateEdit" name="dateAverageOutcomePerDay">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -1917,99 +2433,9 @@
           <property name="title">
            <string>Time</string>
           </property>
-          <layout class="QFormLayout" name="formLayout_3">
-           <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-           </property>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Maximum daily :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QTimeEdit" name="timeEdit">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Maximum weekly :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QTimeEdit" name="timeEdit_2">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Maximum monthly :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QTimeEdit" name="timeEdit_3">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Minimum daily :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QTimeEdit" name="timeEdit_4">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>Minimum weekly :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QTimeEdit" name="timeEdit_5">
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="5" column="1">
+            <widget class="QTimeEdit" name="teMinimumMonthly">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2022,74 +2448,28 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="lblMinimumMonthly">
              <property name="text">
               <string>Minimum monthly :</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="QTimeEdit" name="timeEdit_6">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
            <item row="6" column="0">
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="lblAverageDaily">
              <property name="text">
               <string>Average daily :</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
-            <widget class="QTimeEdit" name="timeEdit_7">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLabel" name="label_12">
-             <property name="text">
-              <string>Average weekly :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="1">
-            <widget class="QTimeEdit" name="timeEdit_8">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>hh:mm:ss</string>
-             </property>
-            </widget>
-           </item>
            <item row="8" column="0">
-            <widget class="QLabel" name="label_13">
+            <widget class="QLabel" name="lblAverageMonthly">
              <property name="text">
               <string>Average monthly :</string>
              </property>
             </widget>
            </item>
            <item row="8" column="1">
-            <widget class="QTimeEdit" name="timeEdit_9">
+            <widget class="QTimeEdit" name="teAverageMonthly">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2100,6 +2480,323 @@
               <string>hh:mm:ss</string>
              </property>
             </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QTimeEdit" name="teAverageWeekly">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QTimeEdit" name="teAverageDaily">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblMinimumWeekly">
+             <property name="text">
+              <string>Minimum weekly :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="lblAverageWeekly">
+             <property name="text">
+              <string>Average weekly :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QTimeEdit" name="teMinimumWeekly">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblMaximumMonthly">
+             <property name="text">
+              <string>Maximum monthly :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QTimeEdit" name="teMaximumDaily">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblMinimumDaily">
+             <property name="text">
+              <string>Minimum daily :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QTimeEdit" name="teMaximumWeekly">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QTimeEdit" name="teMinimumDaily">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblMaximumWeekly">
+             <property name="text">
+              <string>Maximum weekly :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblMaximumDaily">
+             <property name="text">
+              <string>Maximum daily :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QTimeEdit" name="teMaximumMonthly">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm:ss</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QDateEdit" name="dateMaxDaily">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>ddd, dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QDateEdit" name="dateMaxWeekly">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>dd.MM - dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QDateEdit" name="dateMaxMonthly">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QDateEdit" name="dateMinDaily">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>ddd, dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QDateEdit" name="dateMinWeekly">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>dd.MM - dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QDateEdit" name="dateMinMonthly">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QDateEdit" name="dateAverageDaily">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>ddd, dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QDateEdit" name="dateAverageWeekly">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>dd.MM - dd.MM.yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QDateEdit" name="dateAverageMonthly">
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>MMMM yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="3">
+            <spacer name="vSpacerTimeStatistic">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -2121,7 +2818,7 @@
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="mainToolBar">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -2139,7 +2836,7 @@
    <addaction name="actionAbout"/>
    <addaction name="actionExit"/>
   </widget>
-  <widget class="QToolBar" name="toolBar_2">
+  <widget class="QToolBar" name="contactsToolBar">
    <property name="windowTitle">
     <string>toolBar_2</string>
    </property>
@@ -2156,7 +2853,7 @@
    <addaction name="separator"/>
    <addaction name="actionEdit_Contact"/>
   </widget>
-  <widget class="QToolBar" name="toolBar_3">
+  <widget class="QToolBar" name="commonToolBar">
    <property name="windowTitle">
     <string>toolBar_3</string>
    </property>
@@ -2175,7 +2872,7 @@
    <addaction name="separator"/>
    <addaction name="actionAdd_Time"/>
    <addaction name="separator"/>
-   <addaction name="actionAdd_Note"/>
+   <addaction name="actionAdd_Deal"/>
   </widget>
   <action name="actionChooseDatabase">
    <property name="icon">
@@ -2349,12 +3046,12 @@
     <string>Add Transaction</string>
    </property>
   </action>
-  <action name="actionAdd_Note">
+  <action name="actionAdd_Deal">
    <property name="text">
-    <string>Add Note</string>
+    <string>Add Deal</string>
    </property>
    <property name="toolTip">
-    <string>Add Note</string>
+    <string>Add Deal</string>
    </property>
   </action>
   <action name="actionAdd_Time">
