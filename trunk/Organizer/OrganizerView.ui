@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -103,15 +103,18 @@
              <property name="maxLength">
               <number>100</number>
              </property>
+             <property name="placeholderText">
+              <string>other name</string>
+             </property>
             </widget>
            </item>
            <item row="0" column="1">
             <widget class="QLabel" name="lblAlias">
              <property name="text">
-              <string>Alias:</string>
+              <string>Nickname :</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -120,15 +123,18 @@
              <property name="maxLength">
               <number>150</number>
              </property>
+             <property name="placeholderText">
+              <string>nickname</string>
+             </property>
             </widget>
            </item>
            <item row="3" column="1">
             <widget class="QLabel" name="lblOtherName">
              <property name="text">
-              <string>OtherName:</string>
+              <string>Other Name :</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -137,25 +143,28 @@
              <property name="maxLength">
               <number>100</number>
              </property>
+             <property name="placeholderText">
+              <string>name</string>
+             </property>
             </widget>
            </item>
            <item row="1" column="1">
             <widget class="QLabel" name="lblName">
              <property name="text">
-              <string>Name:</string>
+              <string>Name :</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
            <item row="4" column="1">
             <widget class="QLabel" name="lblBirthday">
              <property name="text">
-              <string>Birthday:</string>
+              <string>Birthday :</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -206,15 +215,18 @@
              <property name="maxLength">
               <number>100</number>
              </property>
+             <property name="placeholderText">
+              <string>last name</string>
+             </property>
             </widget>
            </item>
            <item row="2" column="1">
             <widget class="QLabel" name="lblLastName">
              <property name="text">
-              <string>LastName:</string>
+              <string>Last Name :</string>
              </property>
              <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -223,7 +235,7 @@
          <item>
           <widget class="QTabWidget" name="DetailContactData">
            <property name="currentIndex">
-            <number>2</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="tabChannels">
             <attribute name="title">
@@ -244,7 +256,11 @@
               </spacer>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="leEmail"/>
+              <widget class="QLineEdit" name="leEmail">
+               <property name="placeholderText">
+                <string>email address</string>
+               </property>
+              </widget>
              </item>
              <item row="1" column="2">
               <widget class="QLabel" name="lblEditEmail">
@@ -259,10 +275,10 @@
              <item row="2" column="0">
               <widget class="QLabel" name="lbSkype">
                <property name="text">
-                <string>Skype:</string>
+                <string>Skype :</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -277,15 +293,19 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="lePhone"/>
+              <widget class="QLineEdit" name="lePhone">
+               <property name="placeholderText">
+                <string>phone number</string>
+               </property>
+              </widget>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="lbSite">
                <property name="text">
-                <string>Site:</string>
+                <string>Site :</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -315,10 +335,10 @@
              <item row="1" column="0">
               <widget class="QLabel" name="lbEmail">
                <property name="text">
-                <string>Email:</string>
+                <string>Email :</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -343,20 +363,28 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QLineEdit" name="leSite"/>
+              <widget class="QLineEdit" name="leSite">
+               <property name="placeholderText">
+                <string>site name</string>
+               </property>
+              </widget>
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="lbPhone">
                <property name="text">
-                <string>Phone:</string>
+                <string>Phone :</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="leSkype"/>
+              <widget class="QLineEdit" name="leSkype">
+               <property name="placeholderText">
+                <string>skype name</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -364,43 +392,65 @@
             <attribute name="title">
              <string>Address</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout">
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="leCountry"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="leCity"/>
-             </item>
-             <item row="1" column="0">
+            <layout class="QFormLayout" name="formLayout_2">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             </property>
+             <item row="0" column="0">
               <widget class="QLabel" name="lblCountry">
                <property name="text">
-                <string>Country:</string>
+                <string>Country :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="leCountry">
+               <property name="placeholderText">
+                <string>country</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lblCity">
+               <property name="text">
+                <string>City :</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="leCity">
+               <property name="placeholderText">
+                <string>city</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="lblCity">
+              <widget class="QLabel" name="lblStreet">
                <property name="text">
-                <string>City:</string>
+                <string>Street :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="leApartment"/>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="leStreet">
+               <property name="placeholderText">
+                <string>street</string>
+               </property>
+              </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="leHome"/>
-             </item>
-             <item row="4" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="lblHome">
                <property name="text">
-                <string>Home:</string>
+                <string>Home :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -408,40 +458,28 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QLineEdit" name="leStreet"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="lblStreet">
-               <property name="text">
-                <string>Street:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <widget class="QLineEdit" name="leHome">
+               <property name="placeholderText">
+                <string>home</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="lblApartment">
                <property name="text">
-                <string>Apartment:</string>
+                <string>Apartment :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
-             <item row="6" column="0" colspan="2">
-              <spacer name="vSpacerAddresses">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="leApartment">
+               <property name="placeholderText">
+                <string>apartment</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -456,7 +494,7 @@
              <item row="0" column="0">
               <widget class="QLabel" name="lblNameCompany">
                <property name="text">
-                <string>Name:</string>
+                <string>Name :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -464,12 +502,16 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="leNameCompany"/>
+              <widget class="QLineEdit" name="leNameCompany">
+               <property name="placeholderText">
+                <string>company name</string>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="lblPhoneCompany">
                <property name="text">
-                <string>Phone:</string>
+                <string>Phone :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -477,12 +519,16 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lePhoneCompany"/>
+              <widget class="QLineEdit" name="lePhoneCompany">
+               <property name="placeholderText">
+                <string>common work phone</string>
+               </property>
+              </widget>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="lblDapartment">
                <property name="text">
-                <string>Department:</string>
+                <string>Department :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -490,12 +536,16 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="leDepartment"/>
+              <widget class="QLineEdit" name="leDepartment">
+               <property name="placeholderText">
+                <string>department</string>
+               </property>
+              </widget>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="lblPost">
                <property name="text">
-                <string>Post:</string>
+                <string>Post :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -503,12 +553,16 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QLineEdit" name="lePost"/>
+              <widget class="QLineEdit" name="lePost">
+               <property name="placeholderText">
+                <string>post</string>
+               </property>
+              </widget>
              </item>
              <item row="4" column="0">
               <widget class="QLabel" name="lblAddressCompany">
                <property name="text">
-                <string>Address:</string>
+                <string>Address :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -516,12 +570,16 @@
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QLineEdit" name="leAddressCompany"/>
+              <widget class="QLineEdit" name="leAddressCompany">
+               <property name="placeholderText">
+                <string>company address</string>
+               </property>
+              </widget>
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="lblStartWork">
                <property name="text">
-                <string>Start work:</string>
+                <string>Start work :</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -538,7 +596,7 @@
              <item row="6" column="0">
               <widget class="QLabel" name="lblEndWork">
                <property name="text">
-                <string>End work:</string>
+                <string>End work :</string>
                </property>
               </widget>
              </item>
@@ -548,19 +606,6 @@
                 <bool>true</bool>
                </property>
               </widget>
-             </item>
-             <item row="7" column="0" colspan="2">
-              <spacer name="vSpacerCompanies">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
