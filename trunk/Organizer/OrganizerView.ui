@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -223,7 +223,7 @@
          <item>
           <widget class="QTabWidget" name="DetailContactData">
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tabChannels">
             <attribute name="title">
@@ -1531,18 +1531,7 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="hLayoutEvent">
-           <item>
-            <widget class="QDateEdit" name="deEventDate"/>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="leEventDescription">
-             <property name="placeholderText">
-              <string>Event description (comment)</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="EventView" name="eventView_1" native="true"/>
          </item>
          <item>
           <spacer name="vSpacerEvents">
@@ -2864,6 +2853,7 @@
     <bool>true</bool>
    </attribute>
    <addaction name="actionToday"/>
+   <addaction name="separator"/>
    <addaction name="actionAddHoliday"/>
    <addaction name="actionAdd_Task"/>
    <addaction name="separator"/>
@@ -3092,6 +3082,12 @@
    <class>DateView</class>
    <extends>QWidget</extends>
    <header>./Views/dateView.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EventView</class>
+   <extends>QWidget</extends>
+   <header>./Views/eventView.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

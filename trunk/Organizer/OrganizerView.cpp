@@ -5,10 +5,11 @@
 
 namespace
 {
-enum Calendars { Today = 0, ThreeDay, Week, Mounth };
+enum Calendars { Today = 0, ThreeDay, Week, Mounth, Year };
 enum Tabs { ContactsTab, FinanceTab, TimeTab, DealTab, CalendarTab, StatisticTab };
 
 const QChar Separator = ';';
+const QString TimePattern = "hh:mm";
 const QStringList TimeType = QString("sleep;work;travel;study;sport;read").split(Separator);
 const QStringList TodayName = QObject::trUtf8("Today").split(Separator);
 const QStringList ThreeDayNames = QObject::trUtf8("Yesterday;Today;Tomorrow").split(Separator);
@@ -49,8 +50,26 @@ void OrganizerView::setToday()
     case Week :
         ui->weekCalendar->setCurrentCell(time, QDate::currentDate().dayOfWeek() - 1);
         break;
-    case Mounth:
+    case Mounth :
         ui->mounthCalendar->setSelectedDate(QDate::currentDate());
+        break;
+    case Year :
+    {
+        int row = 0;
+        int column = 0;
+        if (QDate::currentDate().month() < 4)
+        {
+            ui->tblCalendar1_3->setCurrentCell(row, column);
+        }
+        else if (QDate::currentDate().month() < 7)
+        {
+            ui->tblCalendar4_6->setCurrentCell(row, column);
+        }
+        else if (QDate::currentDate().month() < 10)
+        {
+            ui->tblCalendar10_12->setCurrentCell(row, column);
+        }
+    }
     }
 }
 
@@ -114,8 +133,6 @@ void OrganizerView::createInterface()
 
 void OrganizerView::initTimeList(QStringList &list)
 {
-    static const QString TimePattern = "hh:mm";
-
     QTime time(0, 0);
     for (int i = 0; i <= 48; ++i)
     {
