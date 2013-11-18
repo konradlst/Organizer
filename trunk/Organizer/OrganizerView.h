@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 
-namespace Ui {
+namespace Ui
+{
 class OrganizerView;
 }
 
@@ -24,9 +25,12 @@ private slots:
 
 private:
     Ui::OrganizerView *ui;
+    typedef QPair<int, int> Position;
+    QMap<QDate, Position> *m_yearDate;
 
 private:
     void createInterface();
+    void initYearCalendar();
     void initTimeList(QStringList &list);
 };
 
