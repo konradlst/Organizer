@@ -34,4 +34,4 @@ private:
     void initTimeList(QStringList &list);
 };
 
-#endif // CONCIERGEVIEW2_H
+#endif // CONCIERGEVIEW_H

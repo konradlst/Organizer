@@ -61,37 +61,33 @@ void OrganizerView::setToday()
         int row = m_yearDate->value(QDate::currentDate()).first;
         int column = m_yearDate->value(QDate::currentDate()).second;
 
+        QList<QTableWidget*> calendars;
+        calendars << ui->tblCalendar1_3
+                  << ui->tblCalendar4_6
+                  << ui->tblCalendar7_9
+                  << ui->tblCalendar10_12;
+        foreach (QTableWidget *table, calendars)
+            table->setCurrentCell(InvalidPosition, InvalidPosition);
+
         if (QDate::currentDate().month() < 4)
         {
             ui->tblCalendar1_3->setFocus();
             ui->tblCalendar1_3->setCurrentCell(row, column);
-            ui->tblCalendar4_6->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar7_9->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar10_12->setCurrentCell(InvalidPosition, InvalidPosition);
         }
         else if (QDate::currentDate().month() < 7)
         {
             ui->tblCalendar4_6->setFocus();
             ui->tblCalendar4_6->setCurrentCell(row, column);
-            ui->tblCalendar1_3->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar7_9->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar10_12->setCurrentCell(InvalidPosition, InvalidPosition);
         }
         else if (QDate::currentDate().month() < 10)
         {
             ui->tblCalendar7_9->setFocus();
             ui->tblCalendar7_9->setCurrentCell(row, column);
-            ui->tblCalendar1_3->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar4_6->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar10_12->setCurrentCell(InvalidPosition, InvalidPosition);
         }
         else
         {
             ui->tblCalendar10_12->setFocus();
             ui->tblCalendar10_12->setCurrentCell(row, column);
-            ui->tblCalendar1_3->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar4_6->setCurrentCell(InvalidPosition, InvalidPosition);
-            ui->tblCalendar7_9->setCurrentCell(InvalidPosition, InvalidPosition);
         }
     }
     }
@@ -133,7 +129,6 @@ void OrganizerView::createInterface()
 
     QStringList timeList;
     initTimeList(timeList);
-
 
     QList<QTableWidget*> calendars;
     calendars << ui->weekCalendar
@@ -186,18 +181,8 @@ void OrganizerView::initYearCalendar()
                 table->item(row, column)->setBackgroundColor(QColor(230, 230, 230));
                 table->item(row, column)->setFlags(!Qt::ItemIsSelectable);
 
-                if (row == 6)
-                {
-                    ++column;
-                    row = 0;
-                }
-                else
-                {
-                    ++row;
-                }
-                if (row == (date.dayOfWeek() - 1))
+                if (((row == 6) && (date.dayOfWeek() == 1)) || (row == (date.dayOfWeek() - 2)))
                     active = true;
-                continue;
             }
             else
             {
