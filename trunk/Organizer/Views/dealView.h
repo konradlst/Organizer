@@ -1,4 +1,4 @@
-#ifndef DEALVIEW_H
+﻿#ifndef DEALVIEW_H
 #define DEALVIEW_H
 
 #include <QGroupBox>

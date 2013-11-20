@@ -1,4 +1,4 @@
-#ifndef ACCOUNTVIEW_H
+﻿#ifndef ACCOUNTVIEW_H
 #define ACCOUNTVIEW_H
 
 #include <QWidget>

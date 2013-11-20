@@ -1,4 +1,4 @@
-#ifndef DATEVIEW_H
+﻿#ifndef DATEVIEW_H
 #define DATEVIEW_H
 
 #include <QWidget>

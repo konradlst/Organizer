@@ -1,4 +1,4 @@
-#ifndef EVENTVIEW_H
+﻿#ifndef EVENTVIEW_H
 #define EVENTVIEW_H
 
 #include <QWidget>

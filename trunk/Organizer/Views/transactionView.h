@@ -1,4 +1,4 @@
-#ifndef TRANSACTIONVIEW_H
+﻿#ifndef TRANSACTIONVIEW_H
 #define TRANSACTIONVIEW_H
 
 #include <QWidget>

@@ -1,4 +1,4 @@
-#include <QLabel>
+﻿#include <QLabel>
 #include <QComboBox>
 #include <QPushButton>
 #include <QSpinBox>

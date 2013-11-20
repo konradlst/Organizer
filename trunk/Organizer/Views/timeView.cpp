@@ -1,4 +1,4 @@
-#include <QHBoxLayout>
+﻿#include <QHBoxLayout>
 #include <QPushButton>
 #include <QComboBox>
 #include <QTimeEdit>

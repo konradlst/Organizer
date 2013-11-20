@@ -1,4 +1,4 @@
-#ifndef YEARCALENDAR_H
+﻿#ifndef YEARCALENDAR_H
 #define YEARCALENDAR_H
 
 #include <QWidget>

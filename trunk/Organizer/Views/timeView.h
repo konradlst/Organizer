@@ -1,4 +1,4 @@
-#ifndef TIMEVIEW_H
+﻿#ifndef TIMEVIEW_H
 #define TIMEVIEW_H
 
 #include <QWidget>

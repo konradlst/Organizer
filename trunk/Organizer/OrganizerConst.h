@@ -1,4 +1,4 @@
-#ifndef ORGANIZERCONST_H
+﻿#ifndef ORGANIZERCONST_H
 #define ORGANIZERCONST_H
 
 #include <QList>
