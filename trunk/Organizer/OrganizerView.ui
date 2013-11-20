@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>893</width>
-    <height>742</height>
+    <width>748</width>
+    <height>688</height>
    </rect>
   </property>
   <property name="baseSize">
    <size>
-    <width>893</width>
-    <height>742</height>
+    <width>748</width>
+    <height>688</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -954,682 +954,215 @@
         <string>Calendar</string>
        </attribute>
        <widget class="QTabWidget" name="twCalendar">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
         <property name="currentIndex">
          <number>4</number>
         </property>
-        <widget class="QWidget" name="tToday">
+        <widget class="QTableWidget" name="todayCalendar">
+         <property name="rowCount">
+          <number>48</number>
+         </property>
+         <property name="columnCount">
+          <number>1</number>
+         </property>
          <attribute name="title">
           <string>Current day</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QTableWidget" name="todayCalendar">
-            <property name="rowCount">
-             <number>48</number>
-            </property>
-            <property name="columnCount">
-             <number>1</number>
-            </property>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-           </widget>
-          </item>
-         </layout>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <column/>
         </widget>
-        <widget class="QWidget" name="tThreeDay">
+        <widget class="QTableWidget" name="threeDayCalendar">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="rowCount">
+          <number>48</number>
+         </property>
+         <property name="columnCount">
+          <number>3</number>
+         </property>
          <attribute name="title">
           <string>Three day</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
-          <item>
-           <widget class="QTableWidget" name="threeDayCalendar">
-            <property name="rowCount">
-             <number>48</number>
-            </property>
-            <property name="columnCount">
-             <number>3</number>
-            </property>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-         </layout>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <column/>
+         <column/>
+         <column/>
         </widget>
-        <widget class="QWidget" name="tWeek">
+        <widget class="QTableWidget" name="weekCalendar">
+         <property name="rowCount">
+          <number>48</number>
+         </property>
+         <property name="columnCount">
+          <number>7</number>
+         </property>
          <attribute name="title">
           <string>Week</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_11">
-          <item>
-           <widget class="QTableWidget" name="weekCalendar">
-            <property name="rowCount">
-             <number>48</number>
-            </property>
-            <property name="columnCount">
-             <number>7</number>
-            </property>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-         </layout>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <column/>
+         <column/>
+         <column/>
+         <column/>
+         <column/>
+         <column/>
+         <column/>
         </widget>
-        <widget class="QWidget" name="tMounth">
+        <widget class="QCalendarWidget" name="mounthCalendar">
+         <property name="gridVisible">
+          <bool>true</bool>
+         </property>
          <attribute name="title">
           <string>Mounth</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QCalendarWidget" name="mounthCalendar">
-            <property name="gridVisible">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
-        <widget class="QWidget" name="mounthCalendarTab">
+        <widget class="YearCalendar" name="yearCalendar">
          <attribute name="title">
           <string>Year</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="5" column="0" colspan="3">
-           <widget class="QTableWidget" name="tblCalendar7_9">
-            <property name="minimumSize">
-             <size>
-              <width>305</width>
-              <height>130</height>
-             </size>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::SingleSelection</enum>
-            </property>
-            <property name="rowCount">
-             <number>7</number>
-            </property>
-            <property name="columnCount">
-             <number>16</number>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="3">
-           <widget class="QTableWidget" name="tblCalendar4_6">
-            <property name="minimumSize">
-             <size>
-              <width>305</width>
-              <height>130</height>
-             </size>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::SingleSelection</enum>
-            </property>
-            <property name="rowCount">
-             <number>7</number>
-            </property>
-            <property name="columnCount">
-             <number>16</number>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="lblMounth4">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>April</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lblMounth1">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>January</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="lblMounth5">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>May</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="lblMounth3">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>March</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="lblMounth2">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>February</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lblMounth7">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>July</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="lblMounth6">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>June</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="lblMounth8">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>August</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLabel" name="lblMounth9">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>September</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="lblMounth10">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>October</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QLabel" name="lblMounth11">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>November</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="2">
-           <widget class="QLabel" name="lblMounth12">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>December</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="3">
-           <widget class="QTableWidget" name="tblCalendar1_3">
-            <property name="minimumSize">
-             <size>
-              <width>305</width>
-              <height>130</height>
-             </size>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::SingleSelection</enum>
-            </property>
-            <property name="rowCount">
-             <number>7</number>
-            </property>
-            <property name="columnCount">
-             <number>16</number>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-          <item row="7" column="0" colspan="3">
-           <widget class="QTableWidget" name="tblCalendar10_12">
-            <property name="minimumSize">
-             <size>
-              <width>305</width>
-              <height>130</height>
-             </size>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::SingleSelection</enum>
-            </property>
-            <property name="rowCount">
-             <number>7</number>
-            </property>
-            <property name="columnCount">
-             <number>16</number>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>18</number>
-            </attribute>
-            <attribute name="verticalHeaderMinimumSectionSize">
-             <number>18</number>
-            </attribute>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <row/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </widget>
        <widget class="QGroupBox" name="gbEvents">
@@ -2918,7 +2451,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>893</width>
+     <width>748</width>
      <height>21</height>
     </rect>
    </property>
@@ -3205,6 +2738,12 @@
    <class>EventView</class>
    <extends>QWidget</extends>
    <header>./Views/eventView.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>YearCalendar</class>
+   <extends>QWidget</extends>
+   <header>./Views/yearCalendar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

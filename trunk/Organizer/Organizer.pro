@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     Views/timeView.cpp \
     Views/dealView.cpp \
     Views/dateView.cpp \
-    Views/eventView.cpp
+    Views/eventView.cpp \
+    Views/yearCalendar.cpp
 
 HEADERS  += \
     OrganizerView.h \
@@ -33,7 +34,8 @@ HEADERS  += \
     Views/timeView.h \
     Views/dealView.h \
     Views/dateView.h \
-    Views/eventView.h
+    Views/eventView.h \
+    Views/yearCalendar.h
 
 FORMS    += \
     OrganizerView.ui
