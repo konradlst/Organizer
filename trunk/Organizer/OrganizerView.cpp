@@ -1,7 +1,13 @@
 ﻿#include <QTableWidget>
-#include "OrganizerView.h"
+#include <QHeaderView>
+#include "transactionDialog.h"
+#include "accountDialog.h"
+#include "timeDialog.h"
+#include "dealDialog.h"
 #include "ui_OrganizerView.h"
-#include "Dialog.h"
+#include "OrganizerView.h"
+
+#include <QDebug>
 
 namespace
 {
@@ -13,7 +19,8 @@ const QChar Separator = ';';
 const QString TimePattern = "hh:mm";
 const QStringList TodayName = QObject::trUtf8("Today").split(Separator);
 const QStringList ThreeDayNames = QObject::trUtf8("Yesterday;Today;Tomorrow").split(Separator);
-const QStringList DayOfWeek = QObject::trUtf8("Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday").split(Separator);
+const QStringList DayOfWeek =
+        QObject::trUtf8("Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday").split(Separator);
 }
 
 OrganizerView::OrganizerView(QWidget *parent)
@@ -24,6 +31,7 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionToday, SIGNAL(triggered()), this, SLOT(setToday()));
     connect(ui->actionAdd_Time, SIGNAL(triggered()), this, SLOT(timeDialog()));
     connect(ui->actionAdd_Deal, SIGNAL(triggered()), this, SLOT(dealDialog()));
+    connect(ui->actionAdd_Task, SIGNAL(triggered()), this, SLOT(taskDialog()));
     connect(ui->actionAdd_Account, SIGNAL(triggered()), this, SLOT(accountDialog()));
     connect(ui->actionAdd_Transaction, SIGNAL(triggered()), this, SLOT(transactionDialog()));
 }
@@ -62,28 +70,50 @@ void OrganizerView::timeDialog()
 {
     ui->tabWidget->setCurrentIndex(TimeTab);
     TimeDialog *d = new TimeDialog();
-    d->show();
+    if (d->exec())
+    {
+        qDebug() << "# " << d->data()->join("\n# ");
+    }
 }
 
 void OrganizerView::dealDialog()
 {
     ui->tabWidget->setCurrentIndex(DealTab);
     DealDialog *d = new DealDialog();
-    d->show();
+    if (d->exec())
+    {
+        qDebug() << "# " << d->data()->join("\n# ");
+    }
+}
+
+void OrganizerView::taskDialog()
+{
+    ui->tabWidget->setCurrentIndex(DealTab);
+    DealDialog *d = new DealDialog(2);
+    if (d->exec())
+    {
+        qDebug() << "# " << d->data()->join("\n# ");
+    }
 }
 
 void OrganizerView::accountDialog()
 {
     ui->tabWidget->setCurrentIndex(FinanceTab);
     AccountDialog *d = new AccountDialog();
-    d->show();
+    if (d->exec())
+    {
+        qDebug() << "# " << d->data()->join("\n# ");
+    }
 }
 
 void OrganizerView::transactionDialog()
 {
     ui->tabWidget->setCurrentIndex(FinanceTab);
     TransactionDialog *d = new TransactionDialog();
-    d->show();
+    if (d->exec())
+    {
+        qDebug() << "# " << d->data()->join("\n# ");
+    }
 }
 
 void OrganizerView::createInterface()
@@ -106,7 +136,8 @@ void OrganizerView::createInterface()
     {
         table->setVerticalHeaderLabels(timeList);
         table->setHorizontalHeaderLabels(*labels.at(i++));
-        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//        table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
+        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     }
 }
 

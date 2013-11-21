@@ -1,8 +1,8 @@
-﻿#include <QLabel>
-#include <QComboBox>
+﻿#include <QProgressBar>
 #include <QPushButton>
-#include <QProgressBar>
 #include <QHBoxLayout>
+#include <QComboBox>
+#include <QLabel>
 #include "accountView.h"
 
 namespace

@@ -65,11 +65,13 @@ QTableWidget* YearCalendar::monthCalendar(const int monthNum)
     const int TotalCell = Skip + date.daysInMonth();
 
     QTableWidget *month = new QTableWidget(DayOfWeek, MaxWeekInMonth);
-    month->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//        month->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
+    month->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     month->horizontalHeader()->setMinimumSectionSize(SectionSize);
     month->horizontalHeader()->setDefaultSectionSize(SectionSize);
     month->horizontalHeader()->hide();
-    month->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//    month->verticalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
+    month->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     month->verticalHeader()->setMinimumSectionSize(SectionSize);
     month->verticalHeader()->setDefaultSectionSize(SectionSize);
     if (monthNum % 3 != 1)

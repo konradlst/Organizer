@@ -5,6 +5,7 @@
 
 class QCalendarWidget;
 class QPushButton;
+class QDate;
 class QLabel;
 
 //! \class DateView
