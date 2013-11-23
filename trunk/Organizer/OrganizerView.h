@@ -8,6 +8,12 @@ namespace Ui
 class OrganizerView;
 }
 
+class TransactionView;
+class AccountView;
+class EventView;
+class TimeView;
+class DealView;
+
 class OrganizerView : public QMainWindow
 {
     Q_OBJECT
@@ -26,6 +32,11 @@ private slots:
 
 private:
     Ui::OrganizerView *ui;
+    QList<TimeView*> *m_times;
+    QList<DealView*> *m_deals;
+    QList<EventView*> *m_events;
+    QList<AccountView*> *m_accounts;
+    QList<TransactionView*> *m_transactions;
 
 private:
     void createInterface();

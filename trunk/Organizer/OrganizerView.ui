@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -625,7 +625,7 @@
         <property name="title">
          <string>Accounts</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
+        <layout class="QVBoxLayout" name="AccountlLayout">
          <item>
           <widget class="AccountView" name="accountView_1" native="true"/>
          </item>
@@ -694,7 +694,7 @@
         <property name="title">
          <string>Transactions</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_10">
+        <layout class="QVBoxLayout" name="TransactionLayout">
          <item>
           <widget class="DateView" name="dateViewTransaction" native="true"/>
          </item>
@@ -780,7 +780,7 @@
           <property name="title">
            <string>Today Time</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="TimeLayout">
            <item>
             <widget class="DateView" name="dateViewTimes" native="true"/>
            </item>
@@ -792,20 +792,54 @@
             </widget>
            </item>
            <item>
-            <widget class="TimeView" name="timeView_1" native="true"/>
-           </item>
-           <item>
-            <spacer name="vSpacerTimes">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QScrollArea" name="TimeScrollArea">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>90</height>
-              </size>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
              </property>
-            </spacer>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="TimeScrollAreaWidget">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>686</width>
+                <height>431</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="Times">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="vSpacerTimes">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>428</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
            </item>
            <item>
             <widget class="Line" name="lineTimes2">
@@ -868,7 +902,7 @@
           <property name="title">
            <string>Deals</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
+          <layout class="QVBoxLayout" name="DealLayout">
            <item>
             <widget class="DateView" name="dateViewDeals" native="true"/>
            </item>
@@ -880,20 +914,54 @@
             </widget>
            </item>
            <item>
-            <widget class="DealView" name="dealView_1" native="true"/>
-           </item>
-           <item>
-            <spacer name="vSpacerDeals">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QScrollArea" name="DealScrollArea">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>32</height>
-              </size>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
              </property>
-            </spacer>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="DealScrollAreaWidget">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>686</width>
+                <height>431</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="Deals">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="vSpacerDeals">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
            </item>
            <item>
             <widget class="Line" name="lineDeals2">
@@ -955,201 +1023,22 @@
        </attribute>
        <widget class="QTabWidget" name="twCalendar">
         <property name="currentIndex">
-         <number>4</number>
+         <number>2</number>
         </property>
         <widget class="QTableWidget" name="todayCalendar">
-         <property name="rowCount">
-          <number>48</number>
-         </property>
-         <property name="columnCount">
-          <number>1</number>
-         </property>
          <attribute name="title">
           <string>Current day</string>
          </attribute>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <column/>
         </widget>
         <widget class="QTableWidget" name="threeDayCalendar">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="rowCount">
-          <number>48</number>
-         </property>
-         <property name="columnCount">
-          <number>3</number>
-         </property>
          <attribute name="title">
           <string>Three day</string>
          </attribute>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <column/>
-         <column/>
-         <column/>
         </widget>
         <widget class="QTableWidget" name="weekCalendar">
-         <property name="rowCount">
-          <number>48</number>
-         </property>
-         <property name="columnCount">
-          <number>7</number>
-         </property>
          <attribute name="title">
           <string>Week</string>
          </attribute>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <column/>
-         <column/>
-         <column/>
-         <column/>
-         <column/>
-         <column/>
-         <column/>
         </widget>
         <widget class="QCalendarWidget" name="mounthCalendar">
          <property name="gridVisible">
@@ -1169,7 +1058,7 @@
         <property name="title">
          <string>Events</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="EventLayout">
          <item>
           <widget class="DateView" name="dateViewEvents" native="true"/>
          </item>
@@ -2714,18 +2603,6 @@
    <class>TransactionView</class>
    <extends>QWidget</extends>
    <header>./Views/transactionView.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TimeView</class>
-   <extends>QWidget</extends>
-   <header>./Views/timeView.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>DealView</class>
-   <extends>QWidget</extends>
-   <header>./Views/dealView.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

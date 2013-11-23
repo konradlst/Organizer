@@ -120,4 +120,5 @@ bool DriverSqlite::openDb()
     m_db.setDatabaseName(m_pathToDb);
     if (!m_db.open())
         return false;
+    return true;
 }
