@@ -35,10 +35,10 @@ const QString LblTotal = QObject::trUtf8("Total :");
 
 const QString AccountNamePlaceholder = QObject::trUtf8("account name");
 const QString TransactionNamePlaceholder = QObject::trUtf8("short transaction comment");
-const QString HumansPlaceholder = QObject::trUtf8("related with task humans");
+const QString HumansPlaceholder = QObject::trUtf8("Associated users separated by commas");
 
 const QStringList DealTypes = QObject::trUtf8("Deal;Holiday;Task").split(Separator);
-const QStringList AccountTypes = QObject::trUtf8("Cash;Account;Deposit;Credit").split(Separator);
+const QStringList AccountTypes = QObject::trUtf8("Cash;Card;Account;Deposit;Credit").split(Separator);
 const QStringList TransactionTypes = QObject::trUtf8("In;Out;Transfer").split(Separator);
 const QStringList TimeTypes = QObject::trUtf8("Sleep;Work;Study;Travel;Drive;Sport").split(Separator);
 }

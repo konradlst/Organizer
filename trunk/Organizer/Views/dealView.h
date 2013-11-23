@@ -16,7 +16,10 @@ class DealView : public QGroupBox
 {
     Q_OBJECT
 public:
-    explicit DealView(QGroupBox *parent = 0);
+    explicit DealView(const int type, const QDate &created, const int price,
+                      const QTime &duration, const QDate &deadline,
+                      const QString &humans, const QString &description,
+                      QGroupBox *parent = 0);
 
 signals:
     void deleted();

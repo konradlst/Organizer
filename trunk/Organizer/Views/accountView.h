@@ -14,7 +14,9 @@ class AccountView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AccountView(QWidget *parent = 0);
+    explicit AccountView(int type = 0, const QString &name = QString(),
+                         const qint64 &value = 0, const qint64 &maxValue = 0,
+                         const QString &comment = QString(), QWidget *parent = 0);
     void rename(const QString &name);
     void setValue(qint64 value);
 

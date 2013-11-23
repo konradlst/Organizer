@@ -14,7 +14,10 @@ class TransactionView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TransactionView(QWidget *parent = 0);
+    explicit TransactionView(int type = 0, const QString &name = QString(),
+                             const qint64 &value = 0,
+                             const QString &comment = QString(),
+                             QWidget *parent = 0);
 
 signals:
     void deleted();

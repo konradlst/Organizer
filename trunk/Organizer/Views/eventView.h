@@ -14,7 +14,8 @@ class EventView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit EventView(QWidget *parent = 0);
+    explicit EventView(const QDate &date, const QString &description = QString(),
+                       QWidget *parent = 0);
 
 signals:
     void deleted();

@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>2</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -1091,7 +1091,7 @@
        </attribute>
        <widget class="QTabWidget" name="twCalendar">
         <property name="currentIndex">
-         <number>2</number>
+         <number>4</number>
         </property>
         <widget class="QTableWidget" name="todayCalendar">
          <attribute name="title">
@@ -3102,7 +3102,7 @@
   <action name="actionDelete_Contact">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/deleteContact</normaloff>:/deleteContact</iconset>
+     <normaloff>:/delete</normaloff>:/delete</iconset>
    </property>
    <property name="text">
     <string>Delete Contact</string>

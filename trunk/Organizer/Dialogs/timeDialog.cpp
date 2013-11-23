@@ -32,10 +32,10 @@ TimeDialog::TimeDialog(QWidget *parent)
 QStringList *TimeDialog::data()
 {
     QStringList *data = new QStringList();
-    *data << m_type->currentText()
-          << m_duration->time().toString(TimeFormat)
+    *data << QString::number(m_type->currentIndex())
           << m_started->time().toString(TimeFormat)
           << m_stoped->time().toString(TimeFormat)
+          << m_duration->time().toString(TimeFormat)
           << m_description->toPlainText();
     return data;
 }

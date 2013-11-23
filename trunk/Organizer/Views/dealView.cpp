@@ -8,14 +8,12 @@
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QLabel>
+#include "dialogConst.h"
 #include "dealView.h"
 
 namespace
 {
-const QChar Separator = ';';
-
 const QStringList Labels = QObject::trUtf8("Created :;Duration :;Type :;Price :;DeadLine :;Humans :;").split(Separator);
-const QString LblDescription = QObject::trUtf8("Description :");
 
 const QString Created = QObject::trUtf8("Created");
 const QString Duration = QObject::trUtf8("Duration");
@@ -25,36 +23,33 @@ const QString DeadLine = QObject::trUtf8("DeadLine");
 const QString Humans = QObject::trUtf8("Humans");
 const QString Description = QObject::trUtf8("Description");
 const QString DescriptionPlaceholder = QObject::trUtf8("Deal description (comment)");
-const QString HumansPlaceholder = QObject::trUtf8("Associated users separated by commas");
 const QString DeleteThisDeal = QObject::trUtf8("Delete this deal");
-
-//test
-const QString DealName = QObject::trUtf8("New Deal");
-const QStringList DealTypes = QObject::trUtf8("Type1;Type2").split(Separator);
-//end test
 }
 
-DealView::DealView(QGroupBox *parent)
+DealView::DealView(const int type, const QDate &created, const int price,
+                   const QTime &duration, const QDate &deadline,
+                   const QString &humans, const QString &description,
+                   QGroupBox *parent)
     : QGroupBox(parent),
-      m_created(new QDateEdit),
-      m_duration(new QTimeEdit),
+      m_created(new QDateEdit(created)),
+      m_duration(new QTimeEdit(duration)),
       m_type(new QComboBox),
       m_price(new QSpinBox),
-      m_deadline(new QDateEdit),
-      m_humans(new QLineEdit),
-      m_description(new QLineEdit),
+      m_deadline(new QDateEdit(deadline)),
+      m_humans(new QLineEdit(humans)),
+      m_description(new QLineEdit(description)),
       m_delete(new QPushButton)
 {
-    //test
-    setTitle(DealName);
+    setTitle(DealTypes.at(type));
     m_type->addItems(DealTypes);
-    //end test
+    m_type->setCurrentIndex(type);
     m_price->setSuffix(" rub.");
+    m_price->setValue(price);
     m_humans->setPlaceholderText(HumansPlaceholder);
     m_description->setPlaceholderText(DescriptionPlaceholder);
     m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
-    m_delete->setIcon(QIcon(":/deleteContact"));
+    m_delete->setIcon(QIcon(":/delete"));
 
     m_created->setToolTip(Created);
     m_duration->setToolTip(Duration);

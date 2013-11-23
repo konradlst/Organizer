@@ -14,10 +14,15 @@ class TimeView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TimeView(QWidget *parent = 0);
+    explicit TimeView(const int type, const QTime &start, const QTime &stop,
+                      const QTime &duration, const QString &comment,
+                      QWidget *parent = 0);
 
 signals:
     void deleted();
+
+private slots:
+    void changeDuration(const QTime &time);
 
 private:
     QComboBox *m_type;
@@ -26,6 +31,7 @@ private:
     QTimeEdit *m_duration;
     QLineEdit *m_comment;
     QPushButton *m_delete;
+    bool m_lock;
 };
 
 #endif // TIMEVIEW_H

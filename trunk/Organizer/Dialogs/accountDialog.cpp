@@ -19,6 +19,8 @@ AccountDialog::AccountDialog(QWidget *parent)
     setWindowTitle(AccountTitle);
 
     m_type->addItems(AccountTypes);
+    m_value->setMaximum(999999);
+    m_value->setMinimum(-999999);
     m_name->setPlaceholderText(AccountNamePlaceholder);
 
     m_lay->addRow(LblType, m_type);
@@ -33,7 +35,7 @@ AccountDialog::AccountDialog(QWidget *parent)
 QStringList *AccountDialog::data()
 {
     QStringList *data = new QStringList();
-    *data << m_type->currentText()
+    *data << QString::number(m_type->currentIndex())
           << m_created->date().toString(DateFormat)
           << m_name->text()
           << QString::number(m_value->value())

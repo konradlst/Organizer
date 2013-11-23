@@ -36,11 +36,11 @@ DealDialog::DealDialog(const int type, QWidget *parent)
 QStringList *DealDialog::data()
 {
     QStringList *data = new QStringList();
-    *data << m_type->currentText()
+    *data << QString::number(m_type->currentIndex())
           << m_date->date().toString(DateFormat)
+          << QString::number(m_money->value())
           << m_duration->time().toString(TimeFormat)
           << m_deadLine->date().toString(DateFormat)
-          << QString::number(m_money->value())
           << m_humans->text()
           << m_description->toPlainText();
     return data;

@@ -10,6 +10,7 @@
 #include "eventView.h"
 #include "timeView.h"
 #include "dealView.h"
+#include "dialogConst.h"
 #include "ui_OrganizerView.h"
 #include "OrganizerView.h"
 
@@ -24,8 +25,6 @@ const int InvalidPosition = -1;
 const int DayToHour = 24;
 const int HourToSec = 3600;
 const double TimeStep = 0.5; //30 min - step in calendars
-const QChar Separator = ';';
-const QString TimePattern = "hh:mm";
 const QString SettingsTabName = QObject::trUtf8("Settings");
 const QString TodayName = QObject::trUtf8("Today");
 const QString ThreeDayNames = QObject::trUtf8("Yesterday;Today;Tomorrow");
@@ -96,12 +95,16 @@ void OrganizerView::timeDialog()
     TimeDialog *d = new TimeDialog();
     if (d->exec())
     {
-        TimeView *view = new TimeView();
+        QStringList *data = d->data();
+        TimeView *view = new TimeView(data->at(0).toLongLong(),
+                                      QTime::fromString(data->at(1), TimeFormat),
+                                      QTime::fromString(data->at(2), TimeFormat),
+                                      QTime::fromString(data->at(3), TimeFormat),
+                                      data->at(4));
         m_times->append(view);
         ui->Times->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        //FIXME fill data in view from dialog
-        qDebug() << "# " << d->data()->join("# ");
+        qDebug() << "Add new time record: " << d->data()->join("# ");
     }
 }
 
@@ -111,12 +114,18 @@ void OrganizerView::dealDialog()
     DealDialog *d = new DealDialog();
     if (d->exec())
     {
-        DealView *view = new DealView();
+        QStringList *data = d->data();
+        DealView *view = new DealView(data->at(0).toLongLong(),
+                                      QDate::fromString(data->at(1), DateFormat),
+                                      data->at(2).toLongLong(),
+                                      QTime::fromString(data->at(3), TimeFormat),
+                                      QDate::fromString(data->at(4), DateFormat),
+                                      data->at(5),
+                                      data->at(6));
         m_deals->append(view);
         ui->Deals->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        //FIXME fill data in view from dialog
-        qDebug() << "# " << d->data()->join("# ");
+        qDebug() << "Add new deal: " << d->data()->join("# ");
     }
 }
 
@@ -130,12 +139,13 @@ void OrganizerView::eventDialog()
         d = new DealDialog(1);
     if (d->exec())
     {
-        EventView *view = new EventView();
+        QStringList *data = d->data();
+        EventView *view = new EventView(QDate::fromString(data->at(1), DateFormat),
+                                        data->at(2));
         m_events->append(view);
         ui->Events->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        //FIXME fill data in view from dialog
-        qDebug() << "# " << d->data()->join("# ");
+        qDebug() << "Add new event: " << d->data()->join("# ");
     }
 }
 
@@ -145,12 +155,16 @@ void OrganizerView::accountDialog()
     AccountDialog *d = new AccountDialog();
     if (d->exec())
     {
-        AccountView *view = new AccountView();
+        QStringList *data = d->data();
+        AccountView *view = new AccountView(data->at(0).toLongLong(),
+                                            data->at(2),
+                                            data->at(3).toLongLong(),
+                                            data->at(4).toLongLong(),
+                                            data->at(5));
         m_accounts->append(view);
         ui->Accounts->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        //FIXME fill data in view from dialog
-        qDebug() << "# " << d->data()->join("# ");
+        qDebug() << "Add new account: " << d->data()->join("# ");
     }
 }
 
@@ -160,12 +174,15 @@ void OrganizerView::transactionDialog()
     TransactionDialog *d = new TransactionDialog();
     if (d->exec())
     {
-        TransactionView *view = new TransactionView();
+        QStringList *data = d->data();
+        TransactionView *view = new TransactionView(data->at(0).toLongLong(),
+                                                    data->at(2),
+                                                    data->at(3).toLongLong(),
+                                                    data->at(4));
         m_transactions->append(view);
         ui->Transactions->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        //FIXME fill data in view from dialog
-        qDebug() << "# " << d->data()->join("# ");
+        qDebug() << "Add new transaction: " << d->data()->join("# ");
     }
 }
 
@@ -286,7 +303,7 @@ void OrganizerView::initTimeList(QStringList &list)
     QTime time(0, 0);
     for (int i = 0; i < (DayToHour / TimeStep); ++i)
     {
-        list << time.toString(TimePattern);
+        list << time.toString(TimeFormat);
         time = time.addSecs(HourToSec * TimeStep);
     }
 }

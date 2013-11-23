@@ -9,19 +9,18 @@ namespace
 const QString EventDescription = QObject::trUtf8("Event description");
 const QString DeleteEventToolTip = QObject::trUtf8("Delete this event");
 const QString DetailInformation= QObject::trUtf8("Open detail information about event");
-
 }
 
-EventView::EventView(QWidget *parent)
+EventView::EventView(const QDate &date, const QString &description, QWidget *parent)
     : QWidget(parent),
-      m_date(new QDateEdit),
-      m_description(new QLineEdit),
+      m_date(new QDateEdit(date)),
+      m_description(new QLineEdit(description)),
       m_delete(new QPushButton),
       m_detail(new QPushButton)
 {
     m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
-    m_delete->setIcon(QIcon(":/deleteContact"));
+    m_delete->setIcon(QIcon(":/delete"));
     m_delete->setToolTip(DeleteEventToolTip);
 
     m_date->setReadOnly(true);

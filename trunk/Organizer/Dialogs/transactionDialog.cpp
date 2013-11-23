@@ -16,6 +16,9 @@ TransactionDialog::TransactionDialog(QWidget *parent)
 {
     setWindowTitle(TransactionTitle);
 
+    m_type->addItems(TransactionTypes);
+    m_value->setMaximum(999999);
+    m_value->setMinimum(-999999);
     m_name->setPlaceholderText(TransactionNamePlaceholder);
 
     m_lay->addRow(LblType, m_type);

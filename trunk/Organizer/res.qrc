@@ -9,7 +9,7 @@
         <file alias="save">icons/commit.png</file>
         <file alias="app_pic">icons/Organizer.png</file>
         <file alias="copyContact">icons/copy.png</file>
-        <file alias="deleteContact">icons/delete.png</file>
+        <file alias="delete">icons/delete.png</file>
         <file alias="editContact">icons/edit.png</file>
         <file alias="settings">icons/settings.png</file>
         <file alias="logo">icons/userpic.gif</file>

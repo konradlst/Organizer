@@ -4,33 +4,31 @@
 #include <QSpinBox>
 #include <QHBoxLayout>
 #include "transactionView.h"
+#include "dialogConst.h"
 
 namespace
 {
-const QChar Separator = ';';
-const QStringList FinanceOperation = QObject::trUtf8("debet;credit;transfer").split(Separator);
+const QString DefaultTransactionName = QObject::trUtf8("Test Account");
 }
 
-TransactionView::TransactionView(QWidget *parent)
+TransactionView::TransactionView(int type, const QString &name,
+                                 const qint64 &value, const QString &comment,
+                                 QWidget *parent)
     : QWidget(parent),
-      m_name(new QLabel()),
+      m_name(new QLabel(name.isEmpty() ? DefaultTransactionName : name)),
       m_type(new QComboBox()),
       m_delete(new QPushButton()),
       m_value(new QSpinBox())
 {
-    m_type->addItems(FinanceOperation);
+    m_type->addItems(TransactionTypes);
+    m_type->setCurrentIndex(type);
     m_value->setMaximum(999999);
-    m_value->setMaximum(-999999);
+    m_value->setMinimum(-999999);
     m_value->setSuffix(" rub.");
+    m_value->setValue(value);
     m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
-    m_delete->setIcon(QIcon(":/deleteContact"));
-
-    //test
-    m_value->setMaximum(100);
-    m_value->setValue(24);
-    m_name->setText("Test Transaction");
-    //end test
+    m_delete->setIcon(QIcon(":/delete"));
 
     QHBoxLayout *lay = new QHBoxLayout();
     lay->setContentsMargins(0, 0, 0, 0);
@@ -39,6 +37,7 @@ TransactionView::TransactionView(QWidget *parent)
     lay->addWidget(m_value);
     lay->addWidget(m_delete);
     setLayout(lay);
+    setToolTip(comment);
 
     connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
 }
