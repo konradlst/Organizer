@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>6</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -627,20 +627,54 @@
         </property>
         <layout class="QVBoxLayout" name="AccountlLayout">
          <item>
-          <widget class="AccountView" name="accountView_1" native="true"/>
-         </item>
-         <item>
-          <spacer name="verticalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+          <widget class="QScrollArea" name="AccountScrollArea">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
            </property>
-          </spacer>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="AccountScrollAreaWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>330</width>
+              <height>474</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="Accounts">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="vSpacerAccounts">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>471</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </item>
          <item>
           <widget class="Line" name="lineAccounts2">
@@ -706,20 +740,54 @@
           </widget>
          </item>
          <item>
-          <widget class="TransactionView" name="transactionView_1" native="true"/>
-         </item>
-         <item>
-          <spacer name="vSpacerTransactions">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+          <widget class="QScrollArea" name="TransactionScrollArea">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
            </property>
-          </spacer>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="TransactionScrollAreaWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>349</width>
+              <height>449</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="Transactions">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="vSpacerTransactions">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>446</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </item>
          <item>
           <widget class="Line" name="lineTransactions2">
@@ -1070,20 +1138,54 @@
           </widget>
          </item>
          <item>
-          <widget class="EventView" name="eventView_1" native="true"/>
-         </item>
-         <item>
-          <spacer name="vSpacerEvents">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+          <widget class="QScrollArea" name="EventScrollArea">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
            </property>
-          </spacer>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="EventScrollAreaWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>246</width>
+              <height>449</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="Events">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="vSpacerEvents">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>446</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </item>
          <item>
           <widget class="Line" name="lineEvents2">
@@ -2331,6 +2433,529 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="SettingsTab">
+       <attribute name="title">
+        <string>Settings</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QGroupBox" name="gbCommonSettings">
+          <property name="title">
+           <string>Common</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="pathToLogFile"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblLanguage">
+             <property name="text">
+              <string>Language :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblPathToLogFile">
+             <property name="text">
+              <string>Path to Log file :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblPathToDb">
+             <property name="text">
+              <string>Path to Db :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="pathToDb"/>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="pbOpenPathToDb">
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/directory</normaloff>:/directory</iconset>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="pbOpenPathToLogFile">
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/directory</normaloff>:/directory</iconset>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QComboBox" name="langauge">
+             <item>
+              <property name="text">
+               <string>English (default)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Russian</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="3">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>118</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="gbTabsSettings">
+          <property name="title">
+           <string>Tabs</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QCheckBox" name="checkBox_16">
+             <property name="text">
+              <string>Contacts</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_15">
+             <property name="text">
+              <string>Finance</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_14">
+             <property name="text">
+              <string>Time</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_13">
+             <property name="text">
+              <string>Calendar</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_12">
+             <property name="text">
+              <string>Statistic</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="gbStatisticSettings">
+          <property name="title">
+           <string>Statistic</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QGroupBox" name="gbFinanceStatisticSettings">
+             <property name="title">
+              <string>Finance</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="13" column="0">
+               <widget class="QCheckBox" name="cbAverageOutcomePerDay">
+                <property name="text">
+                 <string>Average outcome per day :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="0">
+               <widget class="QCheckBox" name="cbAverageOutcomePerWeek">
+                <property name="text">
+                 <string>Average outcome per week :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="0">
+               <widget class="QCheckBox" name="cbAverageOutcomePerMonth">
+                <property name="text">
+                 <string>Average outcome per month :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QCheckBox" name="cbAverageIncomePerDay">
+                <property name="text">
+                 <string>Average income per day :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QCheckBox" name="cbAverageIncomePerWeek">
+                <property name="text">
+                 <string>Average income per week :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QCheckBox" name="cbAverageIncomePerMonth">
+                <property name="text">
+                 <string>Average income per month :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QCheckBox" name="cbMaxOutcomePerDay">
+                <property name="text">
+                 <string>Maximum outcome per day :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QCheckBox" name="cbMaxOutcomePerWeek">
+                <property name="text">
+                 <string>Maximum outcome per week :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="cbMaxOutcomePerMonth">
+                <property name="text">
+                 <string>Maximum outcome per month :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="cbMaxIncomePerDay">
+                <property name="text">
+                 <string>Maximum income per day :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="cbMaxIncomePerWeek">
+                <property name="text">
+                 <string>Maximum income per week :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="cbMaxIncomePerMonth">
+                <property name="text">
+                 <string>Maximum income per month :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="cbSelectAllFinanceStatistic">
+                <property name="text">
+                 <string>Select / Cancaled all</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="cbCurrentAmountOfFunds">
+                <property name="text">
+                 <string>Current amount of funds :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QCheckBox" name="cbTodayIncome">
+                <property name="text">
+                 <string>Today income :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QCheckBox" name="cbLastOutcome">
+                <property name="text">
+                 <string>Last outcome :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="cbCurrentDebet">
+                <property name="text">
+                 <string>Current debet :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="cbLastIncome_2">
+                <property name="text">
+                 <string>Last income :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="cbTodayOutcome">
+                <property name="text">
+                 <string>Today outcome :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QCheckBox" name="cbCurrentCredit">
+                <property name="text">
+                 <string>Current credit</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="Line" name="lineSettingsFinanceStatistic">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="gbTimeStatisticSettings">
+             <property name="title">
+              <string>Time</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QCheckBox" name="cbSelectAllTimeStatistic">
+                <property name="text">
+                 <string>Select / Cancaled all</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="Line" name="lineSettingsTimeStatistic">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMaximumDaily">
+                <property name="text">
+                 <string>Maximum daily</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMaximumWeekly">
+                <property name="text">
+                 <string>Maximum weekly</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMaximumMonthly">
+                <property name="text">
+                 <string>Maximum monthly</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMinimumDaily">
+                <property name="text">
+                 <string>Minimum daily</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMinimumWeekly">
+                <property name="text">
+                 <string>Minimum weekly</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMinimumMonthly">
+                <property name="text">
+                 <string>Minimum monthly</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbAverageDaily">
+                <property name="text">
+                 <string>Average daily</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbAverageWeekly">
+                <property name="text">
+                 <string>Average weekly</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbAverageMonthly">
+                <property name="text">
+                 <string>Average monthly</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="vSpacerSettingsTimeStatistic">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -2362,7 +2987,6 @@
    <addaction name="separator"/>
    <addaction name="actionSettings"/>
    <addaction name="actionAbout"/>
-   <addaction name="actionExit"/>
   </widget>
   <widget class="QToolBar" name="contactsToolBar">
    <property name="windowTitle">
@@ -2393,8 +3017,8 @@
    </attribute>
    <addaction name="actionToday"/>
    <addaction name="separator"/>
-   <addaction name="actionAddHoliday"/>
-   <addaction name="actionAdd_Task"/>
+   <addaction name="actionAdd_Holiday"/>
+   <addaction name="actionAdd_Event"/>
    <addaction name="separator"/>
    <addaction name="actionAdd_Account"/>
    <addaction name="actionAdd_Transaction"/>
@@ -2437,18 +3061,6 @@
    </property>
    <property name="toolTip">
     <string>SaveAs</string>
-   </property>
-  </action>
-  <action name="actionExit">
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/exit</normaloff>:/exit</iconset>
-   </property>
-   <property name="text">
-    <string>Exit</string>
-   </property>
-   <property name="toolTip">
-    <string>Exit</string>
    </property>
   </action>
   <action name="actionAdd_Contact">
@@ -2543,7 +3155,7 @@
     <string>Today</string>
    </property>
   </action>
-  <action name="actionAddHoliday">
+  <action name="actionAdd_Holiday">
    <property name="text">
     <string>Add Holiday</string>
    </property>
@@ -2551,12 +3163,12 @@
     <string>Add Holiday</string>
    </property>
   </action>
-  <action name="actionAdd_Task">
+  <action name="actionAdd_Event">
    <property name="text">
-    <string>Add Task</string>
+    <string>Add Event</string>
    </property>
    <property name="toolTip">
-    <string>Add Task</string>
+    <string>Add Event</string>
    </property>
   </action>
   <action name="actionAdd_Account">
@@ -2594,27 +3206,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>AccountView</class>
-   <extends>QWidget</extends>
-   <header>./Views/accountView.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TransactionView</class>
-   <extends>QWidget</extends>
-   <header>./Views/transactionView.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>DateView</class>
    <extends>QWidget</extends>
    <header>./Views/dateView.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>EventView</class>
-   <extends>QWidget</extends>
-   <header>./Views/eventView.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

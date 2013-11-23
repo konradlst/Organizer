@@ -26,9 +26,13 @@ private slots:
     void setToday();
     void timeDialog();
     void dealDialog();
-    void taskDialog();
+    void eventDialog();
     void accountDialog();
     void transactionDialog();
+    void about();
+    void deleteRecord();
+    void settings();
+
 
 private:
     Ui::OrganizerView *ui;

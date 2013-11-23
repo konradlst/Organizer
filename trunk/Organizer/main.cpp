@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":/app_pic"));
     a.setApplicationName("Organizer");
-    a.setApplicationVersion("0.1");
+    a.setApplicationVersion("0.3");
     a.setOrganizationDomain("a.batyaev@gmail.com");
     a.setOrganizationName("Anton Batyaev");
 

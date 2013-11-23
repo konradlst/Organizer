@@ -15,5 +15,6 @@
         <file alias="logo">icons/userpic.gif</file>
         <file alias="qt_ru_RU">qt_ru.qm</file>
         <file alias="detailInfo">icons/detailInfo.png</file>
+        <file alias="directory">icons/directory.png</file>
     </qresource>
 </RCC>
