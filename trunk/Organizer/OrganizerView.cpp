@@ -45,7 +45,9 @@ OrganizerView::OrganizerView(QWidget *parent)
       m_deals(new QList<DealView*>),
       m_events(new QList<EventView*>),
       m_accounts(new QList<AccountView*>),
-      m_transactions(new QList<TransactionView*>)
+      m_transactions(new QList<TransactionView*>),
+      m_flagFinanceStatistic(19),
+      m_flagTimeStatistic(9)
 {
     createInterface();
     connect(ui->actionToday, SIGNAL(triggered()), SLOT(setToday()));
@@ -273,11 +275,79 @@ void OrganizerView::settings()
     ui->tabWidget->setCurrentIndex(SettingTab);
 }
 
+void OrganizerView::settingsFinaceStatistic(bool value)
+{
+    if (value)
+    {
+        if (sender() == ui->cbSelectAllFinanceStatistic)
+        {
+            ui->cbSelectAllFinanceStatistic->setCheckState(Qt::Checked);
+            m_flagFinanceStatistic = 19;
+            return;
+        }
+        ++m_flagFinanceStatistic;
+        if (m_flagFinanceStatistic == 19)
+            ui->cbSelectAllFinanceStatistic->setCheckState(Qt::Checked);
+        else
+            ui->cbSelectAllFinanceStatistic->setCheckState(Qt::PartiallyChecked);
+    }
+    else
+    {
+        if (sender() == ui->cbSelectAllFinanceStatistic)
+        {
+            ui->cbSelectAllFinanceStatistic->setCheckState(Qt::Unchecked);
+            m_flagFinanceStatistic = 0;
+            return;
+        }
+        --m_flagFinanceStatistic;
+        if (!m_flagFinanceStatistic)
+            ui->cbSelectAllFinanceStatistic->setCheckState(Qt::Unchecked);
+        else
+            ui->cbSelectAllFinanceStatistic->setCheckState(Qt::PartiallyChecked);
+    }
+}
+
+void OrganizerView::settingsTimeStatistic(bool value)
+{
+    if (value)
+    {
+        if (sender() == ui->cbSelectAllTimeStatistic)
+        {
+            ui->cbSelectAllTimeStatistic->setCheckState(Qt::Checked);
+            m_flagTimeStatistic = 9;
+            return;
+        }
+        ++m_flagTimeStatistic;
+        if (m_flagTimeStatistic == 9)
+            ui->cbSelectAllTimeStatistic->setCheckState(Qt::Checked);
+        else
+            ui->cbSelectAllTimeStatistic->setCheckState(Qt::PartiallyChecked);
+    }
+    else
+    {
+        if (sender() == ui->cbSelectAllTimeStatistic)
+        {
+            ui->cbSelectAllTimeStatistic->setCheckState(Qt::Unchecked);
+            m_flagTimeStatistic = 0;
+            return;
+        }
+        --m_flagTimeStatistic;
+        if (!m_flagTimeStatistic)
+            ui->cbSelectAllTimeStatistic->setCheckState(Qt::Unchecked);
+        else
+            ui->cbSelectAllTimeStatistic->setCheckState(Qt::PartiallyChecked);
+    }
+}
+
 void OrganizerView::createInterface()
 {
     ui->setupUi(this);
 
     ui->tabWidget->tabBar()->removeTab(SettingTab);
+    QList<int> sizes;
+    sizes << ui->FinanceTab->width() / 2
+          << ui->FinanceTab->width() / 2;
+    ui->FinanceTab->setSizes(sizes);
     ui->dateViewEvents->calendarPopup(false);
 
     QStringList timeList;
@@ -296,6 +366,126 @@ void OrganizerView::createInterface()
 //        table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
         table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     }
+
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageIncomePerDay, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageIncomePerWeek, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageIncomePerMonth, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageOutcomePerDay, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageOutcomePerWeek, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageOutcomePerMonth, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaxIncomePerDay, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaxIncomePerWeek, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaxIncomePerMonth, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaxOutcomePerDay, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaxOutcomePerWeek, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaxOutcomePerMonth, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbCurrentAmountOfFunds, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbCurrentCredit, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbCurrentDebet, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbTodayIncome, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbTodayOutcome, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbLastIncome, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            ui->cbLastOutcome, SLOT(setChecked(bool)));
+
+    connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbAverageIncomePerDay, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbAverageIncomePerWeek, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbAverageIncomePerMonth, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbAverageOutcomePerDay, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbAverageOutcomePerWeek, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbAverageOutcomePerMonth, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbMaxIncomePerDay, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbMaxIncomePerWeek, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbMaxIncomePerMonth, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbMaxOutcomePerDay, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbMaxOutcomePerWeek, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbMaxOutcomePerMonth, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbCurrentAmountOfFunds, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbCurrentCredit, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbCurrentDebet, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbTodayIncome, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbTodayOutcome, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbLastIncome, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+    connect(ui->cbLastOutcome, SIGNAL(clicked(bool)),
+            SLOT(settingsFinaceStatistic(bool)));
+
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageDaily, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageWeekly, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbAverageMonthly, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaximumDaily, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaximumWeekly, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbMaximumMonthly, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbMinimumDaily, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbMinimumWeekly, SLOT(setChecked(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->cbMinimumMonthly, SLOT(setChecked(bool)));
+
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbAverageDaily, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbAverageWeekly, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbAverageMonthly, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbMaximumDaily, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbMaximumWeekly, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbMaximumMonthly, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbMinimumDaily, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbMinimumWeekly, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
+    connect(ui->cbMinimumMonthly, SIGNAL(clicked(bool)),
+            SLOT(settingsTimeStatistic(bool)));
 }
 
 void OrganizerView::initTimeList(QStringList &list)

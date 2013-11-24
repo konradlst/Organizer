@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>748</width>
-    <height>688</height>
+    <height>708</height>
    </rect>
   </property>
   <property name="baseSize">
@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -643,7 +643,7 @@
               <x>0</x>
               <y>0</y>
               <width>330</width>
-              <height>474</height>
+              <height>494</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="Accounts">
@@ -756,7 +756,7 @@
               <x>0</x>
               <y>0</y>
               <width>349</width>
-              <height>449</height>
+              <height>469</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="Transactions">
@@ -876,7 +876,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>686</width>
-                <height>431</height>
+                <height>451</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="Times">
@@ -998,7 +998,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>686</width>
-                <height>431</height>
+                <height>451</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="Deals">
@@ -1154,7 +1154,7 @@
               <x>0</x>
               <y>0</y>
               <width>246</width>
-              <height>449</height>
+              <height>469</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="Events">
@@ -1469,51 +1469,6 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="2">
-            <widget class="QDateEdit" name="dateAverageIncomePerDay">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <widget class="QDateEdit" name="dateAverageIncomePerWeek">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>dd.MM - dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="2">
-            <widget class="QDateEdit" name="dateAverageIncomePerMonth">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="1">
             <widget class="QSpinBox" name="sbMaxIncomePerWeek">
              <property name="readOnly">
@@ -1537,22 +1492,6 @@
             <widget class="QLabel" name="lblAverageIncomePerWeek">
              <property name="text">
               <string>Average income per week :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="2">
-            <widget class="QDateEdit" name="dateMaxOutcomePerWeek">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>dd.MM - dd.MM.yyyy</string>
              </property>
             </widget>
            </item>
@@ -1582,125 +1521,10 @@
              </property>
             </widget>
            </item>
-           <item row="18" column="2">
-            <widget class="QDateEdit" name="dateCurrentCredit">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="2">
-            <widget class="QDateEdit" name="dateTodayIncome">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
            <item row="6" column="0">
             <widget class="QLabel" name="lblAverageIncomePerMonth">
              <property name="text">
               <string>Average income per month :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="13" column="2">
-            <widget class="QDateEdit" name="dateLastOutcome">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="2">
-            <widget class="QDateEdit" name="dateLastIncome">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="QDateEdit" name="dateMaxOutcomePerMonth">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::MonthSection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QDateEdit" name="dateMaxIncomePerDay">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QDateEdit" name="dateMaxIncomePerWeek">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="displayFormat">
-              <string>dd.MM - dd.MM.yyyy</string>
              </property>
             </widget>
            </item>
@@ -1761,61 +1585,10 @@
              </property>
             </widget>
            </item>
-           <item row="15" column="2">
-            <widget class="QDateEdit" name="dateTodayOutcome">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="QDateEdit" name="dateMaxOutcomePerDay">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="lblMaxIncomePerWeek">
              <property name="text">
               <string>Maximum income per week :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QDateEdit" name="dateMaxIncomePerMonth">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::MonthSection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
              </property>
             </widget>
            </item>
@@ -1910,42 +1683,10 @@
              </property>
             </spacer>
            </item>
-           <item row="17" column="2">
-            <widget class="QDateEdit" name="dateCurrentDebet">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-            </widget>
-           </item>
            <item row="16" column="0">
             <widget class="QLabel" name="lblCurrentAmountOfFunds">
              <property name="text">
               <string>Current amount of funds :</string>
-             </property>
-            </widget>
-           </item>
-           <item row="16" column="2">
-            <widget class="QDateEdit" name="dateCurrentAmountOfFunds">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
              </property>
             </widget>
            </item>
@@ -2013,45 +1754,193 @@
              </property>
             </widget>
            </item>
-           <item row="9" column="2">
-            <widget class="QDateEdit" name="dateAverageOutcomePerMonth">
+           <item row="0" column="2">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>( Январь 2000 )</string>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
-             <property name="readOnly">
-              <bool>true</bool>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>( 01.02 - 03.04.2000 )</string>
              </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>( Сб, 01.01.2000 )</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="2">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item row="10" column="2">
-            <widget class="QDateEdit" name="dateAverageOutcomePerWeek">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string/>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
              </property>
             </widget>
            </item>
            <item row="11" column="2">
-            <widget class="QDateEdit" name="dateAverageOutcomePerDay">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string/>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
-             <property name="readOnly">
-              <bool>true</bool>
+            </widget>
+           </item>
+           <item row="12" column="2">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string/>
              </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="2">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="2">
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="2">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="2">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="17" column="2">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="18" column="2">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -2244,177 +2133,6 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QDateEdit" name="dateMaxDaily">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>ddd, dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QDateEdit" name="dateMaxWeekly">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>dd.MM - dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QDateEdit" name="dateMaxMonthly">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::MonthSection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="QDateEdit" name="dateMinDaily">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>ddd, dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="2">
-            <widget class="QDateEdit" name="dateMinWeekly">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>dd.MM - dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="QDateEdit" name="dateMinMonthly">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::MonthSection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="2">
-            <widget class="QDateEdit" name="dateAverageDaily">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>ddd, dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <widget class="QDateEdit" name="dateAverageWeekly">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::DaySection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>dd.MM - dd.MM.yyyy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="2">
-            <widget class="QDateEdit" name="dateAverageMonthly">
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="currentSection">
-              <enum>QDateTimeEdit::MonthSection</enum>
-             </property>
-             <property name="displayFormat">
-              <string>MMMM yyyy</string>
-             </property>
-            </widget>
-           </item>
            <item row="9" column="0" colspan="3">
             <spacer name="vSpacerTimeStatistic">
              <property name="orientation">
@@ -2427,6 +2145,96 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_21">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_22">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_24">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLabel" name="label_25">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QLabel" name="label_26">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QLabel" name="label_27">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QLabel" name="label_28">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -2752,7 +2560,14 @@
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="1" column="0" colspan="2">
+               <widget class="Line" name="lineSettingsFinanceStatistic">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
                <widget class="QCheckBox" name="cbTodayIncome">
                 <property name="text">
                  <string>Today income :</string>
@@ -2762,37 +2577,7 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="cbLastOutcome">
-                <property name="text">
-                 <string>Last outcome :</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="cbCurrentDebet">
-                <property name="text">
-                 <string>Current debet :</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="cbLastIncome_2">
-                <property name="text">
-                 <string>Last income :</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
+              <item row="6" column="1">
                <widget class="QCheckBox" name="cbTodayOutcome">
                 <property name="text">
                  <string>Today outcome :</string>
@@ -2802,7 +2587,7 @@
                 </property>
                </widget>
               </item>
-              <item row="8" column="1">
+              <item row="3" column="1">
                <widget class="QCheckBox" name="cbCurrentCredit">
                 <property name="text">
                  <string>Current credit</string>
@@ -2812,10 +2597,33 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="0" colspan="2">
-               <widget class="Line" name="lineSettingsFinanceStatistic">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="cbCurrentDebet">
+                <property name="text">
+                 <string>Current debet :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="cbLastOutcome">
+                <property name="text">
+                 <string>Last outcome :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QCheckBox" name="cbLastIncome">
+                <property name="text">
+                 <string>Last income :</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>

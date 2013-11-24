@@ -32,6 +32,8 @@ private slots:
     void about();
     void deleteRecord();
     void settings();
+    void settingsFinaceStatistic(bool value);
+    void settingsTimeStatistic(bool value);
 
 
 private:
@@ -41,6 +43,8 @@ private:
     QList<EventView*> *m_events;
     QList<AccountView*> *m_accounts;
     QList<TransactionView*> *m_transactions;
+    int m_flagFinanceStatistic;
+    int m_flagTimeStatistic;
 
 private:
     void createInterface();
