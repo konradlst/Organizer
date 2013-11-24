@@ -15,7 +15,7 @@ public:
     cgDBManager(QWidget *parent = 0);
 
 private slots:
-    void currentTableChanged(const int &index);
+    void currentTableChanged(const int index);
     void submit();
     void addRecord();
     void removeRecord();

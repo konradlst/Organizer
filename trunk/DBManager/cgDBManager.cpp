@@ -1,24 +1,30 @@
-﻿#include "cgDBManager.h"
-#include <QSqlQuery>
-#include <QSqlTableModel>
-#include <QTableView>
+﻿#include <QSqlTableModel>
 #include <QPushButton>
-#include <QBoxLayout>
 #include <QHeaderView>
 #include <QFileDialog>
-#include <QDir>
+#include <QTableView>
+#include <QBoxLayout>
 #include <QComboBox>
-#include "dbGenerator.h"
-#include "cgDelegateManager.h"
+#include <QSqlQuery>
+#include <QDir>
 #include "cgComboBoxDelegate.h"
+#include "cgDelegateManager.h"
 #include "cgMetaschemeConst.h"
+#include "dbGenerator.h"
+#include "cgDBManager.h"
 
 namespace
 {
-const QString DEFAULT_DB("concierge.sqlite");
-const QString TITLE = QObject::trUtf8("Сoncierge: DBManager");
-const QString OPEN_TITLE = QObject::trUtf8("Path to SQL database");
-const QString FILE_TYPES = QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite)");
+const QString DefaultDb = "concierge.sqlite";
+const QString Title = QObject::trUtf8("Organizer: DBManager");
+const QString OpenTitle = QObject::trUtf8("Path to SQL database");
+const QString FileTypes = QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite)");
+
+const QString OpenDb = QObject::trUtf8("Open Db");
+const QString AddRecord = QObject::trUtf8("Add");
+const QString RemoveRecord = QObject::trUtf8("Remove");
+const QString Submit = QObject::trUtf8("Submit");
+const QString RevertAll = QObject::trUtf8("&Revert All");
 }
 
 cgDBManager::cgDBManager(QWidget *parent)
@@ -27,16 +33,17 @@ cgDBManager::cgDBManager(QWidget *parent)
       m_view(new QTableView),
       m_models(new QHash<QString, QSqlTableModel*>),
       m_tableComboBox(new QComboBox(this)),
-      m_btnOpenDb(new QPushButton(tr("Open Db"))),
-      m_btnAdd(new QPushButton(tr("Add"))),
-      m_btnSubmit(new QPushButton(tr("Submit"))),
-      m_btnRevert(new QPushButton(tr("&Revert All"))),
-      m_btnRemove(new QPushButton(tr("Remove")))
+      m_btnOpenDb(new QPushButton(OpenDb)),
+      m_btnAdd(new QPushButton(AddRecord)),
+      m_btnSubmit(new QPushButton(Submit)),
+      m_btnRevert(new QPushButton(RevertAll)),
+      m_btnRemove(new QPushButton(RemoveRecord))
 {
     dbGenerate();
     createInterface();
 
-    connect(m_tableComboBox, SIGNAL(currentIndexChanged(int)), SLOT(currentTableChanged(int)));
+    connect(m_tableComboBox, SIGNAL(currentIndexChanged(int)),
+            SLOT(currentTableChanged(int)));
     connect(m_btnOpenDb, SIGNAL(clicked()), SLOT(dbGenerate()));
     connect(m_btnAdd,    SIGNAL(clicked()), SLOT(addRecord()));
     connect(m_btnSubmit, SIGNAL(clicked()), SLOT(submit()));
@@ -44,7 +51,7 @@ cgDBManager::cgDBManager(QWidget *parent)
     connect(m_btnRemove, SIGNAL(clicked()), SLOT(removeRecord()));
 }
 
-void cgDBManager::currentTableChanged(const int &index)
+void cgDBManager::currentTableChanged(const int index)
 {
     m_currentTable = m_tables.at(index);
     m_view->setModel(m_models->value(m_currentTable));
@@ -88,12 +95,12 @@ void cgDBManager::initModel()
     db.setDatabaseName(m_currentPathToDb);
     db.open();
     m_tables =  db.tables();
-    if(m_tables.isEmpty())
+    if (m_tables.isEmpty())
         return;
 
     m_currentTable = m_tables.at(0);
     m_tableComboBox->addItems(m_tables);
-    foreach (const QString table, m_tables)
+    foreach (const QString &table, m_tables)
     {
         QSqlTableModel *model = new QSqlTableModel(this);
         model->setTable(table);
@@ -109,7 +116,7 @@ void cgDBManager::createInterface()
     m_view->setModel(m_models->value(m_currentTable));
     m_view->setSortingEnabled(true);
     m_view->setColumnHidden(0, true);
-    if(!m_currentTable.isNull())
+    if (!m_currentTable.isNull())
         setDelegates();
 
     m_btnOpenDb->setDefault(true);
@@ -127,13 +134,13 @@ void cgDBManager::createInterface()
     vlay->addWidget(m_view);
 
     setCentralWidget(centralWidget);
-    setWindowTitle(TITLE);
+    setWindowTitle(Title);
     resize(550, 550);
 }
 
 void cgDBManager::setDelegates()
 {
-    for(int i = 0; i < m_view->model()->columnCount(); ++i)
+    for (int i = 0; i < m_view->model()->columnCount(); ++i)
         m_view->setItemDelegateForColumn(i, 0);
 
     QList<QAbstractItemDelegate*> *list =  cgDelegateManager::getDelegateList(m_currentTable);
@@ -141,7 +148,7 @@ void cgDBManager::setDelegates()
     int i=0;
     foreach (QAbstractItemDelegate *d, *list)
     {
-        if(d)
+        if (d)
             m_view->setItemDelegateForColumn(i, d);
         ++i;
     }
@@ -149,8 +156,9 @@ void cgDBManager::setDelegates()
 
 QString cgDBManager::openDb()
 {
-    QString path = QFileDialog::getSaveFileName(this, OPEN_TITLE, QDir::currentPath(), FILE_TYPES);
-    m_currentPathToDb = path.isEmpty() ? DEFAULT_DB : path;
+    QString path = QFileDialog::getSaveFileName(this, OpenTitle,
+                                                QDir::currentPath(), FileTypes);
+    m_currentPathToDb = path.isEmpty() ? DefaultDb : path;
     return m_currentPathToDb;
 }
 
