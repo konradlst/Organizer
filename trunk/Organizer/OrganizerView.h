@@ -34,6 +34,10 @@ private slots:
     void settings();
     void settingsFinaceStatistic(bool value);
     void settingsTimeStatistic(bool value);
+    void openDbDialog();
+    void saveDbDialog();
+    void openDialog();
+    void saveDialog();
 
 
 private:

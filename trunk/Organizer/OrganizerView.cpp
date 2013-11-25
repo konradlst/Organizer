@@ -1,6 +1,7 @@
 ﻿#include <QTableWidget>
 #include <QHeaderView>
 #include <QMessageBox>
+#include <QFileDialog>
 #include "transactionDialog.h"
 #include "accountDialog.h"
 #include "timeDialog.h"
@@ -25,6 +26,14 @@ const int InvalidPosition = -1;
 const int DayToHour = 24;
 const int HourToSec = 3600;
 const double TimeStep = 0.5; //30 min - step in calendars
+const QString monthTemplate = "( MMMM yyyy )";
+const QString weekTemplate = "( dd.MM - %1 )";
+const QString dayTemplate = "( ddd, dd.MM.yyyy )";
+const QString OpenTitle = QObject::trUtf8("Open database");
+const QString SaveTitle = QObject::trUtf8("Save database");
+const QString OpenContactTitle = QObject::trUtf8("Open contact");
+const QString SaveContactTitle = QObject::trUtf8("Save contact");
+const QString FileTypes = QObject::trUtf8("All Files (*.*);;SQLite files (*.sqlite)");
 const QString SettingsTabName = QObject::trUtf8("Settings");
 const QString TodayName = QObject::trUtf8("Today");
 const QString ThreeDayNames = QObject::trUtf8("Yesterday;Today;Tomorrow");
@@ -59,6 +68,11 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionAdd_Transaction, SIGNAL(triggered()), SLOT(transactionDialog()));
     connect(ui->actionAbout, SIGNAL(triggered()), SLOT(about()));
     connect(ui->actionSettings, SIGNAL(triggered()), SLOT(settings()));
+    connect(ui->actionChoose_Database, SIGNAL(triggered()), SLOT(openDbDialog()));
+    connect(ui->actionNew_Database, SIGNAL(triggered()), SLOT(saveDbDialog()));
+    connect(ui->actionSaveAs, SIGNAL(triggered()), SLOT(saveDbDialog()));
+    connect(ui->actionLoad_Contact, SIGNAL(triggered()), SLOT(openDialog()));
+    connect(ui->actionSave_Contact, SIGNAL(triggered()), SLOT(saveDialog()));
 }
 
 OrganizerView::~OrganizerView()
@@ -337,6 +351,34 @@ void OrganizerView::settingsTimeStatistic(bool value)
         else
             ui->cbSelectAllTimeStatistic->setCheckState(Qt::PartiallyChecked);
     }
+}
+
+void OrganizerView::openDbDialog()
+{
+    QString path = QFileDialog::getOpenFileName(this, OpenTitle,
+                                                QDir::currentPath(), FileTypes);
+    qDebug() << path;
+}
+
+void OrganizerView::saveDbDialog()
+{
+    QString path = QFileDialog::getOpenFileName(this, SaveTitle,
+                                                QDir::currentPath(), FileTypes);
+    qDebug() << path;
+}
+
+void OrganizerView::openDialog()
+{
+    QString path = QFileDialog::getOpenFileName(this, OpenContactTitle,
+                                                QDir::currentPath(), FileTypes);
+    qDebug() << path;
+}
+
+void OrganizerView::saveDialog()
+{
+    QString path = QFileDialog::getSaveFileName(this, SaveContactTitle,
+                                                QDir::currentPath(), FileTypes);
+    qDebug() << path;
 }
 
 void OrganizerView::createInterface()

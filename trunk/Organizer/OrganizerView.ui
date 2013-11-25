@@ -193,7 +193,7 @@
              </property>
              <property name="icon">
               <iconset resource="res.qrc">
-               <normaloff>:/editContact</normaloff>:/editContact</iconset>
+               <normaloff>:/editingMode</normaloff>:/editingMode</iconset>
              </property>
              <property name="flat">
               <bool>true</bool>
@@ -241,34 +241,41 @@
             <attribute name="title">
              <string>Channels</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="5" column="0" colspan="3">
-              <spacer name="vSpacerChannels">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lbPhone">
+               <property name="text">
+                <string>Phone :</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
-              </spacer>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lePhone">
+               <property name="placeholderText">
+                <string>phone number</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lbEmail">
+               <property name="text">
+                <string>Email :</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
              </item>
              <item row="1" column="1">
               <widget class="QLineEdit" name="leEmail">
                <property name="placeholderText">
                 <string>email address</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLabel" name="lblEditEmail">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="res.qrc">:/editContact</pixmap>
                </property>
               </widget>
              </item>
@@ -282,20 +289,10 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QLabel" name="lblEditSkype">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="res.qrc">:/editContact</pixmap>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="lePhone">
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="leSkype">
                <property name="placeholderText">
-                <string>phone number</string>
+                <string>skype name</string>
                </property>
               </widget>
              </item>
@@ -309,7 +306,14 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0" colspan="3">
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="leSite">
+               <property name="placeholderText">
+                <string>site name</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="2">
               <widget class="QPushButton" name="pbAddChannels">
                <property name="minimumSize">
                 <size>
@@ -329,60 +333,6 @@
                <property name="icon">
                 <iconset resource="res.qrc">
                  <normaloff>:/newContact</normaloff>:/newContact</iconset>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="lbEmail">
-               <property name="text">
-                <string>Email :</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="lblEditPhone">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="res.qrc">:/editContact</pixmap>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QLabel" name="lblEditSite">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="res.qrc">:/editContact</pixmap>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="leSite">
-               <property name="placeholderText">
-                <string>site name</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lbPhone">
-               <property name="text">
-                <string>Phone :</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="leSkype">
-               <property name="placeholderText">
-                <string>skype name</string>
                </property>
               </widget>
              </item>
@@ -2789,10 +2739,11 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionChooseDatabase"/>
-   <addaction name="actionSave"/>
+   <addaction name="actionNew_Database"/>
+   <addaction name="actionChoose_Database"/>
    <addaction name="actionSaveAs"/>
    <addaction name="separator"/>
+   <addaction name="actionEditingMode"/>
    <addaction name="actionSettings"/>
    <addaction name="actionAbout"/>
   </widget>
@@ -2810,8 +2761,6 @@
    <addaction name="actionLoad_Contact"/>
    <addaction name="actionSave_Contact"/>
    <addaction name="actionDelete_Contact"/>
-   <addaction name="separator"/>
-   <addaction name="actionEdit_Contact"/>
   </widget>
   <widget class="QToolBar" name="commonToolBar">
    <property name="windowTitle">
@@ -2835,7 +2784,19 @@
    <addaction name="separator"/>
    <addaction name="actionAdd_Deal"/>
   </widget>
-  <action name="actionChooseDatabase">
+  <action name="actionNew_Database">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/newContactList</normaloff>:/newContactList</iconset>
+   </property>
+   <property name="text">
+    <string>New Database</string>
+   </property>
+   <property name="toolTip">
+    <string>New Database</string>
+   </property>
+  </action>
+  <action name="actionChoose_Database">
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/loadContactList</normaloff>:/loadContactList</iconset>
@@ -2845,18 +2806,6 @@
    </property>
    <property name="toolTip">
     <string>Choose Database</string>
-   </property>
-  </action>
-  <action name="actionSave">
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/save</normaloff>:/save</iconset>
-   </property>
-   <property name="text">
-    <string>Save</string>
-   </property>
-   <property name="toolTip">
-    <string>Save</string>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -2919,16 +2868,16 @@
     <string>Delete Contact</string>
    </property>
   </action>
-  <action name="actionEdit_Contact">
+  <action name="actionEditingMode">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/editContact</normaloff>:/editContact</iconset>
+     <normaloff>:/editingMode</normaloff>:/editingMode</iconset>
    </property>
    <property name="text">
-    <string>Edit Contact</string>
+    <string>Editing mode</string>
    </property>
    <property name="toolTip">
-    <string>Edit Contact</string>
+    <string>Editing mode</string>
    </property>
   </action>
   <action name="actionAbout">
