@@ -1,8 +1,8 @@
-﻿#include "cgMetaschemeConst.h"
-#include <QFile>
-#include <QDomDocument>
+﻿#include <QDomDocument>
 #include <QDebug>
+#include <QFile>
 #include "cgErrorMessage.h"
+#include "cgMetaschemeConst.h"
 
 bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
 {
@@ -18,11 +18,7 @@ bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
     int errorColumn;
     if (!doc.setContent(&file, &error, &errorLine, &errorColumn))
     {
-        ERROR_INCORRECT_FORMAT;
-        qDebug() << QString("Invalid file format: %1 in line: %2 in column: %3")
-                    .arg(error)
-                    .arg(errorLine)
-                    .arg(errorColumn);
+        ERROR_INCORRECT_FORMAT(error, errorLine, errorColumn);
         return false;
     }
     file.close();
@@ -30,18 +26,12 @@ bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
     scheme = doc.documentElement();
     if (scheme.nodeName() != Scheme::tagRoot)
     {
-        ERROR_INCORRECT_FORMAT;
-        qDebug() << QString("Incorrect main node. Current: %1, Need: %2")
-                    .arg(scheme.nodeName())
-                    .arg(Scheme::tagRoot);
+        ERROR_INCORRECT_MAIN_NODE(scheme.nodeName(), Scheme::tagRoot);
         return false;
     }
-    if(scheme.attribute(Scheme::attrVersion) != Scheme::VERSION)
+    if (scheme.attribute(Scheme::attrVersion) != Scheme::Version)
     {
-        ERROR_INCORRECT_VERSION;
-        qDebug() << QString("Incorrect version. Current: %1, Need: %2")
-                    .arg(scheme.attribute(Scheme::attrVersion))
-                    .arg(Scheme::VERSION);
+        ERROR_INCORRECT_VERSION(scheme.attribute(Scheme::attrVersion), Scheme::Version);
         return false;
     }
     return true;

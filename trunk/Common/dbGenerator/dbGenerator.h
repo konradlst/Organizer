@@ -2,6 +2,7 @@
 #define DBGENERATOR_H
 
 #include <QSqlDatabase>
+
 class QString;
 class QDomElement;
 class QStringList;

@@ -4,20 +4,20 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Organizer
 TEMPLATE = app
 INCLUDEPATH += "../Common/"
+INCLUDEPATH += "../Common/dbGenerator"
 INCLUDEPATH += "./Views/"
 INCLUDEPATH += "./Dialogs/"
 
 
 SOURCES += main.cpp \
     OrganizerView.cpp \
-    ../Common/drivers/driverSqlite.cpp \
     Views/accountView.cpp \
     Views/transactionView.cpp \
     Views/timeView.cpp \
@@ -29,11 +29,13 @@ SOURCES += main.cpp \
     Dialogs/timeDialog.cpp \
     Dialogs/dealDialog.cpp \
     Dialogs/accountDialog.cpp \
-    Dialogs/transactionDialog.cpp
+    Dialogs/transactionDialog.cpp \
+    ../Common/dbGenerator/dbGenerator.cpp \
+    ../Common/drivers/driverSqlite.cpp \
+    ../Common/cgMetaschemeConst.cpp
 
 HEADERS  += \
     OrganizerView.h \
-    ../Common/drivers/driverSqlite.h \
     OrganizerConst.h \
     Views/accountView.h \
     Views/transactionView.h \
@@ -47,7 +49,11 @@ HEADERS  += \
     Dialogs/timeDialog.h \
     Dialogs/dealDialog.h \
     Dialogs/accountDialog.h \
-    Dialogs/transactionDialog.h
+    Dialogs/transactionDialog.h \
+    ../Common/dbGenerator/dbGenerator.h \
+    ../Common/drivers/driverSqlite.h \
+    ../Common/cgErrorMessage.h \
+    ../Common/cgMetaschemeConst.cpp
 
 FORMS    += \
     OrganizerView.ui
@@ -56,4 +62,4 @@ RESOURCES += \
     res.qrc
 
 OTHER_FILES += \
-    ../Common/metascheme.xml
+    ../Common/metascheme_0.3.xml

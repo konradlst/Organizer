@@ -1,7 +1,7 @@
-﻿#include "driverManager.h"
-#include "driverXml.h"
+﻿#include "cgErrorMessage.h"
 #include "driverSqlite.h"
-#include "cgErrorMessage.h"
+#include "driverXml.h"
+#include "driverManager.h"
 
 namespace File
 {
@@ -36,7 +36,7 @@ Data::Contacts *DriverManager::loadData(const QString &path)
     else if (path.endsWith(File::SQLITE))
         return m_sqlite->loadData(path);
 
-    ERROR_INCORRECT_FORMAT;
+    ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
     return 0;
 }
 
@@ -53,6 +53,6 @@ ContactData *DriverManager::loadContact(const QString &path)
     if (path.endsWith(File::XML))
         return m_xml->loadContact(path);
 
-    ERROR_INCORRECT_FORMAT;
+    ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
     return 0;
 }

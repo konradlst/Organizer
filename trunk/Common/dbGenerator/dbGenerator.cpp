@@ -1,18 +1,18 @@
-﻿#include "dbGenerator.h"
-#include <QDomElement>
+﻿#include <QDomElement>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
-#include "cgErrorMessage.h"
 #include "cgMetaschemeConst.h"
+#include "cgErrorMessage.h"
+#include "dbGenerator.h"
 
 namespace
 {
-const QString CONNECTION_NAME("generateDb");
-const QString DB_EXIST("Database %1 already exist");
-const QString TRUE("1");
-const QString FALSE("0");
-const QString QUOTES("'%1'");
+const QString ConnectionName = "generateDb";
+const QString DbExist = QObject::trUtf8("Database %1 already exist");
+const QString True = "1";
+const QString False = "0";
+const QString Quotes = "'%1'";
 }
 
 dbGenerator::dbGenerator(const QString &pathToDb)
@@ -22,7 +22,7 @@ dbGenerator::dbGenerator(const QString &pathToDb)
 
 bool dbGenerator::generate(const bool fillTable)
 {
-    m_db = QSqlDatabase::addDatabase(SQL::SQLITE, CONNECTION_NAME);
+    m_db = QSqlDatabase::addDatabase(SQL::SQLITE, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
     if (!m_db.open())
     {
@@ -32,14 +32,13 @@ bool dbGenerator::generate(const bool fillTable)
 
     if (!m_db.tables().isEmpty())
     {
-        qDebug() << DB_EXIST.arg(m_pathToDb);
+        qDebug() << DbExist.arg(m_pathToDb);
         return true;
     }
     m_db.close();
 
     QDomElement scheme;
-    if (!Scheme::loadScheme(scheme)
-            || !generateTables(scheme)
+    if (!Scheme::loadScheme(scheme) || !generateTables(scheme)
             || (fillTable && !fillTables(scheme)))
         return false;
     return true;
@@ -87,8 +86,8 @@ bool dbGenerator::fillTables(const QDomElement &scheme)
         while (!fldNode.isNull())
         {
             QDomElement field = fldNode.toElement();
-            fieldNames << QUOTES.arg(field.attribute(Scheme::attrName));
-            fieldValues << QUOTES.arg(field.attribute(Scheme::attrValue));
+            fieldNames << Quotes.arg(field.attribute(Scheme::attrName));
+            fieldValues << Quotes.arg(field.attribute(Scheme::attrValue));
 
             fldNode = fldNode.nextSibling();
         }
@@ -107,16 +106,16 @@ void dbGenerator::parseField(const QDomElement &field, QString &data) const
     d << field.attribute(Scheme::attrName)
       << field.attribute(Scheme::attrType);
 
-    if (field.hasAttribute(Scheme::attrPk) && field.attribute(Scheme::attrPk) == TRUE)
+    if (field.hasAttribute(Scheme::attrPk) && field.attribute(Scheme::attrPk) == True)
         d << SQL::PRIMARY_KEY;
     else if (field.hasAttribute(Scheme::attrFk) && field.hasAttribute(Scheme::attrFkField))
         d << SQL::FOREIGN_KEY.arg(field.attribute(Scheme::attrName))
                              .arg(field.attribute(Scheme::attrFk))
                              .arg(field.attribute(Scheme::attrFkField));
 
-    if (field.hasAttribute(Scheme::attrNullable) && field.attribute(Scheme::attrNullable) == FALSE)
+    if (field.hasAttribute(Scheme::attrNullable) && field.attribute(Scheme::attrNullable) == False)
         d << SQL::NOT_NULL;
-    if (field.hasAttribute(Scheme::attrUnq) && field.attribute(Scheme::attrUnq) == TRUE)
+    if (field.hasAttribute(Scheme::attrUnq) && field.attribute(Scheme::attrUnq) == True)
         d << SQL::UNIQUE;
     if (field.hasAttribute(Scheme::attrDefault))
         d << SQL::DEFAULT.arg(field.attribute(Scheme::attrDefault));
@@ -128,7 +127,7 @@ bool dbGenerator::execQueries(const QStringList &list)
 {
     m_db.open();
     QSqlQuery query(m_db);
-    foreach (const QString q, list)
+    foreach (const QString &q, list)
     {
         if (!query.exec(q))
             qDebug() << query.lastError() << query.lastQuery();

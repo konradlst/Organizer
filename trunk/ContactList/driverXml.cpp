@@ -1,19 +1,19 @@
 ﻿#include <QApplication>
-#include "driverXml.h"
-#include <QFile>
-#include <QTextStream>
 #include <QDomDocument>
+#include <QTextStream>
+#include <QFile>
 #include "cgErrorMessage.h"
+#include "driverXml.h"
 
 namespace Tag
 {
-const QString Tree("tree");
-const QString Record("record");
-const QString Data("data");
-const QString DataType("dataType");
-const QString Addresses("addresses");
-const QString Channels("channels");
-const QString Organizations("organizations");
+const QString Tree = "tree";
+const QString Record = "record";
+const QString Data = "data";
+const QString DataType = "dataType";
+const QString Addresses = "addresses";
+const QString Channels = "channels";
+const QString Organizations = "organizations";
 }
 
 DriverXml::DriverXml()
@@ -37,7 +37,7 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
     QDomElement root = doc.createElement(Tag::Tree);
     root.setAttribute(Attribute::Version, qApp->applicationVersion());
     doc.appendChild(root);
-    for (int i=0; i < data.size(); ++i)
+    for (int i = 0; i < data.size(); ++i)
     {
         QDomElement record = doc.createElement(Tag::Record);
         QDomElement field = doc.createElement(Tag::Data);
@@ -90,7 +90,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     }
     if (!doc->setContent(&file))
     {
-        ERROR_INCORRECT_FORMAT;
+        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
         return 0;
     }
     file.close();
@@ -98,12 +98,12 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     QDomElement rootElement = doc->documentElement();
     if (rootElement.nodeName() != Tag::Tree)
     {
-        ERROR_INCORRECT_FORMAT;
+        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
         return 0;
     }
     if (rootElement.attribute(Attribute::Version) != qApp->applicationVersion())
     {
-        ERROR_INCORRECT_VERSION;
+        ERROR_INCORRECT_VERSION(QString(), QString()); //FIXME
         return 0;
     }
 
@@ -112,7 +112,7 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     while(!recordNode.isNull())
     {
         QDomElement recordElement = recordNode.toElement();
-        if(!recordElement.isNull())
+        if (!recordElement.isNull())
         {
             ContactData *currentContact = new ContactData();
             xmlToContactData(recordElement, *currentContact);
@@ -183,7 +183,7 @@ ContactData *DriverXml::loadContact(const QString &path)
     }
     if (!doc->setContent(&file))
     {
-        ERROR_INCORRECT_FORMAT;
+        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
         return 0;
     }
     file.close();
@@ -191,12 +191,12 @@ ContactData *DriverXml::loadContact(const QString &path)
     QDomElement recordElement = doc->documentElement();
     if (recordElement.nodeName() != Tag::Record)
     {
-        ERROR_INCORRECT_FORMAT;
+        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
         return 0;
     }
     if (recordElement.attribute(Attribute::Version) != qApp->applicationVersion())
     {
-        ERROR_INCORRECT_VERSION;
+        ERROR_INCORRECT_VERSION(QString(), QString()); //FIXME
         return 0;
     }
 

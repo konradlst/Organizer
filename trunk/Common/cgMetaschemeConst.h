@@ -2,45 +2,45 @@
 #define CGMETASCHEMECONST_H
 
 #include <QString>
+
 class QDomElement;
 
 namespace Scheme
 {
-const QString metaschemeFile("./metascheme.xml");
-const QString SPLITTER(";");
-const QString VERSION("0.2");
-const QString tagRoot("cg_db_scheme");
-const QString tagTables("tables");
-const QString tagValues("values");
-const QString tagTable("table");
-const QString tagDelegates("delegates");
-const QString tagDelegate("delegate");
-const QString attrVersion("version");
-const QString attrName("name");
-const QString attrValue("value");
-const QString attrType("type");
-const QString attrPk("pk");
-const QString attrFk("fk");
-const QString attrFkField("fkField");
-const QString attrNullable("nullable");
-const QString attrUnq("unq");
-const QString attrDefault("default");
-const QString attrDelegate("delegate");
-const QString attrParam("param");
+const QString metaschemeFile = "./metascheme.xml";
+const QString Version = "0.3";
+const QString tagRoot = "cg_db_scheme";
+const QString tagTables = "tables";
+const QString tagValues = "values";
+const QString tagTable = "table";
+const QString tagDelegates = "delegates";
+const QString tagDelegate = "delegate";
+const QString attrVersion = "version";
+const QString attrName = "name";
+const QString attrValue = "value";
+const QString attrType = "type";
+const QString attrPk = "pk";
+const QString attrFk = "fk";
+const QString attrFkField = "fkField";
+const QString attrNullable = "nullable";
+const QString attrUnq = "unq";
+const QString attrDefault = "default";
+const QString attrDelegate = "delegate";
+const QString attrParam = "param";
 
 bool loadScheme(QDomElement &scheme, const QString &path = metaschemeFile);
 }
 
 namespace delegateName
 {
-const QString line("lineEdit");
-const QString comboBox("comboBoxEdit");
-const QString checkBox("checkBoxEdit");
-const QString spinBox("spinBoxEdit");
-const QString date("dateEdit");
-const QString time("timeEdit");
-const QString dateTime("dateTimeEdit");
-const QString dSpinBox("doubleSpinBoxEdit");
+const QString line = "lineEdit";
+const QString comboBox = "comboBoxEdit";
+const QString checkBox = "checkBoxEdit";
+const QString spinBox = "spinBoxEdit";
+const QString date = "dateEdit";
+const QString time = "timeEdit";
+const QString dateTime = "dateTimeEdit";
+const QString dSpinBox = "doubleSpinBoxEdit";
 }
 
 namespace SQL

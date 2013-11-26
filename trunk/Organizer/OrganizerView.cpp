@@ -14,6 +14,7 @@
 #include "dialogConst.h"
 #include "ui_OrganizerView.h"
 #include "OrganizerView.h"
+#include "dbGenerator.h"
 
 #include <QDebug>
 
@@ -358,13 +359,19 @@ void OrganizerView::openDbDialog()
     QString path = QFileDialog::getOpenFileName(this, OpenTitle,
                                                 QDir::currentPath(), FileTypes);
     qDebug() << path;
+
+    dbGenerator gen = dbGenerator(path);
+    gen.generate();
 }
 
 void OrganizerView::saveDbDialog()
 {
-    QString path = QFileDialog::getOpenFileName(this, SaveTitle,
+    QString path = QFileDialog::getSaveFileName(this, SaveTitle,
                                                 QDir::currentPath(), FileTypes);
     qDebug() << path;
+
+    dbGenerator gen = dbGenerator(path);
+    gen.generate();
 }
 
 void OrganizerView::openDialog()
