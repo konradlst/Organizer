@@ -11,10 +11,11 @@
 #include "eventView.h"
 #include "timeView.h"
 #include "dealView.h"
+#include "cgErrorMessage.h"
 #include "dialogConst.h"
+#include "dbGenerator.h"
 #include "ui_OrganizerView.h"
 #include "OrganizerView.h"
-#include "dbGenerator.h"
 
 #include <QDebug>
 
@@ -83,6 +84,7 @@ OrganizerView::~OrganizerView()
 
 void OrganizerView::setToday()
 {
+    ui->tabWidget->setCurrentIndex(CalendarTab);
     int time = QTime::currentTime().hour() * 2;
     if (QTime::currentTime().minute() > 30)
         ++time;
@@ -121,7 +123,8 @@ void OrganizerView::timeDialog()
         m_times->append(view);
         ui->Times->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        qDebug() << "Add new time record: " << d->data()->join("# ");
+
+        Log::info("Add new time record: " + d->data()->join("# "));
     }
 }
 
@@ -142,7 +145,7 @@ void OrganizerView::dealDialog()
         m_deals->append(view);
         ui->Deals->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        qDebug() << "Add new deal: " << d->data()->join("# ");
+        Log::info("Add new deal: " + d->data()->join("# "));
     }
 }
 
@@ -162,7 +165,7 @@ void OrganizerView::eventDialog()
         m_events->append(view);
         ui->Events->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        qDebug() << "Add new event: " << d->data()->join("# ");
+        Log::info("Add new event: " + d->data()->join("# "));
     }
 }
 
@@ -181,7 +184,7 @@ void OrganizerView::accountDialog()
         m_accounts->append(view);
         ui->Accounts->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        qDebug() << "Add new account: " << d->data()->join("# ");
+        Log::info("Add new account: " + d->data()->join("# "));
     }
 }
 
@@ -199,7 +202,7 @@ void OrganizerView::transactionDialog()
         m_transactions->append(view);
         ui->Transactions->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
-        qDebug() << "Add new transaction: " << d->data()->join("# ");
+        Log::info("Add new transaction: " + d->data()->join("# "));
     }
 }
 

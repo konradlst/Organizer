@@ -11,7 +11,7 @@
 
 AccountDialog::AccountDialog(QWidget *parent)
     : Dialog(parent),
-      m_created(new QDateEdit()),
+      m_created(new QDateEdit(QDate::currentDate())),
       m_name(new QLineEdit()),
       m_value(new QSpinBox()),
       m_total(new QSpinBox())

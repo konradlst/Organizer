@@ -11,9 +11,9 @@
 
 DealDialog::DealDialog(const int type, QWidget *parent)
     : Dialog(parent),
-      m_date(new QDateEdit()),
+      m_date(new QDateEdit(QDate::currentDate())),
       m_duration(new QTimeEdit()),
-      m_deadLine(new QDateEdit()),
+      m_deadLine(new QDateEdit(QDate::currentDate().addDays(1))),
       m_money(new QSpinBox()),
       m_humans(new QLineEdit())
 {

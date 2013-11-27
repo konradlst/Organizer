@@ -12,4 +12,12 @@ bool incorrectVersion(const QString current = QString(), const QString need = QS
 bool cannotOpen();
 }
 
+namespace Log
+{
+void debug(const QString &lastError);
+void info(const QString &lastError);
+void warning(const QString &lastError);
+void error(const QString &lastError);
+}
+
 #endif // ERRORMESSAGE_H

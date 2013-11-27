@@ -9,8 +9,8 @@
 TimeDialog::TimeDialog(QWidget *parent)
     : Dialog(parent),
       m_duration(new QTimeEdit()),
-      m_started(new QTimeEdit()),
-      m_stoped(new QTimeEdit()),
+      m_started(new QTimeEdit(QTime::currentTime())),
+      m_stoped(new QTimeEdit(QTime::currentTime())),
       m_lock(false)
 {
     setWindowTitle(TimeTitle);

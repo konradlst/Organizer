@@ -1,4 +1,5 @@
 #include <QMessageBox>
+#include <QDateTime>
 #include <QDebug>
 #include "cgErrorMessage.h"
 
@@ -50,4 +51,35 @@ bool cannotOpen()
     return 0;
 }
 
+}
+
+namespace Log
+{
+namespace
+{
+const QString Debug = QObject::trUtf8("Debug : ");
+const QString Info = QObject::trUtf8("Info : ");
+const QString Warning = QObject::trUtf8("Warning : ");
+const QString Error = QObject::trUtf8("Error : ");
+}
+
+void debug(const QString &lastError)
+{
+    qDebug() << QDateTime::currentDateTime() + Debug + lastError;
+}
+
+void info(const QString &lastError)
+{
+    qDebug() << QDateTime::currentDateTime() + Info + lastError;
+}
+
+void warning(const QString &lastError)
+{
+    qDebug() << QDateTime::currentDateTime() + Warning + lastError;
+}
+
+void error(const QString &lastError)
+{
+    qDebug() << QDateTime::currentDateTime() + Error + lastError;
+}
 }

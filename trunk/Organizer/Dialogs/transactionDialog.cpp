@@ -10,7 +10,7 @@
 
 TransactionDialog::TransactionDialog(QWidget *parent)
     : Dialog(parent),
-      m_created(new QDateEdit()),
+      m_created(new QDateEdit(QDate::currentDate())),
       m_name(new QLineEdit()),
       m_value(new QSpinBox())
 {
