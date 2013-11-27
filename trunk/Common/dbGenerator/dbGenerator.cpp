@@ -1,4 +1,5 @@
 ﻿#include <QDomElement>
+#include <QStringList>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
@@ -25,10 +26,7 @@ bool dbGenerator::generate(const bool fillTable)
     m_db = QSqlDatabase::addDatabase(SQL::SQLITE, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
     if (!m_db.open())
-    {
-        ERROR_CANNOT_OPEN;
-        return false;
-    }
+        return Error::cannotOpen();
 
     if (!m_db.tables().isEmpty())
     {

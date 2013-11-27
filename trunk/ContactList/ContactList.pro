@@ -28,6 +28,7 @@ SOURCES += main.cpp\
     driverManager.cpp \
     contactView.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
+    ../Common/cgErrorMessage.cpp \
     ../Common/cgMetaschemeConst.cpp
 
 HEADERS  += \

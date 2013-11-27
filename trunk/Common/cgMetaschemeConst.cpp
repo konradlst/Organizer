@@ -9,30 +9,22 @@ bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
     QDomDocument doc;
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        ERROR_CANNOT_OPEN;
-        return false;
-    }
+        return Error::cannotOpen();
+
     QString error;
     int errorLine;
     int errorColumn;
     if (!doc.setContent(&file, &error, &errorLine, &errorColumn))
-    {
-        ERROR_INCORRECT_FORMAT(error, errorLine, errorColumn);
-        return false;
-    }
+        return Error::incorrectFormat(error, errorLine, errorColumn);
+
     file.close();
 
     scheme = doc.documentElement();
     if (scheme.nodeName() != Scheme::tagRoot)
-    {
-        ERROR_INCORRECT_MAIN_NODE(scheme.nodeName(), Scheme::tagRoot);
-        return false;
-    }
+        return Error::incorrectMainNode(scheme.nodeName(), Scheme::tagRoot);
+
     if (scheme.attribute(Scheme::attrVersion) != Scheme::Version)
-    {
-        ERROR_INCORRECT_VERSION(scheme.attribute(Scheme::attrVersion), Scheme::Version);
-        return false;
-    }
+        return Error::incorrectVersion(scheme.attribute(Scheme::attrVersion), Scheme::Version);
+
     return true;
 }

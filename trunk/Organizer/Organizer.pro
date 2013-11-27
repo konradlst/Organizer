@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     Dialogs/transactionDialog.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
-    ../Common/cgMetaschemeConst.cpp
+    ../Common/cgMetaschemeConst.cpp \
+    ../Common/cgErrorMessage.cpp
 
 HEADERS  += \
     OrganizerView.h \

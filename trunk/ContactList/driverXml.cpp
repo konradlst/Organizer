@@ -1,5 +1,6 @@
 ﻿#include <QApplication>
 #include <QDomDocument>
+#include <QStringList>
 #include <QTextStream>
 #include <QFile>
 #include "cgErrorMessage.h"
@@ -28,10 +29,7 @@ bool DriverXml::saveData(const Data::Contacts &data, const QString &path)
 {
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        ERROR_CANNOT_OPEN;
-        return false;
-    }
+        return Error::cannotOpen();
 
     QDomDocument doc;
     QDomElement root = doc.createElement(Tag::Tree);
@@ -85,25 +83,29 @@ Data::Contacts *DriverXml::loadData(const QString &path)
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        ERROR_CANNOT_OPEN;
+        Error::cannotOpen();
         return 0;
     }
+
     if (!doc->setContent(&file))
     {
-        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
+        Error::incorrectFormat();
         return 0;
     }
+
     file.close();
 
     QDomElement rootElement = doc->documentElement();
     if (rootElement.nodeName() != Tag::Tree)
     {
-        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
+        Error::incorrectFormat();
         return 0;
     }
+
     if (rootElement.attribute(Attribute::Version) != qApp->applicationVersion())
     {
-        ERROR_INCORRECT_VERSION(QString(), QString()); //FIXME
+        Error::incorrectVersion(rootElement.attribute(Attribute::Version),
+                                qApp->applicationVersion());
         return 0;
     }
 
@@ -127,10 +129,7 @@ bool DriverXml::saveContact(const ContactData &data, const QString &path)
 {
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        ERROR_CANNOT_OPEN;
-        return false;
-    }
+        return Error::cannotOpen();
 
     QDomDocument doc;
     QDomElement record = doc.createElement(Tag::Record);
@@ -178,25 +177,29 @@ ContactData *DriverXml::loadContact(const QString &path)
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        ERROR_CANNOT_OPEN;
+        Error::cannotOpen();
         return 0;
     }
+
     if (!doc->setContent(&file))
     {
-        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
+        Error::incorrectFormat();
         return 0;
     }
+
     file.close();
 
     QDomElement recordElement = doc->documentElement();
     if (recordElement.nodeName() != Tag::Record)
     {
-        ERROR_INCORRECT_FORMAT(QString(), QString(), QString()); //FIXME
+        Error::incorrectFormat();
         return 0;
     }
+
     if (recordElement.attribute(Attribute::Version) != qApp->applicationVersion())
     {
-        ERROR_INCORRECT_VERSION(QString(), QString()); //FIXME
+        Error::incorrectVersion(recordElement.attribute(Attribute::Version),
+                                qApp->applicationVersion());
         return 0;
     }
 
