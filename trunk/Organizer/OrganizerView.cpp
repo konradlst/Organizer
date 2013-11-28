@@ -3,17 +3,17 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "transactionDialog.h"
+#include "transactionView.h"
+#include "cgErrorMessage.h"
 #include "accountDialog.h"
+#include "accountView.h"
+#include "dialogConst.h"
+#include "dbGenerator.h"
 #include "timeDialog.h"
 #include "dealDialog.h"
-#include "transactionView.h"
-#include "accountView.h"
 #include "eventView.h"
 #include "timeView.h"
 #include "dealView.h"
-#include "cgErrorMessage.h"
-#include "dialogConst.h"
-#include "dbGenerator.h"
 #include "ui_OrganizerView.h"
 #include "OrganizerView.h"
 

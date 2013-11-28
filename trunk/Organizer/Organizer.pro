@@ -12,24 +12,28 @@ TARGET = Organizer
 TEMPLATE = app
 INCLUDEPATH += "../Common/"
 INCLUDEPATH += "../Common/dbGenerator"
-INCLUDEPATH += "./Views/"
-INCLUDEPATH += "./Dialogs/"
+INCLUDEPATH += "./modules"
+INCLUDEPATH += "./modules/accounts"
+INCLUDEPATH += "./modules/transactions"
+INCLUDEPATH += "./modules/deals"
+INCLUDEPATH += "./modules/times"
+INCLUDEPATH += "./modules/calendars"
 
 
 SOURCES += main.cpp \
     OrganizerView.cpp \
-    Views/accountView.cpp \
-    Views/transactionView.cpp \
-    Views/timeView.cpp \
-    Views/dealView.cpp \
-    Views/dateView.cpp \
-    Views/eventView.cpp \
-    Views/yearCalendar.cpp \
-    Dialogs/dialog.cpp \
-    Dialogs/timeDialog.cpp \
-    Dialogs/dealDialog.cpp \
-    Dialogs/accountDialog.cpp \
-    Dialogs/transactionDialog.cpp \
+    modules/accounts/accountView.cpp \
+    modules/accounts/accountDialog.cpp \
+    modules/transactions/transactionView.cpp \
+    modules/transactions/transactionDialog.cpp \
+    modules/deals/dealView.cpp \
+    modules/deals/eventView.cpp \
+    modules/deals/dealDialog.cpp \
+    modules/times/timeView.cpp \
+    modules/times/timeDialog.cpp \
+    modules/calendars/yearCalendar.cpp \
+    modules/calendars/dateView.cpp \
+    modules/dialog.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
     ../Common/cgMetaschemeConst.cpp \
@@ -38,19 +42,19 @@ SOURCES += main.cpp \
 HEADERS  += \
     OrganizerView.h \
     OrganizerConst.h \
-    Views/accountView.h \
-    Views/transactionView.h \
-    Views/timeView.h \
-    Views/dealView.h \
-    Views/dateView.h \
-    Views/eventView.h \
-    Views/yearCalendar.h \
-    Dialogs/dialog.h \
-    Dialogs/dialogConst.h \
-    Dialogs/timeDialog.h \
-    Dialogs/dealDialog.h \
-    Dialogs/accountDialog.h \
-    Dialogs/transactionDialog.h \
+    modules/accounts/accountView.h \
+    modules/accounts/accountDialog.h \
+    modules/transactions/transactionView.h \
+    modules/transactions/transactionDialog.h \
+    modules/deals/dealView.h \
+    modules/deals/eventView.h \
+    modules/deals/dealDialog.h \
+    modules/times/timeView.h \
+    modules/times/timeDialog.h \
+    modules/calendars/yearCalendar.h \
+    modules/calendars/dateView.h \
+    modules/dialog.h \
+    modules/dialogConst.h \
     ../Common/dbGenerator/dbGenerator.h \
     ../Common/drivers/driverSqlite.h \
     ../Common/cgErrorMessage.h \

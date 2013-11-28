@@ -57,6 +57,7 @@ namespace Log
 {
 namespace
 {
+const QString DateTimeFormat = "";
 const QString Debug = QObject::trUtf8("Debug : ");
 const QString Info = QObject::trUtf8("Info : ");
 const QString Warning = QObject::trUtf8("Warning : ");
@@ -65,21 +66,21 @@ const QString Error = QObject::trUtf8("Error : ");
 
 void debug(const QString &lastError)
 {
-    qDebug() << QDateTime::currentDateTime() + Debug + lastError;
+    qDebug() << QDateTime::currentDateTime().toString(DateTimeFormat) + Debug + lastError;
 }
 
 void info(const QString &lastError)
 {
-    qDebug() << QDateTime::currentDateTime() + Info + lastError;
+    qDebug() << QDateTime::currentDateTime().toString(DateTimeFormat) + Info + lastError;
 }
 
 void warning(const QString &lastError)
 {
-    qDebug() << QDateTime::currentDateTime() + Warning + lastError;
+    qDebug() << QDateTime::currentDateTime().toString(DateTimeFormat) + Warning + lastError;
 }
 
 void error(const QString &lastError)
 {
-    qDebug() << QDateTime::currentDateTime() + Error + lastError;
+    qDebug() << QDateTime::currentDateTime().toString(DateTimeFormat) + Error + lastError;
 }
 }
