@@ -25,29 +25,30 @@ bool incorrectFormat(const QString error, const int errorLine,
 {
     QMessageBox::warning(new QWidget(), Title, MsgIncorrectFormat);
     if (error.isEmpty() && !errorLine && !errorColumn)
-        qDebug() << LogInvalidFile;
+        Log::error(LogInvalidFile);
     else
-        qDebug() << LogInvalidFileFormat.arg(error).arg(errorLine).arg(errorColumn);
+        Log::error(LogInvalidFileFormat.arg(error).arg(errorLine).arg(errorColumn));
     return 0;
 }
 
 bool incorrectMainNode(const QString current, const QString need)
 {
     QMessageBox::warning(new QWidget(), Title, MsgIncorrectFormat);
-    qDebug() << LogIncorrectMainNode.arg(current).arg(need);
+    Log::error(LogIncorrectMainNode.arg(current).arg(need));
     return 0;
 }
 
 bool incorrectVersion(const QString current, const QString need)
 {
     QMessageBox::warning(new QWidget(), Title, MsgIncorrectVersion);
-    qDebug() << LogIncorrectVersion.arg(current).arg(need);
+    Log::error(LogIncorrectVersion.arg(current).arg(need));
     return 0;
 }
 
 bool cannotOpen()
 {
     QMessageBox::warning(new QWidget(), Title, MsgCannotOpenFile);
+    Log::error(MsgCannotOpenFile);
     return 0;
 }
 
