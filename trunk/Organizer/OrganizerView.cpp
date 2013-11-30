@@ -17,8 +17,6 @@
 #include "ui_OrganizerView.h"
 #include "OrganizerView.h"
 
-#include <QDebug>
-
 namespace
 {
 enum Calendars { Today = 0, ThreeDay, Week, Mounth, Year };
@@ -31,6 +29,8 @@ const double TimeStep = 0.5; //30 min - step in calendars
 const QString monthTemplate = "( MMMM yyyy )";
 const QString weekTemplate = "( dd.MM - %1 )";
 const QString dayTemplate = "( ddd, dd.MM.yyyy )";
+const QString TitlePathToDb = QObject::trUtf8("Choose path to DB");
+const QString TitlePathToLogFile = QObject::trUtf8("Choose path to log file");
 const QString OpenTitle = QObject::trUtf8("Open database");
 const QString SaveTitle = QObject::trUtf8("Save database");
 const QString OpenContactTitle = QObject::trUtf8("Open contact");
@@ -361,7 +361,7 @@ void OrganizerView::openDbDialog()
 {
     QString path = QFileDialog::getOpenFileName(this, OpenTitle,
                                                 QDir::currentPath(), FileTypes);
-    qDebug() << path;
+    Log::info(path);
 
     dbGenerator gen = dbGenerator(path);
     gen.generate();
@@ -371,7 +371,7 @@ void OrganizerView::saveDbDialog()
 {
     QString path = QFileDialog::getSaveFileName(this, SaveTitle,
                                                 QDir::currentPath(), FileTypes);
-    qDebug() << path;
+    Log::info(path);
 
     dbGenerator gen = dbGenerator(path);
     gen.generate();
@@ -381,14 +381,30 @@ void OrganizerView::openDialog()
 {
     QString path = QFileDialog::getOpenFileName(this, OpenContactTitle,
                                                 QDir::currentPath(), FileTypes);
-    qDebug() << path;
+    Log::info(path);
 }
 
 void OrganizerView::saveDialog()
 {
     QString path = QFileDialog::getSaveFileName(this, SaveContactTitle,
                                                 QDir::currentPath(), FileTypes);
-    qDebug() << path;
+    Log::info(path);
+}
+
+void OrganizerView::pathToDb()
+{
+    QString path = QFileDialog::getOpenFileName(this, TitlePathToDb,
+                                                QDir::currentPath(), FileTypes);
+    if (!path.isEmpty())
+        ui->pathToDb->setText(path);
+}
+
+void OrganizerView::pathToLogFile()
+{
+    QString path = QFileDialog::getOpenFileName(this, TitlePathToLogFile,
+                                                QDir::currentPath(), FileTypes);
+    if (!path.isEmpty())
+        ui->pathToLogFile->setText(path);
 }
 
 void OrganizerView::createInterface()
@@ -419,6 +435,10 @@ void OrganizerView::createInterface()
         table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     }
 
+    connect(ui->pbOpenPathToDb, SIGNAL(clicked()), SLOT(pathToDb()));
+    connect(ui->pbOpenPathToLogFile, SIGNAL(clicked()), SLOT(pathToLogFile()));
+
+    //connect checkBox Select all in finance statistic
     connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
             ui->cbAverageIncomePerDay, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllFinanceStatistic, SIGNAL(clicked(bool)),
@@ -499,6 +519,7 @@ void OrganizerView::createInterface()
     connect(ui->cbLastOutcome, SIGNAL(clicked(bool)),
             SLOT(settingsFinaceStatistic(bool)));
 
+    //connect checkBox Select all in time statistic
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
             ui->cbAverageDaily, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
@@ -506,17 +527,17 @@ void OrganizerView::createInterface()
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
             ui->cbAverageMonthly, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
-            ui->cbMaximumDaily, SLOT(setChecked(bool)));
+            ui->cbMaxDaily, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
-            ui->cbMaximumWeekly, SLOT(setChecked(bool)));
+            ui->cbMaxWeekly, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
-            ui->cbMaximumMonthly, SLOT(setChecked(bool)));
+            ui->cbMaxMonthly, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
-            ui->cbMinimumDaily, SLOT(setChecked(bool)));
+            ui->cbMinDaily, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
-            ui->cbMinimumWeekly, SLOT(setChecked(bool)));
+            ui->cbMinWeekly, SLOT(setChecked(bool)));
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
-            ui->cbMinimumMonthly, SLOT(setChecked(bool)));
+            ui->cbMinMonthly, SLOT(setChecked(bool)));
 
     connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
@@ -526,18 +547,135 @@ void OrganizerView::createInterface()
             SLOT(settingsTimeStatistic(bool)));
     connect(ui->cbAverageMonthly, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
-    connect(ui->cbMaximumDaily, SIGNAL(clicked(bool)),
+    connect(ui->cbMaxDaily, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
-    connect(ui->cbMaximumWeekly, SIGNAL(clicked(bool)),
+    connect(ui->cbMaxWeekly, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
-    connect(ui->cbMaximumMonthly, SIGNAL(clicked(bool)),
+    connect(ui->cbMaxMonthly, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
-    connect(ui->cbMinimumDaily, SIGNAL(clicked(bool)),
+    connect(ui->cbMinDaily, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
-    connect(ui->cbMinimumWeekly, SIGNAL(clicked(bool)),
+    connect(ui->cbMinWeekly, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
-    connect(ui->cbMinimumMonthly, SIGNAL(clicked(bool)),
+    connect(ui->cbMinMonthly, SIGNAL(clicked(bool)),
             SLOT(settingsTimeStatistic(bool)));
+
+    //connect checkBox in settings and info in time statistic
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblAverageDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teAverageDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateAverageDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblAverageWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teAverageWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateAverageWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblAverageMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teAverageMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateAverageMonthly, SLOT(setVisible(bool)));
+
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblMinDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teMinDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateMinDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblMinWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teMinWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateMinWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblMinMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teMinMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateMinMonthly, SLOT(setVisible(bool)));
+
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblMaxDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teMaxDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateMaxDaily, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblMaxWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teMaxWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateMaxWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->lblMaxMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->teMaxMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbSelectAllTimeStatistic, SIGNAL(clicked(bool)),
+            ui->dateMaxMonthly, SLOT(setVisible(bool)));
+
+    connect(ui->cbAverageDaily, SIGNAL(clicked(bool)),
+            ui->lblAverageDaily, SLOT(setVisible(bool)));
+    connect(ui->cbAverageDaily, SIGNAL(clicked(bool)),
+            ui->teAverageDaily, SLOT(setVisible(bool)));
+    connect(ui->cbAverageDaily, SIGNAL(clicked(bool)),
+            ui->dateAverageDaily, SLOT(setVisible(bool)));
+    connect(ui->cbAverageWeekly, SIGNAL(clicked(bool)),
+            ui->lblAverageWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbAverageWeekly, SIGNAL(clicked(bool)),
+            ui->teAverageWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbAverageWeekly, SIGNAL(clicked(bool)),
+            ui->dateAverageWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbAverageMonthly, SIGNAL(clicked(bool)),
+            ui->lblAverageMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbAverageMonthly, SIGNAL(clicked(bool)),
+            ui->teAverageMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbAverageMonthly, SIGNAL(clicked(bool)),
+            ui->dateAverageMonthly, SLOT(setVisible(bool)));
+
+    connect(ui->cbMinDaily, SIGNAL(clicked(bool)),
+            ui->lblMinDaily, SLOT(setVisible(bool)));
+    connect(ui->cbMinDaily, SIGNAL(clicked(bool)),
+            ui->teMinDaily, SLOT(setVisible(bool)));
+    connect(ui->cbMinDaily, SIGNAL(clicked(bool)),
+            ui->dateMinDaily, SLOT(setVisible(bool)));
+    connect(ui->cbMinWeekly, SIGNAL(clicked(bool)),
+            ui->lblMinWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbMinWeekly, SIGNAL(clicked(bool)),
+            ui->teMinWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbMinWeekly, SIGNAL(clicked(bool)),
+            ui->dateMinWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbMinMonthly, SIGNAL(clicked(bool)),
+            ui->lblMinMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbMinMonthly, SIGNAL(clicked(bool)),
+            ui->teMinMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbMinMonthly, SIGNAL(clicked(bool)),
+            ui->dateMinMonthly, SLOT(setVisible(bool)));
+
+    connect(ui->cbMaxDaily, SIGNAL(clicked(bool)),
+            ui->lblMaxDaily, SLOT(setVisible(bool)));
+    connect(ui->cbMaxDaily, SIGNAL(clicked(bool)),
+            ui->teMaxDaily, SLOT(setVisible(bool)));
+    connect(ui->cbMaxDaily, SIGNAL(clicked(bool)),
+            ui->dateMaxDaily, SLOT(setVisible(bool)));
+    connect(ui->cbMaxWeekly, SIGNAL(clicked(bool)),
+            ui->lblMaxWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbMaxWeekly, SIGNAL(clicked(bool)),
+            ui->teMaxWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbMaxWeekly, SIGNAL(clicked(bool)),
+            ui->dateMaxWeekly, SLOT(setVisible(bool)));
+    connect(ui->cbMaxMonthly, SIGNAL(clicked(bool)),
+            ui->lblMaxMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbMaxMonthly, SIGNAL(clicked(bool)),
+            ui->teMaxMonthly, SLOT(setVisible(bool)));
+    connect(ui->cbMaxMonthly, SIGNAL(clicked(bool)),
+            ui->dateMaxMonthly, SLOT(setVisible(bool)));
+
+    //connect checkBox in settings and info in time statistic
 }
 
 void OrganizerView::initTimeList(QStringList &list)

@@ -1705,7 +1705,7 @@
             </widget>
            </item>
            <item row="0" column="2">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="dateMaxIncomePerMonth">
              <property name="text">
               <string>( Январь 2000 )</string>
              </property>
@@ -1715,7 +1715,7 @@
             </widget>
            </item>
            <item row="1" column="2">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="dateMaxIncomePerWeek">
              <property name="text">
               <string>( 01.02 - 03.04.2000 )</string>
              </property>
@@ -1725,7 +1725,7 @@
             </widget>
            </item>
            <item row="2" column="2">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="dateMaxIncomePerDay">
              <property name="text">
               <string>( Сб, 01.01.2000 )</string>
              </property>
@@ -1735,7 +1735,7 @@
             </widget>
            </item>
            <item row="3" column="2">
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="dateMaxOutcomePerMonth">
              <property name="text">
               <string/>
              </property>
@@ -1745,7 +1745,7 @@
             </widget>
            </item>
            <item row="4" column="2">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="dateMaxOutcomePerWeek">
              <property name="text">
               <string/>
              </property>
@@ -1755,7 +1755,7 @@
             </widget>
            </item>
            <item row="5" column="2">
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="dateMaxOutcomePerDay">
              <property name="text">
               <string/>
              </property>
@@ -1765,7 +1765,7 @@
             </widget>
            </item>
            <item row="6" column="2">
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="dateAverageIncomePerMonth">
              <property name="text">
               <string/>
              </property>
@@ -1775,7 +1775,7 @@
             </widget>
            </item>
            <item row="7" column="2">
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="dateAverageIncomePerWeek">
              <property name="text">
               <string/>
              </property>
@@ -1785,7 +1785,7 @@
             </widget>
            </item>
            <item row="8" column="2">
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="dateAverageIncomePerDay">
              <property name="text">
               <string/>
              </property>
@@ -1795,7 +1795,7 @@
             </widget>
            </item>
            <item row="9" column="2">
-            <widget class="QLabel" name="label_10">
+            <widget class="QLabel" name="dateAverageOutcomePerMonth">
              <property name="text">
               <string/>
              </property>
@@ -1805,7 +1805,7 @@
             </widget>
            </item>
            <item row="10" column="2">
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="dateAverageOutcomePerWeek">
              <property name="text">
               <string/>
              </property>
@@ -1815,7 +1815,7 @@
             </widget>
            </item>
            <item row="11" column="2">
-            <widget class="QLabel" name="label_12">
+            <widget class="QLabel" name="dateAverageOutcomePerDay">
              <property name="text">
               <string/>
              </property>
@@ -1825,7 +1825,7 @@
             </widget>
            </item>
            <item row="12" column="2">
-            <widget class="QLabel" name="label_13">
+            <widget class="QLabel" name="dateLastIncome">
              <property name="text">
               <string/>
              </property>
@@ -1835,7 +1835,7 @@
             </widget>
            </item>
            <item row="13" column="2">
-            <widget class="QLabel" name="label_14">
+            <widget class="QLabel" name="dateLastOutcome">
              <property name="text">
               <string/>
              </property>
@@ -1845,7 +1845,7 @@
             </widget>
            </item>
            <item row="14" column="2">
-            <widget class="QLabel" name="label_15">
+            <widget class="QLabel" name="dateTodayIncome">
              <property name="text">
               <string/>
              </property>
@@ -1855,7 +1855,7 @@
             </widget>
            </item>
            <item row="15" column="2">
-            <widget class="QLabel" name="label_16">
+            <widget class="QLabel" name="dateTodayOutcome">
              <property name="text">
               <string/>
              </property>
@@ -1865,7 +1865,7 @@
             </widget>
            </item>
            <item row="16" column="2">
-            <widget class="QLabel" name="label_17">
+            <widget class="QLabel" name="dateCurrentAmountOfFunds">
              <property name="text">
               <string/>
              </property>
@@ -1875,7 +1875,7 @@
             </widget>
            </item>
            <item row="17" column="2">
-            <widget class="QLabel" name="label_18">
+            <widget class="QLabel" name="dateCurrentDebet">
              <property name="text">
               <string/>
              </property>
@@ -1885,7 +1885,7 @@
             </widget>
            </item>
            <item row="18" column="2">
-            <widget class="QLabel" name="label_19">
+            <widget class="QLabel" name="dateCurrentCredit">
              <property name="text">
               <string/>
              </property>
@@ -1904,7 +1904,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
            <item row="5" column="1">
-            <widget class="QTimeEdit" name="teMinimumMonthly">
+            <widget class="QTimeEdit" name="teMinMonthly">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -1917,7 +1917,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="lblMinimumMonthly">
+            <widget class="QLabel" name="lblMinMonthly">
              <property name="text">
               <string>Minimum monthly :</string>
              </property>
@@ -1977,7 +1977,7 @@
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QLabel" name="lblMinimumWeekly">
+            <widget class="QLabel" name="lblMinWeekly">
              <property name="text">
               <string>Minimum weekly :</string>
              </property>
@@ -1991,7 +1991,7 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QTimeEdit" name="teMinimumWeekly">
+            <widget class="QTimeEdit" name="teMinWeekly">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2004,14 +2004,14 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="lblMaximumMonthly">
+            <widget class="QLabel" name="lblMaxMonthly">
              <property name="text">
               <string>Maximum monthly :</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QTimeEdit" name="teMaximumDaily">
+            <widget class="QTimeEdit" name="teMaxDaily">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2024,14 +2024,14 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="lblMinimumDaily">
+            <widget class="QLabel" name="lblMinDaily">
              <property name="text">
               <string>Minimum daily :</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QTimeEdit" name="teMaximumWeekly">
+            <widget class="QTimeEdit" name="teMaxWeekly">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2044,7 +2044,7 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QTimeEdit" name="teMinimumDaily">
+            <widget class="QTimeEdit" name="teMinDaily">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2057,21 +2057,21 @@
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="lblMaximumWeekly">
+            <widget class="QLabel" name="lblMaxWeekly">
              <property name="text">
               <string>Maximum weekly :</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="lblMaximumDaily">
+            <widget class="QLabel" name="lblMaxDaily">
              <property name="text">
               <string>Maximum daily :</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QTimeEdit" name="teMaximumMonthly">
+            <widget class="QTimeEdit" name="teMaxMonthly">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -2097,7 +2097,7 @@
             </spacer>
            </item>
            <item row="0" column="2">
-            <widget class="QLabel" name="label_20">
+            <widget class="QLabel" name="dateMaxDaily">
              <property name="text">
               <string/>
              </property>
@@ -2107,7 +2107,7 @@
             </widget>
            </item>
            <item row="1" column="2">
-            <widget class="QLabel" name="label_21">
+            <widget class="QLabel" name="dateMaxWeekly">
              <property name="text">
               <string/>
              </property>
@@ -2117,7 +2117,7 @@
             </widget>
            </item>
            <item row="2" column="2">
-            <widget class="QLabel" name="label_22">
+            <widget class="QLabel" name="dateMaxMonthly">
              <property name="text">
               <string/>
              </property>
@@ -2127,7 +2127,7 @@
             </widget>
            </item>
            <item row="3" column="2">
-            <widget class="QLabel" name="label_23">
+            <widget class="QLabel" name="dateMinDaily">
              <property name="text">
               <string/>
              </property>
@@ -2137,7 +2137,7 @@
             </widget>
            </item>
            <item row="4" column="2">
-            <widget class="QLabel" name="label_24">
+            <widget class="QLabel" name="dateMinWeekly">
              <property name="text">
               <string/>
              </property>
@@ -2147,7 +2147,7 @@
             </widget>
            </item>
            <item row="5" column="2">
-            <widget class="QLabel" name="label_25">
+            <widget class="QLabel" name="dateMinMonthly">
              <property name="text">
               <string/>
              </property>
@@ -2157,7 +2157,7 @@
             </widget>
            </item>
            <item row="6" column="2">
-            <widget class="QLabel" name="label_26">
+            <widget class="QLabel" name="dateAverageDaily">
              <property name="text">
               <string/>
              </property>
@@ -2167,7 +2167,7 @@
             </widget>
            </item>
            <item row="7" column="2">
-            <widget class="QLabel" name="label_27">
+            <widget class="QLabel" name="dateAverageWeekly">
              <property name="text">
               <string/>
              </property>
@@ -2177,7 +2177,7 @@
             </widget>
            </item>
            <item row="8" column="2">
-            <widget class="QLabel" name="label_28">
+            <widget class="QLabel" name="dateAverageMonthly">
              <property name="text">
               <string/>
              </property>
@@ -2198,6 +2198,9 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QGroupBox" name="gbCommonSettings">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="title">
            <string>Common</string>
           </property>
@@ -2301,6 +2304,9 @@
         </item>
         <item>
          <widget class="QGroupBox" name="gbTabsSettings">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="title">
            <string>Tabs</string>
           </property>
@@ -2604,7 +2610,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="cbMaximumDaily">
+               <widget class="QCheckBox" name="cbMaxDaily">
                 <property name="text">
                  <string>Maximum daily</string>
                 </property>
@@ -2614,7 +2620,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="cbMaximumWeekly">
+               <widget class="QCheckBox" name="cbMaxWeekly">
                 <property name="text">
                  <string>Maximum weekly</string>
                 </property>
@@ -2624,7 +2630,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="cbMaximumMonthly">
+               <widget class="QCheckBox" name="cbMaxMonthly">
                 <property name="text">
                  <string>Maximum monthly</string>
                 </property>
@@ -2634,7 +2640,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="cbMinimumDaily">
+               <widget class="QCheckBox" name="cbMinDaily">
                 <property name="text">
                  <string>Minimum daily</string>
                 </property>
@@ -2644,7 +2650,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="cbMinimumWeekly">
+               <widget class="QCheckBox" name="cbMinWeekly">
                 <property name="text">
                  <string>Minimum weekly</string>
                 </property>
@@ -2654,7 +2660,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="cbMinimumMonthly">
+               <widget class="QCheckBox" name="cbMinMonthly">
                 <property name="text">
                  <string>Minimum monthly</string>
                 </property>

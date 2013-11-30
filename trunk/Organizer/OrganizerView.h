@@ -38,6 +38,8 @@ private slots:
     void saveDbDialog();
     void openDialog();
     void saveDialog();
+    void pathToDb();
+    void pathToLogFile();
 
 
 private:
