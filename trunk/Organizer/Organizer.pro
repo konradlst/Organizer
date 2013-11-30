@@ -66,5 +66,9 @@ FORMS    += \
 RESOURCES += \
     res.qrc
 
+TRANSLATIONS += \
+    Organizer.ru_RU.ts \
+    Organizer.en_US.ts
+
 OTHER_FILES += \
     ../Common/metascheme_0.3.xml
