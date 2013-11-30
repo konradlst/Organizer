@@ -1,4 +1,5 @@
 ﻿#include <QApplication>
+#include <QTranslator>
 #include <QTextCodec>
 #include "OrganizerView.h"
 
@@ -12,6 +13,12 @@ int main(int argc, char *argv[])
     a.setApplicationVersion("0.3");
     a.setOrganizationDomain("a.batyaev@gmail.com");
     a.setOrganizationName("Anton Batyaev");
+
+//    QTranslator tr, qt_tr;
+//    tr.load(":/lang_ru_RU");
+//    qt_tr.load(":/qt_ru_RU");
+//    a.installTranslator(&tr);
+//    a.installTranslator(&qt_tr);
 
     OrganizerView w;
     w.show();

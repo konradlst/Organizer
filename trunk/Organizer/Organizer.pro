@@ -18,6 +18,7 @@ INCLUDEPATH += "./modules/transactions"
 INCLUDEPATH += "./modules/deals"
 INCLUDEPATH += "./modules/times"
 INCLUDEPATH += "./modules/calendars"
+INCLUDEPATH += "./translation"
 
 
 SOURCES += main.cpp \
@@ -67,8 +68,8 @@ RESOURCES += \
     res.qrc
 
 TRANSLATIONS += \
-    Organizer.ru_RU.ts \
-    Organizer.en_US.ts
+    ./translation/Organizer.ru_RU.ts \
+    ./translation/Organizer.en_US.ts
 
 OTHER_FILES += \
     ../Common/metascheme_0.3.xml

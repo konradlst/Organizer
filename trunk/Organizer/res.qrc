@@ -13,8 +13,10 @@
         <file alias="editingMode">icons/edit.png</file>
         <file alias="settings">icons/settings.png</file>
         <file alias="logo">icons/userpic.gif</file>
-        <file alias="qt_ru_RU">qt_ru.qm</file>
         <file alias="detailInfo">icons/detailInfo.png</file>
         <file alias="directory">icons/directory.png</file>
+        <file alias="qt_ru_RU">translation/qt_ru.qm</file>
+        <file alias="lang_en_US">translation/Organizer.en_US.qm</file>
+        <file alias="lang_ru_RU">translation/Organizer.ru_RU.qm</file>
     </qresource>
 </RCC>
