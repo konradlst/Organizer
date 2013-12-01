@@ -2,6 +2,7 @@
 #define DRIVERSQLITE_H
 
 #include <QObject>
+#include <QStringList>
 #include <QSqlDatabase>
 #include "OrganizerConst.h"
 
@@ -12,19 +13,17 @@ public:
     explicit DriverSqlite(QObject *parent = 0);
 
     //! Запрашивает список контактов.
-    Data::Table *contacts() const;
+    Data::Table *contacts();
     //! Запрашивает контакт по его \alias прозвищу.
-    Data::Record* contact(const QString &alias) const;
+    Data::Record* contact(const QString &alias);
     //! Запрашивает список счетов.
-    Data::Table *financeAccounts() const;
+    Data::Table *accounts();
     //! Запрашивает список транзакций в указанную дату \param date.
-    Data::Table *financeTransaction(const QDate &date) const;
+    Data::Table *transactions(const QDate &date);
     //! Запрашивает список временных расходов в указанную дату \param date.
-    Data::Table *timeLine(const QDate &date) const;
-    //! Запрашивает список дел в указанную дату \param date.
-    Data::Table *deals(const QDate &date) const;
-    //! Запрашивает список заметок по заданными параметрам \param params.
-    Data::Table *notes(const QStringList &params) const;
+    Data::Table *timeLine(const QDate &date);
+    //! Запрашивает список дел в указанную дату \param date по заданными параметрам \param params.
+    Data::Table *deals(const QDate &date, const QStringList params = QStringList());
 
     //! Добавляет новый счет \param record.
     void addAccount(const Data::Record &record);
@@ -36,8 +35,6 @@ public:
     void addDeal(const Data::Record &record);
     //! Добавляет новый контакт.
     void addContact(const Data::Record &record);
-    //! Добавляет новую заметку.
-    void addNote(const Data::Record &record);
 
 private:
     QSqlDatabase m_db;

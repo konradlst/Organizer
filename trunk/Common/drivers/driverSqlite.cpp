@@ -1,5 +1,7 @@
-﻿#include <QSqlQuery>
-#include <QStringList>
+﻿#include <QSqlResult>
+#include <QSqlRecord>
+#include <QSqlQuery>
+#include <QDate>
 #include "driverSqlite.h"
 
 namespace
@@ -11,12 +13,12 @@ const QString AndSeparator = " AND ";
 const QString CommaSeparator = ", ";
 const QString AllFields = "*";
 
-const QString Contacts = "CG_CONTACTS";
-const QString Accounts = "CG_FINANCEACCOUNTS";
-const QString Transactions = "CG_FINANCELOG";
-const QString TimeLine = "CG_TIME";
-const QString Books = "CG_BOOK";
-const QString Dealss = "CG_DEAL";
+const QString Contacts = "CONTACTS";
+const QString Accounts = "ACCOUNTS";
+const QString Transactions = "TRANSACTIONS";
+const QString TimeLine = "TIMES";
+const QString Books = "BOOKS";
+const QString Deals = "DEALS";
 
 const QString ConnectionName = "SqliteDriverConnection";
 const QString QSqlite = "QSQLITE";
@@ -27,53 +29,112 @@ DriverSqlite::DriverSqlite(QObject *parent)
 {
 }
 
-Data::Table *DriverSqlite::contacts() const
+Data::Table *DriverSqlite::contacts()
 {
-    //FIXME :
-//    QSqlQuery(Select.arg(AllFields, Contacts));
-    return new Data::Table;
+    openDb();
+    QSqlQuery q = QSqlQuery(Select.arg(AllFields, Contacts));
+    if (!q.exec())
+        return 0;
+
+    Data::Table *table = new Data::Table;
+    while (q.next())
+    {
+        Data::Record *record = new Data::Record;
+        for (int counter = 0; counter < q.record().count(); ++counter)
+            record->append(q.value(counter));
+        table->append(record);
+    }
+    return table;
 }
 
-Data::Record *DriverSqlite::contact(const QString &alias) const
+Data::Record *DriverSqlite::contact(const QString &alias)
 {
-    //FIXME :
-//    QSqlQuery(SelectFull.arg(AllFields, Contacts, "alias = " + alias));
-    return new Data::Record;
+    openDb();
+    QSqlQuery q = QSqlQuery(SelectFull.arg(AllFields, Contacts, "alias = " + alias));
+    if (!q.exec())
+        return 0;
+
+    Data::Record *record = new Data::Record;
+    if (q.first())
+    {
+        for (int counter = 0; counter < q.record().count(); ++counter)
+            record->append(q.value(counter));
+        return record;
+    }
+    return 0;
 }
 
-Data::Table *DriverSqlite::financeAccounts() const
+Data::Table *DriverSqlite::accounts()
 {
-    //FIXME :
-//    QSqlQuery(Select.arg(AllFields, Accounts));
-    return new Data::Table;
+    openDb();
+    QSqlQuery q = QSqlQuery(Select.arg(AllFields, Accounts));
+    if (!q.exec())
+        return 0;
+
+    Data::Table *table = new Data::Table;
+    while (q.next())
+    {
+        Data::Record *record = new Data::Record;
+        for (int counter = 0; counter < q.record().count(); ++counter)
+            record->append(q.value(counter));
+        table->append(record);
+    }
+    return table;
 }
 
-Data::Table *DriverSqlite::financeTransaction(const QDate &date) const
+Data::Table *DriverSqlite::transactions(const QDate &date)
 {
-    //FIXME :
-//    QSqlQuery(Select.arg(AllFields, Transactions));
-    return new Data::Table;
+    openDb();
+    QSqlQuery q = QSqlQuery(SelectFull.arg(AllFields, Transactions,
+                                           QString("timestamp = %1").arg(date.toString("dd.MM.yyyy"))));
+    if (!q.exec())
+        return 0;
+
+    Data::Table *table = new Data::Table;
+    while (q.next())
+    {
+        Data::Record *record = new Data::Record;
+        for (int counter = 0; counter < q.record().count(); ++counter)
+            record->append(q.value(counter));
+        table->append(record);
+    }
+    return table;
 }
 
-Data::Table *DriverSqlite::timeLine(const QDate &date) const
+Data::Table *DriverSqlite::timeLine(const QDate &date)
 {
-    //FIXME :
-//    QSqlQuery(Select.arg(AllFields, TimeLine));
-    return new Data::Table;
+    openDb();
+    QSqlQuery q = QSqlQuery(Select.arg(AllFields, TimeLine));
+    if (!q.exec())
+        return 0;
+
+    Data::Table *table = new Data::Table;
+    while (q.next())
+    {
+        Data::Record *record = new Data::Record;
+        for (int counter = 0; counter < q.record().count(); ++counter)
+            record->append(q.value(counter));
+        table->append(record);
+    }
+    return table;
 }
 
-Data::Table *DriverSqlite::deals(const QDate &date) const
+Data::Table *DriverSqlite::deals(const QDate &date, const QStringList params)
 {
-    //FIXME :
-//    QSqlQuery(Select.arg(AllFields, Deals));
-    return new Data::Table;
-}
+    openDb();
+    QSqlQuery q = QSqlQuery(Select.arg(AllFields, Deals));
+    if (!q.exec())
+        return 0;
 
-Data::Table *DriverSqlite::notes(const QStringList &params) const
-{
-    //FIXME :
-//    QSqlQuery(Select.arg(AllFields, Deals));
-    return new Data::Table;
+    Data::Table *table = new Data::Table;
+    while (q.next())
+    {
+        Data::Record *record = new Data::Record;
+        for (int counter = 0; counter < q.record().count(); ++counter)
+            record->append(q.value(counter));
+        table->append(record);
+    }
+    return table;
 }
 
 void DriverSqlite::addAccount(const Data::Record &record)
@@ -105,19 +166,17 @@ void DriverSqlite::addContact(const Data::Record &record)
     //FIXME :
 }
 
-void DriverSqlite::addNote(const Data::Record &record)
-{
-    openDb();
-    //FIXME :
-}
-
 bool DriverSqlite::openDb()
 {
+    if (m_db.isOpen())
+        return true;
+
     if (QSqlDatabase::connectionNames().contains(ConnectionName))
         m_db = QSqlDatabase::database(ConnectionName);
     else
         m_db = QSqlDatabase::addDatabase(QSqlite, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
+
     if (!m_db.open())
         return false;
     return true;

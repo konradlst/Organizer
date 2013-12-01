@@ -81,7 +81,7 @@
             <field name="sendto" type="VARCHAR(20)" delegate="typeAccount"/>
             <field name="comment" type="VARCHAR(255)"/>
         </table>
-        <table name="DEAL">
+        <table name="DEALS">
             <field name="id" type="INTEGER" pk="1"/>
             <field name="created" type="DATE" default="(strftime('%d.%m.%Y','now','localtime'))" delegate="date"/>
             <field name="name" type="VARCHAR(127)" delegate="string127"/>
