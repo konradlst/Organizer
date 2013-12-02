@@ -4,7 +4,7 @@
 #include <QFileDialog>
 #include "transactionDialog.h"
 #include "transactionView.h"
-#include "cgErrorMessage.h"
+#include "logger.h"
 #include "accountDialog.h"
 #include "accountView.h"
 #include "dialogConst.h"

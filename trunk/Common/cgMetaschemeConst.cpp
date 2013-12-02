@@ -1,7 +1,7 @@
 ﻿#include <QDomDocument>
 #include <QDebug>
 #include <QFile>
-#include "cgErrorMessage.h"
+#include "logger.h"
 #include "cgMetaschemeConst.h"
 
 bool Scheme::loadScheme(QDomElement &scheme, const QString &path)

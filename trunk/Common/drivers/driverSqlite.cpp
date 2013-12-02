@@ -1,7 +1,10 @@
 ﻿#include <QSqlResult>
 #include <QSqlRecord>
+#include <QSqlError>
 #include <QSqlQuery>
 #include <QDate>
+#include "cgMetaschemeConst.h"
+#include "logger.h"
 #include "driverSqlite.h"
 
 namespace
@@ -16,7 +19,7 @@ const QString AllFields = "*";
 const QString Contacts = "CONTACTS";
 const QString Accounts = "ACCOUNTS";
 const QString Transactions = "TRANSACTIONS";
-const QString TimeLine = "TIMES";
+const QString Times = "TIMES";
 const QString Books = "BOOKS";
 const QString Deals = "DEALS";
 
@@ -104,7 +107,7 @@ Data::Table *DriverSqlite::transactions(const QDate &date)
 Data::Table *DriverSqlite::timeLine(const QDate &date)
 {
     openDb();
-    QSqlQuery q = QSqlQuery(Select.arg(AllFields, TimeLine));
+    QSqlQuery q = QSqlQuery(Select.arg(AllFields, Times));
     if (!q.exec())
         return 0;
 
@@ -122,7 +125,8 @@ Data::Table *DriverSqlite::timeLine(const QDate &date)
 Data::Table *DriverSqlite::deals(const QDate &date, const QStringList params)
 {
     openDb();
-    QSqlQuery q = QSqlQuery(Select.arg(AllFields, Deals));
+    QSqlQuery q = QSqlQuery(SelectFull.arg(AllFields, Deals,
+                                           QString("created = %1").arg(date.toString("dd.MM.yyyy"))));
     if (!q.exec())
         return 0;
 
@@ -140,30 +144,101 @@ Data::Table *DriverSqlite::deals(const QDate &date, const QStringList params)
 void DriverSqlite::addAccount(const Data::Record &record)
 {
     openDb();
-    //FIXME :
+    QStringList fields;
+    QStringList values;
+    for (int i = 0; i < record.count(); ++i)
+        values << record.at(i).toString();
+
+    QString query = Insert.arg(Accounts, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QSqlQuery q(query);
+    if (!q.exec())
+    {
+        Log::error("cannot add transaction in Db" + QString::number(q.lastError().number())
+                   + " " + q.lastError().text());
+        return;
+    }
+    Log::error("new transaction success added in Db");
+    return;
 }
 
 void DriverSqlite::addTransaction(const Data::Record &record)
 {
     openDb();
-    //FIXME :
+    QStringList fields;
+    QStringList values;
+    for (int i = 0; i < record.count(); ++i)
+        values << record.at(i).toString();
+
+    QString query = Insert.arg(Transactions, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QSqlQuery q(query);
+    if (!q.exec())
+    {
+        Log::error("cannot add transaction in Db" + QString::number(q.lastError().number())
+                   + " " + q.lastError().text());
+        return;
+    }
+    Log::error("new transaction success added in Db");
+    return;
 }
 
 void DriverSqlite::addTimeRecord(const Data::Record &record)
 {
-    //FIXME :
+    openDb();
+    QStringList fields;
+    QStringList values;
+    for (int i = 0; i < record.count(); ++i)
+        values << record.at(i).toString();
+
+    QString query = Insert.arg(Times, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QSqlQuery q(query);
+    if (!q.exec())
+    {
+        Log::error("cannot add times in Db" + QString::number(q.lastError().number())
+                   + " " + q.lastError().text());
+        return;
+    }
+    Log::error("new times success added in Db");
+    return;
 }
 
 void DriverSqlite::addDeal(const Data::Record &record)
 {
     openDb();
-    //FIXME :
+    QStringList fields;
+    QStringList values;
+    for (int i = 0; i < record.count(); ++i)
+        values << record.at(i).toString();
+
+    QString query = Insert.arg(Deals, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QSqlQuery q(query);
+    if (!q.exec())
+    {
+        Log::error("cannot add deal in Db" + QString::number(q.lastError().number())
+                   + " " + q.lastError().text());
+        return;
+    }
+    Log::error("new deal success added in Db");
+    return;
 }
 
 void DriverSqlite::addContact(const Data::Record &record)
 {
     openDb();
-    //FIXME :
+    QStringList fields;
+    QStringList values;
+    for (int i = 0; i < record.count(); ++i)
+        values << record.at(i).toString();
+
+    QString query = Insert.arg(Contacts, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QSqlQuery q(query);
+    if (!q.exec())
+    {
+        Log::error("cannot add contact in Db" + QString::number(q.lastError().number())
+                   + " " + q.lastError().text());
+        return;
+    }
+    Log::error("new contact success added in Db");
+    return;
 }
 
 bool DriverSqlite::openDb()

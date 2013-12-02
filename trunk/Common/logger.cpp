@@ -1,8 +1,7 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QDebug>
-#include "cgErrorMessage.h"
-
+#include "logger.h"
 
 namespace Error
 {

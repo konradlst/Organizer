@@ -4,7 +4,7 @@
 #include <QSqlError>
 #include <QDebug>
 #include "cgMetaschemeConst.h"
-#include "cgErrorMessage.h"
+#include "logger.h"
 #include "dbGenerator.h"
 
 namespace

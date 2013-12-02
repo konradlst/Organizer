@@ -38,7 +38,7 @@ SOURCES += main.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
     ../Common/cgMetaschemeConst.cpp \
-    ../Common/cgErrorMessage.cpp
+    ../Common/logger.cpp
 
 HEADERS  += \
     OrganizerView.h \
@@ -58,7 +58,7 @@ HEADERS  += \
     modules/dialogConst.h \
     ../Common/dbGenerator/dbGenerator.h \
     ../Common/drivers/driverSqlite.h \
-    ../Common/cgErrorMessage.h \
+    ../Common/logger.h \
     ../Common/cgMetaschemeConst.cpp
 
 FORMS    += \
