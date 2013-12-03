@@ -64,6 +64,22 @@ TimeView::TimeView(const int type, const QTime &start, const QTime &stop,
     connect(m_duration, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
 }
 
+void TimeView::editableMode(bool flag)
+{
+    //FIXME add hide\show openDetailButton
+    m_type->setEnabled(flag);
+    m_start->setReadOnly(!flag);
+    m_start->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                   : QAbstractSpinBox::NoButtons);
+    m_stop->setReadOnly(!flag);
+    m_stop->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                  : QAbstractSpinBox::NoButtons);
+    m_duration->setReadOnly(!flag);
+    m_duration->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                      : QAbstractSpinBox::NoButtons);
+    m_comment->setReadOnly(!flag);
+}
+
 void TimeView::changeDuration(const QTime &time)
 {
     if (m_lock)

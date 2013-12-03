@@ -41,6 +41,8 @@ DealView::DealView(const int type, const QDate &created, const int price,
       m_delete(new QPushButton)
 {
     setTitle(DealTypes.at(type));
+    m_created->setCalendarPopup(true);
+    m_deadline->setCalendarPopup(true);
     m_type->addItems(DealTypes);
     m_type->setCurrentIndex(type);
     m_price->setSuffix(" rub.");
@@ -86,4 +88,26 @@ DealView::DealView(const int type, const QDate &created, const int price,
     setLayout(mLay);
 
     connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
+}
+
+void DealView::editableMode(bool flag)
+{
+    //FIXME add hide\show openDetailButton
+    m_type->setEnabled(flag);
+    m_created->setReadOnly(!flag);
+    m_created->setCalendarPopup(flag);
+    m_created->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                     : QAbstractSpinBox::NoButtons);
+    m_duration->setReadOnly(!flag);
+    m_duration->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                      : QAbstractSpinBox::NoButtons);
+    m_price->setReadOnly(!flag);
+    m_price->setButtonSymbols(flag ? QAbstractSpinBox::PlusMinus
+                                   : QAbstractSpinBox::NoButtons);
+    m_deadline->setReadOnly(!flag);
+    m_deadline->setCalendarPopup(flag);
+    m_deadline->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                      : QAbstractSpinBox::NoButtons);
+    m_humans->setReadOnly(!flag);
+    m_description->setReadOnly(flag);
 }

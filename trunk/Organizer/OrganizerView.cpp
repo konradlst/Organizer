@@ -75,6 +75,7 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionSaveAs, SIGNAL(triggered()), SLOT(saveDbDialog()));
     connect(ui->actionLoad_Contact, SIGNAL(triggered()), SLOT(openDialog()));
     connect(ui->actionSave_Contact, SIGNAL(triggered()), SLOT(saveDialog()));
+    connect(ui->actionEditingMode, SIGNAL(triggered(bool)), SLOT(editableMode(bool)));
 }
 
 OrganizerView::~OrganizerView()
@@ -123,6 +124,7 @@ void OrganizerView::timeDialog()
         m_times->append(view);
         ui->Times->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        connect(ui->actionEditingMode, SIGNAL(triggered(bool)), view, SLOT(editableMode(bool)));
 
         Log::info("Add new time record: " + d->data()->join("# "));
     }
@@ -145,6 +147,7 @@ void OrganizerView::dealDialog()
         m_deals->append(view);
         ui->Deals->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        connect(ui->actionEditingMode, SIGNAL(triggered(bool)), view, SLOT(editableMode(bool)));
         Log::info("Add new deal: " + d->data()->join("# "));
     }
 }
@@ -165,6 +168,7 @@ void OrganizerView::eventDialog()
         m_events->append(view);
         ui->Events->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        connect(ui->actionEditingMode, SIGNAL(triggered(bool)), view, SLOT(editableMode(bool)));
         Log::info("Add new event: " + d->data()->join("# "));
     }
 }
@@ -184,6 +188,7 @@ void OrganizerView::accountDialog()
         m_accounts->append(view);
         ui->Accounts->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        connect(ui->actionEditingMode, SIGNAL(triggered(bool)), view, SLOT(editableMode(bool)));
         Log::info("Add new account: " + d->data()->join("# "));
     }
 }
@@ -202,6 +207,7 @@ void OrganizerView::transactionDialog()
         m_transactions->append(view);
         ui->Transactions->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        connect(ui->actionEditingMode, SIGNAL(triggered(bool)), view, SLOT(editableMode(bool)));
         Log::info("Add new transaction: " + d->data()->join("# "));
     }
 }
@@ -405,6 +411,36 @@ void OrganizerView::pathToLogFile()
                                                 QDir::currentPath(), FileTypes);
     if (!path.isEmpty())
         ui->pathToLogFile->setText(path);
+}
+
+void OrganizerView::editableMode(bool flag)
+{
+    ui->pbEditUserPic->setVisible(flag);
+    flag = !flag;
+    ui->leAlias->setReadOnly(flag);
+    ui->leName->setReadOnly(flag);
+    ui->leSurName->setReadOnly(flag);
+    ui->leOtherName->setReadOnly(flag);
+    ui->deBirthday->setReadOnly(flag);
+    ui->lePhone->setReadOnly(flag);
+    ui->leEmail->setReadOnly(flag);
+    ui->leSite->setReadOnly(flag);
+    ui->leSkype->setReadOnly(flag);
+    ui->leCountry->setReadOnly(flag);
+    ui->leCity->setReadOnly(flag);
+    ui->leStreet->setReadOnly(flag);
+    ui->leHome->setReadOnly(flag);
+    ui->leApartment->setReadOnly(flag);
+
+
+    ui->leNameCompany->setReadOnly(flag);
+    ui->lePhoneCompany->setReadOnly(flag);
+    ui->leDepartment->setReadOnly(flag);
+    ui->lePost->setReadOnly(flag);
+    ui->leAddressCompany->setReadOnly(flag);
+    ui->deStartWork->setReadOnly(flag);
+    ui->deEndWork->setReadOnly(flag);
+    //FIXME
 }
 
 void OrganizerView::createInterface()

@@ -50,3 +50,9 @@ void AccountView::setValue(qint64 value)
 {
     m_value->setValue(value);
 }
+
+void AccountView::editableMode(bool flag)
+{
+    //FIXME add hide\show openDetailButton
+    m_type->setEnabled(flag);
+}

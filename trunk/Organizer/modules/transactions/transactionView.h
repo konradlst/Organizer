@@ -22,6 +22,9 @@ public:
 signals:
     void deleted();
 
+public slots:
+    void editableMode(bool flag);
+
 private:
     QLabel *m_name;
     QComboBox *m_type;

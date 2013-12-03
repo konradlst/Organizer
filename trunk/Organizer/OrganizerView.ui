@@ -28,7 +28,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <widget class="QSplitter" name="ContactsTab">
        <property name="orientation">
@@ -662,6 +662,9 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
              <property name="buttonSymbols">
               <enum>QAbstractSpinBox::NoButtons</enum>
              </property>
@@ -774,6 +777,9 @@
               <font>
                <pointsize>10</pointsize>
               </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
              </property>
              <property name="buttonSymbols">
               <enum>QAbstractSpinBox::NoButtons</enum>
@@ -1017,6 +1023,9 @@
                  <pointsize>10</pointsize>
                 </font>
                </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
                <property name="buttonSymbols">
                 <enum>QAbstractSpinBox::NoButtons</enum>
                </property>
@@ -1172,6 +1181,9 @@
               <font>
                <pointsize>10</pointsize>
               </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
              </property>
              <property name="buttonSymbols">
               <enum>QAbstractSpinBox::NoButtons</enum>
@@ -2875,6 +2887,12 @@
    </property>
   </action>
   <action name="actionEditingMode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/editingMode</normaloff>:/editingMode</iconset>

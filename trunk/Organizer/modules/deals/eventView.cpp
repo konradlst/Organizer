@@ -18,13 +18,12 @@ EventView::EventView(const QDate &date, const QString &description, QWidget *par
       m_delete(new QPushButton),
       m_detail(new QPushButton)
 {
+    m_date->setCalendarPopup(true);
     m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
     m_delete->setIcon(QIcon(":/delete"));
     m_delete->setToolTip(DeleteEventToolTip);
 
-    m_date->setReadOnly(true);
-    m_date->setButtonSymbols(QAbstractSpinBox::NoButtons);
     m_description->setPlaceholderText(EventDescription);
     m_description->setToolTip(EventDescription);
     m_detail->setFlat(true);
@@ -41,4 +40,14 @@ EventView::EventView(const QDate &date, const QString &description, QWidget *par
 
     connect(m_detail, SIGNAL(clicked()), SIGNAL(openDetail()));
     connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
+}
+
+void EventView::editableMode(bool flag)
+{
+    m_description->setReadOnly(!flag);
+    m_date->setReadOnly(!flag);
+    m_date->setCalendarPopup(flag);
+    m_detail->setVisible(flag);
+    m_date->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                  : QAbstractSpinBox::NoButtons);
 }

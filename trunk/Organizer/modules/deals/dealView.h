@@ -24,6 +24,9 @@ public:
 signals:
     void deleted();
 
+public slots:
+    void editableMode(bool flag);
+
 private:
     QDateEdit *m_created;
     QTimeEdit *m_duration;

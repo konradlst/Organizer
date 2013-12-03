@@ -40,6 +40,7 @@ private slots:
     void saveDialog();
     void pathToDb();
     void pathToLogFile();
+    void editableMode(bool flag);
 
 
 private:

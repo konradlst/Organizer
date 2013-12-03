@@ -21,6 +21,9 @@ public:
 signals:
     void deleted();
 
+public slots:
+    void editableMode(bool flag);
+
 private slots:
     void changeDuration(const QTime &time);
 

@@ -41,3 +41,12 @@ TransactionView::TransactionView(int type, const QString &name,
 
     connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
 }
+
+void TransactionView::editableMode(bool flag)
+{
+    //FIXME add hide\show openDetailButton
+    m_type->setEnabled(flag);
+    m_value->setReadOnly(!flag);
+    m_value->setButtonSymbols(flag ? QAbstractSpinBox::PlusMinus
+                                   : QAbstractSpinBox::NoButtons);
+}

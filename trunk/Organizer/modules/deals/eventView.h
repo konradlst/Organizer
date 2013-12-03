@@ -21,6 +21,9 @@ signals:
     void deleted();
     void openDetail();
 
+public slots:
+    void editableMode(bool flag);
+
 private:
     QDateEdit *m_date;
     QLineEdit *m_description;
