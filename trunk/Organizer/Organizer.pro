@@ -18,6 +18,7 @@ INCLUDEPATH += "./modules/transactions"
 INCLUDEPATH += "./modules/deals"
 INCLUDEPATH += "./modules/times"
 INCLUDEPATH += "./modules/calendars"
+INCLUDEPATH += "./modules/contacts"
 INCLUDEPATH += "./translation"
 
 
@@ -32,8 +33,9 @@ SOURCES += main.cpp \
     modules/deals/dealDialog.cpp \
     modules/times/timeView.cpp \
     modules/times/timeDialog.cpp \
-    modules/calendars/yearCalendar.cpp \
     modules/calendars/dateView.cpp \
+    modules/calendars/yearCalendar.cpp \
+    modules/contacts/contactDialog.cpp \
     modules/dialog.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
@@ -52,14 +54,15 @@ HEADERS  += \
     modules/deals/dealDialog.h \
     modules/times/timeView.h \
     modules/times/timeDialog.h \
-    modules/calendars/yearCalendar.h \
     modules/calendars/dateView.h \
-    modules/dialog.h \
+    modules/calendars/yearCalendar.h \
+    modules/contacts/contactDialog.h \
     modules/dialogConst.h \
+    modules/dialog.h \
     ../Common/dbGenerator/dbGenerator.h \
     ../Common/drivers/driverSqlite.h \
-    ../Common/logger.h \
-    ../Common/cgMetaschemeConst.cpp
+    ../Common/cgMetaschemeConst.cpp \
+    ../Common/logger.h
 
 FORMS    += \
     OrganizerView.ui

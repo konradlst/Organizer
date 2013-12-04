@@ -36,6 +36,8 @@ private slots:
     void settingsTimeStatistic(bool value);
     void openDbDialog();
     void saveDbDialog();
+    void addContact();
+    void deleteContact();
     void openDialog();
     void saveDialog();
     void pathToDb();

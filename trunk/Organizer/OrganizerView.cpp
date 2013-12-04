@@ -4,8 +4,8 @@
 #include <QFileDialog>
 #include "transactionDialog.h"
 #include "transactionView.h"
-#include "logger.h"
 #include "accountDialog.h"
+#include "contactDialog.h"
 #include "accountView.h"
 #include "dialogConst.h"
 #include "dbGenerator.h"
@@ -14,6 +14,7 @@
 #include "eventView.h"
 #include "timeView.h"
 #include "dealView.h"
+#include "logger.h"
 #include "ui_OrganizerView.h"
 #include "OrganizerView.h"
 
@@ -73,6 +74,8 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionChoose_Database, SIGNAL(triggered()), SLOT(openDbDialog()));
     connect(ui->actionNew_Database, SIGNAL(triggered()), SLOT(saveDbDialog()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), SLOT(saveDbDialog()));
+    connect(ui->actionAdd_Contact, SIGNAL(triggered()), SLOT(addContact()));
+    connect(ui->actionDelete_Contact, SIGNAL(triggered()), SLOT(deleteContact()));
     connect(ui->actionLoad_Contact, SIGNAL(triggered()), SLOT(openDialog()));
     connect(ui->actionSave_Contact, SIGNAL(triggered()), SLOT(saveDialog()));
     connect(ui->actionEditingMode, SIGNAL(triggered(bool)), SLOT(editableMode(bool)));
@@ -367,34 +370,72 @@ void OrganizerView::openDbDialog()
 {
     QString path = QFileDialog::getOpenFileName(this, OpenTitle,
                                                 QDir::currentPath(), FileTypes);
-    Log::info(path);
+    if (!path.isEmpty())
+    {
+        Log::info(path);
 
-    dbGenerator gen = dbGenerator(path);
-    gen.generate();
+        dbGenerator gen = dbGenerator(path);
+        gen.generate();
+    }
 }
 
 void OrganizerView::saveDbDialog()
 {
     QString path = QFileDialog::getSaveFileName(this, SaveTitle,
                                                 QDir::currentPath(), FileTypes);
-    Log::info(path);
+    if (!path.isEmpty())
+    {
+        Log::info(path);
 
-    dbGenerator gen = dbGenerator(path);
-    gen.generate();
+        dbGenerator gen = dbGenerator(path);
+        gen.generate();
+    }
+}
+
+void OrganizerView::addContact()
+{
+    if (ui->tabWidget->currentIndex() != ContactsTab)
+    {
+        ui->tabWidget->setCurrentIndex(ContactsTab);
+        return;
+    }
+    ContactDialog *d = new ContactDialog();
+    if (d->exec())
+    {
+        QStringList *data = d->data();
+        //test
+        QString nickName("nickName");
+        //end test
+        ui->lwContactList->addItem(nickName);
+        //FIXME
+    }
+}
+
+void OrganizerView::deleteContact()
+{
+    if (ui->tabWidget->currentIndex() != ContactsTab)
+    {
+        ui->tabWidget->setCurrentIndex(ContactsTab);
+        return;
+    }
+    ui->lwContactList->removeItemWidget(ui->lwContactList->currentItem());
+    //FIXME
 }
 
 void OrganizerView::openDialog()
 {
     QString path = QFileDialog::getOpenFileName(this, OpenContactTitle,
                                                 QDir::currentPath(), FileTypes);
-    Log::info(path);
+    if (path.isEmpty())
+        Log::info(path);
 }
 
 void OrganizerView::saveDialog()
 {
     QString path = QFileDialog::getSaveFileName(this, SaveContactTitle,
                                                 QDir::currentPath(), FileTypes);
-    Log::info(path);
+    if (path.isEmpty())
+        Log::info(path);
 }
 
 void OrganizerView::pathToDb()

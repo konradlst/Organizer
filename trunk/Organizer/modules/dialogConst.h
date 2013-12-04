@@ -16,6 +16,7 @@ const QString DateFormat = "dd.MM.yyyy";
 const QString TimeTitle = QObject::trUtf8("Time Dialog");
 const QString DealTitle = QObject::trUtf8("Deal Dialog");
 const QString AccountTitle = QObject::trUtf8("Account Dialog");
+const QString ContactTitle = QObject::trUtf8("Contact Dialog");
 const QString TransactionTitle = QObject::trUtf8("Transaction Dialog");
 
 const QString LblOk = QObject::trUtf8("Ok");
