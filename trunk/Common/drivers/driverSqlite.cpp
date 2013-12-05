@@ -149,7 +149,7 @@ void DriverSqlite::addAccount(const Data::Record &record)
     for (int i = 0; i < record.count(); ++i)
         values << record.at(i).toString();
 
-    QString query = Insert.arg(Accounts, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QString query = Insert.arg(Accounts, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
     if (!q.exec())
     {
@@ -169,7 +169,7 @@ void DriverSqlite::addTransaction(const Data::Record &record)
     for (int i = 0; i < record.count(); ++i)
         values << record.at(i).toString();
 
-    QString query = Insert.arg(Transactions, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QString query = Insert.arg(Transactions, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
     if (!q.exec())
     {
@@ -189,7 +189,7 @@ void DriverSqlite::addTimeRecord(const Data::Record &record)
     for (int i = 0; i < record.count(); ++i)
         values << record.at(i).toString();
 
-    QString query = Insert.arg(Times, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QString query = Insert.arg(Times, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
     if (!q.exec())
     {
@@ -209,7 +209,7 @@ void DriverSqlite::addDeal(const Data::Record &record)
     for (int i = 0; i < record.count(); ++i)
         values << record.at(i).toString();
 
-    QString query = Insert.arg(Deals, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QString query = Insert.arg(Deals, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
     if (!q.exec())
     {
@@ -229,7 +229,7 @@ void DriverSqlite::addContact(const Data::Record &record)
     for (int i = 0; i < record.count(); ++i)
         values << record.at(i).toString();
 
-    QString query = Insert.arg(Contacts, fields.join(SQL::COMMA), values.join(SQL::COMMA));
+    QString query = Insert.arg(Contacts, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
     if (!q.exec())
     {

@@ -1,13 +1,19 @@
 ﻿#include <QDomDocument>
+#include <QApplication>
 #include <QDebug>
 #include <QFile>
 #include "logger.h"
 #include "cgMetaschemeConst.h"
 
+namespace
+{
+const QString DefaultMetaScheme = "./metascheme.xml";
+}
+
 bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
 {
     QDomDocument doc;
-    QFile file(path);
+    QFile file((path.isEmpty()) ? DefaultMetaScheme : path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return Error::cannotOpen();
 
@@ -20,11 +26,11 @@ bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
     file.close();
 
     scheme = doc.documentElement();
-    if (scheme.nodeName() != Scheme::tagRoot)
-        return Error::incorrectMainNode(scheme.nodeName(), Scheme::tagRoot);
+    if (scheme.nodeName() != SchemeTag::Root)
+        return Error::incorrectMainNode(scheme.nodeName(), SchemeTag::Root);
 
-    if (scheme.attribute(Scheme::attrVersion) != Scheme::Version)
-        return Error::incorrectVersion(scheme.attribute(Scheme::attrVersion), Scheme::Version);
+    if (scheme.attribute(SchemeAttr::Version) != qApp->applicationVersion())
+        return Error::incorrectVersion(scheme.attribute(SchemeAttr::Version), qApp->applicationVersion());
 
     return true;
 }

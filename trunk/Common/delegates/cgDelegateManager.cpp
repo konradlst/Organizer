@@ -14,42 +14,42 @@ QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString
     QList<QAbstractItemDelegate *> *list = new QList<QAbstractItemDelegate*>();
 
     QDomElement scheme;
-    if(!Scheme::loadScheme(scheme))
+    if(!Scheme::load(scheme))
         return list;
 
-    QDomNode tables = scheme.firstChildElement(Scheme::tagTables);
+    QDomNode tables = scheme.firstChildElement(SchemeTag::Tables);
     if(tables.isNull())
         return list;
 
-    QDomNode table = tables.firstChildElement(Scheme::tagTable);
+    QDomNode table = tables.firstChildElement(SchemeTag::Table);
     if(table.isNull())
         return list;
 
-    while (table.toElement().attribute(Scheme::attrName) != tableName)
+    while (table.toElement().attribute(SchemeAttr::Name) != tableName)
         table = table.nextSibling();
 
-    QDomElement delegates = scheme.firstChildElement(Scheme::tagDelegates);
+    QDomElement delegates = scheme.firstChildElement(SchemeTag::Delegates);
     QDomNode field = table.firstChild();
     while(!field.isNull())
     {
-        QString delegateName = field.toElement().attribute(Scheme::attrDelegate);
+        QString delegateName = field.toElement().attribute(SchemeAttr::Delegate);
         if(delegateName.isNull())
         {
             list->append(0);
             field = field.nextSibling();
             continue;
         }
-        QDomNode delegateNode = delegates.firstChildElement(Scheme::tagDelegate);
-        while (delegateNode.toElement().attribute(Scheme::attrName)!= delegateName)
+        QDomNode delegateNode = delegates.firstChildElement(SchemeTag::Delegate);
+        while (delegateNode.toElement().attribute(SchemeAttr::Name)!= delegateName)
             delegateNode = delegateNode.nextSibling();
 
         QStringList lst;
         QDomElement delegate = delegateNode.toElement();
-        lst << delegate.attribute(Scheme::attrType);
+        lst << delegate.attribute(SchemeAttr::Type);
 
         int i = 1;
-        while (delegate.hasAttribute(Scheme::attrParam + QString::number(i)))
-            lst << delegate.attribute(Scheme::attrParam + QString::number(i++));
+        while (delegate.hasAttribute(SchemeAttr::Param + QString::number(i)))
+            lst << delegate.attribute(SchemeAttr::Param + QString::number(i++));
         list->append(createDelegate(lst));
         field = field.nextSibling();
     }

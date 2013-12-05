@@ -16,14 +16,15 @@ const QString False = "0";
 const QString Quotes = "'%1'";
 }
 
-dbGenerator::dbGenerator(const QString &pathToDb)
-    : m_pathToDb(pathToDb)
+dbGenerator::dbGenerator(const QString &pathToDb, const QString &scheme)
+    : m_pathToDb(pathToDb),
+      m_scheme(scheme)
 {
 }
 
 bool dbGenerator::generate(const bool fillTable)
 {
-    m_db = QSqlDatabase::addDatabase(SQL::SQLITE, ConnectionName);
+    m_db = QSqlDatabase::addDatabase(SQL::Sqlite, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
     if (!m_db.open())
         return Error::cannotOpen();
@@ -36,7 +37,7 @@ bool dbGenerator::generate(const bool fillTable)
     m_db.close();
 
     QDomElement scheme;
-    if (!Scheme::loadScheme(scheme) || !generateTables(scheme)
+    if (!Scheme::loadScheme(scheme, m_scheme) || !generateTables(scheme)
             || (fillTable && !fillTables(scheme)))
         return false;
     return true;
@@ -63,7 +64,7 @@ bool dbGenerator::generateTables(const QDomElement &scheme)
             fieldNode = fieldNode.nextSibling();
         }
         QString table = tableNode.toElement().attribute(Scheme::attrName);
-        queryList << SQL::CREATE.arg(table, fields.join(SQL::COMMA));
+        queryList << SQL::Create.arg(table, fields.join(SQL::Comma));
         tableNode = tableNode.nextSibling();
     }
     return execQueries(queryList);
@@ -90,9 +91,9 @@ bool dbGenerator::fillTables(const QDomElement &scheme)
             fldNode = fldNode.nextSibling();
         }
         QString table = tableNode.toElement().attribute(Scheme::attrName);
-        queryList << SQL::INSERT.arg(table)
-                                .arg(fieldNames.join(SQL::COMMA))
-                                .arg(fieldValues.join(SQL::COMMA));
+        queryList << SQL::Insert.arg(table)
+                                .arg(fieldNames.join(SQL::Comma))
+                                .arg(fieldValues.join(SQL::Comma));
         tableNode = tableNode.nextSibling();
     }
     return execQueries(queryList);
@@ -105,18 +106,18 @@ void dbGenerator::parseField(const QDomElement &field, QString &data) const
       << field.attribute(Scheme::attrType);
 
     if (field.hasAttribute(Scheme::attrPk) && field.attribute(Scheme::attrPk) == True)
-        d << SQL::PRIMARY_KEY;
+        d << SQL::PrimaryKey;
     else if (field.hasAttribute(Scheme::attrFk) && field.hasAttribute(Scheme::attrFkField))
-        d << SQL::FOREIGN_KEY.arg(field.attribute(Scheme::attrName))
+        d << SQL::ForeignKey.arg(field.attribute(Scheme::attrName))
                              .arg(field.attribute(Scheme::attrFk))
                              .arg(field.attribute(Scheme::attrFkField));
 
     if (field.hasAttribute(Scheme::attrNullable) && field.attribute(Scheme::attrNullable) == False)
-        d << SQL::NOT_NULL;
+        d << SQL::NotNull;
     if (field.hasAttribute(Scheme::attrUnq) && field.attribute(Scheme::attrUnq) == True)
-        d << SQL::UNIQUE;
+        d << SQL::Unique;
     if (field.hasAttribute(Scheme::attrDefault))
-        d << SQL::DEFAULT.arg(field.attribute(Scheme::attrDefault));
+        d << SQL::Default.arg(field.attribute(Scheme::attrDefault));
 
     data.append(d.join(" "));
 }

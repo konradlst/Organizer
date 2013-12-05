@@ -71,7 +71,7 @@ void cgDBManager::submit()
 void cgDBManager::addRecord()
 {
     QSqlQuery query;
-    query.exec(SQL::INSERT_DEFAULT.arg(m_currentTable));
+    query.exec(SQL::InsertDefault.arg(m_currentTable));
     m_models->value(m_currentTable)->select();
 }
 
@@ -79,7 +79,7 @@ void cgDBManager::removeRecord()
 {
     QSqlQuery query;
     int id = m_view->model()->index(m_view->currentIndex().row(), 0).data().toInt();
-    query.exec(SQL::DELETE_WHERE.arg(m_currentTable, QString::number(id)));
+    query.exec(SQL::DeleteWhere.arg(m_currentTable, QString::number(id)));
     m_models->value(m_currentTable)->select();
 }
 
@@ -91,7 +91,7 @@ void cgDBManager::revertAll()
 
 void cgDBManager::initModel()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
+    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::Sqlite);
     db.setDatabaseName(m_currentPathToDb);
     db.open();
     m_tables =  db.tables();

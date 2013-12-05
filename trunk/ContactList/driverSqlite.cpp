@@ -42,7 +42,7 @@ DriverSqlite::~DriverSqlite()
 
 bool DriverSqlite::saveData(const Data::Contacts &data, const QString &path)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
+    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::Sqlite);
     db.setDatabaseName(path);
     db.open();
 
@@ -56,12 +56,12 @@ bool DriverSqlite::saveData(const Data::Contacts &data, const QString &path)
 
 Data::Contacts* DriverSqlite::loadData(const QString &path)
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::SQLITE);
+    QSqlDatabase db = QSqlDatabase::addDatabase(SQL::Sqlite);
     db.setDatabaseName(path);
     db.open();
 
     QSqlQuery query;
-    query.exec(SQL::SELECT_SHORT.arg(Table::Contacts));
+    query.exec(SQL::SelectShort.arg(Table::Contacts));
 
     Data::Contacts *data = new Data::Contacts();
 
@@ -97,11 +97,11 @@ void DriverSqlite::contactDataToSql(const ContactData *contact, const int i) con
     addressVal << User << index;
 
     QStringList queries;
-    queries << SQL::INSERT.arg(Table::Contacts, FldContact, quotesValue(contact->data(CONTACT)))
-            << SQL::INSERT.arg(Table::Companies, FldCompany, quotesValue(companyVal))
-            << SQL::INSERT.arg(Table::Addresses, FldAddress, quotesValue(addressVal));
+    queries << SQL::Insert.arg(Table::Contacts, FldContact, quotesValue(contact->data(CONTACT)))
+            << SQL::Insert.arg(Table::Companies, FldCompany, quotesValue(companyVal))
+            << SQL::Insert.arg(Table::Addresses, FldAddress, quotesValue(addressVal));
 
-    QString insertChannel = SQL::INSERT.arg(Table::Channels, FldChannel);
+    QString insertChannel = SQL::Insert.arg(Table::Channels, FldChannel);
     for (int id = 0; id < contact->countData(Channel::All); ++id)
     {
         QStringList data = contact->data(Channel::All, id);
@@ -128,7 +128,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     int index = query.record().value(Id).toInt();
 
     QSqlQuery tmpQ;
-    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Addresses, User, QString::number(index)));
+    tmpQ.exec(SQL::SelectWhere.arg(Table::Addresses, User, QString::number(index)));
     while (tmpQ.next())
     {
         QStringList list;
@@ -138,7 +138,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     }
 
     tmpQ.clear();
-    tmpQ.exec(SQL::SELECT.arg(Table::Companies, QString::number(index)));
+    tmpQ.exec(SQL::Select.arg(Table::Companies, QString::number(index)));
     while (tmpQ.next())
     {
         QStringList list;
@@ -148,7 +148,7 @@ void DriverSqlite::sqlToContactData(const QSqlQuery &query, ContactData *contact
     }
 
     tmpQ.clear();
-    tmpQ.exec(SQL::SELECT_WHERE.arg(Table::Channels, User, QString::number(index)));
+    tmpQ.exec(SQL::SelectWhere.arg(Table::Channels, User, QString::number(index)));
     while (tmpQ.next())
     {
         contact->setChannel(tmpQ.record().value(Format).toString(),

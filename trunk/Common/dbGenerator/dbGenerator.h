@@ -10,13 +10,14 @@ class QStringList;
 class dbGenerator
 {
 public:
-    dbGenerator(const QString &pathToDb);
+    dbGenerator(const QString &pathToDb, const QString &scheme = QString());
     //! Генерирует БД на основании дефолтной схемы
     //! и при необходимости \param fillTable заполняет таблицы данными.
     bool generate(const bool fillTable = false);
 
 private:
-    const QString &m_pathToDb;
+    const QString m_pathToDb;
+    const QString m_scheme;
     QSqlDatabase m_db;
 
     //! Генерирует таблицы на основании структуры указанной в схеме \param scheme.
