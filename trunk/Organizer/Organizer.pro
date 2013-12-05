@@ -36,6 +36,9 @@ SOURCES += main.cpp \
     modules/calendars/dateView.cpp \
     modules/calendars/yearCalendar.cpp \
     modules/contacts/contactDialog.cpp \
+    modules/contacts/channelDialog.cpp \
+    modules/contacts/addressDialog.cpp \
+    modules/contacts/companyDialog.cpp \
     modules/dialog.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
@@ -57,6 +60,9 @@ HEADERS  += \
     modules/calendars/dateView.h \
     modules/calendars/yearCalendar.h \
     modules/contacts/contactDialog.h \
+    modules/contacts/channelDialog.h \
+    modules/contacts/addressDialog.h \
+    modules/contacts/companyDialog.h \
     modules/dialogConst.h \
     modules/dialog.h \
     ../Common/dbGenerator/dbGenerator.h \
