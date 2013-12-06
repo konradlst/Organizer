@@ -3,6 +3,8 @@
 
 #include "dialog.h"
 
+class QLineEdit;
+
 class ChannelDialog : public Dialog
 {
     Q_OBJECT
@@ -11,7 +13,10 @@ public:
     virtual QStringList *data();
 
 private:
-    //FIXME
+    QLineEdit *m_phone;
+    QLineEdit *m_email;
+    QLineEdit *m_skype;
+    QLineEdit *m_site;
 
 };
 

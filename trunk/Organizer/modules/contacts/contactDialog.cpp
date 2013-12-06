@@ -3,7 +3,7 @@
 #include <QPushButton>
 #include <QDateEdit>
 #include <QLineEdit>
-#include "dialogConst.h"
+#include "contactsConst.h"
 #include "contactDialog.h"
 
 ContactDialog::ContactDialog(QWidget *parent)
@@ -27,9 +27,20 @@ ContactDialog::ContactDialog(QWidget *parent)
       m_startWork(new QDateEdit),
       m_endWork(new QDateEdit)
 {
-    setWindowTitle(ContactTitle);
-    //FIXME init and create view
-    m_lay->addRow(LblDescription, m_description);
+    setWindowTitle(Title::contact);
+    //FIXME correct init and create view
+
+    m_alias->setPlaceholderText(Placeholder::alias);
+    m_name->setPlaceholderText(Placeholder::name);
+    m_surName->setPlaceholderText(Placeholder::surName);
+    m_otherName->setPlaceholderText(Placeholder::otherName);
+
+    m_lay->addRow(Label::alias, m_alias);
+    m_lay->addRow(Label::name, m_name);
+    m_lay->addRow(Label::surName, m_surName);
+    m_lay->addRow(Label::otherName, m_otherName);
+    m_lay->addRow(Label::birthday, m_birthday);
+    m_lay->addRow(Label::description, m_description);
     m_lay->addWidget(m_ok);
 }
 

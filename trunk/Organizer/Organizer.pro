@@ -68,7 +68,8 @@ HEADERS  += \
     ../Common/dbGenerator/dbGenerator.h \
     ../Common/drivers/driverSqlite.h \
     ../Common/cgMetaschemeConst.cpp \
-    ../Common/logger.h
+    ../Common/logger.h \
+    modules/contacts/contactsConst.h
 
 FORMS    += \
     OrganizerView.ui

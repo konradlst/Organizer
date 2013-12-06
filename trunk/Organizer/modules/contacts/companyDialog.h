@@ -3,6 +3,9 @@
 
 #include "dialog.h"
 
+class QLineEdit;
+class QDateEdit;
+
 class CompanyDialog : public Dialog
 {
     Q_OBJECT
@@ -11,7 +14,13 @@ public:
     virtual QStringList *data();
 
 private:
-    //FIXME
+    QLineEdit *m_name;
+    QLineEdit *m_phone;
+    QLineEdit *m_department;
+    QLineEdit *m_post;
+    QLineEdit *m_address;
+    QDateEdit *m_dateIn;
+    QDateEdit *m_dateOut;
 };
 
 #endif // COMPANYDIALOG_H

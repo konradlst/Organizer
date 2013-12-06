@@ -3,6 +3,8 @@
 
 #include "dialog.h"
 
+class QLineEdit;
+
 class AddressDialog : public Dialog
 {
     Q_OBJECT
@@ -11,8 +13,11 @@ public:
     virtual QStringList *data();
 
 private:
-    //FIXME
-
+    QLineEdit *m_country;
+    QLineEdit *m_city;
+    QLineEdit *m_street;
+    QLineEdit *m_home;
+    QLineEdit *m_apartment;
 };
 
 #endif // ADDRESSDIALOG_H

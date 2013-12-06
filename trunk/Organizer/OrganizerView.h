@@ -44,7 +44,6 @@ private slots:
     void pathToLogFile();
     void editableMode(bool flag);
 
-
 private:
     Ui::OrganizerView *ui;
     QList<TimeView*> *m_times;
