@@ -1,13 +1,13 @@
-﻿#include "cgDelegateManager.h"
-#include <QDomElement>
+﻿#include <QDomElement>
 #include "cgComboBoxDelegate.h"
 #include "cgCheckBoxDelegate.h"
-#include "cgSpinBoxDelegate.h"
-#include "cgDateDelegate.h"
 #include "cgDateTimeDelegate.h"
-#include "cgTimeDelegate.h"
 #include "cgLineEditDelegate.h"
 #include "cgMetaschemeConst.h"
+#include "cgSpinBoxDelegate.h"
+#include "cgDateDelegate.h"
+#include "cgTimeDelegate.h"
+#include "cgDelegateManager.h"
 
 QList<QAbstractItemDelegate *> *cgDelegateManager::getDelegateList(const QString &tableName)
 {
@@ -65,7 +65,7 @@ QAbstractItemDelegate *cgDelegateManager::createDelegate(const QStringList &list
     }
     else if(type == delegateName::comboBox)
     {
-        return new cgComboBoxDelegate(list.at(1).split(Scheme::SPLITTER),
+        return new cgComboBoxDelegate(list.at(1).split(Scheme::Splitter),
                                       list.at(2).toInt());
     }
     else if(type == delegateName::spinBox)

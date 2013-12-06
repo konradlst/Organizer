@@ -37,7 +37,7 @@ bool dbGenerator::generate(const bool fillTable)
     m_db.close();
 
     QDomElement scheme;
-    if (!Scheme::loadScheme(scheme, m_scheme) || !generateTables(scheme)
+    if (!Scheme::load(scheme, m_scheme) || !generateTables(scheme)
             || (fillTable && !fillTables(scheme)))
         return false;
     return true;
@@ -45,7 +45,7 @@ bool dbGenerator::generate(const bool fillTable)
 
 bool dbGenerator::generateTables(const QDomElement &scheme)
 {
-    QDomNode tablesNode = scheme.firstChildElement(Scheme::tagTables);
+    QDomNode tablesNode = scheme.firstChildElement(SchemeTag::Tables);
     if (tablesNode.isNull())
         return false;
     QDomNode tableNode = tablesNode.firstChild();
@@ -63,7 +63,7 @@ bool dbGenerator::generateTables(const QDomElement &scheme)
 
             fieldNode = fieldNode.nextSibling();
         }
-        QString table = tableNode.toElement().attribute(Scheme::attrName);
+        QString table = tableNode.toElement().attribute(SchemeAttr::Name);
         queryList << SQL::Create.arg(table, fields.join(SQL::Comma));
         tableNode = tableNode.nextSibling();
     }
@@ -72,7 +72,7 @@ bool dbGenerator::generateTables(const QDomElement &scheme)
 
 bool dbGenerator::fillTables(const QDomElement &scheme)
 {
-    QDomNode valuesNode = scheme.firstChildElement(Scheme::tagValues);
+    QDomNode valuesNode = scheme.firstChildElement(SchemeTag::Values);
     if (valuesNode.isNull())
         return false;
     QDomNode tableNode = valuesNode.firstChild();
@@ -85,12 +85,12 @@ bool dbGenerator::fillTables(const QDomElement &scheme)
         while (!fldNode.isNull())
         {
             QDomElement field = fldNode.toElement();
-            fieldNames << Quotes.arg(field.attribute(Scheme::attrName));
-            fieldValues << Quotes.arg(field.attribute(Scheme::attrValue));
+            fieldNames << Quotes.arg(field.attribute(SchemeAttr::Name));
+            fieldValues << Quotes.arg(field.attribute(SchemeAttr::Value));
 
             fldNode = fldNode.nextSibling();
         }
-        QString table = tableNode.toElement().attribute(Scheme::attrName);
+        QString table = tableNode.toElement().attribute(SchemeAttr::Name);
         queryList << SQL::Insert.arg(table)
                                 .arg(fieldNames.join(SQL::Comma))
                                 .arg(fieldValues.join(SQL::Comma));
@@ -102,22 +102,22 @@ bool dbGenerator::fillTables(const QDomElement &scheme)
 void dbGenerator::parseField(const QDomElement &field, QString &data) const
 {
     QStringList d;
-    d << field.attribute(Scheme::attrName)
-      << field.attribute(Scheme::attrType);
+    d << field.attribute(SchemeAttr::Name)
+      << field.attribute(SchemeAttr::Type);
 
-    if (field.hasAttribute(Scheme::attrPk) && field.attribute(Scheme::attrPk) == True)
+    if (field.hasAttribute(SchemeAttr::Pk) && field.attribute(SchemeAttr::Pk) == True)
         d << SQL::PrimaryKey;
-    else if (field.hasAttribute(Scheme::attrFk) && field.hasAttribute(Scheme::attrFkField))
-        d << SQL::ForeignKey.arg(field.attribute(Scheme::attrName))
-                             .arg(field.attribute(Scheme::attrFk))
-                             .arg(field.attribute(Scheme::attrFkField));
+    else if (field.hasAttribute(SchemeAttr::Fk) && field.hasAttribute(SchemeAttr::FkField))
+        d << SQL::ForeignKey.arg(field.attribute(SchemeAttr::Name))
+                             .arg(field.attribute(SchemeAttr::Fk))
+                             .arg(field.attribute(SchemeAttr::FkField));
 
-    if (field.hasAttribute(Scheme::attrNullable) && field.attribute(Scheme::attrNullable) == False)
+    if (field.hasAttribute(SchemeAttr::Nullable) && field.attribute(SchemeAttr::Nullable) == False)
         d << SQL::NotNull;
-    if (field.hasAttribute(Scheme::attrUnq) && field.attribute(Scheme::attrUnq) == True)
+    if (field.hasAttribute(SchemeAttr::Unq) && field.attribute(SchemeAttr::Unq) == True)
         d << SQL::Unique;
-    if (field.hasAttribute(Scheme::attrDefault))
-        d << SQL::Default.arg(field.attribute(Scheme::attrDefault));
+    if (field.hasAttribute(SchemeAttr::Default))
+        d << SQL::Default.arg(field.attribute(SchemeAttr::Default));
 
     data.append(d.join(" "));
 }

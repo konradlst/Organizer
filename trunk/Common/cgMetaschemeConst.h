@@ -7,17 +7,18 @@ class QDomElement;
 
 namespace Scheme
 {
+const QString Splitter = ";";
 bool load(QDomElement &scheme, const QString &path = QString());
 }
 
 namespace SchemeTag
 {
-const QString tagRoot = "cg_db_scheme";
-const QString tagTables = "tables";
-const QString tagValues = "values";
-const QString tagTable = "table";
-const QString tagDelegates = "delegates";
-const QString tagDelegate = "delegate";
+const QString Root = "cg_db_scheme";
+const QString Tables = "tables";
+const QString Values = "values";
+const QString Table = "table";
+const QString Delegates = "delegates";
+const QString Delegate = "delegate";
 }
 
 namespace SchemeAttr

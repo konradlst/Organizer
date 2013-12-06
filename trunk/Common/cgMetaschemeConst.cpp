@@ -10,7 +10,7 @@ namespace
 const QString DefaultMetaScheme = "./metascheme.xml";
 }
 
-bool Scheme::loadScheme(QDomElement &scheme, const QString &path)
+bool Scheme::load(QDomElement &scheme, const QString &path)
 {
     QDomDocument doc;
     QFile file((path.isEmpty()) ? DefaultMetaScheme : path);
