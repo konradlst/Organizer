@@ -23,6 +23,9 @@ CompanyDialog::CompanyDialog(QWidget *parent)
     m_post->setPlaceholderText(Placeholder::post);
     m_address->setPlaceholderText(Placeholder::address);
 
+    m_dateIn->setCalendarPopup(true);
+    m_dateOut->setCalendarPopup(true);
+
     m_lay->addRow(Label::name, m_name);
     m_lay->addRow(Label::phone, m_phone);
     m_lay->addRow(Label::department, m_department);

@@ -457,36 +457,20 @@ void OrganizerView::pathToLogFile()
 void OrganizerView::editableMode(bool flag)
 {
     ui->pbEditUserPic->setVisible(flag);
-    flag = !flag;
-    ui->leAlias->setReadOnly(flag);
-    ui->leName->setReadOnly(flag);
-    ui->leSurName->setReadOnly(flag);
-    ui->leOtherName->setReadOnly(flag);
-    ui->deBirthday->setReadOnly(flag);
-    ui->lePhone->setReadOnly(flag);
-    ui->leEmail->setReadOnly(flag);
-    ui->leSite->setReadOnly(flag);
-    ui->leSkype->setReadOnly(flag);
-    ui->leCountry->setReadOnly(flag);
-    ui->leCity->setReadOnly(flag);
-    ui->leStreet->setReadOnly(flag);
-    ui->leHome->setReadOnly(flag);
-    ui->leApartment->setReadOnly(flag);
-
-
-    ui->leNameCompany->setReadOnly(flag);
-    ui->lePhoneCompany->setReadOnly(flag);
-    ui->leDepartment->setReadOnly(flag);
-    ui->lePost->setReadOnly(flag);
-    ui->leAddressCompany->setReadOnly(flag);
-    ui->deStartWork->setReadOnly(flag);
-    ui->deEndWork->setReadOnly(flag);
     //FIXME
 }
 
 void OrganizerView::createInterface()
 {
     ui->setupUi(this);
+
+    QMenu *addMenu = new QMenu("Add");
+    QList<QAction*> addActionList;
+    addActionList.append(ui->actionAdd_channel);
+    addActionList.append(ui->actionAdd_address);
+    addActionList.append(ui->actionAdd_company);
+    addMenu->addActions(addActionList);
+    ui->pbAddInContact->setMenu(addMenu);
 
     ui->tabWidget->tabBar()->removeTab(SettingTab);
     QList<int> sizes;
