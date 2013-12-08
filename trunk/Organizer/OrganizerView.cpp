@@ -6,6 +6,12 @@
 #include "transactionView.h"
 #include "accountDialog.h"
 #include "contactDialog.h"
+#include "channelDialog.h"
+#include "companyDialog.h"
+#include "addressDialog.h"
+#include "channelView.h"
+#include "companyView.h"
+#include "addressView.h"
 #include "accountView.h"
 #include "dialogConst.h"
 #include "dbGenerator.h"
@@ -75,6 +81,9 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionNew_Database, SIGNAL(triggered()), SLOT(saveDbDialog()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), SLOT(saveDbDialog()));
     connect(ui->actionAdd_Contact, SIGNAL(triggered()), SLOT(addContact()));
+    connect(ui->actionAdd_channel, SIGNAL(triggered()), SLOT(addChannel()));
+    connect(ui->actionAdd_address, SIGNAL(triggered()), SLOT(addAddress()));
+    connect(ui->actionAdd_company, SIGNAL(triggered()), SLOT(addCompany()));
     connect(ui->actionDelete_Contact, SIGNAL(triggered()), SLOT(deleteContact()));
     connect(ui->actionLoad_Contact, SIGNAL(triggered()), SLOT(openDialog()));
     connect(ui->actionSave_Contact, SIGNAL(triggered()), SLOT(saveDialog()));
@@ -407,6 +416,53 @@ void OrganizerView::addContact()
         QString nickName("nickName");
         //end test
         ui->lwContactList->addItem(nickName);
+        //FIXME
+    }
+}
+
+void OrganizerView::addChannel()
+{
+    if (ui->tabWidget->currentIndex() != ContactsTab)
+    {
+        ui->tabWidget->setCurrentIndex(ContactsTab);
+        return;
+    }
+    ChannelDialog *d = new ChannelDialog();
+    if (d->exec())
+    {
+        QStringList *data = d->data();
+        ChannelView *view = new ChannelView();
+        ui->verticalLayout_8->addWidget(view);
+        //FIXME
+    }
+}
+
+void OrganizerView::addAddress()
+{
+    if (ui->tabWidget->currentIndex() != ContactsTab)
+    {
+        ui->tabWidget->setCurrentIndex(ContactsTab);
+        return;
+    }
+    AddressDialog *d = new AddressDialog();
+    if (d->exec())
+    {
+        QStringList *data = d->data();
+        //FIXME
+    }
+}
+
+void OrganizerView::addCompany()
+{
+    if (ui->tabWidget->currentIndex() != ContactsTab)
+    {
+        ui->tabWidget->setCurrentIndex(ContactsTab);
+        return;
+    }
+    CompanyDialog *d = new CompanyDialog();
+    if (d->exec())
+    {
+        QStringList *data = d->data();
         //FIXME
     }
 }

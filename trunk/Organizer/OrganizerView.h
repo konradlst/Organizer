@@ -37,6 +37,9 @@ private slots:
     void openDbDialog();
     void saveDbDialog();
     void addContact();
+    void addChannel();
+    void addAddress();
+    void addCompany();
     void deleteContact();
     void openDialog();
     void saveDialog();

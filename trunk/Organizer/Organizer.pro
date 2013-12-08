@@ -39,6 +39,9 @@ SOURCES += main.cpp \
     modules/contacts/channelDialog.cpp \
     modules/contacts/addressDialog.cpp \
     modules/contacts/companyDialog.cpp \
+    modules/contacts/channelView.cpp \
+    modules/contacts/companyView.cpp \
+    modules/contacts/addressView.cpp \
     modules/dialog.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
@@ -59,17 +62,20 @@ HEADERS  += \
     modules/times/timeDialog.h \
     modules/calendars/dateView.h \
     modules/calendars/yearCalendar.h \
+    modules/contacts/contactsConst.h \
     modules/contacts/contactDialog.h \
     modules/contacts/channelDialog.h \
     modules/contacts/addressDialog.h \
     modules/contacts/companyDialog.h \
+    modules/contacts/channelView.h \
+    modules/contacts/companyView.h \
+    modules/contacts/addressView.h \
     modules/dialogConst.h \
     modules/dialog.h \
     ../Common/dbGenerator/dbGenerator.h \
     ../Common/drivers/driverSqlite.h \
     ../Common/cgMetaschemeConst.cpp \
-    ../Common/logger.h \
-    modules/contacts/contactsConst.h
+    ../Common/logger.h
 
 FORMS    += \
     OrganizerView.ui
