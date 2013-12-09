@@ -448,6 +448,8 @@ void OrganizerView::addAddress()
     if (d->exec())
     {
         QStringList *data = d->data();
+        AddressView *view = new AddressView();
+        ui->verticalLayout_10->addWidget(view);
         //FIXME
     }
 }
@@ -463,6 +465,8 @@ void OrganizerView::addCompany()
     if (d->exec())
     {
         QStringList *data = d->data();
+        CompanyView *view = new CompanyView();
+        ui->verticalLayout_11->addWidget(view);
         //FIXME
     }
 }
