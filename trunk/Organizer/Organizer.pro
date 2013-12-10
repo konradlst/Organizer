@@ -24,6 +24,7 @@ INCLUDEPATH += "./translation"
 
 SOURCES += main.cpp \
     OrganizerView.cpp \
+    modules/abstractModule.cpp \
     modules/accounts/accountView.cpp \
     modules/accounts/accountDialog.cpp \
     modules/transactions/transactionView.cpp \
@@ -51,6 +52,7 @@ SOURCES += main.cpp \
 HEADERS  += \
     OrganizerView.h \
     OrganizerConst.h \
+    modules/abstractModule.h \
     modules/accounts/accountView.h \
     modules/accounts/accountDialog.h \
     modules/transactions/transactionView.h \
