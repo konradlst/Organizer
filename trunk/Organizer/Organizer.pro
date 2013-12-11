@@ -4,6 +4,8 @@
 #
 #-------------------------------------------------
 
+include(../Common/local_deploy.pri)
+
 QT       += core gui sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -20,7 +22,6 @@ INCLUDEPATH += "./modules/times"
 INCLUDEPATH += "./modules/calendars"
 INCLUDEPATH += "./modules/contacts"
 INCLUDEPATH += "./translation"
-
 
 SOURCES += main.cpp \
     OrganizerView.cpp \

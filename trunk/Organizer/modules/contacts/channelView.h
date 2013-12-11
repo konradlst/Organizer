@@ -10,7 +10,8 @@ class ChannelView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ChannelView(QWidget *parent = 0);
+    explicit ChannelView(const QString &type, const QString &subType,
+                         const QString &value, QWidget *parent = 0);
 
 signals:
     void deleted();

@@ -3,11 +3,12 @@
 #include <QLabel>
 #include "channelView.h"
 
-ChannelView::ChannelView(QWidget *parent)
+ChannelView::ChannelView(const QString &type, const QString &subType,
+                         const QString &value, QWidget *parent)
     : QWidget(parent),
-      m_type(new QPushButton("Email")),//TEST
-      m_subType(new QLabel("work")),//TEST
-      m_value(new QLabel("i.ivanov@test.com")),//TEST
+      m_type(new QPushButton(type)),
+      m_subType(new QLabel(subType)),
+      m_value(new QLabel(value)),
       m_detail(new QPushButton()),
       m_delete(new QPushButton())
 {

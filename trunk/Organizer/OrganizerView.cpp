@@ -412,11 +412,12 @@ void OrganizerView::addContact()
     if (d->exec())
     {
         QStringList *data = d->data();
-        //test
-        QString nickName("nickName");
-        //end test
-        ui->lwContactList->addItem(nickName);
-        //FIXME
+        ui->lwContactList->addItem(data->at(0));
+        ui->lblNickName->setText(data->at(0));
+        ui->lblName->setText(data->at(1));
+        ui->lblSurName->setText(data->at(2));
+        ui->lblOtherName->setText(data->at(3));
+        ui->lblBirthday->setText(data->at(4));
     }
 }
 
@@ -431,9 +432,8 @@ void OrganizerView::addChannel()
     if (d->exec())
     {
         QStringList *data = d->data();
-        ChannelView *view = new ChannelView();
+        ChannelView *view = new ChannelView(data->at(0), data->at(1), data->at(2));
         ui->verticalLayout_8->addWidget(view);
-        //FIXME
     }
 }
 
@@ -448,9 +448,9 @@ void OrganizerView::addAddress()
     if (d->exec())
     {
         QStringList *data = d->data();
-        AddressView *view = new AddressView();
+        AddressView *view = new AddressView(data->at(0), data->at(1), data->at(2),
+                                            data->at(3), data->at(4));
         ui->verticalLayout_10->addWidget(view);
-        //FIXME
     }
 }
 

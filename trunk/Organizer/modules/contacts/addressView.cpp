@@ -3,13 +3,15 @@
 #include <QLabel>
 #include "addressView.h"
 
-AddressView::AddressView(QWidget *parent)
+AddressView::AddressView(const QString &country, const QString &city,
+                         const QString &street, const QString &home,
+                         const QString &apartment, QWidget *parent)
     : QWidget(parent),
-      m_country(new QPushButton("Russia,")),//TEST
-      m_city(new QPushButton("Samara,")),//TEST
-      m_street(new QLabel("st. Avrora")),//TEST
-      m_home(new QLabel("45")),//TEST
-      m_apartment(new QLabel("23")),//TEST
+      m_country(new QPushButton(country)),
+      m_city(new QPushButton(city)),
+      m_street(new QLabel(street)),
+      m_home(new QLabel(home)),
+      m_apartment(new QLabel(apartment)),
       m_detail(new QPushButton),
       m_delete(new QPushButton)
 {

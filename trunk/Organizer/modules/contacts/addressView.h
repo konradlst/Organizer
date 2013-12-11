@@ -10,7 +10,9 @@ class AddressView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AddressView(QWidget *parent = 0);
+    explicit AddressView(const QString &country, const QString &city,
+                         const QString &street, const QString &home,
+                         const QString &apartment, QWidget *parent = 0);
 
 signals:
     void deleted();

@@ -13,11 +13,9 @@ public:
     virtual QStringList *data();
 
 private:
-    QLineEdit *m_phone;
-    QLineEdit *m_email;
-    QLineEdit *m_skype;
-    QLineEdit *m_site;
-
+    QComboBox *m_type;
+    QLineEdit *m_subType;
+    QLineEdit *m_value;
 };
 
 #endif // CHANNELDIALOG_H
