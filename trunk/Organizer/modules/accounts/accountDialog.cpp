@@ -21,6 +21,10 @@ AccountDialog::AccountDialog(QWidget *parent)
     m_type->addItems(AccountTypes);
     m_value->setMaximum(999999);
     m_value->setMinimum(-999999);
+    m_value->setValue(0);
+    m_total->setMaximum(999999);
+    m_total->setMinimum(0);
+    m_total->setValue(1);
     m_name->setPlaceholderText(AccountNamePlaceholder);
 
     m_lay->addRow(LblType, m_type);
