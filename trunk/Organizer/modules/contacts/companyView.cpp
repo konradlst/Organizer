@@ -1,14 +1,17 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QLabel>
+#include "contactsConst.h"
 #include "companyView.h"
 
-CompanyView::CompanyView(QWidget *parent)
+CompanyView::CompanyView(const QString &company, const QString &post,
+                         const QString &dateIn, const QString &dateOut,
+                         QWidget *parent)
     : QWidget(parent),
-      m_company(new QPushButton("Atol,")),//TEST
-      m_post(new QPushButton("software developer,")),//TEST
-      m_dateIn(new QLabel("25.02.2012")),//TEST
-      m_dateOut(new QLabel("today")),//TEST
+      m_company(new QPushButton(company + Comma)),
+      m_post(new QPushButton(post + Comma)),
+      m_dateIn(new QLabel(dateIn)),
+      m_dateOut(new QLabel((dateOut.isEmpty()) ? Today : dateOut)),
       m_detail(new QPushButton),
       m_delete(new QPushButton)
 {

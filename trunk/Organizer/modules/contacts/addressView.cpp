@@ -1,14 +1,15 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QLabel>
+#include "contactsConst.h"
 #include "addressView.h"
 
 AddressView::AddressView(const QString &country, const QString &city,
                          const QString &street, const QString &home,
                          const QString &apartment, QWidget *parent)
     : QWidget(parent),
-      m_country(new QPushButton(country)),
-      m_city(new QPushButton(city)),
+      m_country(new QPushButton(country + Comma)),
+      m_city(new QPushButton(city + Comma)),
       m_street(new QLabel(street)),
       m_home(new QLabel(home)),
       m_apartment(new QLabel(apartment)),

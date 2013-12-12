@@ -64,6 +64,9 @@ OrganizerView::OrganizerView(QWidget *parent)
       m_events(new QList<EventView*>),
       m_accounts(new QList<AccountView*>),
       m_transactions(new QList<TransactionView*>),
+      m_channels(new QList<ChannelView*>),
+      m_addresses(new QList<AddressView*>),
+      m_companies(new QList<CompanyView*>),
       m_flagFinanceStatistic(19),
       m_flagTimeStatistic(9)
 {
@@ -300,6 +303,45 @@ void OrganizerView::deleteRecord()
             }
         }
     }
+    else if (qobject_cast<ChannelView*>(sender()))
+    {
+        for (int i = 0; i < m_channels->count(); ++i)
+        {
+            if (sender() == m_channels->at(i))
+            {
+                m_channels->at(i)->hide();
+                ui->Channels->removeWidget(qobject_cast<QWidget*>(m_channels->at(i)));
+                m_channels->removeAt(i);
+                break;
+            }
+        }
+    }
+    else if (qobject_cast<AddressView*>(sender()))
+    {
+        for (int i = 0; i < m_addresses->count(); ++i)
+        {
+            if (sender() == m_addresses->at(i))
+            {
+                m_addresses->at(i)->hide();
+                ui->Addresses->removeWidget(qobject_cast<QWidget*>(m_addresses->at(i)));
+                m_addresses->removeAt(i);
+                break;
+            }
+        }
+    }
+    else if (qobject_cast<CompanyView*>(sender()))
+    {
+        for (int i = 0; i < m_companies->count(); ++i)
+        {
+            if (sender() == m_companies->at(i))
+            {
+                m_companies->at(i)->hide();
+                ui->Companies->removeWidget(qobject_cast<QWidget*>(m_companies->at(i)));
+                m_companies->removeAt(i);
+                break;
+            }
+        }
+    }
 }
 
 void OrganizerView::settings()
@@ -418,6 +460,8 @@ void OrganizerView::addContact()
         ui->lblSurName->setText(data->at(2));
         ui->lblOtherName->setText(data->at(3));
         ui->lblBirthday->setText(data->at(4));
+//        connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        //FIXME
     }
 }
 
@@ -433,7 +477,9 @@ void OrganizerView::addChannel()
     {
         QStringList *data = d->data();
         ChannelView *view = new ChannelView(data->at(0), data->at(1), data->at(2));
-        ui->verticalLayout_8->addWidget(view);
+        m_channels->append(view);
+        ui->Channels->addWidget(view);
+        connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
     }
 }
 
@@ -450,7 +496,9 @@ void OrganizerView::addAddress()
         QStringList *data = d->data();
         AddressView *view = new AddressView(data->at(0), data->at(1), data->at(2),
                                             data->at(3), data->at(4));
-        ui->verticalLayout_10->addWidget(view);
+        m_addresses->append(view);
+        ui->Addresses->addWidget(view);
+        connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
     }
 }
 
@@ -465,9 +513,10 @@ void OrganizerView::addCompany()
     if (d->exec())
     {
         QStringList *data = d->data();
-        CompanyView *view = new CompanyView();
-        ui->verticalLayout_11->addWidget(view);
-        //FIXME
+        CompanyView *view = new CompanyView(data->at(0), data->at(3), data->at(5), data->at(6));
+        m_companies->append(view);
+        ui->Companies->addWidget(view);
+        connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
     }
 }
 

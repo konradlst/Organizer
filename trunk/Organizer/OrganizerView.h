@@ -13,7 +13,9 @@ class AccountView;
 class EventView;
 class TimeView;
 class DealView;
-class AddressModule;
+class ChannelView;
+class AddressView;
+class CompanyView;
 
 class OrganizerView : public QMainWindow
 {
@@ -55,7 +57,9 @@ private:
     QList<EventView*> *m_events;
     QList<AccountView*> *m_accounts;
     QList<TransactionView*> *m_transactions;
-    QList<AddressModule*> *m_addresses;
+    QList<ChannelView*> *m_channels;
+    QList<AddressView*> *m_addresses;
+    QList<CompanyView*> *m_companies;
     int m_flagFinanceStatistic;
     int m_flagTimeStatistic;
 

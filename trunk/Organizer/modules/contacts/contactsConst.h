@@ -8,7 +8,9 @@ class QStringList;
 
 namespace
 {
+const QChar Comma = ',';
 const QChar Separator = ';';
+const QString Today = "today";
 const QString DateFormat = "dd.MM.yyyy";
 const QStringList ChannelTypes = QObject::trUtf8("Phone;Email;Skype;Site").split(Separator);
 }

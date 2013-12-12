@@ -10,7 +10,9 @@ class CompanyView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CompanyView(QWidget *parent = 0);
+    explicit CompanyView(const QString &company, const QString &post,
+                         const QString &dateIn, const QString &dateOut = QString(),
+                         QWidget *parent = 0);
 
 signals:
     void deleted();

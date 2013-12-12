@@ -44,6 +44,6 @@ QStringList *CompanyDialog::data()
           << m_post->text()
           << m_address->text()
           << m_dateIn->date().toString(DateFormat)
-          << m_dateOut->date().toString(DateFormat);
+          << ((m_dateOut->date() == QDateEdit().date()) ? "" : m_dateOut->date().toString(DateFormat));
     return data;
 }

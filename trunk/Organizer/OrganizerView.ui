@@ -210,7 +210,7 @@
            <property name="checkable">
             <bool>false</bool>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_8">
+           <layout class="QVBoxLayout" name="Channels">
             <property name="spacing">
              <number>5</number>
             </property>
@@ -240,7 +240,7 @@
            <property name="checkable">
             <bool>false</bool>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_10">
+           <layout class="QVBoxLayout" name="Addresses">
             <property name="spacing">
              <number>5</number>
             </property>
@@ -270,7 +270,7 @@
            <property name="checkable">
             <bool>false</bool>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_11">
+           <layout class="QVBoxLayout" name="Companies">
             <property name="spacing">
              <number>5</number>
             </property>
