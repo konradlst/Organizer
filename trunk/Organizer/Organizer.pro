@@ -44,6 +44,7 @@ SOURCES += main.cpp \
     modules/contacts/channelView.cpp \
     modules/contacts/companyView.cpp \
     modules/contacts/addressView.cpp \
+    modules/contacts/contactView.cpp \
     modules/dialog.cpp \
     ../Common/dbGenerator/dbGenerator.cpp \
     ../Common/drivers/driverSqlite.cpp \
@@ -73,6 +74,7 @@ HEADERS  += \
     modules/contacts/channelView.h \
     modules/contacts/companyView.h \
     modules/contacts/addressView.h \
+    modules/contacts/contactView.h \
     modules/dialogConst.h \
     modules/dialog.h \
     ../Common/dbGenerator/dbGenerator.h \

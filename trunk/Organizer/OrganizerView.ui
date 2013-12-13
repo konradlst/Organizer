@@ -200,6 +200,9 @@
           </layout>
          </item>
          <item>
+          <widget class="ContactView" name="ContactView" native="true"/>
+         </item>
+         <item>
           <widget class="QGroupBox" name="gbChannels">
            <property name="title">
             <string>Channels</string>
@@ -2797,6 +2800,12 @@
    <class>YearCalendar</class>
    <extends>QWidget</extends>
    <header>./modules/calendars/yearCalendar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ContactView</class>
+   <extends>QWidget</extends>
+   <header location="global">./modules/contacts/contactView.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
