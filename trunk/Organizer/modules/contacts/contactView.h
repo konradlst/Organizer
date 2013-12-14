@@ -17,6 +17,7 @@ public:
     void setNickName(const QString &nickName);
     void setBirthday(const QString &birthday);
     void setUserPic(const QPixmap &userPic);
+    void setVisibleEditUserPic(bool flag);
     QString name() const;
     QString surName() const;
     QString otherName() const;

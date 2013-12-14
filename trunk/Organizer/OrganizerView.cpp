@@ -346,7 +346,7 @@ void OrganizerView::deleteRecord()
 
 void OrganizerView::settings()
 {
-    if (ui->tabWidget->tabBar()->count() == 6)
+    if (ui->actionSettings->isChecked())
         ui->tabWidget->tabBar()->addTab(SettingsTabName);
     else
         ui->tabWidget->tabBar()->removeTab(SettingTab);
@@ -455,12 +455,12 @@ void OrganizerView::addContact()
     {
         QStringList *data = d->data();
         ui->lwContactList->addItem(data->at(0));
-        ui->lblNickName->setText(data->at(0));
-        ui->lblName->setText(data->at(1));
-        ui->lblSurName->setText(data->at(2));
-        ui->lblOtherName->setText(data->at(3));
-        ui->lblBirthday->setText(data->at(4));
-//        connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
+        ui->lwContactList->setCurrentRow(ui->lwContactList->count() - 1);
+        ui->Contact->setNickName(data->at(0));
+        ui->Contact->setName(data->at(1));
+        ui->Contact->setSurName(data->at(2));
+        ui->Contact->setOtherName(data->at(3));
+        ui->Contact->setBirthday(data->at(4));
         //FIXME
     }
 }
@@ -565,7 +565,7 @@ void OrganizerView::pathToLogFile()
 
 void OrganizerView::editableMode(bool flag)
 {
-    ui->pbEditUserPic->setVisible(flag);
+    ui->Contact->setVisibleEditUserPic(flag);
     //FIXME
 }
 

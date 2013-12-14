@@ -48,159 +48,7 @@
        <widget class="QWidget" name="ContactWidget" native="true">
         <layout class="QVBoxLayout" name="vLayContact">
          <item>
-          <layout class="QGridLayout" name="MainContactData">
-           <property name="leftMargin">
-            <number>5</number>
-           </property>
-           <property name="topMargin">
-            <number>3</number>
-           </property>
-           <property name="rightMargin">
-            <number>5</number>
-           </property>
-           <property name="bottomMargin">
-            <number>3</number>
-           </property>
-           <property name="horizontalSpacing">
-            <number>5</number>
-           </property>
-           <property name="verticalSpacing">
-            <number>0</number>
-           </property>
-           <item row="0" column="1">
-            <widget class="QLabel" name="lblName">
-             <property name="font">
-              <font>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Ivan</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" rowspan="5">
-            <widget class="QLabel" name="lblUserPic">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>120</width>
-               <height>120</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>120</width>
-               <height>120</height>
-              </size>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="res.qrc">:/logo</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QPushButton" name="pbEditUserPic">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="res.qrc">
-               <normaloff>:/editingMode</normaloff>:/editingMode</iconset>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLabel" name="lblBirthday">
-             <property name="font">
-              <font>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>20.15.1981</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="lblSurName">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Ivanov</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="lblOtherName">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Ivanovich</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="lblNickName">
-             <property name="font">
-              <font>
-               <pointsize>8</pointsize>
-               <italic>true</italic>
-              </font>
-             </property>
-             <property name="text">
-              <string>( venik )</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="ContactView" name="ContactView" native="true"/>
+          <widget class="ContactView" name="Contact" native="true"/>
          </item>
          <item>
           <widget class="QGroupBox" name="gbChannels">
@@ -2685,6 +2533,9 @@
    </property>
   </action>
   <action name="actionSettings">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/settings</normaloff>:/settings</iconset>

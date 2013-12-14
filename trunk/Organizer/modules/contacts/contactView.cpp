@@ -108,6 +108,11 @@ void ContactView::setUserPic(const QPixmap &userPic)
     m_userPic->setPixmap(userPic);
 }
 
+void ContactView::setVisibleEditUserPic(bool flag)
+{
+    m_editUserPic->setVisible(flag);
+}
+
 QString ContactView::name() const
 {
     return m_name->text();
