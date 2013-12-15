@@ -421,26 +421,26 @@ void OrganizerView::openDbDialog()
 {
     QString path = QFileDialog::getOpenFileName(this, OpenTitle,
                                                 QDir::currentPath(), FileTypes);
-    if (!path.isEmpty())
-    {
-        Log::info(path);
+    if (path.isEmpty())
+        return;
 
-        dbGenerator gen = dbGenerator(path);
-        gen.generate();
-    }
+    Log::info(path);
+
+    dbGenerator gen = dbGenerator(path);
+    gen.generate();
 }
 
 void OrganizerView::saveDbDialog()
 {
     QString path = QFileDialog::getSaveFileName(this, SaveTitle,
                                                 QDir::currentPath(), FileTypes);
-    if (!path.isEmpty())
-    {
-        Log::info(path);
+    if (path.isEmpty())
+        return;
 
-        dbGenerator gen = dbGenerator(path);
-        gen.generate();
-    }
+    Log::info(path);
+
+    dbGenerator gen = dbGenerator(path);
+    gen.generate();
 }
 
 void OrganizerView::addContact()
