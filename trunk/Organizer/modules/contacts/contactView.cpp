@@ -2,6 +2,7 @@
 #include <QSizePolicy>
 #include <QPushButton>
 #include <QLabel>
+#include "contactData.h"
 #include "contactView.h"
 
 ContactView::ContactView(QWidget *parent)
@@ -76,6 +77,16 @@ ContactView::ContactView(QWidget *parent)
     m_otherName->setText("Ivanovich");
     m_nickName->setText("( venik )");
     m_birthday->setText("20.15.1981");
+}
+
+void ContactView::setData(const ContactData &data)
+{
+    m_name->setText(data.name);
+    m_surName->setText(data.surName);
+    m_otherName->setText(data.otherName);
+    m_nickName->setText(data.nickName);
+    m_birthday->setText(data.birthday);
+    m_userPic->setPixmap(data.userPic.isNull() ? QPixmap(":/logo") : data.userPic);
 }
 
 void ContactView::setName(const QString &name)

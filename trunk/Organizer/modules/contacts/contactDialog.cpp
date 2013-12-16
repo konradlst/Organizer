@@ -4,6 +4,7 @@
 #include <QDateEdit>
 #include <QLineEdit>
 #include "contactsConst.h"
+#include "contactData.h"
 #include "contactDialog.h"
 
 ContactDialog::ContactDialog(QWidget *parent)
@@ -38,5 +39,16 @@ QStringList *ContactDialog::data()
           << m_surName->text()
           << m_otherName->text()
           << m_birthday->date().toString(DateFormat);
+    return data;
+}
+
+ContactData ContactDialog::data2() const
+{
+    ContactData data;
+    data.name = m_name->text();
+    data.surName = m_surName->text();
+    data.otherName = m_otherName->text();
+    data.nickName = m_alias->text();
+    data.birthday = m_birthday->date().toString(DateFormat);
     return data;
 }

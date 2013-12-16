@@ -6,6 +6,7 @@
 class QLineEdit;
 class QDateEdit;
 class QPair<QString, QLineEdit*>;
+class ContactData;
 
 class ContactDialog : public Dialog
 {
@@ -13,6 +14,7 @@ class ContactDialog : public Dialog
 public:
     explicit ContactDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    ContactData data2() const;
 
 private:
     //FIXME

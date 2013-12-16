@@ -75,6 +75,7 @@ HEADERS  += \
     modules/contacts/companyView.h \
     modules/contacts/addressView.h \
     modules/contacts/contactView.h \
+    modules/contacts/contactData.h \
     modules/dialogConst.h \
     modules/dialog.h \
     ../Common/dbGenerator/dbGenerator.h \

@@ -9,6 +9,7 @@
 #include "channelDialog.h"
 #include "companyDialog.h"
 #include "addressDialog.h"
+#include "contactData.h"
 #include "channelView.h"
 #include "companyView.h"
 #include "addressView.h"
@@ -67,6 +68,7 @@ OrganizerView::OrganizerView(QWidget *parent)
       m_channels(new QList<ChannelView*>),
       m_addresses(new QList<AddressView*>),
       m_companies(new QList<CompanyView*>),
+      m_contacts(new QHash<QString, ContactData>),
       m_flagFinanceStatistic(19),
       m_flagTimeStatistic(9)
 {
@@ -453,15 +455,11 @@ void OrganizerView::addContact()
     ContactDialog *d = new ContactDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        ui->lwContactList->addItem(data->at(0));
+        ContactData data = d->data2();
+        m_contacts->insert(data.nickName, data);
+        ui->Contact->setData(data);
+        ui->lwContactList->addItem(data.nickName);
         ui->lwContactList->setCurrentRow(ui->lwContactList->count() - 1);
-        ui->Contact->setNickName(data->at(0));
-        ui->Contact->setName(data->at(1));
-        ui->Contact->setSurName(data->at(2));
-        ui->Contact->setOtherName(data->at(3));
-        ui->Contact->setBirthday(data->at(4));
-        //FIXME
     }
 }
 

@@ -16,6 +16,7 @@ class DealView;
 class ChannelView;
 class AddressView;
 class CompanyView;
+struct ContactData;
 
 class OrganizerView : public QMainWindow
 {
@@ -60,6 +61,7 @@ private:
     QList<ChannelView*> *m_channels;
     QList<AddressView*> *m_addresses;
     QList<CompanyView*> *m_companies;
+    QHash<QString, ContactData> *m_contacts;
     int m_flagFinanceStatistic;
     int m_flagTimeStatistic;
 

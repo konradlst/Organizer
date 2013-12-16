@@ -5,12 +5,14 @@
 
 class QLabel;
 class QPushButton;
+struct ContactData;
 
 class ContactView : public QWidget
 {
     Q_OBJECT
 public:
     explicit ContactView(QWidget *parent = 0);
+    void setData(const ContactData &data);
     void setName(const QString &name);
     void setSurName(const QString &surName);
     void setOtherName(const QString &otherName);
