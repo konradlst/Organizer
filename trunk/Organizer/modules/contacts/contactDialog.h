@@ -6,7 +6,7 @@
 class QLineEdit;
 class QDateEdit;
 class QPair<QString, QLineEdit*>;
-class ContactData;
+struct ContactData;
 
 class ContactDialog : public Dialog
 {

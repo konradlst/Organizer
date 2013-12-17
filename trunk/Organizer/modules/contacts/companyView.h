@@ -5,6 +5,7 @@
 
 class QPushButton;
 class QLabel;
+struct CompanyData;
 
 class CompanyView : public QWidget
 {
@@ -13,6 +14,7 @@ public:
     explicit CompanyView(const QString &company, const QString &post,
                          const QString &dateIn, const QString &dateOut = QString(),
                          QWidget *parent = 0);
+    explicit CompanyView(const CompanyData &data);
 
 signals:
     void deleted();
@@ -24,6 +26,8 @@ private:
     QLabel *m_dateOut;
     QPushButton *m_detail;
     QPushButton *m_delete;
+
+    void createInterface();
 };
 
 #endif // COMPANYVIEW_H

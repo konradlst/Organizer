@@ -10,6 +10,7 @@
 #include "companyDialog.h"
 #include "addressDialog.h"
 #include "contactData.h"
+#include "companyData.h"
 #include "channelView.h"
 #include "companyView.h"
 #include "addressView.h"
@@ -510,8 +511,7 @@ void OrganizerView::addCompany()
     CompanyDialog *d = new CompanyDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        CompanyView *view = new CompanyView(data->at(0), data->at(3), data->at(5), data->at(6));
+        CompanyView *view = new CompanyView(d->data2());
         m_companies->append(view);
         ui->Companies->addWidget(view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));

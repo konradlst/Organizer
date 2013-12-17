@@ -3,6 +3,7 @@
 #include <QLineEdit>
 #include <QDateEdit>
 #include "contactsConst.h"
+#include "companyData.h"
 #include "companyDialog.h"
 
 CompanyDialog::CompanyDialog(QWidget *parent)
@@ -44,6 +45,18 @@ QStringList *CompanyDialog::data()
           << m_post->text()
           << m_address->text()
           << m_dateIn->date().toString(DateFormat)
-          << ((m_dateOut->date() == QDateEdit().date()) ? "" : m_dateOut->date().toString(DateFormat));
+          << ((m_dateOut->date() == QDateEdit().date())
+                ? ""
+                : m_dateOut->date().toString(DateFormat));
+    return data;
+}
+
+CompanyData CompanyDialog::data2() const
+{
+    CompanyData data;
+    data.company = m_name->text();
+    data.post = m_post->text();
+    data.dateIn = m_dateIn->text();
+    data.dateOut = m_dateOut->text();
     return data;
 }

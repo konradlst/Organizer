@@ -5,6 +5,7 @@
 
 class QLineEdit;
 class QDateEdit;
+struct CompanyData;
 
 class CompanyDialog : public Dialog
 {
@@ -12,6 +13,7 @@ class CompanyDialog : public Dialog
 public:
     explicit CompanyDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    virtual CompanyData data2() const;
 
 private:
     QLineEdit *m_name;
