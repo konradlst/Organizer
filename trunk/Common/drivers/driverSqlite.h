@@ -44,4 +44,21 @@ private:
     bool openDb();
 };
 
+class SqliteTableDriver
+{
+public:
+    explicit SqliteTableDriver(const QString &tableName, const QSqlDatabase &db) {};
+    void submit() {};
+    void openTransaction() {};
+    void closeTransaction() {};
+    void insertQuery() {};
+    void deleteQuery() {};
+    void updateQuery() {};
+
+private:
+    struct Mapper{};
+    Mapper m_mapper;
+    QString m_table;
+};
+
 #endif // DRIVERSQLITE_H

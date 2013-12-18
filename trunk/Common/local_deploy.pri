@@ -1,4 +1,5 @@
 win32 {
+    QMAKE_POST_LINK += $$quote( $$PWD/../Common/local_deploy.cmd $$PWD/metascheme*.xml ./ & )
     debug {
         QMAKE_POST_LINK += $$quote( $$PWD/../Common/local_deploy.cmd $$PWD/metascheme*.xml ./debug & )
     }

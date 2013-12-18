@@ -34,10 +34,12 @@ enum Tabs { ContactsTab, FinanceTab, TimeTab, DealTab, CalendarTab, StatisticTab
 const int InvalidPosition = -1;
 const int DayToHour = 24;
 const int HourToSec = 3600;
+const QString DbName = "db.sqlite";
 const double TimeStep = 0.5; //30 min - step in calendars
 const QString monthTemplate = "( MMMM yyyy )";
 const QString weekTemplate = "( dd.MM - %1 )";
 const QString dayTemplate = "( ddd, dd.MM.yyyy )";
+const QString ErrorGenerateDb = QObject::trUtf8("Generate database is fail");
 const QString TitlePathToDb = QObject::trUtf8("Choose path to DB");
 const QString TitlePathToLogFile = QObject::trUtf8("Choose path to log file");
 const QString OpenTitle = QObject::trUtf8("Open database");
@@ -430,7 +432,10 @@ void OrganizerView::openDbDialog()
     Log::info(path);
 
     dbGenerator gen = dbGenerator(path);
-    gen.generate();
+    if (gen.generate())
+        ui->pathToDb->setText(path);
+    else
+        Log::error(ErrorGenerateDb);
 }
 
 void OrganizerView::saveDbDialog()
@@ -443,7 +448,10 @@ void OrganizerView::saveDbDialog()
     Log::info(path);
 
     dbGenerator gen = dbGenerator(path);
-    gen.generate();
+    if (gen.generate())
+        ui->pathToDb->setText(path);
+    else
+        Log::error(ErrorGenerateDb);
 }
 
 void OrganizerView::addContact()
@@ -603,6 +611,7 @@ void OrganizerView::createInterface()
         table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     }
 
+    ui->pathToDb->setText(QDir::toNativeSeparators(qApp->applicationDirPath() + QDir::separator() + DbName));
     connect(ui->pbOpenPathToDb, SIGNAL(clicked()), SLOT(pathToDb()));
     connect(ui->pbOpenPathToLogFile, SIGNAL(clicked()), SLOT(pathToLogFile()));
 

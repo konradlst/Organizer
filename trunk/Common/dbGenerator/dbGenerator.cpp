@@ -2,7 +2,6 @@
 #include <QStringList>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QDebug>
 #include "cgMetaschemeConst.h"
 #include "logger.h"
 #include "dbGenerator.h"
@@ -26,21 +25,28 @@ bool dbGenerator::generate(const bool fillTable)
 {
     m_db = QSqlDatabase::addDatabase(SQL::Sqlite, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
-    if (!m_db.open())
+    if (!m_db.isOpen() && !m_db.open())
         return Error::cannotOpen();
 
     if (!m_db.tables().isEmpty())
     {
-        qDebug() << DbExist.arg(m_pathToDb);
+        m_lastError = DbExist.arg(m_pathToDb);
+        Log::error(m_lastError);
         return true;
     }
     m_db.close();
 
     QDomElement scheme;
-    if (!Scheme::load(scheme, m_scheme) || !generateTables(scheme)
+    if (!Scheme::load(scheme, m_scheme)
+            || !generateTables(scheme)
             || (fillTable && !fillTables(scheme)))
         return false;
     return true;
+}
+
+QString dbGenerator::lastError()
+{
+    return m_lastError;
 }
 
 bool dbGenerator::generateTables(const QDomElement &scheme)
@@ -124,12 +130,16 @@ void dbGenerator::parseField(const QDomElement &field, QString &data) const
 
 bool dbGenerator::execQueries(const QStringList &list)
 {
-    m_db.open();
+    if (m_db.isOpen())
+        m_db.open();
     QSqlQuery query(m_db);
     foreach (const QString &q, list)
     {
         if (!query.exec(q))
-            qDebug() << query.lastError() << query.lastQuery();
+        {
+            m_lastError = query.lastError().text() + query.lastQuery();
+            Log::error(m_lastError);
+        }
     }
     m_db.close();
     return true;
