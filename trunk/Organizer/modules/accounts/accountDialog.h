@@ -6,6 +6,7 @@
 class QDateEdit;
 class QSpinBox;
 class QLineEdit;
+struct AccountData;
 
 //! \class AccountDialog
 //! \brief Диалог добавления нового финансового счета.
@@ -15,6 +16,7 @@ class AccountDialog : public Dialog
 public:
     explicit AccountDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    virtual AccountData *data2();
 
 private:
     QDateEdit *m_created;

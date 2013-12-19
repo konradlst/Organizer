@@ -57,6 +57,7 @@ HEADERS  += \
     modules/abstractModule.h \
     modules/accounts/accountView.h \
     modules/accounts/accountDialog.h \
+    modules/accounts/accountData.h \
     modules/transactions/transactionView.h \
     modules/transactions/transactionDialog.h \
     modules/deals/dealView.h \

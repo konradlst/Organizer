@@ -7,6 +7,7 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include "dialogConst.h"
+#include "accountData.h"
 #include "accountDialog.h"
 
 AccountDialog::AccountDialog(QWidget *parent)
@@ -45,5 +46,17 @@ QStringList *AccountDialog::data()
           << QString::number(m_value->value())
           << QString::number(m_total->value())
           << m_description->toPlainText();
+    return data;
+}
+
+AccountData *AccountDialog::data2()
+{
+    AccountData data;
+    data.type = m_type->currentText();
+    data.created = m_created->date().toString(DateFormat);
+    data.name = m_name->text();
+    data.value = QString::number(m_value->value());
+    data.total = QString::number(m_total->value());
+    data.description = m_description->toPlainText();
     return data;
 }
