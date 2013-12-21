@@ -42,6 +42,7 @@ const double TimeStep = 0.5; //30 min - step in calendars
 const QString monthTemplate = "( MMMM yyyy )";
 const QString weekTemplate = "( dd.MM - %1 )";
 const QString dayTemplate = "( ddd, dd.MM.yyyy )";
+const QString Add = QObject::trUtf8("Add");
 const QString ErrorGenerateDb = QObject::trUtf8("Generate database is fail");
 const QString TitlePathToDb = QObject::trUtf8("Choose path to DB");
 const QString TitlePathToLogFile = QObject::trUtf8("Choose path to log file");
@@ -178,11 +179,14 @@ void OrganizerView::dealDialog()
 void OrganizerView::eventDialog()
 {
     ui->tabWidget->setCurrentIndex(CalendarTab);
-    DealDialog *d = 0;
+
+    int type = 0;
     if (sender() == ui->actionAdd_Event)
-        d = new DealDialog(2);
+        type = 2;
     else if (sender() == ui->actionAdd_Holiday)
-        d = new DealDialog(1);
+        type = 1;
+
+    DealDialog *d = new DealDialog(type);
     if (d->exec())
     {
         QStringList *data = d->data();
@@ -237,6 +241,7 @@ void OrganizerView::about()
 
 void OrganizerView::deleteRecord()
 {
+    //FIXME create factory
     if (qobject_cast<TimeView*>(sender()))
     {
         for (int i = 0; i < m_times->count(); ++i)
@@ -359,11 +364,11 @@ void OrganizerView::settingsFinaceStatistic(bool value)
         if (sender() == ui->cbSelectAllFinanceStatistic)
         {
             ui->cbSelectAllFinanceStatistic->setCheckState(Qt::Checked);
-            m_flagFinanceStatistic = 19;
+            m_flagFinanceStatistic = 19; //FIXME magic number
             return;
         }
         ++m_flagFinanceStatistic;
-        if (m_flagFinanceStatistic == 19)
+        if (m_flagFinanceStatistic == 19) //FIXME magic number
             ui->cbSelectAllFinanceStatistic->setCheckState(Qt::Checked);
         else
             ui->cbSelectAllFinanceStatistic->setCheckState(Qt::PartiallyChecked);
@@ -391,11 +396,11 @@ void OrganizerView::settingsTimeStatistic(bool value)
         if (sender() == ui->cbSelectAllTimeStatistic)
         {
             ui->cbSelectAllTimeStatistic->setCheckState(Qt::Checked);
-            m_flagTimeStatistic = 9;
+            m_flagTimeStatistic = 9; //FIXME magic number
             return;
         }
         ++m_flagTimeStatistic;
-        if (m_flagTimeStatistic == 9)
+        if (m_flagTimeStatistic == 9) //FIXME magic number
             ui->cbSelectAllTimeStatistic->setCheckState(Qt::Checked);
         else
             ui->cbSelectAllTimeStatistic->setCheckState(Qt::PartiallyChecked);
@@ -571,7 +576,7 @@ void OrganizerView::createInterface()
 {
     ui->setupUi(this);
 
-    QMenu *addMenu = new QMenu("Add");
+    QMenu *addMenu = new QMenu(Add);
     QList<QAction*> addActionList;
     addActionList.append(ui->actionAdd_channel);
     addActionList.append(ui->actionAdd_address);
