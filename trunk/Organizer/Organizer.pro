@@ -85,7 +85,8 @@ HEADERS  += \
     ../Common/cgMetaschemeConst.cpp \
     ../Common/logger.h \
     modules/transactions/transactionData.h \
-    modules/contacts/addressData.h
+    modules/contacts/addressData.h \
+    modules/contacts/channelData.h
 
 FORMS    += \
     OrganizerView.ui

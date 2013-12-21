@@ -5,6 +5,7 @@
 
 class QLabel;
 class QPushButton;
+struct ChannelData;
 
 class ChannelView : public QWidget
 {
@@ -12,6 +13,7 @@ class ChannelView : public QWidget
 public:
     explicit ChannelView(const QString &type, const QString &subType,
                          const QString &value, QWidget *parent = 0);
+    explicit ChannelView(const ChannelData &data);
 
 signals:
     void deleted();
@@ -22,6 +24,8 @@ private:
     QLabel *m_value;
     QPushButton *m_detail;
     QPushButton *m_delete;
+
+    void createInterface();
 };
 
 #endif // CHANNELVIEW_H

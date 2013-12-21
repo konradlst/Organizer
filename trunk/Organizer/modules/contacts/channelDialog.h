@@ -4,6 +4,7 @@
 #include "dialog.h"
 
 class QLineEdit;
+struct ChannelData;
 
 class ChannelDialog : public Dialog
 {
@@ -11,6 +12,7 @@ class ChannelDialog : public Dialog
 public:
     explicit ChannelDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    virtual ChannelData data2();
 
 private:
     QComboBox *m_type;

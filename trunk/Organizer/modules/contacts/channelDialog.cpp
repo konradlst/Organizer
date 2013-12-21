@@ -2,6 +2,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QComboBox>
+#include "channelData.h"
 #include "contactsConst.h"
 #include "channelDialog.h"
 
@@ -29,5 +30,14 @@ QStringList *ChannelDialog::data()
     *data << m_type->currentText()
           << m_subType->text()
           << m_value->text();
+    return data;
+}
+
+ChannelData ChannelDialog::data2()
+{
+    ChannelData data;
+    data.type = m_type->currentText();
+    data.subType = m_subType->text();
+    data.value = m_value->text();
     return data;
 }

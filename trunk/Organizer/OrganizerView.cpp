@@ -12,6 +12,7 @@
 #include "addressDialog.h"
 #include "contactData.h"
 #include "companyData.h"
+#include "channelData.h"
 #include "channelView.h"
 #include "companyView.h"
 #include "addressData.h"
@@ -481,8 +482,7 @@ void OrganizerView::addChannel()
     ChannelDialog *d = new ChannelDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        ChannelView *view = new ChannelView(data->at(0), data->at(1), data->at(2));
+        ChannelView *view = new ChannelView(d->data2());
         m_channels->append(view);
         ui->Channels->addWidget(view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));

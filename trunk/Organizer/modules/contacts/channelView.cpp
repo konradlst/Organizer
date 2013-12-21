@@ -1,6 +1,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QLabel>
+#include "channelData.h"
 #include "channelView.h"
 
 ChannelView::ChannelView(const QString &type, const QString &subType,
@@ -11,6 +12,21 @@ ChannelView::ChannelView(const QString &type, const QString &subType,
       m_value(new QLabel(value)),
       m_detail(new QPushButton()),
       m_delete(new QPushButton())
+{
+    createInterface();
+}
+
+ChannelView::ChannelView(const ChannelData &data)
+    : m_type(new QPushButton(data.type)),
+      m_subType(new QLabel(data.subType)),
+      m_value(new QLabel(data.value)),
+      m_detail(new QPushButton()),
+      m_delete(new QPushButton())
+{
+    createInterface();
+}
+
+void ChannelView::createInterface()
 {
     m_type->setFlat(true);
     m_detail->setFlat(true);
