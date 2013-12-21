@@ -9,6 +9,7 @@ class QComboBox;
 class QSpinBox;
 class QLineEdit;
 class QPushButton;
+struct DealData;
 
 //! \class DealView
 //! \brief Класс-представление записи о деле.
@@ -20,6 +21,7 @@ public:
                       const QTime &duration, const QDate &deadline,
                       const QString &humans, const QString &description,
                       QGroupBox *parent = 0);
+    explicit DealView(const DealData &data);
 
 signals:
     void deleted();
@@ -36,6 +38,8 @@ private:
     QLineEdit *m_humans;
     QLineEdit *m_description;
     QPushButton *m_delete;
+
+    void createInterface(const DealData &data);
 };
 
 #endif // DEALVIEW_H

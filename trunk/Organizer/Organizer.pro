@@ -87,7 +87,8 @@ HEADERS  += \
     modules/transactions/transactionData.h \
     modules/contacts/addressData.h \
     modules/contacts/channelData.h \
-    modules/times/timeData.h
+    modules/times/timeData.h \
+    modules/deals/dealData.h
 
 FORMS    += \
     OrganizerView.ui

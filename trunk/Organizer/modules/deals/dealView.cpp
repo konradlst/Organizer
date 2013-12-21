@@ -9,6 +9,7 @@
 #include <QSpinBox>
 #include <QLabel>
 #include "dialogConst.h"
+#include "dealData.h"
 #include "dealView.h"
 
 namespace
@@ -40,13 +41,61 @@ DealView::DealView(const int type, const QDate &created, const int price,
       m_description(new QLineEdit(description)),
       m_delete(new QPushButton)
 {
-    setTitle(DealTypes.at(type));
+    DealData data;
+    data.type = type;
+    data.date = created;
+    data.money = price;
+    data.duration = duration;
+    data.deadLine = deadline;
+    data.humans = humans;
+    data.description = description;
+    createInterface(data);
+}
+
+DealView::DealView(const DealData &data)
+    : m_created(new QDateEdit(data.date)),
+      m_duration(new QTimeEdit(data.duration)),
+      m_type(new QComboBox),
+      m_price(new QSpinBox),
+      m_deadline(new QDateEdit(data.deadLine)),
+      m_humans(new QLineEdit(data.humans)),
+      m_description(new QLineEdit(data.description)),
+      m_delete(new QPushButton)
+{
+    createInterface(data);
+}
+
+void DealView::editableMode(bool flag)
+{
+    //FIXME add hide\show openDetailButton
+    m_type->setEnabled(flag);
+    m_created->setReadOnly(!flag);
+    m_created->setCalendarPopup(flag);
+    m_created->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                     : QAbstractSpinBox::NoButtons);
+    m_duration->setReadOnly(!flag);
+    m_duration->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                      : QAbstractSpinBox::NoButtons);
+    m_price->setReadOnly(!flag);
+    m_price->setButtonSymbols(flag ? QAbstractSpinBox::PlusMinus
+                                   : QAbstractSpinBox::NoButtons);
+    m_deadline->setReadOnly(!flag);
+    m_deadline->setCalendarPopup(flag);
+    m_deadline->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                      : QAbstractSpinBox::NoButtons);
+    m_humans->setReadOnly(!flag);
+    m_description->setReadOnly(flag);
+}
+
+void DealView::createInterface(const DealData &data)
+{
+    setTitle(DealTypes.at(data.type));
     m_created->setCalendarPopup(true);
     m_deadline->setCalendarPopup(true);
     m_type->addItems(DealTypes);
-    m_type->setCurrentIndex(type);
+    m_type->setCurrentIndex(data.type);
     m_price->setSuffix(" rub.");
-    m_price->setValue(price);
+    m_price->setValue(data.money);
     m_humans->setPlaceholderText(HumansPlaceholder);
     m_description->setPlaceholderText(DescriptionPlaceholder);
     m_delete->setFlat(true);
@@ -88,26 +137,4 @@ DealView::DealView(const int type, const QDate &created, const int price,
     setLayout(mLay);
 
     connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
-}
-
-void DealView::editableMode(bool flag)
-{
-    //FIXME add hide\show openDetailButton
-    m_type->setEnabled(flag);
-    m_created->setReadOnly(!flag);
-    m_created->setCalendarPopup(flag);
-    m_created->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
-                                     : QAbstractSpinBox::NoButtons);
-    m_duration->setReadOnly(!flag);
-    m_duration->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
-                                      : QAbstractSpinBox::NoButtons);
-    m_price->setReadOnly(!flag);
-    m_price->setButtonSymbols(flag ? QAbstractSpinBox::PlusMinus
-                                   : QAbstractSpinBox::NoButtons);
-    m_deadline->setReadOnly(!flag);
-    m_deadline->setCalendarPopup(flag);
-    m_deadline->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
-                                      : QAbstractSpinBox::NoButtons);
-    m_humans->setReadOnly(!flag);
-    m_description->setReadOnly(flag);
 }

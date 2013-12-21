@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QSpinBox>
+#include "dealData.h"
 #include "dialogConst.h"
 #include "dealDialog.h"
 
@@ -43,5 +44,18 @@ QStringList *DealDialog::data()
           << m_deadLine->date().toString(DateFormat)
           << m_humans->text()
           << m_description->toPlainText();
+    return data;
+}
+
+DealData DealDialog::data2()
+{
+    DealData data;
+    data.type = m_type->currentIndex();
+    data.date = m_date->date();
+    data.money = m_money->value();
+    data.duration = m_duration->time();
+    data.deadLine = m_deadLine->date();
+    data.humans = m_humans->text();
+    data.description = m_description->toPlainText();
     return data;
 }

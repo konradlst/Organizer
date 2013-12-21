@@ -2,6 +2,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QDateEdit>
+#include "dealData.h"
 #include "eventView.h"
 
 namespace
@@ -17,6 +18,30 @@ EventView::EventView(const QDate &date, const QString &description, QWidget *par
       m_description(new QLineEdit(description)),
       m_delete(new QPushButton),
       m_detail(new QPushButton)
+{
+    createInterface();
+}
+
+EventView::EventView(const DealData &data)
+    : m_date(new QDateEdit(data.date)),
+      m_description(new QLineEdit(data.description)),
+      m_delete(new QPushButton),
+      m_detail(new QPushButton)
+{
+    createInterface();
+}
+
+void EventView::editableMode(bool flag)
+{
+    m_description->setReadOnly(!flag);
+    m_date->setReadOnly(!flag);
+    m_date->setCalendarPopup(flag);
+    m_detail->setVisible(flag);
+    m_date->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
+                                  : QAbstractSpinBox::NoButtons);
+}
+
+void EventView::createInterface()
 {
     m_date->setCalendarPopup(true);
     m_delete->setFlat(true);
@@ -40,14 +65,4 @@ EventView::EventView(const QDate &date, const QString &description, QWidget *par
 
     connect(m_detail, SIGNAL(clicked()), SIGNAL(openDetail()));
     connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
-}
-
-void EventView::editableMode(bool flag)
-{
-    m_description->setReadOnly(!flag);
-    m_date->setReadOnly(!flag);
-    m_date->setCalendarPopup(flag);
-    m_detail->setVisible(flag);
-    m_date->setButtonSymbols(flag ? QAbstractSpinBox::UpDownArrows
-                                  : QAbstractSpinBox::NoButtons);
 }

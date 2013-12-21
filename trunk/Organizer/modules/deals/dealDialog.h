@@ -7,6 +7,7 @@ class QDateEdit;
 class QTimeEdit;
 class QSpinBox;
 class QLineEdit;
+struct DealData;
 
 //! \class DealDialog
 //! \brief Диалог добавления нового дела.
@@ -16,6 +17,7 @@ class DealDialog : public Dialog
 public:
     explicit DealDialog(const int type = 0, QWidget *parent = 0);
     virtual QStringList *data();
+    virtual DealData data2();
 
 private:
     QDateEdit *m_date;

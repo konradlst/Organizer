@@ -24,7 +24,9 @@
 #include "timeDialog.h"
 #include "dealDialog.h"
 #include "eventView.h"
+#include "timeData.h"
 #include "timeView.h"
+#include "dealData.h"
 #include "dealView.h"
 #include "logger.h"
 #include "ui_OrganizerView.h"
@@ -156,14 +158,7 @@ void OrganizerView::dealDialog()
     DealDialog *d = new DealDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        DealView *view = new DealView(data->at(0).toLongLong(),
-                                      QDate::fromString(data->at(1), DateFormat),
-                                      data->at(2).toLongLong(),
-                                      QTime::fromString(data->at(3), TimeFormat),
-                                      QDate::fromString(data->at(4), DateFormat),
-                                      data->at(5),
-                                      data->at(6));
+        DealView *view = new DealView(d->data2());
         m_deals->append(view);
         ui->Deals->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
@@ -185,9 +180,7 @@ void OrganizerView::eventDialog()
     DealDialog *d = new DealDialog(type);
     if (d->exec())
     {
-        QStringList *data = d->data();
-        EventView *view = new EventView(QDate::fromString(data->at(1), DateFormat),
-                                        data->at(2));
+        EventView *view = new EventView(d->data2());
         m_events->append(view);
         ui->Events->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
