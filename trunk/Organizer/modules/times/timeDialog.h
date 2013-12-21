@@ -4,6 +4,7 @@
 #include "dialog.h"
 
 class QTimeEdit;
+struct TimeData;
 
 //! \class TimeDialog
 //! \brief Диалог добавления записи о потраченном времени.
@@ -13,6 +14,7 @@ class TimeDialog : public Dialog
 public:
     explicit TimeDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    virtual TimeData data2();
 
 private slots:
     void changeDuration(const QTime &time);

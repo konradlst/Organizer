@@ -86,7 +86,8 @@ HEADERS  += \
     ../Common/logger.h \
     modules/transactions/transactionData.h \
     modules/contacts/addressData.h \
-    modules/contacts/channelData.h
+    modules/contacts/channelData.h \
+    modules/times/timeData.h
 
 FORMS    += \
     OrganizerView.ui

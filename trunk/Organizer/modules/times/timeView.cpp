@@ -4,6 +4,7 @@
 #include <QTimeEdit>
 #include <QLineEdit>
 #include <QLabel>
+#include "timeData.h"
 #include "timeView.h"
 
 namespace
@@ -33,35 +34,26 @@ TimeView::TimeView(const int type, const QTime &start, const QTime &stop,
       m_delete(new  QPushButton),
       m_lock(false)
 {
-    m_type->addItems(TimeType);
-    m_type->setCurrentIndex(type);
-    m_comment->setText(comment);
-    m_comment->setPlaceholderText(CommentPlaceholder);
-    m_start->setTime(start);
-    m_stop->setTime(stop);
-    m_duration->setTime(duration);
-    m_delete->setFlat(true);
-    m_delete->setFixedSize(25, 25);
-    m_delete->setIcon(QIcon(":/delete"));
+    TimeData data;
+    data.type = type;
+    data.started = start;
+    data.stoped = stop;
+    data.duration = duration;
+    data.description = comment;
 
-    QHBoxLayout *lay = new QHBoxLayout();
-    lay->setContentsMargins(0, 0, 0, 0);
-    lay->addWidget(m_type);
-    lay->addWidget(vLine());
-    lay->addWidget(m_start);
-    lay->addWidget(new QLabel(" - "));
-    lay->addWidget(m_stop);
-    lay->addWidget(vLine());
-    lay->addWidget(m_duration);
-    lay->addWidget(vLine());
-    lay->addWidget(m_comment);
-    lay->addWidget(m_delete);
-    setLayout(lay);
+    createInterface(data);
+}
 
-    connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
-    connect(m_start, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
-    connect(m_stop, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
-    connect(m_duration, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
+TimeView::TimeView(const TimeData &data)
+    : m_type(new QComboBox),
+      m_start(new QTimeEdit),
+      m_stop(new QTimeEdit),
+      m_duration(new QTimeEdit),
+      m_comment(new QLineEdit),
+      m_delete(new  QPushButton),
+      m_lock(false)
+{
+    createInterface(data);
 }
 
 void TimeView::editableMode(bool flag)
@@ -103,4 +95,37 @@ void TimeView::changeDuration(const QTime &time)
         m_duration->setTime(QTime(0,0).addSecs(m_start->time().secsTo(time)));
     }
     m_lock = false;
+}
+
+void TimeView::createInterface(const TimeData &data)
+{
+    m_type->addItems(TimeType);
+    m_type->setCurrentIndex(data.type);
+    m_comment->setText(data.description);
+    m_comment->setPlaceholderText(CommentPlaceholder);
+    m_start->setTime(data.started);
+    m_stop->setTime(data.stoped);
+    m_duration->setTime(data.duration);
+    m_delete->setFlat(true);
+    m_delete->setFixedSize(25, 25);
+    m_delete->setIcon(QIcon(":/delete"));
+
+    QHBoxLayout *lay = new QHBoxLayout();
+    lay->setContentsMargins(0, 0, 0, 0);
+    lay->addWidget(m_type);
+    lay->addWidget(vLine());
+    lay->addWidget(m_start);
+    lay->addWidget(new QLabel(" - "));
+    lay->addWidget(m_stop);
+    lay->addWidget(vLine());
+    lay->addWidget(m_duration);
+    lay->addWidget(vLine());
+    lay->addWidget(m_comment);
+    lay->addWidget(m_delete);
+    setLayout(lay);
+
+    connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
+    connect(m_start, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
+    connect(m_stop, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
+    connect(m_duration, SIGNAL(timeChanged(QTime)), SLOT(changeDuration(QTime)));
 }

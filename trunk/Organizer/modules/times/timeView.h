@@ -7,6 +7,7 @@ class QComboBox;
 class QTimeEdit;
 class QLineEdit;
 class QPushButton;
+struct TimeData;
 
 //! \class TimeView
 //! \brief Класс-представление записи о времени.
@@ -17,6 +18,7 @@ public:
     explicit TimeView(const int type, const QTime &start, const QTime &stop,
                       const QTime &duration, const QString &comment,
                       QWidget *parent = 0);
+    explicit TimeView(const TimeData &data);
 
 signals:
     void deleted();
@@ -35,6 +37,8 @@ private:
     QLineEdit *m_comment;
     QPushButton *m_delete;
     bool m_lock;
+
+    void createInterface(const TimeData &data);
 };
 
 #endif // TIMEVIEW_H

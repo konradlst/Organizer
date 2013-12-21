@@ -140,12 +140,7 @@ void OrganizerView::timeDialog()
     TimeDialog *d = new TimeDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        TimeView *view = new TimeView(data->at(0).toLongLong(),
-                                      QTime::fromString(data->at(1), TimeFormat),
-                                      QTime::fromString(data->at(2), TimeFormat),
-                                      QTime::fromString(data->at(3), TimeFormat),
-                                      data->at(4));
+        TimeView *view = new TimeView(d->data2());
         m_times->append(view);
         ui->Times->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));

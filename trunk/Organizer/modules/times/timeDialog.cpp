@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QTimeEdit>
 #include <QComboBox>
+#include "timeData.h"
 #include "dialogConst.h"
 #include "timeDialog.h"
 
@@ -37,6 +38,17 @@ QStringList *TimeDialog::data()
           << m_stoped->time().toString(TimeFormat)
           << m_duration->time().toString(TimeFormat)
           << m_description->toPlainText();
+    return data;
+}
+
+TimeData TimeDialog::data2()
+{
+    TimeData data;
+    data.type = m_type->currentIndex();
+    data.started = m_started->time();
+    data.stoped = m_stoped->time();
+    data.duration = m_duration->time();
+    data.description = m_description->toPlainText();
     return data;
 }
 
