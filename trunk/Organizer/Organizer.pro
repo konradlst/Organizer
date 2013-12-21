@@ -84,7 +84,8 @@ HEADERS  += \
     ../Common/drivers/driverSqlite.h \
     ../Common/cgMetaschemeConst.cpp \
     ../Common/logger.h \
-    modules/transactions/transactionData.h
+    modules/transactions/transactionData.h \
+    modules/contacts/addressData.h
 
 FORMS    += \
     OrganizerView.ui

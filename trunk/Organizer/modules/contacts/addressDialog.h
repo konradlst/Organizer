@@ -4,6 +4,7 @@
 #include "dialog.h"
 
 class QLineEdit;
+struct AddressData;
 
 class AddressDialog : public Dialog
 {
@@ -11,6 +12,7 @@ class AddressDialog : public Dialog
 public:
     explicit AddressDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    virtual AddressData data2();
 
 private:
     QLineEdit *m_country;

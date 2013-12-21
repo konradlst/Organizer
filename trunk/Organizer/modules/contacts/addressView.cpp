@@ -2,6 +2,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include "contactsConst.h"
+#include "addressData.h"
 #include "addressView.h"
 
 AddressView::AddressView(const QString &country, const QString &city,
@@ -15,6 +16,23 @@ AddressView::AddressView(const QString &country, const QString &city,
       m_apartment(new QLabel(apartment)),
       m_detail(new QPushButton),
       m_delete(new QPushButton)
+{
+    createInterface();
+}
+
+AddressView::AddressView(const AddressData &data)
+    : m_country(new QPushButton(data.country + Comma)),
+      m_city(new QPushButton(data.city + Comma)),
+      m_street(new QLabel(data.street)),
+      m_home(new QLabel(data.home)),
+      m_apartment(new QLabel(data.apartment)),
+      m_detail(new QPushButton),
+      m_delete(new QPushButton)
+{
+    createInterface();
+}
+
+void AddressView::createInterface()
 {
     m_country->setFlat(true);
     m_city->setFlat(true);

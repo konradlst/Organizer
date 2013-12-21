@@ -2,6 +2,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include "contactsConst.h"
+#include "addressData.h"
 #include "addressDialog.h"
 
 AddressDialog::AddressDialog(QWidget *parent)
@@ -36,5 +37,16 @@ QStringList *AddressDialog::data()
           << m_street->text()
           << m_home->text()
           << m_apartment->text();
+    return data;
+}
+
+AddressData AddressDialog::data2()
+{
+    AddressData data;
+    data.country = m_country->text();
+    data.city = m_city->text();
+    data.street = m_street->text();
+    data.home = m_home->text();
+    data.apartment = m_apartment->text();
     return data;
 }

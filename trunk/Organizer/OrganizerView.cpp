@@ -14,6 +14,7 @@
 #include "companyData.h"
 #include "channelView.h"
 #include "companyView.h"
+#include "addressData.h"
 #include "addressView.h"
 #include "accountData.h"
 #include "accountView.h"
@@ -493,9 +494,7 @@ void OrganizerView::addAddress()
     AddressDialog *d = new AddressDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        AddressView *view = new AddressView(data->at(0), data->at(1), data->at(2),
-                                            data->at(3), data->at(4));
+        AddressView *view = new AddressView(d->data2());
         m_addresses->append(view);
         ui->Addresses->addWidget(view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
