@@ -21,7 +21,7 @@ public:
     //! Запрашивает список транзакций в указанную дату \param date.
     Data::Table *transactions(const QDate &date);
     //! Запрашивает список временных расходов в указанную дату \param date.
-    Data::Table *timeLine(const QDate &date);
+    Data::Table *timeLine(const QDate &/*date*/);
     //! Запрашивает список дел в указанную дату \param date по заданными параметрам \param params.
     Data::Table *deals(const QDate &date, const QStringList params = QStringList());
 
@@ -47,7 +47,7 @@ private:
 class SqliteTableDriver
 {
 public:
-    explicit SqliteTableDriver(const QString &tableName, const QSqlDatabase &db) {};
+    explicit SqliteTableDriver(const QString &/*tableName*/, const QSqlDatabase &/*db*/) {};
     void submit() {};
     void openTransaction() {};
     void closeTransaction() {};

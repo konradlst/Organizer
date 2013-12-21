@@ -104,7 +104,7 @@ Data::Table *DriverSqlite::transactions(const QDate &date)
     return table;
 }
 
-Data::Table *DriverSqlite::timeLine(const QDate &date)
+Data::Table *DriverSqlite::timeLine(const QDate &/*date*/)
 {
     openDb();
     QSqlQuery q = QSqlQuery(Select.arg(AllFields, Times));
@@ -122,7 +122,7 @@ Data::Table *DriverSqlite::timeLine(const QDate &date)
     return table;
 }
 
-Data::Table *DriverSqlite::deals(const QDate &date, const QStringList params)
+Data::Table *DriverSqlite::deals(const QDate &date, const QStringList /*params*/)
 {
     openDb();
     QSqlQuery q = QSqlQuery(SelectFull.arg(AllFields, Deals,
