@@ -4,6 +4,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include "accountView.h"
+#include "accountData.h"
 #include "dialogConst.h"
 
 namespace
@@ -20,25 +21,23 @@ AccountView::AccountView(int type, const QString &name,
       m_delete(new QPushButton()),
       m_value(new QProgressBar())
 {
-    m_type->addItems(AccountTypes);
-    m_type->setCurrentIndex(type);
-    m_value->setMaximum(maxValue < value ? 999999 : maxValue);
-    m_value->setMinimum(0);
-    m_value->setFormat("%v rub.");
-    m_value->setValue(value);
-    m_delete->setFlat(true);
-    m_delete->setFixedSize(25, 25);
-    m_delete->setIcon(QIcon(":/delete"));
-    QHBoxLayout *lay = new QHBoxLayout();
-    lay->setContentsMargins(0, 0, 0, 0);
-    lay->addWidget(m_type);
-    lay->addWidget(m_name);
-    lay->addWidget(m_value);
-    lay->addWidget(m_delete);
-    setLayout(lay);
-    setToolTip(comment);
+    AccountData data;
+    data.name = name;
+    data.type = QString::number(type);
+    data.value = QString::number(value);
+    data.total = QString::number(maxValue);
+    data.description = comment;
 
-    connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
+    createInterface(data);
+}
+
+AccountView::AccountView(const AccountData &data)
+    : m_name(new QLabel(data.name.isEmpty() ? DefaultAccountName : data.name)),
+      m_type(new QComboBox()),
+      m_delete(new QPushButton()),
+      m_value(new QProgressBar())
+{
+    createInterface(data);
 }
 
 void AccountView::rename(const QString &name)
@@ -55,4 +54,27 @@ void AccountView::editableMode(bool flag)
 {
     //FIXME add hide\show openDetailButton
     m_type->setEnabled(flag);
+}
+
+void AccountView::createInterface(const AccountData &data)
+{
+    m_type->addItems(AccountTypes);
+    m_type->setCurrentIndex(data.type.toInt());
+    m_value->setMaximum(data.total.toLongLong() < data.value.toLongLong() ? 999999 : data.total.toLongLong());
+    m_value->setMinimum(0);
+    m_value->setFormat("%v rub.");
+    m_value->setValue(data.value.toLongLong());
+    m_delete->setFlat(true);
+    m_delete->setFixedSize(25, 25);
+    m_delete->setIcon(QIcon(":/delete"));
+    QHBoxLayout *lay = new QHBoxLayout();
+    lay->setContentsMargins(0, 0, 0, 0);
+    lay->addWidget(m_type);
+    lay->addWidget(m_name);
+    lay->addWidget(m_value);
+    lay->addWidget(m_delete);
+    setLayout(lay);
+    setToolTip(data.description);
+
+    connect(m_delete, SIGNAL(clicked()), SIGNAL(deleted()));
 }

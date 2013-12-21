@@ -16,7 +16,7 @@ class AccountDialog : public Dialog
 public:
     explicit AccountDialog(QWidget *parent = 0);
     virtual QStringList *data();
-    virtual AccountData *data2();
+    virtual AccountData data2();
 
 private:
     QDateEdit *m_created;

@@ -49,7 +49,7 @@ QStringList *AccountDialog::data()
     return data;
 }
 
-AccountData *AccountDialog::data2()
+AccountData AccountDialog::data2()
 {
     AccountData data;
     data.type = m_type->currentText();
