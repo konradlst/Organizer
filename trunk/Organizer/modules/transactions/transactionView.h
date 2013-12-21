@@ -7,6 +7,7 @@ class QLabel;
 class QComboBox;
 class QPushButton;
 class QSpinBox;
+struct TransactionData;
 
 //! \class TimeView
 //! \brief Класс-представление записи о финансовой транзакции.
@@ -18,6 +19,7 @@ public:
                              const qint64 &value = 0,
                              const QString &comment = QString(),
                              QWidget *parent = 0);
+    explicit TransactionView(const TransactionData &data);
 
 signals:
     void deleted();
@@ -30,6 +32,8 @@ private:
     QComboBox *m_type;
     QPushButton *m_delete;
     QSpinBox *m_value;
+
+    void createInterface(const TransactionData &data);
 };
 
 #endif // TRANSACTIONVIEW_H

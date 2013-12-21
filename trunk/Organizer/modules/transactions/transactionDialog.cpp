@@ -6,6 +6,7 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include "dialogConst.h"
+#include "transactionData.h"
 #include "transactionDialog.h"
 
 TransactionDialog::TransactionDialog(QWidget *parent)
@@ -37,5 +38,16 @@ QStringList *TransactionDialog::data()
           << m_name->text()
           << QString::number(m_value->value())
           << m_description->toPlainText();
+    return data;
+}
+
+TransactionData TransactionDialog::data2()
+{
+    TransactionData data;
+    data.created = m_created->date();
+    data.name = m_name->text();
+    data.type = m_type->currentIndex();
+    data.value = m_value->value();
+    data.description = m_description->toPlainText();
     return data;
 }

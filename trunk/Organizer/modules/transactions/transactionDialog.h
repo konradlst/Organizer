@@ -6,6 +6,7 @@
 class QDateEdit;
 class QSpinBox;
 class QLineEdit;
+struct TransactionData;
 
 //! \class TransactionDialog
 //! \brief Диалог добавления новой финансовой операции.
@@ -15,6 +16,7 @@ class TransactionDialog : public Dialog
 public:
     explicit TransactionDialog(QWidget *parent = 0);
     virtual QStringList *data();
+    virtual TransactionData data2();
 
 private:
     QDateEdit *m_created;

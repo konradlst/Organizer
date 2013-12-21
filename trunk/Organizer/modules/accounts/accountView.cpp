@@ -23,9 +23,9 @@ AccountView::AccountView(int type, const QString &name,
 {
     AccountData data;
     data.name = name;
-    data.type = QString::number(type);
-    data.value = QString::number(value);
-    data.total = QString::number(maxValue);
+    data.type = type;
+    data.value = value;
+    data.total = maxValue;
     data.description = comment;
 
     createInterface(data);
@@ -59,11 +59,11 @@ void AccountView::editableMode(bool flag)
 void AccountView::createInterface(const AccountData &data)
 {
     m_type->addItems(AccountTypes);
-    m_type->setCurrentIndex(data.type.toInt());
-    m_value->setMaximum(data.total.toLongLong() < data.value.toLongLong() ? 999999 : data.total.toLongLong());
+    m_type->setCurrentIndex(data.type);
+    m_value->setMaximum(data.total < data.value ? 999999 : data.total);
     m_value->setMinimum(0);
     m_value->setFormat("%v rub.");
-    m_value->setValue(data.value.toLongLong());
+    m_value->setValue(data.value);
     m_delete->setFlat(true);
     m_delete->setFixedSize(25, 25);
     m_delete->setIcon(QIcon(":/delete"));

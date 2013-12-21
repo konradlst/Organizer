@@ -52,11 +52,11 @@ QStringList *AccountDialog::data()
 AccountData AccountDialog::data2()
 {
     AccountData data;
-    data.type = m_type->currentText();
-    data.created = m_created->date().toString(DateFormat);
+    data.type = m_type->currentIndex();
+    data.created = m_created->date();
     data.name = m_name->text();
-    data.value = QString::number(m_value->value());
-    data.total = QString::number(m_total->value());
+    data.value = m_value->value();
+    data.total = m_total->value();
     data.description = m_description->toPlainText();
     return data;
 }

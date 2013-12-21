@@ -83,7 +83,8 @@ HEADERS  += \
     ../Common/dbGenerator/dbGenerator.h \
     ../Common/drivers/driverSqlite.h \
     ../Common/cgMetaschemeConst.cpp \
-    ../Common/logger.h
+    ../Common/logger.h \
+    modules/transactions/transactionData.h
 
 FORMS    += \
     OrganizerView.ui

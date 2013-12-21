@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include "transactionDialog.h"
+#include "transactionData.h"
 #include "transactionView.h"
 #include "accountDialog.h"
 #include "contactDialog.h"
@@ -14,6 +15,7 @@
 #include "channelView.h"
 #include "companyView.h"
 #include "addressView.h"
+#include "accountData.h"
 #include "accountView.h"
 #include "dialogConst.h"
 #include "dbGenerator.h"
@@ -199,12 +201,7 @@ void OrganizerView::accountDialog()
     AccountDialog *d = new AccountDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        AccountView *view = new AccountView(data->at(0).toLongLong(),
-                                            data->at(2),
-                                            data->at(3).toLongLong(),
-                                            data->at(4).toLongLong(),
-                                            data->at(5));
+        AccountView *view = new AccountView(d->data2());
         m_accounts->append(view);
         ui->Accounts->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
@@ -219,11 +216,7 @@ void OrganizerView::transactionDialog()
     TransactionDialog *d = new TransactionDialog();
     if (d->exec())
     {
-        QStringList *data = d->data();
-        TransactionView *view = new TransactionView(data->at(0).toLongLong(),
-                                                    data->at(2),
-                                                    data->at(3).toLongLong(),
-                                                    data->at(4));
+        TransactionView *view = new TransactionView(d->data2());
         m_transactions->append(view);
         ui->Transactions->insertWidget(0, view);
         connect(view, SIGNAL(deleted()), SLOT(deleteRecord()));
