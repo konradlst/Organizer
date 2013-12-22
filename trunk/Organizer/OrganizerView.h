@@ -50,6 +50,7 @@ private slots:
     void pathToDb();
     void pathToLogFile();
     void editableMode(bool flag);
+    void contactChanged();
 
 private:
     Ui::OrganizerView *ui;

@@ -103,6 +103,7 @@ OrganizerView::OrganizerView(QWidget *parent)
     connect(ui->actionLoad_Contact, SIGNAL(triggered()), SLOT(openDialog()));
     connect(ui->actionSave_Contact, SIGNAL(triggered()), SLOT(saveDialog()));
     connect(ui->actionEditingMode, SIGNAL(triggered(bool)), SLOT(editableMode(bool)));
+    connect(ui->lwContactList, SIGNAL(currentRowChanged(int)), SLOT(contactChanged()));
 }
 
 OrganizerView::~OrganizerView()
@@ -558,6 +559,11 @@ void OrganizerView::editableMode(bool flag)
 {
     ui->Contact->setVisibleEditUserPic(flag);
     //FIXME
+}
+
+void OrganizerView::contactChanged()
+{
+    ui->Contact->setData(m_contacts->value(ui->lwContactList->currentItem()->text()));
 }
 
 void OrganizerView::createInterface()
