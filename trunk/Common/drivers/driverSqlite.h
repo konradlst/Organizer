@@ -6,6 +6,15 @@
 #include <QSqlDatabase>
 #include "OrganizerConst.h"
 
+struct ContactData;
+struct AddressData;
+struct ChannelData;
+struct CompanyData;
+struct AccountData;
+struct DealData;
+struct TimeData;
+struct TransactionData;
+
 class DriverSqlite : public QObject
 {
     Q_OBJECT
@@ -13,28 +22,28 @@ public:
     explicit DriverSqlite(QObject *parent = 0);
 
     //! Запрашивает список контактов.
-    Data::Table *contacts();
+    QList<ContactData*> *contacts();
     //! Запрашивает контакт по его \alias прозвищу.
-    Data::Record* contact(const QString &alias);
+    ContactData* contact(const QString &alias);
     //! Запрашивает список счетов.
-    Data::Table *accounts();
+    QList<AccountData*> *accounts();
     //! Запрашивает список транзакций в указанную дату \param date.
-    Data::Table *transactions(const QDate &date);
+    QList<TransactionData*> *transactions(const QDate &date);
     //! Запрашивает список временных расходов в указанную дату \param date.
-    Data::Table *timeLine(const QDate &/*date*/);
+    QList<TimeData*> *timeLine(const QDate &/*date*/);
     //! Запрашивает список дел в указанную дату \param date по заданными параметрам \param params.
-    Data::Table *deals(const QDate &date, const QStringList params = QStringList());
+    QList<DealData*> *deals(const QDate &date, const QStringList params = QStringList());
 
     //! Добавляет новый счет \param record.
-    void addAccount(const Data::Record &record);
+    void addAccount(const AccountData &/*record*/);
     //! Добавляет новую транзакцию \param record.
-    void addTransaction(const Data::Record &record);
+    void addTransaction(const TransactionData &/*record*/);
     //! Добавляет новую запись о времени \param record.
-    void addTimeRecord(const Data::Record &record);
+    void addTimeRecord(const TimeData &/*record*/);
     //! Добавляет новое дело \param record.
-    void addDeal(const Data::Record &record);
+    void addDeal(const DealData &/*record*/);
     //! Добавляет новый контакт.
-    void addContact(const Data::Record &record);
+    void addContact(const ContactData &/*record*/);
 
 private:
     QSqlDatabase m_db;
