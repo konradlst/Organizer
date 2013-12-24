@@ -35,15 +35,15 @@ public:
     QList<DealData*> *deals(const QDate &date, const QStringList params = QStringList());
 
     //! Добавляет новый счет \param record.
-    void addAccount(const AccountData &/*record*/);
+    void addAccount(const AccountData &record);
     //! Добавляет новую транзакцию \param record.
-    void addTransaction(const TransactionData &/*record*/);
+    void addTransaction(const TransactionData &record);
     //! Добавляет новую запись о времени \param record.
-    void addTimeRecord(const TimeData &/*record*/);
+    void addTimeRecord(const TimeData &record);
     //! Добавляет новое дело \param record.
-    void addDeal(const DealData &/*record*/);
+    void addDeal(const DealData &record);
     //! Добавляет новый контакт.
-    void addContact(const ContactData &/*record*/);
+    void addContact(const ContactData &record);
 
 private:
     QSqlDatabase m_db;

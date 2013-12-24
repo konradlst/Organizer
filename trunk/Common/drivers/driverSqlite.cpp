@@ -155,13 +155,17 @@ QList<DealData *> *DriverSqlite::deals(const QDate &date, const QStringList /*pa
     return new QList<DealData*>();
 }
 
-void DriverSqlite::addAccount(const AccountData &/*record*/)
+void DriverSqlite::addAccount(const AccountData &record)
 {
     openDb();
     QStringList fields;
     QStringList values;
-//    for (int i = 0; i < record.count(); ++i)
-//        values << record.at(i).toString();
+    values << record.created
+           << record.name
+           << record.type
+           << record.value
+           << record.total
+           << record.description;
 
     QString query = Insert.arg(Accounts, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
@@ -175,13 +179,16 @@ void DriverSqlite::addAccount(const AccountData &/*record*/)
     return;
 }
 
-void DriverSqlite::addTransaction(const TransactionData &/*record*/)
+void DriverSqlite::addTransaction(const TransactionData &record)
 {
     openDb();
     QStringList fields;
     QStringList values;
-//    for (int i = 0; i < record.count(); ++i)
-//        values << record.at(i).toString();
+    values << record.created
+           << record.name
+           << record.type
+           << record.value
+           << record.description;
 
     QString query = Insert.arg(Transactions, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
@@ -195,13 +202,16 @@ void DriverSqlite::addTransaction(const TransactionData &/*record*/)
     return;
 }
 
-void DriverSqlite::addTimeRecord(const TimeData &/*record*/)
+void DriverSqlite::addTimeRecord(const TimeData &record)
 {
     openDb();
     QStringList fields;
     QStringList values;
-//    for (int i = 0; i < record.count(); ++i)
-//        values << record.at(i).toString();
+    values << record.type
+           << record.started
+           << record.stoped
+           << record.duration
+           << record.description;
 
     QString query = Insert.arg(Times, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
@@ -215,13 +225,18 @@ void DriverSqlite::addTimeRecord(const TimeData &/*record*/)
     return;
 }
 
-void DriverSqlite::addDeal(const DealData &/*record*/)
+void DriverSqlite::addDeal(const DealData &record)
 {
     openDb();
     QStringList fields;
     QStringList values;
-//    for (int i = 0; i < record.count(); ++i)
-//        values << record.at(i).toString();
+    values << record.date
+           << record.type
+           << record.duration
+           << record.humans
+           << record.money
+           << record.deadLine
+           << record.description;
 
     QString query = Insert.arg(Deals, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
@@ -235,13 +250,17 @@ void DriverSqlite::addDeal(const DealData &/*record*/)
     return;
 }
 
-void DriverSqlite::addContact(const ContactData &/*record*/)
+void DriverSqlite::addContact(const ContactData &record)
 {
     openDb();
     QStringList fields;
     QStringList values;
-//    for (int i = 0; i < record.count(); ++i)
-//        values << record.at(i).toString();
+    values << record.nickName
+           << record.name
+           << record.surName
+           << record.otherName
+           << record.birthday
+           << record.userPic;
 
     QString query = Insert.arg(Contacts, fields.join(SQL::Comma), values.join(SQL::Comma));
     QSqlQuery q(query);
@@ -266,7 +285,7 @@ bool DriverSqlite::openDb()
         m_db = QSqlDatabase::addDatabase(QSqlite, ConnectionName);
     m_db.setDatabaseName(m_pathToDb);
 
-    if (!m_db.open())
+    if (!m_db.isOpen() &&!m_db.open())
         return false;
     return true;
 }
