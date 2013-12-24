@@ -47,16 +47,19 @@ QList<ContactData *> *DriverSqlite::contacts()
     if (!q.exec())
         return 0;
 
-    Data::Table *table = new Data::Table;
+    QList<ContactData *> *data = new QList<ContactData *>();
     while (q.next())
     {
-        Data::Record *record = new Data::Record;
-        for (int counter = 0; counter < q.record().count(); ++counter)
-            record->append(q.value(counter));
-        table->append(record);
+        ContactData *contact = new ContactData;
+        contact->nickName = q.value("nickName");
+        contact->name = q.value("name");
+        contact->surName = q.value("surName");
+        contact->otherName = q.value("otherName");
+        contact->birthday = q.value("birthday");
+        contact->userPic = q.value("userPic");
+        data->append(contact);
     }
-//    return table;
-    return new QList<ContactData*>();
+    return data;
 }
 
 ContactData *DriverSqlite::contact(const QString &alias)
@@ -66,13 +69,16 @@ ContactData *DriverSqlite::contact(const QString &alias)
     if (!q.exec())
         return 0;
 
-    Data::Record *record = new Data::Record;
+    ContactData *contact = new ContactData;
     if (q.first())
     {
-        for (int counter = 0; counter < q.record().count(); ++counter)
-            record->append(q.value(counter));
-//        return record;
-        return new ContactData;
+        contact->nickName = q.value("nickName");
+        contact->name = q.value("name");
+        contact->surName = q.value("surName");
+        contact->otherName = q.value("otherName");
+        contact->birthday = q.value("birthday");
+        contact->userPic = q.value("userPic");
+        return contact;
     }
     return 0;
 }
@@ -84,16 +90,19 @@ QList<AccountData *> *DriverSqlite::accounts()
     if (!q.exec())
         return 0;
 
-    Data::Table *table = new Data::Table;
+    QList<AccountData *> *data = new QList<AccountData *>();
     while (q.next())
     {
-        Data::Record *record = new Data::Record;
-        for (int counter = 0; counter < q.record().count(); ++counter)
-            record->append(q.value(counter));
-        table->append(record);
+        AccountData *account = new AccountData;
+        account->created = q.value("created");
+        account->type = q.value("type");
+        account->name = q.value("name");
+        account->value = q.value("value");
+        account->total = q.value("total");
+        account->description = q.value("description");
+        data->append(account);
     }
-//    return table;
-    return new QList<AccountData *>();
+    return data;
 }
 
 QList<TransactionData *> *DriverSqlite::transactions(const QDate &date)
@@ -104,38 +113,43 @@ QList<TransactionData *> *DriverSqlite::transactions(const QDate &date)
     if (!q.exec())
         return 0;
 
-    Data::Table *table = new Data::Table;
+    QList<TransactionData *> *data = new QList<TransactionData *>();
     while (q.next())
     {
-        Data::Record *record = new Data::Record;
-        for (int counter = 0; counter < q.record().count(); ++counter)
-            record->append(q.value(counter));
-        table->append(record);
+        TransactionData *transaction = new TransactionData;
+        transaction->created = q.value("created");
+        transaction->type = q.value("type");
+        transaction->name = q.value("name");
+        transaction->value = q.value("value");
+        transaction->description = q.value("description");
+        data->append(account);
     }
-//    return table;
-    return new QList<TransactionData *>();
+    return data;
 }
 
-QList<TimeData *> *DriverSqlite::timeLine(const QDate &/*date*/)
+QList<TimeData *> *DriverSqlite::timeLine(const QDate &date)
 {
     openDb();
-    QSqlQuery q = QSqlQuery(Select.arg(AllFields, Times));
+    QSqlQuery q = QSqlQuery(SelectFull.arg(AllFields, Times,
+                                           QString("created = %1").arg(date.toString("dd.MM.yyyy"))));
     if (!q.exec())
         return 0;
 
-    Data::Table *table = new Data::Table;
+    QList<TimeData *> *data = new QList<TimeData *>();
     while (q.next())
     {
-        Data::Record *record = new Data::Record;
-        for (int counter = 0; counter < q.record().count(); ++counter)
-            record->append(q.value(counter));
-        table->append(record);
+        TimeData *time = new TimeData;
+        time->started = q.value("started");
+        time->stoped = q.value("stoped");
+        time->duration = q.value("duration");
+        time->type = q.value("type");
+        time->description = q.value("description");
+        data->append(account);
     }
-//    return table;
-    return new QList<TimeData*>();
+    return data;
 }
 
-QList<DealData *> *DriverSqlite::deals(const QDate &date, const QStringList /*params*/)
+QList<DealData *> *DriverSqlite::deals(const QDate &date)
 {
     openDb();
     QSqlQuery q = QSqlQuery(SelectFull.arg(AllFields, Deals,
@@ -143,16 +157,20 @@ QList<DealData *> *DriverSqlite::deals(const QDate &date, const QStringList /*pa
     if (!q.exec())
         return 0;
 
-    Data::Table *table = new Data::Table;
+    QList<DealData *> *data = new QList<DealData *>();
     while (q.next())
     {
-        Data::Record *record = new Data::Record;
-        for (int counter = 0; counter < q.record().count(); ++counter)
-            record->append(q.value(counter));
-        table->append(record);
+        DealData *deal = new DealData;
+        deal->date = q.value("date");
+        deal->deadLine = q.value("deadLine");
+        deal->duration = q.value("duration");
+        deal->type = q.value("type");
+        deal->humans = q.value("humans");
+        deal->money = q.value("money");
+        deal->description = q.value("description");
+        deal->append(account);
     }
-//    return table;
-    return new QList<DealData*>();
+    return data;
 }
 
 void DriverSqlite::addAccount(const AccountData &record)
