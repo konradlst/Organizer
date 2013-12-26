@@ -1,0 +1,2 @@
+C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\Organizer\* > C:\project\Organizer\trunk\reports\OrganizerReport.txt
+C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\Common\* >> C:\project\Organizer\trunk\reports\OrganizerReport.txt

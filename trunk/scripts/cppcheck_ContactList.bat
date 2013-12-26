@@ -1,0 +1,2 @@
+C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\ContactList\* > C:\project\Organizer\trunk\reports\ContactListReport.txt
+C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\Common\* >> C:\project\Organizer\trunk\reports\ContactListReport.txt

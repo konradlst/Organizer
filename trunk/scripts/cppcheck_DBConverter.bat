@@ -1,0 +1,2 @@
+C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\DBConverter\* > C:\project\Organizer\trunk\reports\DBConverterReport.txt
+C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\Common\* >> C:\project\Organizer\trunk\reports\DBConverterReport.txt
