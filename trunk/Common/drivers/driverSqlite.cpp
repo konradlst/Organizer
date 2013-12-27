@@ -161,12 +161,12 @@ QList<DealData *> *DriverSqlite::deals(const QDate &date)
     while (q.next())
     {
         DealData *deal = new DealData;
-        deal->date = QDate::fromString(q.value("date").toString(), "dd.MM.yyyy");
+        deal->created = QDate::fromString(q.value("date").toString(), "dd.MM.yyyy");
         deal->deadLine = QDate::fromString(q.value("deadLine").toString(), "dd.MM.yyyy");
         deal->duration = QTime::fromString(q.value("duration").toString(), "hh:mm:ss");
         deal->type = q.value("type").toInt();
         deal->humans = q.value("humans").toString();
-        deal->money = q.value("money").toLongLong();
+        deal->price = q.value("money").toLongLong();
         deal->description = q.value("description").toString();
         data->append(deal);
     }
@@ -248,11 +248,11 @@ void DriverSqlite::addDeal(const DealData &record)
     openDb();
     QStringList fields;
     QStringList values;
-    values << record.date.toString("dd.MM.yyyy")
+    values << record.created.toString("dd.MM.yyyy")
            << QString::number(record.type)
            << record.duration.toString("hh:mm:ss")
            << record.humans
-           << QString::number(record.money)
+           << QString::number(record.price)
            << record.deadLine.toString("dd.MM.yyyy")
            << record.description;
 
