@@ -6,8 +6,8 @@
 struct DealData : public AbstractData
 {
     int type;
-    QDate date;
-    qint64 money;
+    QDate created;
+    qint64 price;
     QTime duration;
     QDate deadLine;
     QString humans;

@@ -9,6 +9,7 @@ struct CompanyData : public AbstractData
     QString post;
     QString dateIn;
     QString dateOut;
+    int contactId;
 };
 
 #endif // COMPANYDATA_H

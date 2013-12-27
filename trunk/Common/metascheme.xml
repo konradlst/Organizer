@@ -8,21 +8,15 @@
             <field name="otherName" type="VARCHAR(100)" delegate="string100"/>
             <field name="birthday" type="DATE" delegate="date"/>
             <field name="pathToUserPic" type="VARCHAR(255)"/>
-            <field name="comment" type="VARCHAR(255)" delegate="string255"/>
+            <field name="description" type="VARCHAR(255)" delegate="string255"/>
         </table>
         <table name="COMPANIES">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="name" type="VARCHAR(100)" delegate="string100"/>
-            <field name="birthday" type="DATE" delegate="date"/>
-            <field name="areasOfActivity" type="VARCHAR(100)" delegate="string255"/>
+            <field name="company" type="VARCHAR(100)" delegate="string100"/>
             <field name="post" type="VARCHAR(100)" delegate="string100"/>
-            <field name="department" type="VARCHAR(127)" delegate="string127"/>
-            <field name="chief" type="VARCHAR(255)" delegate="string255"/>
             <field name="dateIn" type="DATE" delegate="date"/>
             <field name="dateOut" type="DATE" delegate="date"/>
-            <field name="cabinet" type="VARCHAR(100)" delegate="string100"/>
-            <field name="city" type="INTEGER" fk="1"/>
-            <field name="contacts" type="INTEGER" fk="1"/>
+            <field name="contactId" type="INTEGER" fk="1"/>
         </table>
         <table name="ADDRESSES">
             <field name="id" type="INTEGER" pk="1"/>
@@ -31,8 +25,6 @@
             <field name="street" type="VARCHAR(127)" delegate="string127"/>
             <field name="home" type="VARCHAR(127)" delegate="string127"/>
             <field name="apartment" type="VARCHAR(127)" delegate="string127"/>
-            <field name="type" type="INTEGER" delegate="comboBoxEdit"/>
-            <field name="companyId" type="INTEGER" fk="1"/>
             <field name="contactId" type="INTEGER" fk="1"/>
         </table>
         <table name="CHANNELS">
@@ -40,48 +32,42 @@
             <field name="type" type="INTEGER" delegate="comboBoxEdit"/>
             <field name="title" type="VARCHAR(100)" delegate="string100"/>
             <field name="value" type="VARCHAR(100)" delegate="string100"/>
-            <field name="typeOwner" type="INTEGER" delegate="comboBoxEdit"/>
-            <field name="companyId" type="INTEGER" fk="1"/>
             <field name="contactId" type="INTEGER" fk="1"/>
-            <field name="employeeId" type="INTEGER" fk="1"/>
         </table>
         <table name="TIMES">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="created" type="DATE" default="(strftime('%d.%m.%Y','now','localtime'))" delegate="date"/>
             <field name="type" type="VARCHAR(30)"/>
-            <field name="duration" type="TIME" delegate="time"/>
+            <field name="created" type="DATE" default="(strftime('%d.%m.%Y','now','localtime'))" delegate="date"/>
             <field name="start" type="TIME" delegate="time"/>
             <field name="stop" type="TIME" delegate="time"/>
+            <field name="duration" type="TIME" delegate="time"/>
+            <field name="description" type="VARCHAR(255)" delegate="string255"/>
         </table>
         <table name="ACCOUNTS">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="number" type="VARCHAR(20)" unq="1" delegate="int20"/>
-            <field name="state" type="BOOLEAN" nullable="0" default="'0'" delegate="checkBox"/>
             <field name="type" type="VARCHAR(20)" nullable="0" default="'0'" delegate="typeAccount"/>
-            <field name="name" type="VARCHAR(100)" unq="1" nullable="0" default="' '" delegate="string100"/>
             <field name="created" type="DATE" default="(strftime('%d.%m.%Y','now','localtime'))" delegate="date"/>
-            <field name="closed" type="DATE" delegate="date"/>
+            <field name="name" type="VARCHAR(100)" unq="1" nullable="0" default="' '" delegate="string100"/>
             <field name="value" type="INTEGER" delegate="int"/>
+			<field name="total" type="INTEGER" delegate="int"/>
+            <field name="description" type="VARCHAR(255)" delegate="string255"/>
         </table>
         <table name="TRANSACTIONS">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="timestamp" type="TIMESTAMP" default="(strftime('%d.%m.%Y %H:%M:%f','now','localtime'))" delegate="dateTime"/>
+            <field name="created" type="TIMESTAMP" default="(strftime('%d.%m.%Y %H:%M:%f','now','localtime'))" delegate="dateTime"/>
+            <field name="name" type="VARCHAR(100)" unq="1" nullable="0" default="' '" delegate="string100"/>
             <field name="value" type="INTEGER" nullable="0" default="'0'" delegate="int"/>
-            <field name="sendfrom" type="VARCHAR(20)" delegate="typeAccount"/>
-            <field name="sendto" type="VARCHAR(20)" delegate="typeAccount"/>
-            <field name="comment" type="VARCHAR(255)"/>
+            <field name="description" type="VARCHAR(255)" delegate="string255"/>
         </table>
         <table name="DEALS">
             <field name="id" type="INTEGER" pk="1"/>
-            <field name="created" type="DATE" default="(strftime('%d.%m.%Y','now','localtime'))" delegate="date"/>
-            <field name="name" type="VARCHAR(127)" delegate="string127"/>
             <field name="type" type="INTEGER"/>
-            <field name="deadline" type="DATE" delegate="date"/>
-            <field name="description" type="VARCHAR(255)" delegate="string127"/>
-            <field name="state" type="INTEGER" delegate="comboBoxEdit"/>
+            <field name="created" type="DATE" default="(strftime('%d.%m.%Y','now','localtime'))" delegate="date"/>
             <field name="price" type="INTEGER" delegate="int"/>
-            <field name="contacts" type="VARCHAR(255)" delegate="string255"/>
             <field name="duration" type="TIME" delegate="time"/>
+            <field name="deadline" type="DATE" delegate="date"/>
+            <field name="humans" type="VARCHAR(255)" delegate="string255"/>
+            <field name="description" type="VARCHAR(255)" delegate="string255"/>
         </table>
     </tables>
     <delegates>

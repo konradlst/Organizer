@@ -51,8 +51,8 @@ DealData DealDialog::data2()
 {
     DealData data;
     data.type = m_type->currentIndex();
-    data.date = m_date->date();
-    data.money = m_money->value();
+    data.created = m_date->date();
+    data.price = m_money->value();
     data.duration = m_duration->time();
     data.deadLine = m_deadLine->date();
     data.humans = m_humans->text();

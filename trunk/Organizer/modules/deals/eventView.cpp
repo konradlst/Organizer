@@ -23,7 +23,7 @@ EventView::EventView(const QDate &date, const QString &description, QWidget *par
 }
 
 EventView::EventView(const DealData &data)
-    : m_date(new QDateEdit(data.date)),
+    : m_date(new QDateEdit(data.created)),
       m_description(new QLineEdit(data.description)),
       m_delete(new QPushButton),
       m_detail(new QPushButton)

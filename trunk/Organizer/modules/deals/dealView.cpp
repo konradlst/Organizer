@@ -43,8 +43,8 @@ DealView::DealView(const int type, const QDate &created, const int price,
 {
     DealData data;
     data.type = type;
-    data.date = created;
-    data.money = price;
+    data.created = created;
+    data.price = price;
     data.duration = duration;
     data.deadLine = deadline;
     data.humans = humans;
@@ -53,7 +53,7 @@ DealView::DealView(const int type, const QDate &created, const int price,
 }
 
 DealView::DealView(const DealData &data)
-    : m_created(new QDateEdit(data.date)),
+    : m_created(new QDateEdit(data.created)),
       m_duration(new QTimeEdit(data.duration)),
       m_type(new QComboBox),
       m_price(new QSpinBox),
@@ -95,7 +95,7 @@ void DealView::createInterface(const DealData &data)
     m_type->addItems(DealTypes);
     m_type->setCurrentIndex(data.type);
     m_price->setSuffix(" rub.");
-    m_price->setValue(data.money);
+    m_price->setValue(data.price);
     m_humans->setPlaceholderText(HumansPlaceholder);
     m_description->setPlaceholderText(DescriptionPlaceholder);
     m_delete->setFlat(true);

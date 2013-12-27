@@ -10,6 +10,7 @@ struct AddressData : public AbstractData
     QString street;
     QString home;
     QString apartment;
+    int contactId;
 };
 
 #endif // ADDRESSDATA_H

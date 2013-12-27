@@ -11,6 +11,7 @@ struct ContactData : public AbstractData
     QString nickName;
     QString birthday;
     QPixmap userPic;
+    QString description;
 };
 
 #endif // CONTACTDATA_H
