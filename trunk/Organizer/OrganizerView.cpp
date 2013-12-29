@@ -40,8 +40,8 @@ enum Tabs { ContactsTab, FinanceTab, TimeTab, DealTab, CalendarTab, StatisticTab
 const int InvalidPosition = -1;
 const int DayToHour = 24;
 const int HourToSec = 3600;
-const QString DbName = "db.sqlite";
 const double TimeStep = 0.5; //30 min - step in calendars
+const QString DbName = "db.sqlite";
 const QString monthTemplate = "( MMMM yyyy )";
 const QString weekTemplate = "( dd.MM - %1 )";
 const QString dayTemplate = "( ddd, dd.MM.yyyy )";
