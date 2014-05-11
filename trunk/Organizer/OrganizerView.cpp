@@ -63,7 +63,7 @@ const QStringList CalendarLabels = QStringList() << DayOfWeek << ThreeDayNames <
 
 const QString AboutTitle = QObject::trUtf8("About %1");
 const QString AboutText =
-        QObject::trUtf8("<b>%1 %2 for %3</b><br><br>Based on Qt 5.1.1<br><br>"
+        QObject::trUtf8("<b>%1 %2</b><br><br>Based on Qt 4.8.1<br><br>"
                         "Copyright 2013, Anton Batyaev.<br>All rights reserved.");
 }
 
@@ -225,8 +225,7 @@ void OrganizerView::about()
     QMessageBox::about(this,
                        AboutTitle.arg(qApp->applicationName()),
                        AboutText.arg(qApp->applicationName())
-                                .arg(qApp->applicationVersion())
-                                .arg(qApp->platformName()));
+                                .arg(qApp->applicationVersion()));
 }
 
 void OrganizerView::deleteRecord()
@@ -340,10 +339,11 @@ void OrganizerView::deleteRecord()
 
 void OrganizerView::settings()
 {
-    if (ui->actionSettings->isChecked())
-        ui->tabWidget->tabBar()->addTab(SettingsTabName);
-    else
-        ui->tabWidget->tabBar()->removeTab(SettingTab);
+    //work in QT 5.1.1
+//    if (ui->actionSettings->isChecked())
+//        ui->tabWidget->tabBar()->addTab(SettingsTabName);
+//    else
+//        ui->tabWidget->tabBar()->removeTab(SettingTab);
     ui->tabWidget->setCurrentIndex(SettingTab);
 }
 
@@ -578,7 +578,8 @@ void OrganizerView::createInterface()
     addMenu->addActions(addActionList);
     ui->pbAddInContact->setMenu(addMenu);
 
-    ui->tabWidget->tabBar()->removeTab(SettingTab);
+//work in QT 5.1.1
+//    ui->tabWidget->tabBar()->removeTab(SettingTab);
     QList<int> sizes;
     sizes << ui->FinanceTab->width() / 2
           << ui->FinanceTab->width() / 2;
@@ -598,8 +599,8 @@ void OrganizerView::createInterface()
         table->setColumnCount(list.count());
         table->setVerticalHeaderLabels(timeList);
         table->setHorizontalHeaderLabels(list);
-//        table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
-        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
+        table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
+//        table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     }
 
     ui->pathToDb->setText(QDir::toNativeSeparators(qApp->applicationDirPath() + QDir::separator() + DbName));

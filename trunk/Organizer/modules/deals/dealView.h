@@ -3,12 +3,13 @@
 
 #include <QGroupBox>
 
+class QPushButton;
 class QDateEdit;
 class QTimeEdit;
 class QComboBox;
-class QSpinBox;
 class QLineEdit;
-class QPushButton;
+class QSpinBox;
+class QDate;
 struct DealData;
 
 //! \class DealView

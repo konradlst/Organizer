@@ -16,7 +16,7 @@ class DealView;
 class ChannelView;
 class AddressView;
 class CompanyView;
-struct ContactData;
+class ContactData;
 
 class OrganizerView : public QMainWindow
 {

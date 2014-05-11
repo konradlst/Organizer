@@ -1,2 +1,0 @@
-C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\DBManager\* > C:\project\Organizer\trunk\reports\DBManagerReport.txt
-C:\cppcheck\cppcheck.exe -j 4 --enable=all --check-config C:\project\Organizer\trunk\Common\* >> C:\project\Organizer\trunk\reports\DBManagerReport.txt

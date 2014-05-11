@@ -51,12 +51,12 @@ QList<ContactData *> *DriverSqlite::contacts()
     while (q.next())
     {
         ContactData *contact = new ContactData;
-        contact->nickName = q.value("nickName").toString();
-        contact->name = q.value("name").toString();
-        contact->surName = q.value("surName").toString();
-        contact->otherName = q.value("otherName").toString();
-        contact->birthday = q.value("birthday").toString();
-        contact->userPic = q.value("userPic").toString();
+        contact->nickName = q.record().value("nickName").toString();
+        contact->name = q.record().value("name").toString();
+        contact->surName = q.record().value("surName").toString();
+        contact->otherName = q.record().value("otherName").toString();
+        contact->birthday = q.record().value("birthday").toString();
+        contact->userPic = q.record().value("userPic").toString();
         data->append(contact);
     }
     return data;
@@ -72,12 +72,12 @@ ContactData *DriverSqlite::contact(const QString &alias)
     ContactData *contact = new ContactData;
     if (q.first())
     {
-        contact->nickName = q.value("nickName").toString();
-        contact->name = q.value("name").toString();
-        contact->surName = q.value("surName").toString();
-        contact->otherName = q.value("otherName").toString();
-        contact->birthday = q.value("birthday").toString();
-        contact->userPic = q.value("userPic").toString();
+        contact->nickName = q.record().value("nickName").toString();
+        contact->name = q.record().value("name").toString();
+        contact->surName = q.record().value("surName").toString();
+        contact->otherName = q.record().value("otherName").toString();
+        contact->birthday = q.record().value("birthday").toString();
+        contact->userPic = q.record().value("userPic").toString();
         return contact;
     }
     return 0;
@@ -94,12 +94,12 @@ QList<AccountData *> *DriverSqlite::accounts()
     while (q.next())
     {
         AccountData *account = new AccountData;
-        account->created = QDate::fromString(q.value("created").toString(), "dd.MM.yyyy");
-        account->type = q.value("type").toInt();
-        account->name = q.value("name").toString();
-        account->value = q.value("value").toLongLong();
-        account->total = q.value("total").toLongLong();
-        account->description = q.value("description").toString();
+        account->created = QDate::fromString(q.record().value("created").toString(), "dd.MM.yyyy");
+        account->type = q.record().value("type").toInt();
+        account->name = q.record().value("name").toString();
+        account->value = q.record().value("value").toLongLong();
+        account->total = q.record().value("total").toLongLong();
+        account->description = q.record().value("description").toString();
         data->append(account);
     }
     return data;
@@ -117,11 +117,11 @@ QList<TransactionData *> *DriverSqlite::transactions(const QDate &date)
     while (q.next())
     {
         TransactionData *transaction = new TransactionData;
-        transaction->created = QDate::fromString(q.value("created").toString(), "dd.MM.yyyy");
-        transaction->type = q.value("type").toInt();
-        transaction->name = q.value("name").toString();
-        transaction->value = q.value("value").toLongLong();
-        transaction->description = q.value("description").toString();
+        transaction->created = QDate::fromString(q.record().value("created").toString(), "dd.MM.yyyy");
+        transaction->type = q.record().value("type").toInt();
+        transaction->name = q.record().value("name").toString();
+        transaction->value = q.record().value("value").toLongLong();
+        transaction->description = q.record().value("description").toString();
         data->append(transaction);
     }
     return data;
@@ -139,11 +139,11 @@ QList<TimeData *> *DriverSqlite::timeLine(const QDate &date)
     while (q.next())
     {
         TimeData *time = new TimeData;
-        time->started = QTime::fromString(q.value("created").toString(), "hh:mm:ss");
-        time->stoped = QTime::fromString(q.value("stoped").toString(), "hh:mm:ss");
-        time->duration = QTime::fromString(q.value("duration").toString(), "hh:mm:ss");
-        time->type = q.value("type").toInt();
-        time->description = q.value("description").toString();
+        time->started = QTime::fromString(q.record().value("created").toString(), "hh:mm:ss");
+        time->stoped = QTime::fromString(q.record().value("stoped").toString(), "hh:mm:ss");
+        time->duration = QTime::fromString(q.record().value("duration").toString(), "hh:mm:ss");
+        time->type = q.record().value("type").toInt();
+        time->description = q.record().value("description").toString();
         data->append(time);
     }
     return data;
@@ -161,13 +161,13 @@ QList<DealData *> *DriverSqlite::deals(const QDate &date)
     while (q.next())
     {
         DealData *deal = new DealData;
-        deal->created = QDate::fromString(q.value("date").toString(), "dd.MM.yyyy");
-        deal->deadLine = QDate::fromString(q.value("deadLine").toString(), "dd.MM.yyyy");
-        deal->duration = QTime::fromString(q.value("duration").toString(), "hh:mm:ss");
-        deal->type = q.value("type").toInt();
-        deal->humans = q.value("humans").toString();
-        deal->price = q.value("money").toLongLong();
-        deal->description = q.value("description").toString();
+        deal->created = QDate::fromString(q.record().value("date").toString(), "dd.MM.yyyy");
+        deal->deadLine = QDate::fromString(q.record().value("deadLine").toString(), "dd.MM.yyyy");
+        deal->duration = QTime::fromString(q.record().value("duration").toString(), "hh:mm:ss");
+        deal->type = q.record().value("type").toInt();
+        deal->humans = q.record().value("humans").toString();
+        deal->price = q.record().value("money").toLongLong();
+        deal->description = q.record().value("description").toString();
         data->append(deal);
     }
     return data;

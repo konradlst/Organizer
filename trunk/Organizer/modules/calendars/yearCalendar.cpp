@@ -65,13 +65,13 @@ QTableWidget* YearCalendar::monthCalendar(const int monthNum)
     const int TotalCell = Skip + date.daysInMonth();
 
     QTableWidget *month = new QTableWidget(DayOfWeek, MaxWeekInMonth);
-//        month->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
-    month->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
+        month->horizontalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
+//    month->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     month->horizontalHeader()->setMinimumSectionSize(SectionSize);
     month->horizontalHeader()->setDefaultSectionSize(SectionSize);
     month->horizontalHeader()->hide();
-//    month->verticalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
-    month->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
+    month->verticalHeader()->setResizeMode(QHeaderView::Stretch);//4.8.4
+//    month->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);//5.1.0
     month->verticalHeader()->setMinimumSectionSize(SectionSize);
     month->verticalHeader()->setDefaultSectionSize(SectionSize);
     if (monthNum % 3 != 1)
@@ -92,7 +92,7 @@ QTableWidget* YearCalendar::monthCalendar(const int monthNum)
             {
                 month->model()->setData(month->model()->index(row, column), QString());
                 month->item(row, column)->setBackgroundColor(QColor(230, 230, 230));
-                month->item(row, column)->setFlags(!Qt::ItemIsSelectable);
+                month->item(row, column)->setFlags(Qt::ItemIsSelectable);
             }
             else
             {

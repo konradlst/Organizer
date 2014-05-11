@@ -3,9 +3,10 @@
 
 #include <QWidget>
 
+class QPushButton;
 class QDateEdit;
 class QLineEdit;
-class QPushButton;
+class QDate;
 struct DealData;
 
 //! \class EventView
