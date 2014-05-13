@@ -2445,7 +2445,7 @@
   <action name="actionSaveAs">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/save</normaloff>:/save</iconset>
+     <normaloff>:/saveContactList</normaloff>:/saveContactList</iconset>
    </property>
    <property name="text">
     <string>SaveAs</string>

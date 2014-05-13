@@ -5,6 +5,7 @@
         <file alias="newContactList">../Common/icons/newContactList.png</file>
         <file alias="loadContact">../Common/icons/loadContact.png</file>
         <file alias="loadContactList">../Common/icons/loadContactList.png</file>
+        <file alias="saveContactList">../Common/icons/saveContactList.png</file>
         <file alias="exit">../Common/icons/close.png</file>
         <file alias="save">../Common/icons/commit.png</file>
         <file alias="app_pic">../Common/icons/Organizer.png</file>
