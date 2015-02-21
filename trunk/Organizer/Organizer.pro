@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-include(../Common/local_deploy.pri)
+include(../common/local_deploy.pri)
 
 QT       += core gui sql xml
 
@@ -12,8 +12,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Organizer
 TEMPLATE = app
-INCLUDEPATH += "../Common/"
-INCLUDEPATH += "../Common/dbGenerator"
+INCLUDEPATH += "../common/"
+INCLUDEPATH += "../common/dbGenerator"
 INCLUDEPATH += "./modules"
 INCLUDEPATH += "./modules/accounts"
 INCLUDEPATH += "./modules/transactions"
@@ -46,10 +46,10 @@ SOURCES += main.cpp \
     modules/contacts/addressView.cpp \
     modules/contacts/contactView.cpp \
     modules/dialog.cpp \
-    ../Common/dbGenerator/dbGenerator.cpp \
-    ../Common/drivers/driverSqlite.cpp \
-    ../Common/cgMetaschemeConst.cpp \
-    ../Common/logger.cpp
+    ../common/dbGenerator/dbGenerator.cpp \
+    ../common/drivers/driverSqlite.cpp \
+    ../common/cgMetaschemeConst.cpp \
+    ../common/logger.cpp
 
 HEADERS  += \
     OrganizerView.h \
@@ -80,15 +80,15 @@ HEADERS  += \
     modules/contacts/companyData.h \
     modules/dialogConst.h \
     modules/dialog.h \
-    ../Common/dbGenerator/dbGenerator.h \
-    ../Common/drivers/driverSqlite.h \
-    ../Common/cgMetaschemeConst.cpp \
-    ../Common/logger.h \
     modules/transactions/transactionData.h \
     modules/contacts/addressData.h \
     modules/contacts/channelData.h \
     modules/times/timeData.h \
-    modules/deals/dealData.h
+    modules/deals/dealData.h \
+    ../common/dbGenerator/dbGenerator.h \
+    ../common/drivers/driverSqlite.h \
+    ../common/cgMetaschemeConst.cpp \
+    ../common/logger.h
 
 FORMS    += \
     OrganizerView.ui
@@ -101,4 +101,4 @@ TRANSLATIONS += \
     ./translation/Organizer.en_US.ts
 
 OTHER_FILES += \
-    ../Common/metascheme_0.3.xml
+    ../common/metascheme_0.3.xml

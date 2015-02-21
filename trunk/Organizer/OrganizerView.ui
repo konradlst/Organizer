@@ -1825,12 +1825,12 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QGroupBox" name="gbCommonSettings">
+         <widget class="QGroupBox" name="gbcommonSettings">
           <property name="enabled">
            <bool>true</bool>
           </property>
           <property name="title">
-           <string>Common</string>
+           <string>common</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="2" column="1">
